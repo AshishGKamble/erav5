@@ -183,6 +183,94 @@ export class Plot {
   }
 }
 
+// A compact log-scale line chart for live loss curves.
+export class LossPlot {
+  constructor(canvas, opts = {}) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d");
+    this.ymin = opts.ymin || 0.003;
+    this.ymax = opts.ymax || 1.0;
+    this.maxEpoch = opts.maxEpoch || 600;
+    this.pad = { l: 46, r: 14, t: 12, b: 24 };
+    this.resize();
+  }
+
+  resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = this.canvas.getBoundingClientRect();
+    const w = Math.max(1, Math.round(rect.width));
+    const h = Math.max(1, Math.round(rect.height));
+    this.canvas.width = w * dpr;
+    this.canvas.height = h * dpr;
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.w = w;
+    this.h = h;
+  }
+
+  xpos(e) {
+    const iw = this.w - this.pad.l - this.pad.r;
+    return this.pad.l + (e / this.maxEpoch) * iw;
+  }
+
+  ypos(v) {
+    const ih = this.h - this.pad.t - this.pad.b;
+    const clamped = Math.min(this.ymax, Math.max(this.ymin, v));
+    const frac =
+      (Math.log10(clamped) - Math.log10(this.ymin)) /
+      (Math.log10(this.ymax) - Math.log10(this.ymin));
+    return this.pad.t + (1 - frac) * ih;
+  }
+
+  // series: [{ color, data: [[epoch, loss], ...] }]
+  draw(series) {
+    const c = this.ctx;
+    c.clearRect(0, 0, this.w, this.h);
+    c.fillStyle = PALETTE.surface;
+    c.fillRect(0, 0, this.w, this.h);
+    // log gridlines
+    c.font = "11px system-ui, -apple-system, sans-serif";
+    c.fillStyle = PALETTE.muted;
+    c.strokeStyle = PALETTE.grid;
+    c.lineWidth = 1;
+    const ticks = [1, 0.3, 0.1, 0.03, 0.01, 0.003];
+    c.textAlign = "right";
+    c.textBaseline = "middle";
+    for (const t of ticks) {
+      if (t > this.ymax || t < this.ymin) continue;
+      const y = this.ypos(t);
+      c.beginPath();
+      c.moveTo(this.pad.l, y);
+      c.lineTo(this.w - this.pad.r, y);
+      c.stroke();
+      c.fillText(String(t), this.pad.l - 6, y);
+    }
+    c.strokeStyle = PALETTE.axis;
+    c.strokeRect(this.pad.l, this.pad.t, this.w - this.pad.l - this.pad.r, this.h - this.pad.t - this.pad.b);
+    // x labels
+    c.textAlign = "center";
+    c.textBaseline = "top";
+    c.fillStyle = PALETTE.muted;
+    c.fillText("0", this.pad.l, this.h - this.pad.b + 5);
+    c.fillText(String(this.maxEpoch), this.w - this.pad.r, this.h - this.pad.b + 5);
+    // series
+    for (const s of series) {
+      if (!s.data.length) continue;
+      c.strokeStyle = s.color;
+      c.lineWidth = s.width || 2;
+      if (s.dash) c.setLineDash(s.dash);
+      c.beginPath();
+      for (let i = 0; i < s.data.length; i++) {
+        const x = this.xpos(s.data[i][0]);
+        const y = this.ypos(s.data[i][1]);
+        if (i === 0) c.moveTo(x, y);
+        else c.lineTo(x, y);
+      }
+      c.stroke();
+      c.setLineDash([]);
+    }
+  }
+}
+
 function niceTicks(min, max, count) {
   const range = max - min;
   const raw = range / count;

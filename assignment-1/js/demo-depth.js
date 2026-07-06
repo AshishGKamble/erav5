@@ -5,10 +5,11 @@
 // multiply the five weight matrices numerically to show the product is one map.
 
 import { MLP, makeRng, randn, collapseLinear } from "./nn.js";
-import { Plot, PALETTE } from "./viz.js";
+import { Plot, LossPlot, PALETTE } from "./viz.js";
 
 const DOMAIN = { xmin: -3.2, xmax: 3.2, ymin: -3.2, ymax: 3.2 };
 const COLORS = { 0: PALETTE.red, 1: PALETTE.blue };
+const TOTAL = 600;
 
 function makeRings(n, seed) {
   const rng = makeRng(seed);
@@ -37,11 +38,18 @@ export function initDepth(root) {
     one: root.querySelector('[data-out="depth-acc-one"]'),
     lin: root.querySelector('[data-out="depth-acc-linear5"]'),
     relu: root.querySelector('[data-out="depth-acc-relu5"]'),
+    lossOne: root.querySelector('[data-out="depth-loss-one"]'),
+    lossLin: root.querySelector('[data-out="depth-loss-linear5"]'),
+    lossRelu: root.querySelector('[data-out="depth-loss-relu5"]'),
     product: root.querySelector('[data-out="depth-product"]'),
   };
+  const lossPlot = new LossPlot(root.querySelector('[data-canvas="depth-loss-curve"]'), {
+    ymin: 0.003, ymax: 1.0, maxEpoch: TOTAL,
+  });
   const btn = root.querySelector('[data-action="depth-retrain"]');
 
   let one, lin, relu, epoch, raf, seed = 3;
+  let histOne = [], histLin = [], histRelu = [];
 
   function fiveLinear(s) {
     const defs = [];
@@ -70,6 +78,9 @@ export function initDepth(root) {
     lin = fiveLinear(seed + 10);
     relu = fiveRelu(seed + 20);
     epoch = 0;
+    histOne = [];
+    histLin = [];
+    histRelu = [];
   }
 
   function batchProb(model) {
@@ -99,18 +110,31 @@ export function initDepth(root) {
     out.one.textContent = (one.accuracy(data.X, data.Y) * 100).toFixed(0) + "%";
     out.lin.textContent = (lin.accuracy(data.X, data.Y) * 100).toFixed(0) + "%";
     out.relu.textContent = (relu.accuracy(data.X, data.Y) * 100).toFixed(0) + "%";
+    const last = (h) => (h.length ? h[h.length - 1][1] : 0.7);
+    out.lossOne.textContent = last(histOne).toFixed(3);
+    out.lossLin.textContent = last(histLin).toFixed(3);
+    out.lossRelu.textContent = last(histRelu).toFixed(3);
     drawProduct();
+    lossPlot.draw([
+      { color: PALETTE.violet, data: histOne, width: 3.2 },
+      { color: PALETTE.red, data: histLin, dash: [5, 4] },
+      { color: PALETTE.aqua, data: histRelu },
+    ]);
   }
 
   function loop() {
+    let lo = 0, ll = 0, lr = 0;
     for (let k = 0; k < 4; k++) {
-      one.step(data.X, data.Y);
-      lin.step(data.X, data.Y);
-      relu.step(data.X, data.Y);
+      lo = one.step(data.X, data.Y);
+      ll = lin.step(data.X, data.Y);
+      lr = relu.step(data.X, data.Y);
       epoch++;
     }
+    histOne.push([epoch, lo]);
+    histLin.push([epoch, ll]);
+    histRelu.push([epoch, lr]);
     draw();
-    if (epoch < 600) raf = requestAnimationFrame(loop);
+    if (epoch < TOTAL) raf = requestAnimationFrame(loop);
     else btn.disabled = false;
   }
 
@@ -128,6 +152,7 @@ export function initDepth(root) {
   });
   window.addEventListener("resize", () => {
     for (const p of Object.values(plots)) p.resize();
+    lossPlot.resize();
     draw();
   });
 

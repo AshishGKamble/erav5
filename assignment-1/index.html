@@ -22,104 +22,222 @@
     <p class="lede">
       Every model on this page is a tiny neural network written from scratch in
       plain JavaScript. Nothing is precomputed. When a section scrolls into view
-      it trains live on real data, and the picture that forms is the proof.
+      it trains live on real data, and the picture that forms is the proof. Each
+      panel tells you how to read it and why the result is true.
     </p>
     <div class="hero-meta">
       <span>No libraries</span>
       <span>Trains in your browser</span>
+      <span>Live loss curves</span>
       <span>Press <b>Retrain</b> to re-run any experiment</span>
     </div>
   </header>
 
-  <!-- S1-1 -->
+  <!-- ============ S1-1 ============ -->
   <section class="claim" id="s1-1">
     <div class="claim-head">
       <span class="tag">S1-1</span>
-      <h2>Activations exist for a reason.</h2>
+      <div>
+        <h2>Activations exist for a reason.</h2>
+        <p class="subtitle">Same data, same <span class="mono">2 &rarr; 16 &rarr; 1</span> architecture, same optimizer. The hidden activation is the only change.</p>
+      </div>
     </div>
     <p class="claim-text">
       A model with no nonlinearity can only draw a straight boundary, so it
       cannot separate two interleaved rings. Adding one ReLU hidden layer can.
     </p>
+
+    <div class="datacard">
+      <span class="dc-big">300 noisy points &middot; two concentric rings</span>
+      <span class="dc-sub">Inner ring = class 0 &middot; outer ring = class 1 &middot; the two are not linearly separable</span>
+    </div>
+
     <div class="grid two">
       <figure class="panel">
         <figcaption>
-          <span class="ptitle">Single linear layer + sigmoid</span>
-          <span class="badge" data-out="rings-acc-linear">-</span>
+          <div>
+            <span class="ptitle">No nonlinearity</span>
+            <span class="formula">&sigma;(W&#8322; &middot; identity(W&#8321;x + b&#8321;) + b&#8322;)</span>
+          </div>
+          <span class="chip warn">collapses to a line</span>
         </figcaption>
         <canvas data-canvas="rings-linear"></canvas>
-        <p class="cap">One straight cut. It cannot wrap a ring, so it is stuck near chance.</p>
+        <div class="stats">
+          <div class="stat"><span class="s-label">accuracy</span><span class="s-val" data-out="rings-acc-linear">-</span></div>
+          <div class="stat"><span class="s-label">loss</span><span class="s-val" data-out="rings-loss-linear">-</span></div>
+          <div class="stat"><span class="s-label">epoch</span><span class="s-val" data-out="rings-epoch-linear">0</span></div>
+        </div>
       </figure>
       <figure class="panel">
         <figcaption>
-          <span class="ptitle">One ReLU hidden layer</span>
-          <span class="badge good" data-out="rings-acc-relu">-</span>
+          <div>
+            <span class="ptitle">ReLU hidden layer</span>
+            <span class="formula">&sigma;(W&#8322; &middot; ReLU(W&#8321;x + b&#8321;) + b&#8322;)</span>
+          </div>
+          <span class="chip good">wraps the ring</span>
         </figcaption>
         <canvas data-canvas="rings-relu"></canvas>
-        <p class="cap">The same data, one activation added. The boundary wraps the ring.</p>
+        <div class="stats">
+          <div class="stat"><span class="s-label">accuracy</span><span class="s-val" data-out="rings-acc-relu">-</span></div>
+          <div class="stat"><span class="s-label">loss</span><span class="s-val" data-out="rings-loss-relu">-</span></div>
+          <div class="stat"><span class="s-label">epoch</span><span class="s-val" data-out="rings-epoch-relu">0</span></div>
+        </div>
       </figure>
     </div>
+
+    <figure class="panel loss-panel">
+      <figcaption>
+        <span class="ptitle">Live binary cross-entropy</span>
+        <span class="legend inline">
+          <span><i style="background:#e34948"></i>no activation</span>
+          <span><i style="background:#1baf7a"></i>ReLU</span>
+        </span>
+      </figcaption>
+      <canvas data-canvas="rings-loss-curve" class="lossc"></canvas>
+      <p class="cap">Log scale. The linear model's loss flattens near 0.69 (coin flip). The ReLU model's keeps diving.</p>
+    </figure>
+
+    <div class="explain">
+      <div class="ecard read">
+        <span class="ecard-label">How to read this</span>
+        <ul>
+          <li>Each <b>dot</b> is a data point. Its position is its two inputs; its color is its true class (red = 0, blue = 1).</li>
+          <li>The <b>shaded background</b> is what the model predicts everywhere. The seam where red meets blue is its decision boundary.</li>
+          <li>Good means each dot sits on background of its own color. The <b>badge</b> is accuracy on all 300 points.</li>
+        </ul>
+      </div>
+      <div class="ecard proof">
+        <span class="ecard-label">Why it is true</span>
+        <ol>
+          <li><b>Identity preserves linearity.</b> W&#8322;(W&#8321;x + b&#8321;) + b&#8322; algebraically collapses to a single Ax + c, so the best it can draw is one straight line.</li>
+          <li><b>ReLU creates bends.</b> Each hidden unit adds a hinge; together the hinges approximate a closed curve around the inner ring.</li>
+          <li><b>The boundary is the evidence.</b> One stays a line near 50%. The other wraps the ring near 100%. Only the activation changed.</li>
+        </ol>
+      </div>
+    </div>
+
     <div class="controls">
       <button data-action="rings-retrain">Retrain</button>
-      <span class="epoch">epoch <b data-out="rings-epoch">0</b></span>
-      <span class="note">Only the activation changed. The boundary picture is the proof.</span>
+      <button class="ghost" data-action="rings-newdata">New dataset</button>
+      <span class="note">Re-initializes weights and trains again. New dataset resamples the rings.</span>
     </div>
   </section>
 
-  <!-- S1-2 -->
+  <!-- ============ S1-2 ============ -->
   <section class="claim" id="s1-2">
     <div class="claim-head">
       <span class="tag">S1-2</span>
-      <h2>Depth without nonlinearity is a lie.</h2>
+      <div>
+        <h2>Depth without nonlinearity is a lie.</h2>
+        <p class="subtitle">Five stacked linear layers hold no more power than one. ReLU between the same layers changes everything.</p>
+      </div>
     </div>
     <p class="claim-text">
       Five stacked linear layers collapse to a single linear map, so a 5-layer
       linear net is no stronger than 1 layer. Both fail the ring task
       identically. Inserting ReLUs between the same five layers solves it.
     </p>
+
     <div class="grid three">
       <figure class="panel">
         <figcaption>
-          <span class="ptitle">1 linear layer</span>
-          <span class="badge" data-out="depth-acc-one">-</span>
+          <div>
+            <span class="ptitle">1 linear layer</span>
+            <span class="formula"><span class="mono">2 &rarr; 1</span></span>
+          </div>
+          <span class="chip warn">a line</span>
         </figcaption>
         <canvas data-canvas="depth-one"></canvas>
-        <p class="cap">A line.</p>
+        <div class="stats">
+          <div class="stat"><span class="s-label">accuracy</span><span class="s-val" data-out="depth-acc-one">-</span></div>
+          <div class="stat"><span class="s-label">loss</span><span class="s-val" data-out="depth-loss-one">-</span></div>
+        </div>
       </figure>
       <figure class="panel">
         <figcaption>
-          <span class="ptitle">5 linear layers, no activation</span>
-          <span class="badge" data-out="depth-acc-linear5">-</span>
+          <div>
+            <span class="ptitle">5 linear layers</span>
+            <span class="formula"><span class="mono">2&rarr;8&rarr;8&rarr;8&rarr;8&rarr;1</span>, no activation</span>
+          </div>
+          <span class="chip warn">same line</span>
         </figcaption>
         <canvas data-canvas="depth-linear5"></canvas>
-        <p class="cap">The same line. Depth bought nothing.</p>
+        <div class="stats">
+          <div class="stat"><span class="s-label">accuracy</span><span class="s-val" data-out="depth-acc-linear5">-</span></div>
+          <div class="stat"><span class="s-label">loss</span><span class="s-val" data-out="depth-loss-linear5">-</span></div>
+        </div>
       </figure>
       <figure class="panel">
         <figcaption>
-          <span class="ptitle">5 layers + ReLU</span>
-          <span class="badge good" data-out="depth-acc-relu5">-</span>
+          <div>
+            <span class="ptitle">5 layers + ReLU</span>
+            <span class="formula">same shape, ReLU between</span>
+          </div>
+          <span class="chip good">breaks the tie</span>
         </figcaption>
         <canvas data-canvas="depth-relu5"></canvas>
-        <p class="cap">ReLU breaks the tie.</p>
+        <div class="stats">
+          <div class="stat"><span class="s-label">accuracy</span><span class="s-val" data-out="depth-acc-relu5">-</span></div>
+          <div class="stat"><span class="s-label">loss</span><span class="s-val" data-out="depth-loss-relu5">-</span></div>
+        </div>
       </figure>
     </div>
-    <div class="proof-note">
-      <span class="proof-label">Proof by multiplication</span>
-      Multiply the five weight matrices of the linear net and the product is one
-      matrix mapping 2 inputs straight to 1 output:
-      <div class="product" data-out="depth-product">-</div>
+
+    <div class="grid loss-and-proof">
+      <figure class="panel loss-panel">
+        <figcaption>
+          <span class="ptitle">Live binary cross-entropy</span>
+          <span class="legend inline">
+            <span><i style="background:#4a3aa7"></i>1 linear</span>
+            <span><i style="background:#e34948"></i>5 linear</span>
+            <span><i style="background:#1baf7a"></i>5 + ReLU</span>
+          </span>
+        </figcaption>
+        <canvas data-canvas="depth-loss-curve" class="lossc"></canvas>
+        <p class="cap">The two linear curves sit on top of each other. Depth alone moved nothing.</p>
+      </figure>
+      <div class="proof-note tall">
+        <span class="proof-label">Proof by multiplication</span>
+        Multiply the five weight matrices of the linear net. The product is one
+        matrix mapping 2 inputs straight to 1 output:
+        <div class="product" data-out="depth-product">-</div>
+        <p class="pn-foot">That single matrix is exactly what one linear layer already is.</p>
+      </div>
     </div>
+
+    <div class="explain">
+      <div class="ecard read">
+        <span class="ecard-label">How to read this</span>
+        <ul>
+          <li>Same rings, same reading as S1-1: dots are points, background is the model's prediction, the seam is the boundary.</li>
+          <li>Compare the first two panels. If depth mattered, the middle one would look different. It does not.</li>
+          <li>The loss curve overlays all three so you can watch the two linear nets stay locked together.</li>
+        </ul>
+      </div>
+      <div class="ecard proof">
+        <span class="ecard-label">Why it is true</span>
+        <ol>
+          <li><b>Linear composed with linear is linear.</b> A stack of matrices multiplies into a single matrix, shown live in the box above.</li>
+          <li><b>So capacity does not grow with depth</b> until you add a nonlinearity between the layers.</li>
+          <li><b>ReLU is that nonlinearity.</b> The same five layers, now with bends, wrap the ring the linear stack never could.</li>
+        </ol>
+      </div>
+    </div>
+
     <div class="controls">
       <button data-action="depth-retrain">Retrain</button>
-      <span class="note">The 1-layer and 5-linear-layer boundaries are the same line.</span>
+      <span class="note">The 1-layer and 5-linear-layer boundaries stay the same line every run.</span>
     </div>
   </section>
 
-  <!-- S1-3 -->
+  <!-- ============ S1-3 ============ -->
   <section class="claim" id="s1-3">
     <div class="claim-head">
       <span class="tag">S1-3</span>
-      <h2>Embeddings learn similarity from nothing but next-token.</h2>
+      <div>
+        <h2>Embeddings learn similarity from nothing but next-token.</h2>
+        <p class="subtitle">No one labeled which words are alike. The model was only asked to predict what comes next.</p>
+      </div>
     </div>
     <p class="claim-text">
       Trained only to predict the next token in a tiny synthetic grammar, the
@@ -127,11 +245,16 @@
       supplied. Same-category tokens share next-token distributions, so they end
       up neighbors.
     </p>
+
     <div class="grid embed">
       <figure class="panel">
         <figcaption>
           <span class="ptitle">Learned embeddings, projected to 2D</span>
-          <span class="epoch">epoch <b data-out="embed-epoch">0</b></span>
+          <div class="stats inline-stats">
+            <div class="stat"><span class="s-label">neighbors</span><span class="s-val" data-out="embed-nn">-</span></div>
+            <div class="stat"><span class="s-label">loss</span><span class="s-val" data-out="embed-loss">-</span></div>
+            <div class="stat"><span class="s-label">epoch</span><span class="s-val" data-out="embed-epoch">0</span></div>
+          </div>
         </figcaption>
         <canvas data-canvas="embed-scatter"></canvas>
         <div class="legend">
@@ -140,43 +263,76 @@
           <span><i style="background:#eb6834"></i>verbs</span>
         </div>
       </figure>
-      <aside class="sidecard">
-        <p class="side-label">The grammar</p>
-        <p class="mono small">
-          animals: cat, dog, cow<br />
-          fruits: apple, mango<br />
-          verbs: eat, chase, see
-        </p>
-        <p class="side-label">Nearest neighbor is same category</p>
-        <p class="bignum"><span data-out="embed-nn">-</span></p>
-        <p class="side-text">
-          For each token, its closest neighbor in embedding space belongs to the
-          same category. That structure was never labeled. It emerged from
-          next-token prediction alone.
-        </p>
-        <button data-action="embed-retrain">Retrain</button>
+      <aside class="sidecol">
+        <div class="sidecard">
+          <p class="side-label">The grammar</p>
+          <p class="mono small">
+            animals: cat, dog, cow<br />
+            fruits: apple, mango<br />
+            verbs: eat, chase, see
+          </p>
+          <p class="side-text">
+            Sentences follow simple rules (animal &rarr; verb &rarr; fruit or animal).
+            Every animal is followed by the same kind of word, so all animals
+            share a next-token distribution. Same for fruits and verbs.
+          </p>
+        </div>
+        <figure class="panel loss-panel compact">
+          <figcaption>
+            <span class="ptitle">Next-token cross-entropy</span>
+          </figcaption>
+          <canvas data-canvas="embed-loss-curve" class="lossc short"></canvas>
+        </figure>
       </aside>
+    </div>
+
+    <div class="explain">
+      <div class="ecard read">
+        <span class="ecard-label">How to read this</span>
+        <ul>
+          <li>This is <b>not</b> a decision boundary. Each dot is a <b>word</b>, labeled next to it.</li>
+          <li>Each word owns a 16-number vector; we squash it to 2D with PCA just to plot it. <b>Distance = similarity.</b></li>
+          <li>Color is category, which the model never saw. Watch same-category words drift into the same clump.</li>
+        </ul>
+      </div>
+      <div class="ecard proof">
+        <span class="ecard-label">Why it is true</span>
+        <ol>
+          <li><b>Shared context, shared gradient.</b> Words that predict the same next-words receive the same training signal.</li>
+          <li><b>So their vectors are pushed together</b> even though nothing said "cat is like dog".</li>
+          <li><b>The count is the proof.</b> Every token's nearest neighbor ends up in its own category. Similarity emerged from prediction alone.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button data-action="embed-retrain">Retrain</button>
+      <span class="note">Resamples the corpus and re-initializes the embedding table.</span>
     </div>
   </section>
 
-  <!-- S1-4 -->
+  <!-- ============ S1-4 ============ -->
   <section class="claim" id="s1-4">
     <div class="claim-head">
       <span class="tag">S1-4</span>
-      <h2>Memorization vs generalization, and data closes the gap.</h2>
+      <div>
+        <h2>Memorization vs generalization, and data closes the gap.</h2>
+        <p class="subtitle">One over-parameterized network. Three dataset sizes. Watch the gap between train and test collapse.</p>
+      </div>
     </div>
     <p class="claim-text">
       A high-capacity net on tiny data drives train accuracy to nearly 100% while
       held-out accuracy stays low. It memorizes. Growing the dataset closes the
-      gap. The same over-parameterized network is trained at three dataset sizes.
+      gap. The same network is trained at three dataset sizes.
     </p>
+
     <div class="grid three">
       <figure class="panel">
         <figcaption>
           <span class="ptitle">n = 20</span>
           <span class="badges">
-            <span class="badge" data-out="gen-train-20">-</span>
-            <span class="badge alt" data-out="gen-test-20">-</span>
+            <span class="chip train" data-out="gen-train-20">-</span>
+            <span class="chip test" data-out="gen-test-20">-</span>
           </span>
         </figcaption>
         <canvas data-canvas="gen-20"></canvas>
@@ -186,8 +342,8 @@
         <figcaption>
           <span class="ptitle">n = 200</span>
           <span class="badges">
-            <span class="badge" data-out="gen-train-200">-</span>
-            <span class="badge alt" data-out="gen-test-200">-</span>
+            <span class="chip train" data-out="gen-train-200">-</span>
+            <span class="chip test" data-out="gen-test-200">-</span>
           </span>
         </figcaption>
         <canvas data-canvas="gen-200"></canvas>
@@ -197,28 +353,49 @@
         <figcaption>
           <span class="ptitle">n = 2000</span>
           <span class="badges">
-            <span class="badge" data-out="gen-train-2000">-</span>
-            <span class="badge alt" data-out="gen-test-2000">-</span>
+            <span class="chip train" data-out="gen-train-2000">-</span>
+            <span class="chip test" data-out="gen-test-2000">-</span>
           </span>
         </figcaption>
         <canvas data-canvas="gen-2000"></canvas>
         <p class="cap">Smooth boundary. Train and test almost agree.</p>
       </figure>
     </div>
-    <figure class="panel wide">
+
+    <figure class="panel loss-panel">
       <figcaption>
         <span class="ptitle">Generalization gap vs dataset size</span>
         <span class="legend inline">
-          <span><i style="background:#2a78d6"></i>train</span>
+          <span><i style="background:#2a78d6"></i>train accuracy</span>
           <span><i style="background:#eb6834"></i>held-out test</span>
         </span>
       </figcaption>
       <canvas data-canvas="gen-gap" class="gapc"></canvas>
-      <p class="cap">The dashed span between the lines is the gap. It shrinks as data grows.</p>
+      <p class="cap">The dashed span between the two lines is the gap. It shrinks as data grows.</p>
     </figure>
+
+    <div class="explain">
+      <div class="ecard read">
+        <span class="ecard-label">How to read this</span>
+        <ul>
+          <li>All three panels are the <b>same network</b>, trained on 20, 200, then 2000 points.</li>
+          <li>Two badges per panel: <span class="tt blue">blue</span> is accuracy on the training points, <span class="tt orange">orange</span> is accuracy on unseen test points.</li>
+          <li>In the chart, the vertical dashed span between the lines is the generalization gap at each size.</li>
+        </ul>
+      </div>
+      <div class="ecard proof">
+        <span class="ecard-label">Why it is true</span>
+        <ol>
+          <li><b>Capacity outruns tiny data.</b> With 20 points a big net just memorizes them, including the 10% flipped labels.</li>
+          <li><b>Memorizing is not learning.</b> On new points that memory does not transfer, so test accuracy lags far behind train.</li>
+          <li><b>Data constrains the model.</b> More points leave fewer ways to fit them, so the net finds the real boundary and the gap closes.</li>
+        </ol>
+      </div>
+    </div>
+
     <div class="controls">
       <button data-action="gen-retrain">Retrain all three</button>
-      <span class="note">Blue is training accuracy, orange is held-out accuracy. Data is everything.</span>
+      <span class="note">Data is everything: same model, more data, smaller gap.</span>
     </div>
   </section>
 

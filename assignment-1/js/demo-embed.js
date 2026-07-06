@@ -4,7 +4,9 @@
 // model clusters them, though similarity was never supplied.
 
 import { MLP, makeRng, pca2 } from "./nn.js";
-import { Plot, PALETTE } from "./viz.js";
+import { Plot, LossPlot, PALETTE } from "./viz.js";
+
+const TOTAL = 300;
 
 const TOKENS = ["cat", "dog", "cow", "apple", "mango", "eat", "chase", "see"];
 // category id: 0 animals, 1 fruits, 2 verbs
@@ -70,13 +72,18 @@ export function initEmbed(root) {
   const plot = new Plot(canvas, { xmin: -1, xmax: 1, ymin: -1, ymax: 1 });
   const nnOut = root.querySelector('[data-out="embed-nn"]');
   const epochOut = root.querySelector('[data-out="embed-epoch"]');
+  const lossOut = root.querySelector('[data-out="embed-loss"]');
+  const lossPlot = new LossPlot(root.querySelector('[data-canvas="embed-loss-curve"]'), {
+    ymin: 0.1, ymax: 2.5, maxEpoch: TOTAL,
+  });
   const btn = root.querySelector('[data-action="embed-retrain"]');
   const projRng = makeRng(99);
 
   let model, corpus, epoch, raf, seed = 5;
+  let hist = [];
 
   function build() {
-    corpus = makeCorpus(seed, 3000);
+    corpus = makeCorpus(seed, 1600);
     model = new MLP(
       [
         { in: VOCAB, out: DIM, act: "linear" },
@@ -86,6 +93,7 @@ export function initEmbed(root) {
       { seed: seed + 50, lr: 0.03 }
     );
     epoch = 0;
+    hist = [];
   }
 
   function draw() {
@@ -123,15 +131,19 @@ export function initEmbed(root) {
     }
     nnOut.textContent = `${same} / ${VOCAB}`;
     epochOut.textContent = epoch;
+    if (lossOut) lossOut.textContent = (hist.length ? hist[hist.length - 1][1] : 0).toFixed(3);
+    lossPlot.draw([{ color: PALETTE.blue, data: hist }]);
   }
 
   function loop() {
-    for (let k = 0; k < 3; k++) {
-      model.step(corpus.X, corpus.Y);
+    let l = 0;
+    for (let k = 0; k < 5; k++) {
+      l = model.step(corpus.X, corpus.Y);
       epoch++;
     }
+    hist.push([epoch, l]);
     draw();
-    if (epoch < 450) raf = requestAnimationFrame(loop);
+    if (epoch < TOTAL) raf = requestAnimationFrame(loop);
     else btn.disabled = false;
   }
 
@@ -144,7 +156,7 @@ export function initEmbed(root) {
   }
 
   btn.addEventListener("click", () => { seed += 1; run(); });
-  window.addEventListener("resize", () => { plot.resize(); draw(); });
+  window.addEventListener("resize", () => { plot.resize(); lossPlot.resize(); draw(); });
 
   return { start: run };
 }
