@@ -42,21 +42,22 @@ body {
 .rail a {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
+  gap: 9px;
+  font-size: 14px;
   color: var(--muted);
   text-decoration: none;
   letter-spacing: 0.01em;
   transition: color 0.2s;
 }
-.rail a b { color: var(--secondary); font-weight: 600; }
+.rail a b { color: var(--secondary); font-weight: 700; }
 .rail .dot {
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   border: 1.5px solid var(--axis);
   background: transparent;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
 .rail a.active { color: var(--ink); }
 .rail a.active .dot { background: var(--blue); border-color: var(--blue); }
@@ -64,10 +65,11 @@ body {
 
 /* ---- Layout ---- */
 .hero, .claim, .foot {
-  max-width: 1080px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 40px;
 }
+.spacer { height: 8vh; }
 
 .hero {
   padding-top: 15vh;
@@ -151,7 +153,7 @@ body {
 }
 
 /* ---- Grids of panels ---- */
-.grid { display: grid; gap: 18px; }
+.grid { display: grid; gap: 22px; }
 .grid.two { grid-template-columns: repeat(2, 1fr); }
 .grid.three { grid-template-columns: repeat(3, 1fr); }
 .grid.embed { grid-template-columns: 1.5fr 1fr; }
@@ -275,10 +277,10 @@ body {
 /* ---- Loss curve panel ---- */
 .loss-panel { margin-top: 18px; }
 .loss-panel.compact { margin-top: 14px; }
-.panel canvas.lossc { aspect-ratio: 30 / 8; }
-.panel canvas.lossc.short { aspect-ratio: 20 / 9; }
+.panel canvas.lossc { aspect-ratio: 24 / 8; }
+.panel canvas.lossc.short { aspect-ratio: 18 / 9; }
 
-.grid.loss-and-proof { grid-template-columns: 1.4fr 1fr; margin-top: 18px; align-items: stretch; }
+.grid.loss-and-proof { grid-template-columns: 1.3fr 1fr; margin-top: 22px; align-items: stretch; }
 .grid.loss-and-proof .loss-panel { margin-top: 0; }
 
 /* ---- Explainer cards ---- */
