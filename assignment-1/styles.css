@@ -69,7 +69,6 @@ body {
   margin: 0 auto;
   padding: 0 40px;
 }
-.spacer { height: 8vh; }
 
 .hero {
   padding-top: 15vh;
@@ -458,14 +457,29 @@ button.ghost:disabled { opacity: 0.4; }
   display: inline-block;
 }
 
-/* ---- Footer ---- */
+/* ---- Footer byline ---- */
 .foot {
-  padding-top: 7vh;
-  padding-bottom: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 6vh;
+  padding-top: 24px;
+  padding-bottom: 8vh;
   border-top: 1px solid var(--border);
 }
-.foot p { max-width: 64ch; color: var(--secondary); font-size: 16px; }
-.foot .fine { color: var(--muted); font-size: 13px; margin-top: 14px; }
+.foot .by { font-size: 14px; color: var(--muted); }
+.foot .by b { color: var(--secondary); font-weight: 600; }
+.foot .src {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1px;
+  transition: color 0.15s;
+}
+.foot .src:hover { color: var(--ink); }
 
 /* ---- Responsive ---- */
 @media (max-width: 900px) {
