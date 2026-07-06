@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Four proofs about neural networks - live in your browser</title>
+  <meta name="description" content="Four claims about activations, depth, embeddings, and data, each proven with a tiny neural network that trains live in your browser." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='14'>&#129504;</text></svg>" />
+</head>
+<body>
+  <nav class="rail" aria-label="Section navigation">
+    <a href="#s1-1"><span class="dot"></span><b>S1-1</b> Activations</a>
+    <a href="#s1-2"><span class="dot"></span><b>S1-2</b> Depth</a>
+    <a href="#s1-3"><span class="dot"></span><b>S1-3</b> Embeddings</a>
+    <a href="#s1-4"><span class="dot"></span><b>S1-4</b> Data</a>
+  </nav>
+
+  <header class="hero">
+    <p class="eyebrow">Assignment 1 &middot; live demonstrations</p>
+    <h1>Four things that are true about neural networks, proven while you watch.</h1>
+    <p class="lede">
+      Every model on this page is a tiny neural network written from scratch in
+      plain JavaScript. Nothing is precomputed. When a section scrolls into view
+      it trains live on real data, and the picture that forms is the proof.
+    </p>
+    <div class="hero-meta">
+      <span>No libraries</span>
+      <span>Trains in your browser</span>
+      <span>Press <b>Retrain</b> to re-run any experiment</span>
+    </div>
+  </header>
+
+  <!-- S1-1 -->
+  <section class="claim" id="s1-1">
+    <div class="claim-head">
+      <span class="tag">S1-1</span>
+      <h2>Activations exist for a reason.</h2>
+    </div>
+    <p class="claim-text">
+      A model with no nonlinearity can only draw a straight boundary, so it
+      cannot separate two interleaved rings. Adding one ReLU hidden layer can.
+    </p>
+    <div class="grid two">
+      <figure class="panel">
+        <figcaption>
+          <span class="ptitle">Single linear layer + sigmoid</span>
+          <span class="badge" data-out="rings-acc-linear">-</span>
+        </figcaption>
+        <canvas data-canvas="rings-linear"></canvas>
+        <p class="cap">One straight cut. It cannot wrap a ring, so it is stuck near chance.</p>
+      </figure>
+      <figure class="panel">
+        <figcaption>
+          <span class="ptitle">One ReLU hidden layer</span>
+          <span class="badge good" data-out="rings-acc-relu">-</span>
+        </figcaption>
+        <canvas data-canvas="rings-relu"></canvas>
+        <p class="cap">The same data, one activation added. The boundary wraps the ring.</p>
+      </figure>
+    </div>
+    <div class="controls">
+      <button data-action="rings-retrain">Retrain</button>
+      <span class="epoch">epoch <b data-out="rings-epoch">0</b></span>
+      <span class="note">Only the activation changed. The boundary picture is the proof.</span>
+    </div>
+  </section>
+
+  <!-- S1-2 -->
+  <section class="claim" id="s1-2">
+    <div class="claim-head">
+      <span class="tag">S1-2</span>
+      <h2>Depth without nonlinearity is a lie.</h2>
+    </div>
+    <p class="claim-text">
+      Five stacked linear layers collapse to a single linear map, so a 5-layer
+      linear net is no stronger than 1 layer. Both fail the ring task
+      identically. Inserting ReLUs between the same five layers solves it.
+    </p>
+    <div class="grid three">
+      <figure class="panel">
+        <figcaption>
+          <span class="ptitle">1 linear layer</span>
+          <span class="badge" data-out="depth-acc-one">-</span>
+        </figcaption>
+        <canvas data-canvas="depth-one"></canvas>
+        <p class="cap">A line.</p>
+      </figure>
+      <figure class="panel">
+        <figcaption>
+          <span class="ptitle">5 linear layers, no activation</span>
+          <span class="badge" data-out="depth-acc-linear5">-</span>
+        </figcaption>
+        <canvas data-canvas="depth-linear5"></canvas>
+        <p class="cap">The same line. Depth bought nothing.</p>
+      </figure>
+      <figure class="panel">
+        <figcaption>
+          <span class="ptitle">5 layers + ReLU</span>
+          <span class="badge good" data-out="depth-acc-relu5">-</span>
+        </figcaption>
+        <canvas data-canvas="depth-relu5"></canvas>
+        <p class="cap">ReLU breaks the tie.</p>
+      </figure>
+    </div>
+    <div class="proof-note">
+      <span class="proof-label">Proof by multiplication</span>
+      Multiply the five weight matrices of the linear net and the product is one
+      matrix mapping 2 inputs straight to 1 output:
+      <div class="product" data-out="depth-product">-</div>
+    </div>
+    <div class="controls">
+      <button data-action="depth-retrain">Retrain</button>
+      <span class="note">The 1-layer and 5-linear-layer boundaries are the same line.</span>
+    </div>
+  </section>
+
+  <!-- S1-3 -->
+  <section class="claim" id="s1-3">
+    <div class="claim-head">
+      <span class="tag">S1-3</span>
+      <h2>Embeddings learn similarity from nothing but next-token.</h2>
+    </div>
+    <p class="claim-text">
+      Trained only to predict the next token in a tiny synthetic grammar, the
+      embedding table clusters related tokens, though similarity was never
+      supplied. Same-category tokens share next-token distributions, so they end
+      up neighbors.
+    </p>
+    <div class="grid embed">
+      <figure class="panel">
+        <figcaption>
+          <span class="ptitle">Learned embeddings, projected to 2D</span>
+          <span class="epoch">epoch <b data-out="embed-epoch">0</b></span>
+        </figcaption>
+        <canvas data-canvas="embed-scatter"></canvas>
+        <div class="legend">
+          <span><i style="background:#2a78d6"></i>animals</span>
+          <span><i style="background:#1baf7a"></i>fruits</span>
+          <span><i style="background:#eb6834"></i>verbs</span>
+        </div>
+      </figure>
+      <aside class="sidecard">
+        <p class="side-label">The grammar</p>
+        <p class="mono small">
+          animals: cat, dog, cow<br />
+          fruits: apple, mango<br />
+          verbs: eat, chase, see
+        </p>
+        <p class="side-label">Nearest neighbor is same category</p>
+        <p class="bignum"><span data-out="embed-nn">-</span></p>
+        <p class="side-text">
+          For each token, its closest neighbor in embedding space belongs to the
+          same category. That structure was never labeled. It emerged from
+          next-token prediction alone.
+        </p>
+        <button data-action="embed-retrain">Retrain</button>
+      </aside>
+    </div>
+  </section>
+
+  <!-- S1-4 -->
+  <section class="claim" id="s1-4">
+    <div class="claim-head">
+      <span class="tag">S1-4</span>
+      <h2>Memorization vs generalization, and data closes the gap.</h2>
+    </div>
+    <p class="claim-text">
+      A high-capacity net on tiny data drives train accuracy to nearly 100% while
+      held-out accuracy stays low. It memorizes. Growing the dataset closes the
+      gap. The same over-parameterized network is trained at three dataset sizes.
+    </p>
+    <div class="grid three">
+      <figure class="panel">
+        <figcaption>
+          <span class="ptitle">n = 20</span>
+          <span class="badges">
+            <span class="badge" data-out="gen-train-20">-</span>
+            <span class="badge alt" data-out="gen-test-20">-</span>
+          </span>
+        </figcaption>
+        <canvas data-canvas="gen-20"></canvas>
+        <p class="cap">Boundary contorts to memorize noise. Train high, test low.</p>
+      </figure>
+      <figure class="panel">
+        <figcaption>
+          <span class="ptitle">n = 200</span>
+          <span class="badges">
+            <span class="badge" data-out="gen-train-200">-</span>
+            <span class="badge alt" data-out="gen-test-200">-</span>
+          </span>
+        </figcaption>
+        <canvas data-canvas="gen-200"></canvas>
+        <p class="cap">The gap narrows.</p>
+      </figure>
+      <figure class="panel">
+        <figcaption>
+          <span class="ptitle">n = 2000</span>
+          <span class="badges">
+            <span class="badge" data-out="gen-train-2000">-</span>
+            <span class="badge alt" data-out="gen-test-2000">-</span>
+          </span>
+        </figcaption>
+        <canvas data-canvas="gen-2000"></canvas>
+        <p class="cap">Smooth boundary. Train and test almost agree.</p>
+      </figure>
+    </div>
+    <figure class="panel wide">
+      <figcaption>
+        <span class="ptitle">Generalization gap vs dataset size</span>
+        <span class="legend inline">
+          <span><i style="background:#2a78d6"></i>train</span>
+          <span><i style="background:#eb6834"></i>held-out test</span>
+        </span>
+      </figcaption>
+      <canvas data-canvas="gen-gap" class="gapc"></canvas>
+      <p class="cap">The dashed span between the lines is the gap. It shrinks as data grows.</p>
+    </figure>
+    <div class="controls">
+      <button data-action="gen-retrain">Retrain all three</button>
+      <span class="note">Blue is training accuracy, orange is held-out accuracy. Data is everything.</span>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>Four claims, four tiny networks, one point: what a model can represent is
+       decided by nonlinearity, depth used honestly, the signal in its data, and
+       how much of that data it sees.</p>
+    <p class="fine">Built for Assignment 1. Every network here trains live in the browser with no external libraries.</p>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
