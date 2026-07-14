@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Faithful multilingual BPE tokenizer - India across four languages</title>
+  <meta name="description" content="A shared 10k byte-fallback BPE tokenizer for the India Wikipedia article in English, Hindi, Telugu and Marathi. Faithful (lossless round-trip), with ratios and self-score recomputed live in your browser." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='14'>&#129517;</text></svg>" />
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Assignment 2 &middot; faithful BPE tokenizer</p>
+    <h1>One 10,000-token BPE vocabulary, four languages, balanced compression, lossless round-trip.</h1>
+    <p class="lede">
+      A single Byte-Pair-Encoding tokenizer trained on the <b>India</b> Wikipedia
+      article (faithful Markdown) in English, Hindi, Telugu and Marathi. It is a
+      <b>byte-fallback</b> BPE: subword tokens over character atoms, with a byte
+      fallback for anything unseen, so <span class="mono">decode(encode(text))</span>
+      preserves every visible character. Every number below is recomputed live in
+      your browser from the exported <span class="mono">tokenizer.json</span> and the
+      four texts.
+    </p>
+
+    <div class="scorecard">
+      <div class="score-main">
+        <span class="score-label">Self score</span>
+        <span class="score-num" data-score>-</span>
+        <span class="score-formula" data-calc>-</span>
+      </div>
+      <div class="score-side">
+        <div class="ss-row"><span>X max</span><span data-xmax>-</span></div>
+        <div class="ss-row"><span>X min</span><span data-xmin>-</span></div>
+        <div class="ss-row"><span>spread</span><span class="mono" data-spread>-</span></div>
+      </div>
+    </div>
+    <div class="capcheck" data-cap>-</div>
+    <div class="capcheck" data-faithful>-</div>
+    <p class="livenote" data-adj>-</p>
+    <p class="livenote">↻ Computed in your browser now &middot; the shipped tokenizer and texts are used, so re-running reproduces these exact numbers.</p>
+  </header>
+
+  <section class="block">
+    <h2>Per-language ratios</h2>
+    <p class="sub">Fertility X = tokens &divide; faithful units, for each language's India article. Score = 1000 / (X max &minus; X min).</p>
+    <div class="tablewrap">
+      <table class="ratios">
+        <thead>
+          <tr><th>Language</th><th>Script</th><th class="num">Faithful units</th><th class="num">Tokens</th><th class="num">X (ratio)</th><th>Fertility</th></tr>
+        </thead>
+        <tbody data-rows></tbody>
+      </table>
+    </div>
+    <p class="caphint" data-caphint></p>
+    <div class="metastrip">
+      <div><span class="m-num" data-vocabcount>-</span><span class="m-lab">total vocabulary</span></div>
+      <div><span class="m-num" data-basecount>-</span><span class="m-lab">byte-fallback tokens</span></div>
+      <div><span class="m-num" data-basechars>-</span><span class="m-lab">base characters</span></div>
+      <div><span class="m-num" data-mergecount>-</span><span class="m-lab">BPE merges</span></div>
+    </div>
+    <p class="caphint" data-vocabsum></p>
+  </section>
+
+  <section class="block">
+    <h2>Token statistics by language</h2>
+    <p class="sub">Per-language breakdown from the exported tokenizer over each India article. <b>chars / token</b> and <b>bytes / token</b> show how much text one token carries; <b>distinct types</b> is how many of the 10,000 vocabulary tokens that language actually uses.</p>
+    <div class="tablewrap">
+      <table class="ratios stats">
+        <thead>
+          <tr>
+            <th>Language</th>
+            <th class="num">Characters</th>
+            <th class="num">UTF-8 bytes</th>
+            <th class="num">Faithful units</th>
+            <th class="num">Tokens</th>
+            <th class="num">Fertility</th>
+            <th class="num">Chars / token</th>
+            <th class="num">Bytes / token</th>
+            <th class="num">Distinct types</th>
+          </tr>
+        </thead>
+        <tbody data-statrows></tbody>
+      </table>
+    </div>
+    <p class="caphint" data-stathint></p>
+  </section>
+
+  <section class="block">
+    <h2>Tokenize anything</h2>
+    <p class="sub">Type any text - any language, punctuation, URLs, emoji. It is tokenized live by the exact shared tokenizer, and round-tripped back to prove nothing is lost.</p>
+    <textarea class="input" data-input spellcheck="false">India is a country. भारत एक देश है। భారత దేశం. मराठी: https://en.wikipedia.org/wiki/India#History (1,428,627,663)</textarea>
+    <div class="pstats">
+      <div><span class="p-num" data-pwords>0</span><span class="p-lab">faithful units</span></div>
+      <div><span class="p-num" data-ptokens>0</span><span class="p-lab">tokens</span></div>
+      <div><span class="p-num" data-pfert>0</span><span class="p-lab">tokens / unit</span></div>
+    </div>
+    <div class="tokens" data-tokens></div>
+    <div class="capcheck" data-rt>-</div>
+  </section>
+
+  <section class="block">
+    <h2>The vocabulary</h2>
+    <p class="sub">All <span data-vocabmatch>-</span> tokens (<span class="mono">·</span> marks a leading space). Search to filter; download the full tokenizer below.</p>
+    <input class="vsearch" data-vocabsearch placeholder="filter tokens, e.g. ing or भा or ా" spellcheck="false" />
+    <div class="vocablist" data-vocablist></div>
+  </section>
+
+  <section class="block">
+    <h2>Sample from tokenizer.json</h2>
+    <p class="sub">A live slice of the tokenizer file itself, read straight from what this page loaded - the real thing, not a description of it. You can see the model type, actual vocabulary entries and the BPE merge rules that drive encoding, plus the settings that make the round trip lossless: <span class="mono">byte_fallback</span> is on, no normalizer rewrites characters, and decoding runs a Metaspace + byte-fallback pipeline. That is the whole encoding algorithm, not just a list of tokens.</p>
+    <div class="jsonwrap"><pre class="jsonview" data-tokjson>-</pre></div>
+    <p class="caphint">Byte-fallback tokens <span class="mono">&lt;0xNN&gt;</span> are kept non-special so the default <span class="mono">decode()</span> reconstructs them. Full file below.</p>
+  </section>
+
+  <section class="block">
+    <h2>Download the tokenizer</h2>
+    <p class="sub">Standard HuggingFace format - loads directly with <span class="mono">Tokenizer.from_file()</span>.</p>
+    <div class="downloads">
+      <button data-dl="tokenizer.json">tokenizer.json <span>full HF tokenizer</span></button>
+      <button data-dl="vocab.json">vocab.json <span>token &rarr; id map</span></button>
+      <button data-dl="merges.txt">merges.txt <span>BPE merge rules</span></button>
+    </div>
+    <p class="sub small">Corpus snapshots: <a href="texts/en.txt" download>en</a>, <a href="texts/hi.txt" download>hi</a>, <a href="texts/te.txt" download>te</a>, <a href="texts/mr.txt" download>mr</a>. Applying the tokenizer to these exact texts reproduces the scores above.</p>
+  </section>
+
+  <section class="block method">
+    <h2>How it works, and how to check it</h2>
+    <div class="mcols">
+      <div class="mcard">
+        <span class="mlabel">The method</span>
+        <ul>
+          <li><b>Byte-fallback BPE (SentencePiece/Llama style).</b> Subword BPE over character atoms; any character the tokenizer never saw falls back to its raw UTF-8 bytes. So it is efficient for Indic scripts <i>and</i> faithful: <span class="mono">decode(encode(text)) </span> keeps every visible character, for any input.</li>
+          <li><b>No lossy normalizer.</b> NFKC would re-spell characters (″&rarr;′′); we omit it so the round trip is exact.</li>
+          <li><b>Decoupled per-language weighting.</b> English, Hindi, Telugu and Marathi are weighted during training to balance their tokens-per-unit ratios, minimizing the spread within one shared 10k vocabulary.</li>
+          <li><b>Faithful corpus, not clipped prose.</b> Each India article is fetched from Wikipedia and converted to text that keeps links, tables, references and punctuation, so the ratios reflect real article content and the round trip is tested on exactly what is trained.</li>
+        </ul>
+      </div>
+      <div class="mcard">
+        <span class="mlabel">Why the numbers are trustworthy</span>
+        <ul>
+          <li>The widget tokenizes the shipped texts <b>live</b> and re-checks the round trip in your browser. Nothing is hardcoded.</li>
+          <li>The JavaScript tokenizer is verified <b>token-for-token</b> against the Python <span class="mono">tokenizers</span> library.</li>
+          <li>A standalone <span class="mono">verify.py</span> reproduces every figure and asserts <span class="mono">decode(encode(x)) == x</span>, using the assignment's own score formula so the numbers are independently checkable.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Folder contents</h2>
+    <p class="sub">Everything needed to reproduce the tokenizer and this widget end to end. Each script is deterministic; run them in order and the numbers above come back exactly.</p>
+    <div class="filetree">
+      <div class="frow fhead"><span class="fpath">path</span><span class="fdesc">what it is</span></div>
+      <div class="frow"><span class="fpath">scripts/build_faithful_corpus.py</span><span class="fdesc">fetch the four India Wikipedia pages and convert them to faithful text</span></div>
+      <div class="frow"><span class="fpath">scripts/hf_build.py</span><span class="fdesc">train the byte-fallback BPE, tune the language weights, export the tokenizer</span></div>
+      <div class="frow"><span class="fpath">scripts/token_stats.py</span><span class="fdesc">compute per-language token statistics into metrics.json</span></div>
+      <div class="frow"><span class="fpath">scripts/verify.py</span><span class="fdesc">re-check <span class="mono">decode(encode(x)) == x</span> and recompute the score</span></div>
+      <div class="frow"><span class="fpath">scripts/test_widget_js.py</span><span class="fdesc">prove this widget's JS tokenizer equals Python, token-for-token</span></div>
+      <div class="frow"><span class="fpath">tokenizer/tokenizer.json</span><span class="fdesc">the trained tokenizer in HuggingFace format</span></div>
+      <div class="frow"><span class="fpath">tokenizer/metrics.json</span><span class="fdesc">ratios, spread, score and token statistics</span></div>
+      <div class="frow"><span class="fpath">corpus/*.faithful.txt&thinsp;/&thinsp;.md</span><span class="fdesc">faithful text snapshots the tokenizer is trained and scored on</span></div>
+      <div class="frow"><span class="fpath">corpus/*.meta.json</span><span class="fdesc">source URL, converter and fetch time for each language</span></div>
+      <div class="frow"><span class="fpath">site/</span><span class="fdesc">this self-contained widget (HTML/CSS/JS + a copy of the tokenizer)</span></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span class="by">Built by <b>Ashish Kamble</b></span>
+    <span class="src">India Wikipedia &middot; en / hi / te / mr</span>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

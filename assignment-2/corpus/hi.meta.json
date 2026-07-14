@@ -1,0 +1,9 @@
+{
+  "lang": "hi",
+  "title": "भारत",
+  "source_url": "https://hi.wikipedia.org/api/rest_v1/page/html/भारत",
+  "converter": "html2text",
+  "fetched_at": "2026-07-14T10:24:04Z",
+  "chars": 212781,
+  "faithful_units": 72170
+}

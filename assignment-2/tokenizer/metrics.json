@@ -1,0 +1,90 @@
+{
+  "method": "HuggingFace BPE, byte_fallback, Metaspace, no normalizer",
+  "languages": {
+    "en": "English",
+    "hi": "Hindi",
+    "te": "Telugu",
+    "mr": "Marathi"
+  },
+  "weights": {
+    "en": 2,
+    "hi": 2,
+    "te": 4,
+    "mr": 5
+  },
+  "vocab_size": 10000,
+  "faithful_units": {
+    "en": 157936,
+    "hi": 72170,
+    "te": 29315,
+    "mr": 24384
+  },
+  "unit_policy": "one Unicode letter/mark/number run OR one visible punctuation/symbol char",
+  "token_counts": {
+    "en": 123111,
+    "hi": 55834,
+    "te": 23537,
+    "mr": 19354
+  },
+  "ratios": {
+    "en": 0.7794992908519907,
+    "hi": 0.7736455590965775,
+    "te": 0.8028995394849053,
+    "mr": 0.7937171916010499
+  },
+  "min_language": "hi",
+  "max_language": "te",
+  "spread": 0.029253980388327827,
+  "score": 34183.38245687053,
+  "hindi_penalty_factor": 1.0,
+  "hindi_adjusted_score": 34183.38245687053,
+  "english_ok": true,
+  "hindi_ok": true,
+  "faithful": true,
+  "token_stats": {
+    "en": {
+      "characters": 499634,
+      "visible_characters": 453735,
+      "bytes": 501668,
+      "faithful_units": 157936,
+      "tokens": 123111,
+      "fertility": 0.7794992908519907,
+      "chars_per_token": 4.058402579785722,
+      "bytes_per_token": 4.074924255346801,
+      "distinct_token_types": 4640
+    },
+    "hi": {
+      "characters": 212781,
+      "visible_characters": 191586,
+      "bytes": 406591,
+      "faithful_units": 72170,
+      "tokens": 55834,
+      "fertility": 0.7736455590965775,
+      "chars_per_token": 3.8109574811047033,
+      "bytes_per_token": 7.282139914747287,
+      "distinct_token_types": 4562
+    },
+    "te": {
+      "characters": 91046,
+      "visible_characters": 83401,
+      "bytes": 175972,
+      "faithful_units": 29315,
+      "tokens": 23537,
+      "fertility": 0.8028995394849053,
+      "chars_per_token": 3.8682075030802565,
+      "bytes_per_token": 7.476398861367209,
+      "distinct_token_types": 3066
+    },
+    "mr": {
+      "characters": 79755,
+      "visible_characters": 71759,
+      "bytes": 170174,
+      "faithful_units": 24384,
+      "tokens": 19354,
+      "fertility": 0.7937171916010499,
+      "chars_per_token": 4.120853570321381,
+      "bytes_per_token": 8.792704350521856,
+      "distinct_token_types": 3300
+    }
+  }
+}

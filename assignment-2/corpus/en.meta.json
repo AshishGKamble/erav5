@@ -1,0 +1,9 @@
+{
+  "lang": "en",
+  "title": "India",
+  "source_url": "https://en.wikipedia.org/api/rest_v1/page/html/India",
+  "converter": "html2text",
+  "fetched_at": "2026-07-14T10:24:02Z",
+  "chars": 499634,
+  "faithful_units": 157936
+}
