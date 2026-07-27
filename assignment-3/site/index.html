@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>India-First 40B - A Design</title>
+<meta name="description" content="A design for a 40B India-first LLM, re-baselined against Gemma 4: match its frontier capability with a license-clean recipe, and win on India-first perspective, Indic depth, and tokenizer efficiency." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">India-First 40B <span>/ ERA V5 &middot; Assignment 3</span></div>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme">
+    <span id="themeIcon">&#9788;</span><span id="themeLabel">Light</span>
+  </button>
+</div>
+
+<main class="wrap">
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero">
+    <div class="eyebrow">Designing a sovereign frontier model</div>
+    <h1>An India-first 40B model, designed around one number.</h1>
+    <p class="thesis">
+      A 40B model runs out of compute at ~800B tokens - but out of real Indian <em>words</em> long
+      before that. <strong>Gemma 4</strong> (Apr 2026) is now frontier-strong and even agentic, so we
+      match it on capability with a license-clean 2026 recipe, and win on what a global 140-language
+      model does not do: an <strong>India-first perspective</strong>, <strong>measured Indic depth</strong>,
+      and <strong>Indic tokenizer efficiency</strong>. The lever underneath is still fertility - tokens per word.
+    </p>
+    <div class="meta">
+      <span class="chip">match <b>Gemma 4</b></span>
+      <span class="chip">lead on <b>India</b></span>
+      <span class="chip">India-first, <b>measurably fair</b></span>
+    </div>
+
+    <!-- design at a glance: the answer, up front -->
+    <p class="glance-label">The design at a glance</p>
+    <div class="kpi">
+      <div class="tile"><div class="label">Parameters</div><div class="value">40<span class="u">B</span></div><div class="sub">dense; vs Gemma 4 31B flagship</div></div>
+      <div class="tile"><div class="label">Training tokens</div><div class="value">15-20<span class="u">T</span></div><div class="sub">staged: base &rarr; anneal &rarr; Indic</div></div>
+      <div class="tile"><div class="label">Vocabulary</div><div class="value">200<span class="u">K</span></div><div class="sub">focus beats Gemma 4's 262K/140 langs</div></div>
+      <div class="tile"><div class="label">Languages</div><div class="value">12</div><div class="sub">top-10 + Punjabi, Assamese</div></div>
+      <div class="tile"><div class="label">India-touching data</div><div class="value">~30<span class="u">%</span></div><div class="sub">~100&times; its natural web share</div></div>
+      <div class="tile"><div class="label">Indic fertility</div><div class="value small">1.2 - 2.0</div><div class="sub">vs 4 - 10 for generic tokenizers</div></div>
+    </div>
+
+    <nav class="pipeline" aria-label="Report sections in build order">
+      <span class="lab">Read in build order</span>
+      <a class="p" href="#targets"><b>1</b> Targets</a><span class="sep">&rarr;</span>
+      <a class="p" href="#data"><b>2</b> Data</a><span class="sep">&rarr;</span>
+      <a class="p" href="#cleaning"><b>3</b> Cleaning</a><span class="sep">&rarr;</span>
+      <a class="p" href="#tokenizer"><b>4</b> Tokenizer</a><span class="sep">&rarr;</span>
+      <a class="p" href="#eval"><b>5</b> Tests</a>
+    </nav>
+
+    <!-- HERO FIGURE: the waste bomb -->
+    <figure class="figure" style="margin-top:1.5rem">
+      <figcaption>
+        <div class="fig-title">Why fertility is the whole game</div>
+        <div class="fig-sub">Of 500B tokens you "collected", how many are real words the model can actually learn from?</div>
+      </figcaption>
+      <div class="chart-scroll"><div class="chart-host" id="figWaste"></div></div>
+      <div class="legend" id="figWaste-legend"></div>
+      <p class="fig-note">
+        A weak multilingual tokenizer breaks each Indian word into ~13 tokens, so "500B tokens" is
+        really only ~37B words - the rest is glue. A good tokenizer (~1.5) keeps ~333B. Same data,
+        <b>9&times; more learning</b>. This is why the tokenizer (Section 4) is the highest-leverage
+        India decision.
+        <span class="src">Illustrates the session's "500B tokens, 37B words" point; fertility numbers from Section 4.</span>
+      </p>
+      <button class="tbl-toggle" data-table="figWaste-table">Show data table</button>
+      <div id="figWaste-table" hidden></div>
+    </figure>
+  </header>
+
+  <!-- ===================== 1. TARGETS ===================== -->
+  <section id="targets">
+    <div class="sec-head"><span class="sec-num">01</span><h2>What "winning" means</h2></div>
+    <div class="asks"><span class="lab">The brief</span><q>as good as (or better than) Gemma 4, and really good at coding, agentic work and Indic languages.</q></div>
+    <p class="sec-lead">
+      Gemma 4 (Apr 2026) is a big jump over Gemma 3 - frontier scores <em>and</em> now native agentic.
+      We target <strong>parity with the 31B flagship</strong> on its own suite, and <strong>lead where it
+      stays silent</strong>: the Indic depth it no longer reports. (Our 40B dense vs Gemma 4's 31B dense flagship.)
+    </p>
+
+    <figure class="figure">
+      <figcaption>
+        <div class="fig-title">Figure 1. Our targets vs Gemma 4 31B (Gemma 3 for context)</div>
+        <div class="fig-sub">Gemma 3 &rarr; Gemma 4 was a huge jump. We aim to match Gemma 4 across its suite - and lead on the Indic row it drops.</div>
+      </figcaption>
+      <div class="chart-scroll"><div class="chart-host" id="figBench"></div></div>
+      <div class="legend" id="figBench-legend"></div>
+      <p class="fig-note">
+        The blue (our-target) bars sit at Gemma 4's level - parity on capability. On IndicGenBench,
+        Gemma 3 at least reported 63.4; <b>Gemma 4 publishes nothing</b> (n/p), so simply measuring
+        Indic is our lead.
+        <span class="src">Gemma 4 Technical Report (arXiv 2607.02770); tau2-bench = 3-domain average; Gemma 3 from arXiv 2503.19786.</span>
+      </p>
+      <button class="tbl-toggle" data-table="figBench-table">Show data table</button>
+      <div id="figBench-table" hidden></div>
+    </figure>
+
+    <div class="callout">
+      <b>The goalposts moved - so our wedges are positional, not capability gaps.</b> Gemma 4 is
+      frontier and agentic, so we concede capability parity and win on three durable fronts:
+      (1) <b>India-first perspective</b> - Gemma has none; (2) <b>measured Indic depth</b> - Gemma 4
+      publishes only a blended MMMLU 88.4, zero per-language; (3) <b>tokenizer efficiency</b> - focus
+      beats breadth (Section 4).
+    </div>
+  </section>
+
+  <!-- ===================== 2. DATA ===================== -->
+  <section id="data">
+    <div class="sec-head"><span class="sec-num">02</span><h2>The data: what we feed it, and why</h2></div>
+    <div class="asks"><span class="lab">The brief</span><q>how would your data look, what would you collect and why - for pre-training, post-training and RL / alignment?</q></div>
+    <p class="sec-lead">
+      Matching Gemma 4 needs frontier reasoning, which wants <strong>40%+ code + math</strong> - fighting
+      the India tilt. So we <strong>stage</strong> the data instead of one flat mix, and add a
+      <strong>reasoning + agentic training spine</strong> the naive plan lacked.
+    </p>
+
+    <figure class="figure">
+      <figcaption>
+        <div class="fig-title">Figure 2. The staged pre-training recipe (~15-20T tokens)</div>
+        <div class="fig-sub">Top: the base-phase mix. Bottom: an honest look inside the Indic slice.</div>
+      </figcaption>
+      <div class="chart-scroll"><div class="chart-host" id="figRecipe"></div></div>
+      <div class="legend" id="figRecipe-legend"></div>
+      <div class="chart-scroll" style="margin-top:1rem"><div class="chart-host" id="figIndic"></div></div>
+      <p class="fig-note">
+        Three phases: <b>A</b> a reasoning-capable base (above) &rarr; <b>B</b> mid-training / annealing on
+        the best code / math / reasoning &rarr; <b>C</b> a dedicated <b>Indic continued-pretrain (~30%)</b> so
+        Indic depth is built without forgetting. Honest part: organic Indic is only ~50-100B tokens, so
+        <b>~90% of the Indic slice is synthetic / translated</b> and caps the Indic ceiling.
+        <span class="src">Curriculum: OLMo 2 / Nemotron annealing; Indic corpora: Sangraha / IndicCorp (AI4Bharat).</span>
+      </p>
+      <button class="tbl-toggle" data-table="figRecipe-table">Show data table</button>
+      <div id="figRecipe-table" hidden></div>
+    </figure>
+
+    <figure class="figure">
+      <figcaption>
+        <div class="fig-title">Figure 3. The post-training spine (how we reach Gemma 4's scores)</div>
+        <div class="fig-sub">Gemma 4's AIME 89 / GPQA 84 are "thinking-model" numbers - impossible without this.</div>
+      </figcaption>
+      <div class="flow">
+        <div class="step"><div class="n">01</div><div class="t">Mid-train / anneal</div><div class="d">LR&rarr;0 on best code / math / CoT; unlocks RL</div></div>
+        <div class="arrow">&rarr;</div>
+        <div class="step fix"><span class="tag">license-clean</span><div class="n">02</div><div class="t">Reasoning SFT</div><div class="d">long chain-of-thought, distilled from DeepSeek-R1 / Qwen3, not Gemma</div></div>
+        <div class="arrow">&rarr;</div>
+        <div class="step"><div class="n">03</div><div class="t">RLVR (GRPO)</div><div class="d">verifiable rewards: math exact-match, code unit-tests</div></div>
+        <div class="arrow">&rarr;</div>
+        <div class="step fix"><span class="tag">India</span><div class="n">04</div><div class="t">Agentic RL</div><div class="d">tool sandboxes re-skinned to IRCTC / UPI / DigiLocker</div></div>
+        <div class="arrow">&rarr;</div>
+        <div class="step"><div class="n">05</div><div class="t">Thinking fusion + align</div><div class="d">think toggle; Constitutional-AI Indian values; native prefs</div></div>
+      </div>
+      <p class="fig-note">
+        Distilling reasoning from <b>R1 (MIT) / Qwen3 (Apache)</b> - not Gemma - is both cheaper (~1/10 the
+        GPU-hours) and keeps our model legally independent.
+        <span class="src">DeepSeek-R1 (Nature 2025); Qwen3 (arXiv 2505.09388); GRPO / DeepSeekMath; Kimi K2 (arXiv 2507.20534).</span>
+      </p>
+    </figure>
+
+    <p style="font-size:.95rem;color:var(--text-secondary)">The brief asks for three data stages. Here is each, and why:</p>
+    <div class="cols">
+      <div class="card">
+        <div class="k">Pre-training</div>
+        <h3>Reasoning base, then Indic depth</h3>
+        <p>Code / math-rich base (The Stack v2 rewritten, OpenWebMath) + Indian-weighted English (NCERT, PIB, law), then a dedicated Indic continued-pretrain stage.</p>
+      </div>
+      <div class="card">
+        <div class="k">Post-training (SFT)</div>
+        <h3>Reason, then help in Indian tools</h3>
+        <p>Reasoning cold-start distilled from R1 / Qwen3 (license-clean), plus native + translated Indic instructions and agentic data re-skinned to IRCTC / UPI / DigiLocker.</p>
+      </div>
+      <div class="card">
+        <div class="k">RL / alignment</div>
+        <h3>Where preference comes from</h3>
+        <p>RLVR (math exact-match, code unit-tests) + multi-turn agentic RL, then an Indian-Constitution value set (Constitutional AI) + a seed of native-annotator preferences.</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <b>Two named limitations.</b> The Indic slice is ~90% synthetic, so Indic quality is capped by our
+      translation / synthesis quality. And the <b>&tau;&sup2;-bench ~77 target is aggressive</b> - at or above the
+      current open frontier (Kimi K2 ~66); it hinges on heavy agentic RL or a strong agentic teacher.
+    </div>
+  </section>
+
+  <!-- ===================== 3. CLEANING ===================== -->
+  <section id="cleaning">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Cleaning: tuned for Indian text</h2></div>
+    <div class="asks"><span class="lab">The brief</span><q>how would you clean your data for the objectives you defined?</q></div>
+    <p class="sec-lead">
+      The web is ~90% junk, so we run the usual scrub. The value is in four traps that ordinary
+      English pipelines get wrong and that <strong>quietly destroy Indian data</strong> - plus hard
+      decontamination against Gemma 4's newer benchmarks.
+    </p>
+
+    <figure class="figure">
+      <figcaption>
+        <div class="fig-title">Figure 4. The cleaning pipeline</div>
+        <div class="fig-sub">Raw crawl to clean training pile. The blue steps are where we diverge from the standard recipe.</div>
+      </figcaption>
+      <div class="flow">
+        <div class="step"><div class="n">01</div><div class="t">Extract</div><div class="d">pull real text; drop menus / ads</div></div>
+        <div class="arrow">&rarr;</div>
+        <div class="step fix"><span class="tag">India fix</span><div class="n">02</div><div class="t">Language ID</div><div class="d">keeps Hinglish, not just English</div></div>
+        <div class="arrow">&rarr;</div>
+        <div class="step fix"><span class="tag">India fix</span><div class="n">03</div><div class="t">Normalize</div><div class="d">NFC, never the lossy NFKC</div></div>
+        <div class="arrow">&rarr;</div>
+        <div class="step fix"><span class="tag">India fix</span><div class="n">04</div><div class="t">Quality</div><div class="d">a bar set per language</div></div>
+        <div class="arrow">&rarr;</div>
+        <div class="step fix"><span class="tag">India fix</span><div class="n">05</div><div class="t">De-duplicate</div><div class="d">within each source, not globally</div></div>
+        <div class="arrow">&rarr;</div>
+        <div class="step"><div class="n">06</div><div class="t">Boost + decontaminate</div><div class="d">up-weight Indian; strip the Gemma 4 eval sets</div></div>
+      </div>
+      <p class="fig-note">
+        Code is also LLM-<b>rewritten</b> for quality (SwallowCode-style) and kept with tests for RLVR.
+        <span class="src">FineWeb (per-dump dedup), AI4Bharat Setu (per-language thresholds), StarCoder2 (code license + PII).</span>
+      </p>
+    </figure>
+
+    <ul class="tight">
+      <li><b>Trap 1 - deleted Hinglish.</b> A naive "is this English?" gate throws away Hindi written in Latin letters. We use India-aware language detection.</li>
+      <li><b>Trap 2 - corrupted scripts.</b> The common NFKC normalization silently rewrites Indian characters. We use NFC (learned the hard way in Assignment 2).</li>
+      <li><b>Trap 3 - unfair quality bars.</b> One English-tuned threshold over-deletes small languages, so we set the bar per language.</li>
+      <li><b>Trap 4 - harmful global de-duplication.</b> De-duping across everything strips good older data, so we do it within each source.</li>
+    </ul>
+  </section>
+
+  <!-- ===================== 4. TOKENIZER ===================== -->
+  <section id="tokenizer">
+    <div class="sec-head"><span class="sec-num">04</span><h2>The tokenizer: fertility targets &amp; vocab size</h2></div>
+    <div class="asks"><span class="lab">The brief</span><q>what fertility for each language, and for coding, science, math and agentic tasks - and from those numbers, the tokenizer size?</q></div>
+    <p class="sec-lead">
+      <strong>Fertility = pieces per word</strong> (lower is better). Ordinary tokenizers shatter Indian
+      scripts - Llama-4 needs <strong>10.5 tokens for one Odia word</strong>. Tellingly,
+      <strong>Gemma 4 reuses the exact same 262K tokenizer as Gemma 3</strong>, spread across 140+ languages.
+      Our fix: a focused vocabulary - <strong>focus beats breadth</strong>.
+    </p>
+
+    <figure class="figure">
+      <figcaption>
+        <div class="fig-title">Figure 5. Focus beats breadth</div>
+        <div class="fig-sub">Hindi fertility vs vocabulary size. A big vocab spread thin over 140 languages is not the same as a focused one.</div>
+      </figcaption>
+      <div class="chart-scroll"><div class="chart-host" id="figScatter"></div></div>
+      <div class="legend" id="figScatter-legend"></div>
+      <p class="fig-note">
+        <b>Gemma 3 &amp; 4 share one 262K tokenizer</b> spread over 140+ languages (Hindi 1.47).
+        IndicSuperTokenizer - a <b>published 2025 tokenizer</b> (not ours) - proves a focused 200K reaches
+        Hindi 1.23; <b>our design targets the same zone</b>. Llama-4 blows up to 10.5 on Odia. The lesson:
+        not how many pieces, but <b>who you give them to</b>.
+        <span class="src">IndicSuperTokenizer (arXiv 2511.03237, cited as proof); Gemma 4 tokenizer = Gemma 3's 262K (arXiv 2607.02770); Sarvam-1; Llama-4.</span>
+      </p>
+      <button class="tbl-toggle" data-table="figScatter-table">Show data table</button>
+      <div id="figScatter-table" hidden></div>
+    </figure>
+
+    <figure class="figure">
+      <figcaption>
+        <div class="fig-title">Figure 6. Why not just make the vocabulary huge?</div>
+        <div class="fig-sub">Every extra piece costs model weights. Cost = vocab &times; width, as a share of a 40B model.</div>
+      </figcaption>
+      <div class="chart-scroll"><div class="chart-host" id="figCost"></div></div>
+      <p class="fig-note">
+        A vocabulary-scaling law puts the best size for 40B near ~160K; a multilingual premium takes us to
+        <b>200K (4.1% of the model)</b>. Past that, fertility barely improves while cost and wasted rare
+        tokens climb.
+        <span class="src">Cost = vocab&times;8192 (tied); scaling law: Tao et al., NeurIPS 2024 (arXiv 2407.13623).</span>
+      </p>
+      <button class="tbl-toggle" data-table="figCost-table">Show data table</button>
+      <div id="figCost-table" hidden></div>
+    </figure>
+
+    <div class="callout">
+      <b>200K, reached three ways that agree.</b> A bottom-up count (~50K shared + ~144K across 12 languages) &asymp; 196K &middot;
+      the vocabulary-scaling law for a 40B (~160K + a multilingual premium) &middot; and real-world proof: IndicSuperTokenizer
+      already hits Hindi 1.23 / Tamil 2.12 at exactly 200K - versus Gemma 4's 262K.
+    </div>
+
+    <h3 style="margin-top:2rem">Which languages, and their fertility targets</h3>
+    <p style="font-size:.92rem">
+      The tutor anchored on the <b>top 10 Indian languages by population</b> and left the selection to us.
+      We commit to <b>12</b>: the top 10 (which already includes Urdu at ~#7) plus <b>Punjabi and Assamese</b> -
+      spanning both the Indo-Aryan and Dravidian families across ~10 scripts. Targets are set
+      <b>per language shape</b>: Dravidian languages glue many word-parts into one long word, so a higher
+      target is honest, not a failure.
+    </p>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Language</th><th>Family / script</th><th class="num">Fertility target</th><th class="num">Vocab alloc.</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Hindi</td><td class="fam">Indo-Aryan &middot; Devanagari</td><td class="num">1.2 - 1.4</td><td class="num">18K</td></tr>
+          <tr><td>Bengali</td><td class="fam">Indo-Aryan &middot; Eastern Nagari</td><td class="num">1.3 - 1.5</td><td class="num">14K</td></tr>
+          <tr><td>Marathi</td><td class="fam">Indo-Aryan &middot; Devanagari</td><td class="num">1.2 - 1.4</td><td class="num">12K</td></tr>
+          <tr><td>Telugu</td><td class="fam">Dravidian &middot; Telugu</td><td class="num">1.6 - 2.0</td><td class="num">13K</td></tr>
+          <tr><td>Tamil</td><td class="fam">Dravidian &middot; Tamil</td><td class="num">1.6 - 2.0</td><td class="num">13K</td></tr>
+          <tr><td>Gujarati</td><td class="fam">Indo-Aryan &middot; Gujarati</td><td class="num">1.3 - 1.6</td><td class="num">11K</td></tr>
+          <tr><td>Urdu</td><td class="fam">Indo-Aryan &middot; Perso-Arabic</td><td class="num">1.4 - 1.7</td><td class="num">11K</td></tr>
+          <tr><td>Kannada</td><td class="fam">Dravidian &middot; Kannada</td><td class="num">1.6 - 2.0</td><td class="num">12K</td></tr>
+          <tr><td>Odia</td><td class="fam">Indo-Aryan &middot; Odia</td><td class="num">1.3 - 1.6</td><td class="num">10K</td></tr>
+          <tr><td>Malayalam</td><td class="fam">Dravidian &middot; Malayalam</td><td class="num">1.6 - 2.0</td><td class="num">12K</td></tr>
+          <tr><td>Punjabi</td><td class="fam">Indo-Aryan &middot; Gurmukhi</td><td class="num">1.3 - 1.5</td><td class="num">9K</td></tr>
+          <tr><td>Assamese</td><td class="fam">Indo-Aryan &middot; Eastern Nagari</td><td class="num">1.3 - 1.6</td><td class="num">9K</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>12 languages</td><td class="fam">+ ~56K shared: English, code, math, punctuation, 256 byte-fallback</td><td class="num">-</td><td class="num">200K</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <h3 style="margin-top:1.6rem">Fertility for the other domains the brief asks about</h3>
+    <div class="cols">
+      <div class="card">
+        <div class="k">Code</div>
+        <h3>~1.45 pieces/word</h3>
+        <p>Indentation carries meaning, so we add single-piece whitespace runs and a digit splitter (StarCoder-style).</p>
+      </div>
+      <div class="card">
+        <div class="k">Science</div>
+        <h3>~1.2 - 1.3</h3>
+        <p>Technical prose tokenizes near English; it reuses the math, Greek and SI-unit tokens, so it needs no separate budget.</p>
+      </div>
+      <div class="card">
+        <div class="k">Math</div>
+        <h3>Deliberately higher</h3>
+        <p>Numbers are split into single digits. It looks wasteful, but it is what makes arithmetic reliable - fertility traded for correctness.</p>
+      </div>
+      <div class="card">
+        <div class="k">Agentic</div>
+        <h3>Structural, not linguistic</h3>
+        <p>"Fertility for agents" is really JSON / tool-call overhead. Reserved special tokens keep each action cheap.</p>
+      </div>
+      <div class="card">
+        <div class="k">Faithfulness</div>
+        <h3>Byte-fallback</h3>
+        <p>Any unknown character falls back to raw bytes, so text is never lost - a lesson carried from Assignment 2.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 5. EVALUATION ===================== -->
+  <section id="eval">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Testing, and a benchmark we invent</h2></div>
+    <div class="asks"><span class="lab">The brief</span><q>how would you test your model against the objective, including an Indian perspective?</q></div>
+    <p class="sec-lead">
+      Three buckets, on Gemma 4's own harder suite. General-skill and Indian-language exams exist. The
+      third - does it think from an <strong>Indian point of view</strong>? - has no good test, so we build one.
+    </p>
+
+    <div class="cols">
+      <div class="card">
+        <div class="k">Bucket 1</div>
+        <h3>General skills (Gemma 4's suite)</h3>
+        <p>MMLU-Pro, AIME 2026, LiveCodeBench v6, GPQA Diamond, BBEH, MMMLU, and &tau;&sup2;-bench for agentic. Targets in Figure 1.</p>
+      </div>
+      <div class="card">
+        <div class="k">Bucket 2</div>
+        <h3>Indian languages (our wedge)</h3>
+        <p>MILU, IndicGenBench, IndicXTREME, Global-MMLU - reported <b>per language</b>, which Gemma 4 does not.</p>
+      </div>
+      <div class="card">
+        <div class="k">Bucket 3</div>
+        <h3>Indian perspective</h3>
+        <p>No good benchmark exists. We propose <b>BharatDrishti</b> - the original contribution below.</p>
+      </div>
+    </div>
+
+    <figure class="figure">
+      <figcaption>
+        <div class="fig-title">Figure 7. BharatDrishti - measuring an Indian perspective, fairly</div>
+        <div class="fig-sub">Sources on the left; two scores plus a fairness guardrail on the right.</div>
+      </figcaption>
+      <div class="bd">
+        <div class="col">
+          <div class="node"><span class="h">UPSC &amp; state PSC</span><span class="s">official exam framing</span></div>
+          <div class="node"><span class="h">NCERT 6-12</span><span class="s">school curriculum</span></div>
+          <div class="node"><span class="h">Constitution + SC</span><span class="s">civics &amp; law</span></div>
+          <div class="node"><span class="h">Indian press + WVS-India</span><span class="s">current affairs &amp; values</span></div>
+        </div>
+        <div class="col">
+          <div class="hub"><span class="badge">Our original benchmark</span>BharatDrishti<small>contested-topic &amp; knowledge test set</small></div>
+        </div>
+        <div class="col">
+          <div class="node"><span class="h">India-knowledge score</span><span class="s">does it know Indian facts?</span></div>
+          <div class="node"><span class="h">Framing-match score</span><span class="s">aligns to Indian opinion (GlobalOpinionQA method)</span></div>
+          <div class="node guard"><span class="h">Fairness guardrail</span><span class="s">India-first must not become anti-anyone</span></div>
+        </div>
+      </div>
+      <p class="fig-note">
+        This turns "India-first but fair" into <b>measured numbers</b>, and fills a real gap - no benchmark
+        today tests contested Indian-vs-Western framing or UPSC / NCERT reasoning.
+        <span class="src">Method: GlobalOpinionQA / WVS (arXiv 2306.16388); gap confirmed vs MILU, INDICA, BLEnD, NormAd.</span>
+      </p>
+    </figure>
+
+    <div class="callout">
+      <b>Two testing principles.</b> Gemma 4 itself dropped the saturated classics (MATH, GSM8K, HumanEval)
+      for harder successors - we follow suit and decontaminate against all of them. And <b>report fertility
+      itself</b> as a result - the proof that the Section 04 tokenizer bet paid off.
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span class="by">Built by <b>Ashish Kamble</b></span> &nbsp;&middot;&nbsp;
+  <a href="https://github.com/AshishGKamble/erav5" target="_blank" rel="noopener">Source on GitHub</a>
+  &nbsp;&middot;&nbsp; <span>A design proposal, not a trained model. Figures trace to the research corpus in FINDINGS.md.</span>
+</footer>
+
+<div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+
+<script src="app.js" defer></script>
+</body>
+</html>
