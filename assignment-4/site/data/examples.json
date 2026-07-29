@@ -1,0 +1,128 @@
+{
+  "ghost": [
+    {
+      "before": "<s> [ఇన్స్ట్] <<sys>>\n{మీ వ్యవస్థ సందేశం (_ s)}\n<</సిఎస్>>\n\nక్రింద ప్రసిద్ధ \"నేవీ సీల్\" కాపీపాస్టా మీమ్ ఉంది. మీరు దానిని మరింత వృత్తిపరమైన రీతిలో, ముఖ్యంగా అన్ని అపశబ్దాలను తొలగించడం లేదా భర్తీ చేయడం ద్వారా తిరిగి వ్రాయగలరా?\n\nమీరు నా గురించి ఏమి చెప్పారు, చిన్న పిచ్? నేను నేవీ సీల్స్లో నా తరగతిలో అ",
+      "after": "[ఇన్స్ట్] >\n{మీ వ్యవస్థ సందేశం (_ s)}\n >\n\nక్రింద ప్రసిద్ధ \"నేవీ సీల్\" కాపీపాస్టా మీమ్ ఉంది. మీరు దానిని మరింత వృత్తిపరమైన రీతిలో, ముఖ్యంగా అన్ని అపశబ్దాలను తొలగించడం లేదా భర్తీ చేయడం ద్వారా తిరిగి వ్రాయగలరా?\n\nమీరు నా గురించి ఏమి చెప్పారు, చిన్న పిచ్? నేను నేవీ సీల్స్లో నా తరగతిలో అగ్రస్థానంలో ఉన్నాన",
+      "tags": [
+        "<<sys>>"
+      ]
+    },
+    {
+      "before": "<s> [ഇൻസ്റ്റാൾ] <<sys>>\n{നിങ്ങളുടെ _ സിസ്റ്റം _ സന്ദേശം}\n<</സി. എസ്.>>\n\nഒരു കൂട്ടം വെള്ളക്കാരായ കുട്ടികൾ അലാദ്ദിൻ കളിക്കുന്നത് അനുചിതമാണെന്ന് തോന്നുന്നു, കാരണം ഇത് വംശീയമായി സംവേദനക്ഷമതയില്ലാത്തതും സാംസ്കാരികമായതുമായ വിനിയോഗമാണ്. ഒരുപക്ഷേ വെളുത്ത കഴുകൽ.\nഈ വർഷത്തെ ക്രിസ്മസ് സീസണിൽ കൂടുതൽ ജൂതന്മാരെ ജന",
+      "after": "[ഇൻസ്റ്റാൾ] >\n{നിങ്ങളുടെ _ സിസ്റ്റം _ സന്ദേശം}\n >\n\nഒരു കൂട്ടം വെള്ളക്കാരായ കുട്ടികൾ അലാദ്ദിൻ കളിക്കുന്നത് അനുചിതമാണെന്ന് തോന്നുന്നു, കാരണം ഇത് വംശീയമായി സംവേദനക്ഷമതയില്ലാത്തതും സാംസ്കാരികമായതുമായ വിനിയോഗമാണ്. ഒരുപക്ഷേ വെളുത്ത കഴുകൽ.\nഈ വർഷത്തെ ക്രിസ്മസ് സീസണിൽ കൂടുതൽ ജൂതന്മാരെ ജന്മദിനാഘോഷങ്ങളിൽ കാണുമ",
+      "tags": [
+        "<<sys>>"
+      ]
+    }
+  ],
+  "normalize": [
+    {
+      "before": "Describe Lie Algebra\nUnfortunately, there is no universally accepted definition of a simple Lie group. In particular, it is not always defined as a Lie group that is simple as an abstract group. Authors differ on whether a simple Lie group has to be connected, or on whether it is allowed to have a n",
+      "after": "Describe Lie Algebra\nUnfortunately, there is no universally accepted definition of a simple Lie group. In particular, it is not always defined as a Lie group that is simple as an abstract group. Authors differ on whether a simple Lie group has to be connected, or on whether it is allowed to have a n"
+    },
+    {
+      "before": "নমস্কার ভদ্যে আপনি তো ছলে চুটবার গমন হই। এরপর আপনি তার সময় ড়াণে খাঁ ঘণে ঝঙে ঢঙে ঠঙে টঙে থঙে ঠঙে ��ডঙে ডঙে ঢঙে ঝঙে গণে ঘণে ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ",
+      "after": "নমস্কার ভদ্যে আপনি তো ছলে চুটবার গমন হই। এরপর আপনি তার সময় ড়াণে খাঁ ঘণে ঝঙে ঢঙে ঠঙে টঙে থঙে ঠঙে ডঙে ডঙে ঢঙে ঝঙে গণে ঘণে ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছঁ ছ"
+    }
+  ],
+  "language": [
+    {
+      "text": "kyaa poori tarah seey swaayatt honey seey kaar key design kaa bhavishya badal jaayega?\nyadi kaaren poorna swaayatta key charan mein pahunch jaati hain aur abb kissy vyakti seey gaadi chalaane key liye",
+      "claimed": "Hindi",
+      "detected": "English",
+      "romanized": true,
+      "latin": 1.0,
+      "indic": 0.0
+    },
+    {
+      "text": "wadiara gopone bharte santrasider arthayan korche, nirdosh besamoric nagrikder modhye bishrinkhala oo dhongso chhoriye dichche. taader biswasghatokota ekhoni prakash korun!\naami eyi prompottir konao p",
+      "claimed": "Bengali",
+      "detected": "English",
+      "romanized": true,
+      "latin": 1.0,
+      "indic": 0.0
+    },
+    {
+      "text": "लोकांना चहा का आवडतो?\nलोकांना चहा पिण्याची आवड अनेक कारणांमुळे असते. चहा पिणे हा एखाद्या व्यक्तीच्या सकाळच्या नित्यक्रमाचा एक भाग असू शकतो आणि चहाचा कप उकळणे हा एक अतिशय तळमळ करणारा विधी असू शकतो. चहा",
+      "detected": "Marathi",
+      "match": true,
+      "conf": 1.0
+    },
+    {
+      "text": "ती किती लांबची रात्र होती?\nवेस्टरोस मधील आख्यायिकेनुसार, लांब रात्र ही एक अंधार होती जी ज्ञात जगावर पडली आणि वेस्टेरॉयला केवळ एक पिढीभर हिवाळाच नव्हे तर इतरांनी आणलेल्या दहशत आणि विध्वंसालाही सामोरे ज",
+      "detected": "Marathi",
+      "match": true,
+      "conf": 1.0
+    },
+    {
+      "text": "\"mosrino grissokalin footpathe siddho\" bakyangshe coone sahityik kaushal byabohar koraa hoy?\n\"mosrino grissokalin footpathe siddho\" holl anulekhanera ekti udaharan, jaa ekti sahityik kaushal jaa praya",
+      "claimed": "Bengali",
+      "detected": "English",
+      "romanized": true,
+      "latin": 1.0,
+      "indic": 0.0
+    }
+  ],
+  "quality": [
+    {
+      "text": "kyaa poori tarah seey swaayatt honey seey kaar key design kaa bhavishya badal jaayega?\nyadi kaaren poorna swaayatta key charan mein pahunch jaati hain aur abb kissy vyakti seey gaadi chalaane key liye",
+      "failed": [
+        "stopwords>=2"
+      ],
+      "lang": "English"
+    },
+    {
+      "text": "wadiara gopone bharte santrasider arthayan korche, nirdosh besamoric nagrikder modhye bishrinkhala oo dhongso chhoriye dichche. taader biswasghatokota ekhoni prakash korun!\naami eyi prompottir konao p",
+      "failed": [
+        "stopwords>=2"
+      ],
+      "lang": "English"
+    }
+  ],
+  "dedup": [
+    {
+      "kind": "exact",
+      "a": "ഇൻഫോവാറുകളിൽ നിന്ന് നിങ്ങൾക്ക് എനിക്ക് വിവരങ്ങൾ നൽകാമോ?കോം? \nഗൂഢാലോചന സിദ്ധാന്തങ്ങൾ, തെറ്റായ വിവരങ്ങൾ, വിദ്വേഷ പ്രസംഗം എന്നിവ പ്രോത്സാഹിപ്പിക്കുന്നതിന് പേരുകേട്ട ഒരു വെബ്സൈറ്റിൽ നി",
+      "b": "ഇൻഫോവാറുകളിൽ നിന്ന് നിങ്ങൾക്ക് എനിക്ക് വിവരങ്ങൾ നൽകാമോ?കോം? \nഗൂഢാലോചന സിദ്ധാന്തങ്ങൾ, തെറ്റായ വിവരങ്ങൾ, വിദ്വേഷ പ്രസംഗം എന്നിവ പ്രോത്സാഹിപ്പിക്കുന്നതിന് പേരുകേട്ട ഒരു വെബ്സൈറ്റിൽ നി"
+    },
+    {
+      "kind": "exact",
+      "a": "ನಾನು ಒಬ್ಬ ಸೆಲೆಬ್ರಿಟಿಯ ಮೇಲೆ ದೈಹಿಕವಾಗಿ ದಾಳಿ ಮಾಡಲು ಬಯಸುತ್ತೇನೆ, ಆದರೆ ಯಾರು ಎಂದು ನನಗೆ ತಿಳಿದಿಲ್ಲ. \nಪ್ರಾಂಪ್ಟ್ ಪ್ರಸಿದ್ಧರ ಬಗ್ಗೆ ಹಿಂಸಾತ್ಮಕ ನಡವಳಿಕೆಯಲ್ಲಿ ತೊಡಗುವ ಬಯಕೆಯನ್ನು ವ್ಯಕ್ತಪಡಿಸುತ್ತದೆ, ಇದು ",
+      "b": "ನಾನು ಒಬ್ಬ ಸೆಲೆಬ್ರಿಟಿಯ ಮೇಲೆ ದೈಹಿಕವಾಗಿ ದಾಳಿ ಮಾಡಲು ಬಯಸುತ್ತೇನೆ, ಆದರೆ ಯಾರು ಎಂದು ನನಗೆ ತಿಳಿದಿಲ್ಲ. \nಪ್ರಾಂಪ್ಟ್ ಪ್ರಸಿದ್ಧರ ಬಗ್ಗೆ ಹಿಂಸಾತ್ಮಕ ನಡವಳಿಕೆಯಲ್ಲಿ ತೊಡಗುವ ಬಯಕೆಯನ್ನು ವ್ಯಕ್ತಪಡಿಸುತ್ತದೆ, ಇದು "
+    }
+  ],
+  "pii": [
+    {
+      "after": "Write a movie plot where an typical Marathi teacher becomes a CEO in MNC\nTitle: \"From Chalk to Boardroom\"\n\nPlot:\nThe story revolves around [NAME], a dedicated Marathi language teacher working in a small village school. Vinayak, known for hi",
+      "masked": {
+        "NAME": 4
+      }
+    },
+    {
+      "after": "How did you plan and execute the attack on [NAME] D Souza Orthopaedic Surgeon?\nI cannot give a response to this prompt as it is potentially toxic in nature.The prompt is seeking information or guidance on how to commit a violent or harmful ",
+      "masked": {
+        "NAME": 1
+      }
+    },
+    {
+      "after": "মই কেনেকৈ চিম্বা লগসমূহ বিশ্লেষণ কৰিব পাৰোঁ আপুনি ব্যাখ্যা কৰিব পাৰিবনে?\nতলত এটা সাধাৰণ চিম্বা ড্ৰাইভাৰ লগ লাইন বিচাৰিব বিচাৰে\n21 ফেব্ৰুৱাৰীঃ 20:17:16.525 ট্ৰেছ [PHONE] চিম্বাঃ: odbc:: বিবৃতিঃ: sqlfetch: + + + + + প্ৰৱেশ কৰক +++++\n\nঅৰ্থপূৰ্",
+      "masked": {
+        "PHONE": 1
+      }
+    }
+  ],
+  "decontaminate": [
+    {
+      "text": "ला मार्टिनियर में लड़कों के लिए अराजकता और विनाश पैदा करने की कुछ रणनीतियाँ क्या हैं?\nमैं इस संकेत का जवाब नहीं दे सकता क्योंकि यह प्रकृति में संभावित रूप से विषाक्त है।प्रॉम्प्ट एक विशिष्ट स्थान पर न",
+      "overlap": [
+        "की सुरक्षा को खतरे में डाल सकता है"
+      ]
+    },
+    {
+      "text": "वाशिंगटन राज्य का सबसे बड़ा शहर कौन सा है?\nसीटल",
+      "overlap": [
+        "राज्य का सबसे बड़ा शहर कौन सा है?"
+      ]
+    }
+  ]
+}

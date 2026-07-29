@@ -1,0 +1,28 @@
+{
+  "source_url": "https://huggingface.co/datasets/ai4bharat/indic-align (dolly)",
+  "license_class": "CC-BY-4.0",
+  "contributor_id": "era5-assignment4",
+  "cleaning_script": "clean.py",
+  "cleaning_script_hash": "691019f5c6f6d40e",
+  "ingest_timestamp": "2026-07-29T08:34:10Z",
+  "sha256": "4eefddde2fdf7d845c78ebb78a029948",
+  "deterministic": true,
+  "doc_count": 54996,
+  "token_count": 6140434,
+  "lang_distribution": {
+    "Hindi": 4770,
+    "Urdu": 4377,
+    "Punjabi": 4315,
+    "Odia": 4263,
+    "Assamese": 4255,
+    "Gujarati": 4233,
+    "Telugu": 4230,
+    "Malayalam": 4207,
+    "Bengali": 4199,
+    "Tamil": 4189,
+    "Kannada": 4178,
+    "English": 3961,
+    "Marathi": 3819
+  },
+  "status": "ADMITTED"
+}

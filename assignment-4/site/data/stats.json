@@ -1,0 +1,195 @@
+{
+  "extract": {
+    "files": 4,
+    "rows_seen": 502176,
+    "empties_dropped": 0,
+    "docs_in": 146074,
+    "per_source": {
+      "anudesh": 6000,
+      "dolly": 240176,
+      "hhrlhf": 128000,
+      "toxicmatrix": 128000
+    },
+    "est_tokens_in": 22000122,
+    "tokens_in_real": 21698854
+  },
+  "normalize": {
+    "docs": 146074,
+    "ghost_docs": 80,
+    "ghost_hits": 105,
+    "ghost_kinds": {
+      "<<SYS>>": 77,
+      "[/INST]": 16,
+      "[INST]": 12
+    },
+    "zwnj_preserved": 203,
+    "zwj_preserved": 38
+  },
+  "language": {
+    "distribution": {
+      "English": 37727,
+      "Hindi": 9233,
+      "Urdu": 9152,
+      "Punjabi": 9117,
+      "Malayalam": 9105,
+      "Telugu": 9099,
+      "Bengali": 9030,
+      "Kannada": 9029,
+      "Tamil": 9022,
+      "Odia": 8944,
+      "Assamese": 8924,
+      "Gujarati": 8918,
+      "Marathi": 8773,
+      "Undetermined": 1
+    },
+    "code_switched": 105,
+    "low_confidence": 1,
+    "claimed_vs_detected_mismatch": 28271,
+    "romanized_flagged": 27186,
+    "languages_seen": 13
+  },
+  "quality": {
+    "docs_in": 146074,
+    "kept": 117213,
+    "dropped": 28861,
+    "rule_failures": {
+      "stopwords>=2": 27563,
+      "mean_word_len_3_10": 3421,
+      "word_count>=8": 1147,
+      "bullet_frac<0.90": 301,
+      "dup_line_frac<0.30": 108,
+      "symbol_ratio<0.10": 81
+    },
+    "indic_saved_by_alwayson": 106959,
+    "naive_english_chain_would_drop_indic": 106959
+  },
+  "dedup": {
+    "docs_in": 117213,
+    "kept": 114831,
+    "exact_dupes": 2127,
+    "near_dupes": 255,
+    "removed": 2382,
+    "params": {
+      "shingle_k": 5,
+      "num_perm": 64,
+      "threshold": 0.7
+    }
+  },
+  "pii": {
+    "docs": 114831,
+    "docs_with_pii": 128,
+    "masked": {
+      "NAME": 233,
+      "PHONE": 19,
+      "EMAIL": 19,
+      "AADHAAR": 11
+    },
+    "total_masked": 282,
+    "method": "regex (email/phone/IP/Aadhaar) + honorific-anchored name layer"
+  },
+  "decontaminate": {
+    "holdout_questions": 319860,
+    "holdout_ngrams": 3533242,
+    "contaminated_removed": 136,
+    "toxic_removed": 312,
+    "docs_in": 114831,
+    "kept": 114383,
+    "holdout_sets": [
+      "sarvamai/mmlu-indic (test)",
+      "sarvamai/trivia-qa-indic-mcq (validation)"
+    ]
+  },
+  "manifest": {
+    "shards": 4,
+    "admitted": 4,
+    "blocked": 0,
+    "total_tokens": 15660833,
+    "total_words": 10147856,
+    "overall_fertility": 1.54,
+    "fertility_by_language": {
+      "Marathi": 1.44,
+      "Malayalam": 2.34,
+      "Hindi": 1.22,
+      "Assamese": 1.54,
+      "Telugu": 2.09,
+      "Gujarati": 1.46,
+      "Kannada": 1.82,
+      "Punjabi": 1.39,
+      "English": 1.3,
+      "Tamil": 1.71,
+      "Urdu": 1.21,
+      "Odia": 2.02,
+      "Bengali": 1.35
+    },
+    "fertility_sarvam": {
+      "Marathi": 1.63,
+      "Malayalam": 2.78,
+      "Hindi": 1.35,
+      "Assamese": 4.48,
+      "Telugu": 2.01,
+      "Gujarati": 1.64,
+      "Kannada": 2.12,
+      "Punjabi": 1.5,
+      "English": 1.5,
+      "Tamil": 2.13,
+      "Urdu": 8.35,
+      "Odia": 2.42,
+      "Bengali": 1.69
+    },
+    "tokenizer": "google/muril-base-cased (197K vocab)",
+    "tokenizer_compare": "sarvamai/sarvam-1 (68K vocab)",
+    "cleaning_script_hash": "691019f5c6f6d40e",
+    "ingest_timestamp": "2026-07-29T08:34:10Z",
+    "determinism_ok": true
+  },
+  "_summary": {
+    "dataset": "ai4bharat/indic-align (mirror: CharuAgarwal/indic-align)",
+    "license": "CC-BY-4.0",
+    "holdout": [
+      "sarvamai/mmlu-indic",
+      "sarvamai/trivia-qa-indic-mcq"
+    ],
+    "tokenizer": "sarvamai/sarvam-1",
+    "docs_in": 146074,
+    "docs_out": 114383,
+    "survival_pct": 78.3,
+    "tokens_in": 21698854,
+    "total_tokens": 15660833,
+    "languages": 13,
+    "runtime_sec": 432.1,
+    "funnel": [
+      [
+        "Extract",
+        146074
+      ],
+      [
+        "Normalize",
+        146074
+      ],
+      [
+        "Language ID",
+        146074
+      ],
+      [
+        "Quality",
+        117213
+      ],
+      [
+        "Deduplicate",
+        114831
+      ],
+      [
+        "PII scrub",
+        114831
+      ],
+      [
+        "Decontaminate",
+        114383
+      ],
+      [
+        "Manifest",
+        114383
+      ]
+    ]
+  }
+}
