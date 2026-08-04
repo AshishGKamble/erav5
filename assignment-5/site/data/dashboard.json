@@ -1,0 +1,967 @@
+{
+  "findings": {
+    "floor": {
+      "web": 0.144,
+      "code": 0.329,
+      "math": 0.318,
+      "reasoning": 0.24,
+      "indic": 0.346,
+      "avg": 0.051
+    },
+    "tier": {
+      "indic_hi": {
+        "t18": 6.062,
+        "t30": 5.971,
+        "delta": -0.091,
+        "floor": 0.243,
+        "readable": false
+      },
+      "indic_lo": {
+        "t18": 4.738,
+        "t30": 4.216,
+        "delta": -0.522,
+        "floor": 0.087,
+        "readable": true
+      },
+      "ideal_hi": 5.886
+    },
+    "native_pinned_pct": 11.0,
+    "leakage": {
+      "web": 0,
+      "code": 2,
+      "math": 0,
+      "reasoning": 100,
+      "indic": 6
+    },
+    "withdrawn": [
+      [
+        "Every lane is monotone in its share",
+        "generalised from 3 pairs never designed to test it"
+      ],
+      [
+        "Web scaffolds Indic",
+        "0.120 effect against a 0.216 noise floor"
+      ],
+      [
+        "The v2 revision improves the mixture",
+        "0.011 against a 0.033 floor - no measurable difference"
+      ],
+      [
+        "More Indic buys Indic capability",
+        "the Indic bin was 98.5% synthetic; native Indic did not move"
+      ],
+      [
+        "Reasoning 6% -> 9%",
+        "the reasoning val set has 100% train leakage - it measured memorisation"
+      ]
+    ],
+    "verdict": "Nine rounds, sixteen runs, every attempted improvement withdrawn. The shares in section 1 stand exactly as first defended."
+  },
+  "model": "India-first ~40B MoE",
+  "budget_B": 4000,
+  "budget_future_B": 20000,
+  "proxy_lanes": [
+    "web",
+    "code",
+    "math",
+    "reasoning",
+    "indic"
+  ],
+  "proxy_note": "The proxy tests 5 lanes (agentic + long-context can't be proxied at this scale - they need tool execution / 32K sequences). Sets are compared on these 5; the chosen set is then expanded to all 7 lanes in full_plan.",
+  "sets": [
+    {
+      "key": "web_heavy",
+      "name": "Web-heavy (V4 baseline)",
+      "chosen": false,
+      "proxy_key": "naive_web",
+      "thesis": "70% web, Indic starved to 5% - the lazy default a careless team ships.",
+      "recipe": {
+        "web": 70,
+        "code": 15,
+        "math": 5,
+        "reasoning": 5,
+        "indic": 5
+      },
+      "outcome": {
+        "final": {
+          "code": 5.6956,
+          "indic": 4.9811,
+          "math": 6.733,
+          "reasoning": 5.3866,
+          "web": 6.3117
+        },
+        "avg": 5.8216,
+        "history": [
+          {
+            "code": 9.7363,
+            "indic": 9.7257,
+            "math": 9.7217,
+            "reasoning": 9.727,
+            "web": 9.7212,
+            "_avg": 9.7264,
+            "step": 0,
+            "sec": 2.0
+          },
+          {
+            "code": 6.5559,
+            "indic": 7.5108,
+            "math": 7.5276,
+            "reasoning": 6.7549,
+            "web": 6.8738,
+            "_avg": 7.0446,
+            "step": 300,
+            "sec": 207.6
+          },
+          {
+            "code": 5.9732,
+            "indic": 6.3233,
+            "math": 7.2035,
+            "reasoning": 6.054,
+            "web": 6.3373,
+            "_avg": 6.3783,
+            "step": 600,
+            "sec": 371.4
+          },
+          {
+            "code": 5.9679,
+            "indic": 5.7606,
+            "math": 6.7297,
+            "reasoning": 5.7194,
+            "web": 6.3374,
+            "_avg": 6.103,
+            "step": 900,
+            "sec": 570.9
+          },
+          {
+            "code": 5.8578,
+            "indic": 5.3686,
+            "math": 6.7317,
+            "reasoning": 5.6534,
+            "web": 6.2247,
+            "_avg": 5.9672,
+            "step": 1200,
+            "sec": 735.8
+          },
+          {
+            "code": 5.6956,
+            "indic": 4.9811,
+            "math": 6.733,
+            "reasoning": 5.3866,
+            "web": 6.3117,
+            "_avg": 5.8216,
+            "step": 1500,
+            "sec": 900.8
+          }
+        ],
+        "params_M": 4.85,
+        "steps": 1500
+      }
+    },
+    {
+      "key": "balanced",
+      "name": "Balanced - India-first (our pick)",
+      "chosen": true,
+      "proxy_key": "ours",
+      "thesis": "Protect Indic (20%), boost code (25%), keep enough web (35%) for common sense.",
+      "recipe": {
+        "web": 35,
+        "code": 25,
+        "math": 12,
+        "reasoning": 8,
+        "indic": 20
+      },
+      "outcome": {
+        "final": {
+          "code": 5.4752,
+          "indic": 4.4065,
+          "math": 6.6495,
+          "reasoning": 5.2728,
+          "web": 6.5413
+        },
+        "avg": 5.6691,
+        "history": [
+          {
+            "code": 9.7363,
+            "indic": 9.7257,
+            "math": 9.7217,
+            "reasoning": 9.727,
+            "web": 9.7212,
+            "_avg": 9.7264,
+            "step": 0,
+            "sec": 1.9
+          },
+          {
+            "code": 6.202,
+            "indic": 5.4081,
+            "math": 7.5196,
+            "reasoning": 6.6254,
+            "web": 7.1192,
+            "_avg": 6.5749,
+            "step": 300,
+            "sec": 194.4
+          },
+          {
+            "code": 5.8082,
+            "indic": 4.8736,
+            "math": 6.9305,
+            "reasoning": 5.861,
+            "web": 6.7426,
+            "_avg": 6.0432,
+            "step": 600,
+            "sec": 381.8
+          },
+          {
+            "code": 5.6161,
+            "indic": 4.5791,
+            "math": 6.78,
+            "reasoning": 5.7523,
+            "web": 6.5308,
+            "_avg": 5.8517,
+            "step": 900,
+            "sec": 568.7
+          },
+          {
+            "code": 5.5423,
+            "indic": 4.5033,
+            "math": 6.4636,
+            "reasoning": 5.4785,
+            "web": 6.4661,
+            "_avg": 5.6908,
+            "step": 1200,
+            "sec": 759.4
+          },
+          {
+            "code": 5.4752,
+            "indic": 4.4065,
+            "math": 6.6495,
+            "reasoning": 5.2728,
+            "web": 6.5413,
+            "_avg": 5.6691,
+            "step": 1500,
+            "sec": 941.1
+          }
+        ],
+        "params_M": 4.85,
+        "steps": 1500
+      }
+    },
+    {
+      "key": "code_forward",
+      "name": "Code-forward",
+      "chosen": false,
+      "proxy_key": "code_heavy",
+      "thesis": "Maximise code+math, sacrifice web and Indic - the 'great coder, no common sense' trap.",
+      "recipe": {
+        "web": 8,
+        "code": 55,
+        "math": 25,
+        "reasoning": 7,
+        "indic": 5
+      },
+      "outcome": {
+        "final": {
+          "code": 5.2078,
+          "indic": 5.4731,
+          "math": 6.3213,
+          "reasoning": 5.4823,
+          "web": 6.754
+        },
+        "avg": 5.8477,
+        "history": [
+          {
+            "code": 9.7363,
+            "indic": 9.7257,
+            "math": 9.7217,
+            "reasoning": 9.727,
+            "web": 9.7212,
+            "_avg": 9.7264,
+            "step": 0,
+            "sec": 1.7
+          },
+          {
+            "code": 5.9088,
+            "indic": 7.1825,
+            "math": 7.1722,
+            "reasoning": 6.7411,
+            "web": 7.5042,
+            "_avg": 6.9018,
+            "step": 300,
+            "sec": 171.6
+          },
+          {
+            "code": 5.6439,
+            "indic": 6.0464,
+            "math": 6.804,
+            "reasoning": 5.9282,
+            "web": 7.0373,
+            "_avg": 6.292,
+            "step": 600,
+            "sec": 358.6
+          },
+          {
+            "code": 5.3321,
+            "indic": 5.5252,
+            "math": 6.2682,
+            "reasoning": 5.5087,
+            "web": 6.91,
+            "_avg": 5.9088,
+            "step": 900,
+            "sec": 548.8
+          },
+          {
+            "code": 5.0988,
+            "indic": 5.6008,
+            "math": 6.2576,
+            "reasoning": 5.5992,
+            "web": 6.9143,
+            "_avg": 5.8941,
+            "step": 1200,
+            "sec": 729.1
+          },
+          {
+            "code": 5.2078,
+            "indic": 5.4731,
+            "math": 6.3213,
+            "reasoning": 5.4823,
+            "web": 6.754,
+            "_avg": 5.8477,
+            "step": 1500,
+            "sec": 920.2
+          }
+        ],
+        "params_M": 4.85,
+        "steps": 1500
+      }
+    },
+    {
+      "key": "indic_first",
+      "name": "Indic-first (Indic is the largest lane)",
+      "chosen": false,
+      "proxy_key": "indic_first",
+      "thesis": "Make Indic the biggest lane (32%) while keeping web healthy. Tests whether Indic keeps paying past 20% or saturates.",
+      "recipe": {
+        "web": 28,
+        "code": 18,
+        "math": 10,
+        "reasoning": 12,
+        "indic": 32
+      },
+      "outcome": {
+        "final": {
+          "code": 5.4449,
+          "indic": 4.0791,
+          "math": 6.5794,
+          "reasoning": 5.1878,
+          "web": 6.5203
+        },
+        "avg": 5.5623,
+        "history": [
+          {
+            "code": 9.7363,
+            "indic": 9.7257,
+            "math": 9.7217,
+            "reasoning": 9.727,
+            "web": 9.7212,
+            "_avg": 9.7264,
+            "step": 0,
+            "sec": 3.5
+          },
+          {
+            "code": 6.6827,
+            "indic": 5.0338,
+            "math": 7.2293,
+            "reasoning": 6.3424,
+            "web": 7.2063,
+            "_avg": 6.4989,
+            "step": 300,
+            "sec": 179.3
+          },
+          {
+            "code": 5.9147,
+            "indic": 4.2542,
+            "math": 7.058,
+            "reasoning": 5.6117,
+            "web": 6.7781,
+            "_avg": 5.9233,
+            "step": 600,
+            "sec": 335.0
+          },
+          {
+            "code": 5.832,
+            "indic": 4.1226,
+            "math": 6.7276,
+            "reasoning": 5.3502,
+            "web": 6.6062,
+            "_avg": 5.7277,
+            "step": 900,
+            "sec": 493.4
+          },
+          {
+            "code": 5.6964,
+            "indic": 3.9014,
+            "math": 6.7234,
+            "reasoning": 5.1884,
+            "web": 6.572,
+            "_avg": 5.6163,
+            "step": 1200,
+            "sec": 668.0
+          },
+          {
+            "code": 5.4449,
+            "indic": 4.0791,
+            "math": 6.5794,
+            "reasoning": 5.1878,
+            "web": 6.5203,
+            "_avg": 5.5623,
+            "step": 1500,
+            "sec": 939.5
+          }
+        ],
+        "params_M": 4.85,
+        "steps": 1500
+      }
+    },
+    {
+      "key": "reasoning_fwd",
+      "name": "Reasoning-forward",
+      "chosen": false,
+      "proxy_key": "reasoning_fwd",
+      "thesis": "Round 1 found reasoning NON-monotone, but the set that raised it also starved the base. Raise reasoning 8->20% with web and Indic held at 'ours' levels.",
+      "recipe": {
+        "web": 35,
+        "code": 15,
+        "math": 10,
+        "reasoning": 20,
+        "indic": 20
+      },
+      "outcome": {
+        "final": {
+          "code": 5.8471,
+          "indic": 4.4022,
+          "math": 6.9172,
+          "reasoning": 4.8045,
+          "web": 6.2681
+        },
+        "avg": 5.6478,
+        "history": [
+          {
+            "code": 9.7363,
+            "indic": 9.7257,
+            "math": 9.7217,
+            "reasoning": 9.727,
+            "web": 9.7212,
+            "_avg": 9.7264,
+            "step": 0,
+            "sec": 1.4
+          },
+          {
+            "code": 6.7932,
+            "indic": 5.4704,
+            "math": 7.6018,
+            "reasoning": 6.1966,
+            "web": 7.1571,
+            "_avg": 6.6438,
+            "step": 300,
+            "sec": 208.5
+          },
+          {
+            "code": 6.161,
+            "indic": 4.6689,
+            "math": 7.1106,
+            "reasoning": 5.3566,
+            "web": 6.7084,
+            "_avg": 6.0011,
+            "step": 600,
+            "sec": 392.7
+          },
+          {
+            "code": 5.8451,
+            "indic": 4.6448,
+            "math": 6.9212,
+            "reasoning": 4.9086,
+            "web": 6.5473,
+            "_avg": 5.7734,
+            "step": 900,
+            "sec": 549.5
+          },
+          {
+            "code": 5.7142,
+            "indic": 4.1767,
+            "math": 6.7222,
+            "reasoning": 4.7892,
+            "web": 6.4687,
+            "_avg": 5.5742,
+            "step": 1200,
+            "sec": 699.6
+          },
+          {
+            "code": 5.8471,
+            "indic": 4.4022,
+            "math": 6.9172,
+            "reasoning": 4.8045,
+            "web": 6.2681,
+            "_avg": 5.6478,
+            "step": 1500,
+            "sec": 888.7
+          }
+        ],
+        "params_M": 4.85,
+        "steps": 1500
+      }
+    },
+    {
+      "key": "web_lean",
+      "name": "Web-lean (controlled web test)",
+      "chosen": false,
+      "proxy_key": "web_lean",
+      "thesis": "Controlled test of web-as-scaffolding: Indic and reasoning pinned to 'ours' (20/8), ONLY web moves 35->20. If Indic loss rises, cutting web to fund Indic is self-defeating.",
+      "recipe": {
+        "web": 20,
+        "code": 35,
+        "math": 17,
+        "reasoning": 8,
+        "indic": 20
+      },
+      "outcome": {
+        "final": {
+          "code": 5.5314,
+          "indic": 4.5261,
+          "math": 6.7115,
+          "reasoning": 5.3395,
+          "web": 6.5537
+        },
+        "avg": 5.7324,
+        "history": [
+          {
+            "code": 9.7363,
+            "indic": 9.7257,
+            "math": 9.7217,
+            "reasoning": 9.727,
+            "web": 9.7212,
+            "_avg": 9.7264,
+            "step": 0,
+            "sec": 1.8
+          },
+          {
+            "code": 6.2786,
+            "indic": 5.3405,
+            "math": 7.6034,
+            "reasoning": 6.5174,
+            "web": 7.1882,
+            "_avg": 6.5856,
+            "step": 300,
+            "sec": 169.3
+          },
+          {
+            "code": 5.5957,
+            "indic": 5.0002,
+            "math": 6.5983,
+            "reasoning": 5.7548,
+            "web": 6.8741,
+            "_avg": 5.9646,
+            "step": 600,
+            "sec": 326.1
+          },
+          {
+            "code": 5.4301,
+            "indic": 4.1916,
+            "math": 6.5492,
+            "reasoning": 5.5007,
+            "web": 6.6854,
+            "_avg": 5.6714,
+            "step": 900,
+            "sec": 488.7
+          },
+          {
+            "code": 5.3629,
+            "indic": 4.2639,
+            "math": 6.6098,
+            "reasoning": 5.3305,
+            "web": 6.6317,
+            "_avg": 5.6398,
+            "step": 1200,
+            "sec": 646.0
+          },
+          {
+            "code": 5.5314,
+            "indic": 4.5261,
+            "math": 6.7115,
+            "reasoning": 5.3395,
+            "web": 6.5537,
+            "_avg": 5.7324,
+            "step": 1500,
+            "sec": 805.6
+          }
+        ],
+        "params_M": 4.85,
+        "steps": 1500
+      }
+    },
+    {
+      "key": "v2_proposed",
+      "name": "v2 proposed (README section 14)",
+      "chosen": false,
+      "proxy_key": "v2_proposed",
+      "thesis": "The revision round 2 argues for: Indic and reasoning up, web and code down - but each stopping short of the proxy's optimum because real supply caps it. Proposed, not adopted: the 1B run decides.",
+      "recipe": {
+        "web": 30,
+        "code": 23,
+        "math": 12,
+        "reasoning": 10,
+        "indic": 25
+      },
+      "outcome": {
+        "final": {
+          "code": 5.6187,
+          "indic": 4.4315,
+          "math": 6.5099,
+          "reasoning": 5.256,
+          "web": 6.4299
+        },
+        "avg": 5.6492,
+        "history": [
+          {
+            "code": 9.7363,
+            "indic": 9.7257,
+            "math": 9.7217,
+            "reasoning": 9.727,
+            "web": 9.7212,
+            "_avg": 9.7264,
+            "step": 0,
+            "sec": 3.9
+          },
+          {
+            "code": 6.4188,
+            "indic": 5.231,
+            "math": 7.1704,
+            "reasoning": 6.4536,
+            "web": 7.2504,
+            "_avg": 6.5048,
+            "step": 300,
+            "sec": 197.1
+          },
+          {
+            "code": 5.9354,
+            "indic": 4.6285,
+            "math": 6.9922,
+            "reasoning": 5.848,
+            "web": 6.7012,
+            "_avg": 6.0211,
+            "step": 600,
+            "sec": 347.6
+          },
+          {
+            "code": 5.8416,
+            "indic": 4.4201,
+            "math": 6.6811,
+            "reasoning": 5.4503,
+            "web": 6.5558,
+            "_avg": 5.7898,
+            "step": 900,
+            "sec": 539.5
+          },
+          {
+            "code": 5.5128,
+            "indic": 4.2191,
+            "math": 6.7,
+            "reasoning": 5.2496,
+            "web": 6.5647,
+            "_avg": 5.6492,
+            "step": 1200,
+            "sec": 746.8
+          },
+          {
+            "code": 5.6187,
+            "indic": 4.4315,
+            "math": 6.5099,
+            "reasoning": 5.256,
+            "web": 6.4299,
+            "_avg": 5.6492,
+            "step": 1500,
+            "sec": 909.1
+          }
+        ],
+        "params_M": 4.85,
+        "steps": 1500
+      }
+    }
+  ],
+  "full_plan": {
+    "note": "The chosen 'Balanced' set expanded to the shipped 7-lane, staged plan.",
+    "lanes": [
+      {
+        "key": "web",
+        "name": "General web",
+        "share": 30,
+        "benchmark": "MMLU-Pro, common sense",
+        "supply_B": 20300,
+        "epochs": 0.06,
+        "generated_B": 0,
+        "trainable_frac": 1.0
+      },
+      {
+        "key": "code",
+        "name": "Code",
+        "share": 22,
+        "benchmark": "LiveCodeBench, SWE-bench, CF",
+        "supply_B": 1813,
+        "epochs": 0.49,
+        "generated_B": 0,
+        "trainable_frac": 1.0
+      },
+      {
+        "key": "math_stem",
+        "name": "Math + STEM",
+        "share": 10,
+        "benchmark": "AIME, GPQA, MMLU-Pro(STEM)",
+        "supply_B": 143,
+        "epochs": 2.8,
+        "generated_B": 0,
+        "trainable_frac": 1.0
+      },
+      {
+        "key": "reasoning",
+        "name": "Reasoning",
+        "share": 6,
+        "benchmark": "AIME, GPQA, depth-control",
+        "supply_B": 38,
+        "epochs": 4.0,
+        "generated_B": 88,
+        "trainable_frac": 1.0
+      },
+      {
+        "key": "agentic",
+        "name": "Agentic",
+        "share": 8,
+        "benchmark": "tau2, BFCL, Terminal, WebArena",
+        "supply_B": 43,
+        "epochs": 4.0,
+        "generated_B": 150,
+        "trainable_frac": 0.35
+      },
+      {
+        "key": "long_ctx",
+        "name": "Long-context",
+        "share": 6,
+        "benchmark": "RULER, MRCR-v2",
+        "supply_B": 240,
+        "epochs": 1.0,
+        "generated_B": 0,
+        "trainable_frac": 1.0
+      },
+      {
+        "key": "indic",
+        "name": "Indic",
+        "share": 18,
+        "benchmark": "MILU, IndicGenBench, MMMLU",
+        "supply_B": 778,
+        "epochs": 0.93,
+        "generated_B": 0,
+        "trainable_frac": 1.0
+      }
+    ],
+    "stages": [
+      {
+        "key": "seed",
+        "name": "Seed",
+        "weight": 8,
+        "seq": "4K",
+        "band": "B0-B1",
+        "note": "warm start: establish language + basic Indic",
+        "shares": {
+          "web": 58,
+          "code": 12,
+          "math_stem": 6,
+          "reasoning": 2,
+          "agentic": 1,
+          "long_ctx": 3,
+          "indic": 18
+        }
+      },
+      {
+        "key": "general",
+        "name": "General",
+        "weight": 45,
+        "seq": "4-8K",
+        "band": "B1-B3",
+        "note": "broad base; web fades, code/STEM climb",
+        "shares": {
+          "web": 39,
+          "code": 22,
+          "math_stem": 10,
+          "reasoning": 4,
+          "agentic": 4,
+          "long_ctx": 3,
+          "indic": 18
+        }
+      },
+      {
+        "key": "reasoning",
+        "name": "Reasoning",
+        "weight": 25,
+        "seq": "8-16K",
+        "band": "B3-B4",
+        "note": "code + logic peak; agentic introduced",
+        "shares": {
+          "web": 21,
+          "code": 26,
+          "math_stem": 12,
+          "reasoning": 9,
+          "agentic": 8,
+          "long_ctx": 6,
+          "indic": 18
+        }
+      },
+      {
+        "key": "long_ctx",
+        "name": "Long-context",
+        "weight": 19,
+        "seq": "16-32K",
+        "band": "B4-B5",
+        "note": "stretch context; agentic trajectories climb",
+        "shares": {
+          "web": 12,
+          "code": 22,
+          "math_stem": 9,
+          "reasoning": 7,
+          "agentic": 18,
+          "long_ctx": 14,
+          "indic": 18
+        }
+      },
+      {
+        "key": "anneal",
+        "name": "Anneal",
+        "weight": 3,
+        "seq": "32K",
+        "band": "B5",
+        "note": "low-LR cooldown on the reserved Tier-A gold",
+        "shares": {
+          "web": 8,
+          "code": 14,
+          "math_stem": 11,
+          "reasoning": 16,
+          "agentic": 24,
+          "long_ctx": 9,
+          "indic": 18
+        }
+      }
+    ],
+    "indic_tiers": [
+      {
+        "key": "verified",
+        "name": "Verified",
+        "share_of_indic": 18,
+        "demand_B": 130,
+        "supply_B": 86,
+        "epochs": 1.52,
+        "role": "scarce, best; reserved for anneal"
+      },
+      {
+        "key": "unverified",
+        "name": "Unverified",
+        "share_of_indic": 14,
+        "demand_B": 101,
+        "supply_B": 24,
+        "epochs": 4.0,
+        "role": "cheap breadth; capped at 4 epochs"
+      },
+      {
+        "key": "translated",
+        "name": "Translated",
+        "share_of_indic": 33,
+        "demand_B": 238,
+        "supply_B": 305,
+        "epochs": 0.78,
+        "role": "bulk (IndicTrans2, chrF++ gated)"
+      },
+      {
+        "key": "synthetic",
+        "name": "Synthetic",
+        "share_of_indic": 35,
+        "demand_B": 252,
+        "supply_B": 363,
+        "epochs": 0.69,
+        "role": "bulk; caps Indic ceiling"
+      }
+    ],
+    "floor": {
+      "indic_batch_pct": 14,
+      "agentic": "never OPUS-trimmed",
+      "opus_keep_frac": 0.5,
+      "opus_rerun_every_B": 2,
+      "reason": "OPUS judges a sample from its first ~512 tokens; Indic aligns weakly to the English/code golden proxy and agentic traces look like logs, so both would be discarded."
+    },
+    "anneal_reserve": {
+      "total_B": 120,
+      "pct": 3,
+      "items": [
+        {
+          "name": "Tier-A verified Indic",
+          "B": 30
+        },
+        {
+          "name": "Hardest verified agentic traces",
+          "B": 30
+        },
+        {
+          "name": "Ultra-length reasoning",
+          "B": 25
+        },
+        {
+          "name": "PhD/research STEM + math",
+          "B": 25
+        },
+        {
+          "name": "Decontaminated benchmark-adjacent gold",
+          "B": 10
+        }
+      ]
+    },
+    "supply_totals": {
+      "generated_B": 238,
+      "generated_pct": 5.9,
+      "organic_indic_B": 110,
+      "verified_pct_of_budget": 3.2
+    },
+    "reasoning_bands": [
+      {
+        "name": "short",
+        "budget": "<=64 tok",
+        "example": "43 / 17 ~= 2.5 (no scratch work)"
+      },
+      {
+        "name": "medium",
+        "budget": "64-512 tok",
+        "example": "Integers 1-1000 divisible by 3 or 5? 333+200-66 = 467"
+      },
+      {
+        "name": "long",
+        "budget": "512-4,000 tok",
+        "example": "competition geometry proof with case analysis"
+      },
+      {
+        "name": "ultra",
+        "budget": "4,000-32,000",
+        "example": "research problem / multi-step agentic debug with backtracking"
+      }
+    ]
+  },
+  "verdicts": [
+    {
+      "ok": true,
+      "claim": "Protecting Indic works",
+      "detail": "Indic loss: Balanced 4.407 vs Web-heavy 4.981 (Δ +0.575) - 5%→20% Indic buys Indic."
+    },
+    {
+      "ok": true,
+      "claim": "Starving web costs common sense",
+      "detail": "Web loss: Code-forward 6.754 vs Balanced 6.541 (Δ +0.213)."
+    },
+    {
+      "ok": true,
+      "claim": "Code share buys code",
+      "detail": "Code loss: Code-forward 5.208 vs Web-heavy 5.696 (Δ +0.488)."
+    }
+  ]
+}

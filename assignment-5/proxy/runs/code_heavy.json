@@ -1,0 +1,96 @@
+{
+  "name": "code_heavy",
+  "mixture": {
+    "web": 0.08,
+    "code": 0.55,
+    "math": 0.25,
+    "reasoning": 0.07,
+    "indic": 0.05
+  },
+  "lane_probs": {
+    "code": 0.55,
+    "indic": 0.05,
+    "math": 0.25,
+    "reasoning": 0.07,
+    "web": 0.08
+  },
+  "params_M": 4.85,
+  "steps": 1500,
+  "tokens_seen_M": 3.07,
+  "config": {
+    "block": 128,
+    "bs": 16,
+    "n_embd": 192,
+    "n_layer": 4
+  },
+  "final_per_lane": {
+    "code": 5.2078,
+    "indic": 5.4731,
+    "math": 6.3213,
+    "reasoning": 5.4823,
+    "web": 6.754
+  },
+  "final_avg": 5.8477,
+  "history": [
+    {
+      "code": 9.7363,
+      "indic": 9.7257,
+      "math": 9.7217,
+      "reasoning": 9.727,
+      "web": 9.7212,
+      "_avg": 9.7264,
+      "step": 0,
+      "sec": 1.7
+    },
+    {
+      "code": 5.9088,
+      "indic": 7.1825,
+      "math": 7.1722,
+      "reasoning": 6.7411,
+      "web": 7.5042,
+      "_avg": 6.9018,
+      "step": 300,
+      "sec": 171.6
+    },
+    {
+      "code": 5.6439,
+      "indic": 6.0464,
+      "math": 6.804,
+      "reasoning": 5.9282,
+      "web": 7.0373,
+      "_avg": 6.292,
+      "step": 600,
+      "sec": 358.6
+    },
+    {
+      "code": 5.3321,
+      "indic": 5.5252,
+      "math": 6.2682,
+      "reasoning": 5.5087,
+      "web": 6.91,
+      "_avg": 5.9088,
+      "step": 900,
+      "sec": 548.8
+    },
+    {
+      "code": 5.0988,
+      "indic": 5.6008,
+      "math": 6.2576,
+      "reasoning": 5.5992,
+      "web": 6.9143,
+      "_avg": 5.8941,
+      "step": 1200,
+      "sec": 729.1
+    },
+    {
+      "code": 5.2078,
+      "indic": 5.4731,
+      "math": 6.3213,
+      "reasoning": 5.4823,
+      "web": 6.754,
+      "_avg": 5.8477,
+      "step": 1500,
+      "sec": 920.2
+    }
+  ]
+}

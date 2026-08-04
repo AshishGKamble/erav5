@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>V5 Mixture - Compare Design Sets</title>
+<meta name="description" content="Compare candidate design sets for the V5 India-first data mixture side by side - each a full recipe with its measured proxy outcome - then expand the chosen set to the full staged plan. A control panel to tune before the 1B/3B runs." />
+<link rel="stylesheet" href="styles.css" />
+<body data-palette="#2a78d6,#eb6834,#1baf7a,#eda100,#e87ba4,#008300,#4a3aa7,#e34948">
+
+<div class="topbar">
+  <div class="brand">V5 Mixture &middot; compare design sets <span>/ ERA V5 &middot; Assignment 5</span></div>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">&#9788;</span><span id="themeLabel">Light</span></button>
+</div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">A recipe is a hypothesis until a cheap run tests it</div>
+    <h1>Compare candidate design sets, then expand the winner.</h1>
+    <p class="lead">Each <strong>set</strong> is a full mixture recipe we decide; each is scored by a tiny
+      proxy on the same 5 lanes. Compare them, add tuning sets, pick one - then expand it to the shipped
+      7-lane staged plan below. This is the loop the plan commits to at 1B/3B scale.</p>
+    <div class="kpi" id="kpi"></div>
+  </header>
+
+  <!-- ============ SECTION 1: COMPARE SETS ============ -->
+  <section id="sets">
+    <div class="sec-head"><span class="sec-num">01</span><h2>The candidate sets, side by side</h2></div>
+    <p class="sec-lead">Three recipes we decided. <strong>Recipe</strong> = the <em>run-integrated</em> budget
+      split (the whole-run average, seed through anneal - not any single stage); <strong>outcome</strong> =
+      per-lane held-out loss from the proxy trained on that flat mixture (lower is better). The proxy tests 5
+      lanes; agentic + long-context need real scale, so they enter only in the expanded plan (&sect;2), and the
+      stage-by-stage schedule of the chosen set is in &sect;3.</p>
+    <div class="cols" id="setCards"></div>
+
+    <figure class="figure">
+      <div class="fig-title">Comparison matrix</div>
+      <div class="fig-sub">Design (the recipe %) on top, measured outcome (loss) below. Best in each row is highlighted.</div>
+      <div class="data-table-wrap"><table class="data-table" id="compareTable"></table></div>
+    </figure>
+
+    <figure class="figure">
+      <div class="fig-title">Recipes compared (design) - run-integrated budget %</div>
+      <div class="fig-sub">One bar per set; each segment is that lane's share of the whole-run budget.</div>
+      <div class="chart-scroll"><div class="chart-host" id="figRecipes"></div></div>
+      <div class="legend" id="figRecipes-legend"></div>
+    </figure>
+    <figure class="figure">
+      <div class="fig-title">Outcomes compared (proxy loss)</div>
+      <div class="fig-sub">Per-lane held-out loss; left = better. Our set wins Indic, reasoning, and the average.</div>
+      <div class="chart-scroll"><div class="chart-host" id="figLoss"></div></div>
+      <div class="legend" id="figLoss-legend"></div>
+    </figure>
+
+    <div class="cols" id="verdicts"></div>
+    <div class="callout" id="addSet"></div>
+  </section>
+
+  <!-- ============ SECTION 2: CHOSEN SET EXPANDED ============ -->
+  <section id="expanded">
+    <div class="sec-head"><span class="sec-num">02</span><h2>The chosen set, expanded - the full 7-lane plan</h2></div>
+    <p class="sec-lead" id="expandedLead"></p>
+    <figure class="figure">
+      <div class="fig-title">Budget share per lane (integrated over the run)</div>
+      <div class="chart-scroll"><div class="chart-host" id="figShares"></div></div>
+    </figure>
+    <div class="data-table-wrap"><table class="data-table" id="supplyTable"></table></div>
+    <div class="callout warn" id="supplyNote"></div>
+  </section>
+
+  <!-- ============ SECTION 3: STAGES ============ -->
+  <section id="stages">
+    <div class="sec-head"><span class="sec-num">03</span><h2>The curriculum - five stages</h2></div>
+    <p class="sec-lead">Staged <strong>Seed &rarr; General &rarr; Reasoning &rarr; Long-context &rarr; Anneal</strong>.
+      Each column is the mixture <em>at that stage</em> (sums to 100). Web fades, code/agentic/long-context climb,
+      Indic stays on its floor, and the difficulty band + sequence length rise.</p>
+    <figure class="figure">
+      <div class="fig-title">Mixture at each stage</div>
+      <div class="fig-sub">Stacked bars, one per stage. Each segment = that lane's % within the stage.</div>
+      <div class="chart-scroll"><div class="chart-host" id="figStages"></div></div>
+      <div class="legend" id="figStages-legend"></div>
+    </figure>
+    <div class="stages" id="stageCards"></div>
+    <p class="fig-note" id="stageNote"></p>
+  </section>
+
+  <!-- ============ SECTION 4: INDIC + SUPPLY ============ -->
+  <section id="indic">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Indic four tiers &amp; the supply reality</h2></div>
+    <p class="sec-lead">The Indic lane is not one number - most of it is translated/synthetic because organic
+      Indic barely exists. The honest split, and where every lane must repeat or generate.</p>
+    <div class="grid2">
+      <figure class="figure">
+        <div class="fig-title">Indic composition (of the 18% Indic budget)</div>
+        <div class="chart-scroll"><div class="chart-host" id="figTiers"></div></div>
+        <div class="legend" id="figTiers-legend"></div>
+        <p class="fig-note" id="tiersNote"></p>
+      </figure>
+      <figure class="figure">
+        <div class="fig-title">Demand vs real supply (log scale)</div>
+        <div class="fig-sub">Short supply bar &rarr; we repeat or generate, and say so.</div>
+        <div class="chart-scroll"><div class="chart-host" id="figDemand"></div></div>
+        <div class="legend" id="figDemand-legend"></div>
+      </figure>
+    </div>
+    <div class="callout" id="anneal"></div>
+  </section>
+
+  <!-- ============ SECTION 5: WHAT THE EXPERIMENTS SETTLED ============ -->
+  <section id="settled">
+    <div class="sec-head"><span class="sec-num">05</span><h2>What the experiments settled</h2></div>
+    <p class="sec-lead">The comparison above is how the study <em>started</em>. Nine rounds and sixteen runs
+      later, most of its apparent winners had been withdrawn - not because the numbers changed, but because
+      we finally measured what they meant. This is that reckoning.</p>
+
+    <div class="callout warn" id="pinned"></div>
+
+    <figure class="figure">
+      <div class="fig-title">Seed-noise floor - how much of a difference is even readable</div>
+      <div class="fig-sub">Re-running the <em>identical</em> mixture at different seeds. Any effect smaller than its lane's bar is not evidence of anything.</div>
+      <div class="chart-scroll"><div class="chart-host" id="figFloor"></div></div>
+    </figure>
+
+    <figure class="figure">
+      <div class="fig-title">The decisive test - does more Indic buy <em>native</em> Indic?</div>
+      <div class="fig-sub">Both arms hold native Indic at the 11% the supply allows; both scored on the same held-out sets.</div>
+      <div class="data-table-wrap"><table class="data-table" id="tierTable"></table></div>
+      <p class="fig-note" id="tierNote"></p>
+    </figure>
+
+    <div class="grid2">
+      <figure class="figure">
+        <div class="fig-title">Validity audit - is each "held-out" set held out?</div>
+        <div class="fig-sub">Share of val windows found verbatim in the same lane's training data.</div>
+        <div class="data-table-wrap"><table class="data-table" id="leakTable"></table></div>
+      </figure>
+      <figure class="figure">
+        <div class="fig-title">Claims we published and then withdrew</div>
+        <div class="fig-sub">The useful part of a log is the part that makes its author look wrong.</div>
+        <div class="data-table-wrap"><table class="data-table" id="withdrawnTable"></table></div>
+      </figure>
+    </div>
+
+    <div class="callout" id="finalVerdict"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>Built by <b>Ashish Kamble</b></span> &middot; sets + design values in <span class="mono">plan.json</span>,
+  outcomes from <span class="mono">proxy/runs/*.json</span> &middot; supporting tool for the Assignment-5 README plan.
+</footer>
+
+<div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+<script src="app.js" defer></script>
+</body>
+</html>

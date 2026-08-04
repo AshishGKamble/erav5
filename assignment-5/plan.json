@@ -1,0 +1,375 @@
+{
+  "_note": "Candidate DESIGN SETS for the V5 mixture, compared. Each set is a full recipe we decide; its outcome comes from a proxy run (proxy/runs/<proxy_key>.json). Add a set = add an entry here + a MIXES entry in proxy/train.py + re-run. 'full_plan' expands the CHOSEN set to the shipped 7-lane plan (curriculum, tiers, floor, anneal). Tokens in BILLIONS.",
+  "model": "India-first ~40B MoE",
+  "budget_B": 4000,
+  "budget_future_B": 20000,
+  "proxy_lanes": [
+    "web",
+    "code",
+    "math",
+    "reasoning",
+    "indic"
+  ],
+  "proxy_note": "The proxy tests 5 lanes (agentic + long-context can't be proxied at this scale - they need tool execution / 32K sequences). Sets are compared on these 5; the chosen set is then expanded to all 7 lanes in full_plan.",
+  "sets": [
+    {
+      "key": "web_heavy",
+      "name": "Web-heavy (V4 baseline)",
+      "chosen": false,
+      "proxy_key": "naive_web",
+      "thesis": "70% web, Indic starved to 5% - the lazy default a careless team ships.",
+      "recipe": {
+        "web": 70,
+        "code": 15,
+        "math": 5,
+        "reasoning": 5,
+        "indic": 5
+      }
+    },
+    {
+      "key": "balanced",
+      "name": "Balanced - India-first (our pick)",
+      "chosen": true,
+      "proxy_key": "ours",
+      "thesis": "Protect Indic (20%), boost code (25%), keep enough web (35%) for common sense.",
+      "recipe": {
+        "web": 35,
+        "code": 25,
+        "math": 12,
+        "reasoning": 8,
+        "indic": 20
+      }
+    },
+    {
+      "key": "code_forward",
+      "name": "Code-forward",
+      "chosen": false,
+      "proxy_key": "code_heavy",
+      "thesis": "Maximise code+math, sacrifice web and Indic - the 'great coder, no common sense' trap.",
+      "recipe": {
+        "web": 8,
+        "code": 55,
+        "math": 25,
+        "reasoning": 7,
+        "indic": 5
+      }
+    },
+    {
+      "key": "indic_first",
+      "name": "Indic-first (Indic is the largest lane)",
+      "chosen": false,
+      "proxy_key": "indic_first",
+      "thesis": "Make Indic the biggest lane (32%) while keeping web healthy. Tests whether Indic keeps paying past 20% or saturates.",
+      "recipe": {
+        "web": 28,
+        "code": 18,
+        "math": 10,
+        "reasoning": 12,
+        "indic": 32
+      }
+    },
+    {
+      "key": "reasoning_fwd",
+      "name": "Reasoning-forward",
+      "chosen": false,
+      "proxy_key": "reasoning_fwd",
+      "thesis": "Round 1 found reasoning NON-monotone, but the set that raised it also starved the base. Raise reasoning 8->20% with web and Indic held at 'ours' levels.",
+      "recipe": {
+        "web": 35,
+        "code": 15,
+        "math": 10,
+        "reasoning": 20,
+        "indic": 20
+      }
+    },
+    {
+      "key": "web_lean",
+      "name": "Web-lean (controlled web test)",
+      "chosen": false,
+      "proxy_key": "web_lean",
+      "thesis": "Controlled test of web-as-scaffolding: Indic and reasoning pinned to 'ours' (20/8), ONLY web moves 35->20. If Indic loss rises, cutting web to fund Indic is self-defeating.",
+      "recipe": {
+        "web": 20,
+        "code": 35,
+        "math": 17,
+        "reasoning": 8,
+        "indic": 20
+      }
+    },
+    {
+      "key": "v2_proposed",
+      "name": "v2 proposed (README section 14)",
+      "chosen": false,
+      "proxy_key": "v2_proposed",
+      "thesis": "The revision round 2 argues for: Indic and reasoning up, web and code down - but each stopping short of the proxy's optimum because real supply caps it. Proposed, not adopted: the 1B run decides.",
+      "recipe": {
+        "web": 30,
+        "code": 23,
+        "math": 12,
+        "reasoning": 10,
+        "indic": 25
+      }
+    }
+  ],
+  "full_plan": {
+    "note": "The chosen 'Balanced' set expanded to the shipped 7-lane, staged plan.",
+    "lanes": [
+      {
+        "key": "web",
+        "name": "General web",
+        "share": 30,
+        "benchmark": "MMLU-Pro, common sense",
+        "supply_B": 20300,
+        "epochs": 0.06,
+        "generated_B": 0,
+        "trainable_frac": 1.0
+      },
+      {
+        "key": "code",
+        "name": "Code",
+        "share": 22,
+        "benchmark": "LiveCodeBench, SWE-bench, CF",
+        "supply_B": 1813,
+        "epochs": 0.49,
+        "generated_B": 0,
+        "trainable_frac": 1.0
+      },
+      {
+        "key": "math_stem",
+        "name": "Math + STEM",
+        "share": 10,
+        "benchmark": "AIME, GPQA, MMLU-Pro(STEM)",
+        "supply_B": 143,
+        "epochs": 2.8,
+        "generated_B": 0,
+        "trainable_frac": 1.0
+      },
+      {
+        "key": "reasoning",
+        "name": "Reasoning",
+        "share": 6,
+        "benchmark": "AIME, GPQA, depth-control",
+        "supply_B": 38,
+        "epochs": 4.0,
+        "generated_B": 88,
+        "trainable_frac": 1.0
+      },
+      {
+        "key": "agentic",
+        "name": "Agentic",
+        "share": 8,
+        "benchmark": "tau2, BFCL, Terminal, WebArena",
+        "supply_B": 43,
+        "epochs": 4.0,
+        "generated_B": 150,
+        "trainable_frac": 0.35
+      },
+      {
+        "key": "long_ctx",
+        "name": "Long-context",
+        "share": 6,
+        "benchmark": "RULER, MRCR-v2",
+        "supply_B": 240,
+        "epochs": 1.0,
+        "generated_B": 0,
+        "trainable_frac": 1.0
+      },
+      {
+        "key": "indic",
+        "name": "Indic",
+        "share": 18,
+        "benchmark": "MILU, IndicGenBench, MMMLU",
+        "supply_B": 778,
+        "epochs": 0.93,
+        "generated_B": 0,
+        "trainable_frac": 1.0
+      }
+    ],
+    "stages": [
+      {
+        "key": "seed",
+        "name": "Seed",
+        "weight": 8,
+        "seq": "4K",
+        "band": "B0-B1",
+        "note": "warm start: establish language + basic Indic",
+        "shares": {
+          "web": 58,
+          "code": 12,
+          "math_stem": 6,
+          "reasoning": 2,
+          "agentic": 1,
+          "long_ctx": 3,
+          "indic": 18
+        }
+      },
+      {
+        "key": "general",
+        "name": "General",
+        "weight": 45,
+        "seq": "4-8K",
+        "band": "B1-B3",
+        "note": "broad base; web fades, code/STEM climb",
+        "shares": {
+          "web": 39,
+          "code": 22,
+          "math_stem": 10,
+          "reasoning": 4,
+          "agentic": 4,
+          "long_ctx": 3,
+          "indic": 18
+        }
+      },
+      {
+        "key": "reasoning",
+        "name": "Reasoning",
+        "weight": 25,
+        "seq": "8-16K",
+        "band": "B3-B4",
+        "note": "code + logic peak; agentic introduced",
+        "shares": {
+          "web": 21,
+          "code": 26,
+          "math_stem": 12,
+          "reasoning": 9,
+          "agentic": 8,
+          "long_ctx": 6,
+          "indic": 18
+        }
+      },
+      {
+        "key": "long_ctx",
+        "name": "Long-context",
+        "weight": 19,
+        "seq": "16-32K",
+        "band": "B4-B5",
+        "note": "stretch context; agentic trajectories climb",
+        "shares": {
+          "web": 12,
+          "code": 22,
+          "math_stem": 9,
+          "reasoning": 7,
+          "agentic": 18,
+          "long_ctx": 14,
+          "indic": 18
+        }
+      },
+      {
+        "key": "anneal",
+        "name": "Anneal",
+        "weight": 3,
+        "seq": "32K",
+        "band": "B5",
+        "note": "low-LR cooldown on the reserved Tier-A gold",
+        "shares": {
+          "web": 8,
+          "code": 14,
+          "math_stem": 11,
+          "reasoning": 16,
+          "agentic": 24,
+          "long_ctx": 9,
+          "indic": 18
+        }
+      }
+    ],
+    "indic_tiers": [
+      {
+        "key": "verified",
+        "name": "Verified",
+        "share_of_indic": 18,
+        "demand_B": 130,
+        "supply_B": 86,
+        "epochs": 1.52,
+        "role": "scarce, best; reserved for anneal"
+      },
+      {
+        "key": "unverified",
+        "name": "Unverified",
+        "share_of_indic": 14,
+        "demand_B": 101,
+        "supply_B": 24,
+        "epochs": 4.0,
+        "role": "cheap breadth; capped at 4 epochs"
+      },
+      {
+        "key": "translated",
+        "name": "Translated",
+        "share_of_indic": 33,
+        "demand_B": 238,
+        "supply_B": 305,
+        "epochs": 0.78,
+        "role": "bulk (IndicTrans2, chrF++ gated)"
+      },
+      {
+        "key": "synthetic",
+        "name": "Synthetic",
+        "share_of_indic": 35,
+        "demand_B": 252,
+        "supply_B": 363,
+        "epochs": 0.69,
+        "role": "bulk; caps Indic ceiling"
+      }
+    ],
+    "floor": {
+      "indic_batch_pct": 14,
+      "agentic": "never OPUS-trimmed",
+      "opus_keep_frac": 0.5,
+      "opus_rerun_every_B": 2,
+      "reason": "OPUS judges a sample from its first ~512 tokens; Indic aligns weakly to the English/code golden proxy and agentic traces look like logs, so both would be discarded."
+    },
+    "anneal_reserve": {
+      "total_B": 120,
+      "pct": 3,
+      "items": [
+        {
+          "name": "Tier-A verified Indic",
+          "B": 30
+        },
+        {
+          "name": "Hardest verified agentic traces",
+          "B": 30
+        },
+        {
+          "name": "Ultra-length reasoning",
+          "B": 25
+        },
+        {
+          "name": "PhD/research STEM + math",
+          "B": 25
+        },
+        {
+          "name": "Decontaminated benchmark-adjacent gold",
+          "B": 10
+        }
+      ]
+    },
+    "supply_totals": {
+      "generated_B": 238,
+      "generated_pct": 5.9,
+      "organic_indic_B": 110,
+      "verified_pct_of_budget": 3.2
+    },
+    "reasoning_bands": [
+      {
+        "name": "short",
+        "budget": "<=64 tok",
+        "example": "43 / 17 ~= 2.5 (no scratch work)"
+      },
+      {
+        "name": "medium",
+        "budget": "64-512 tok",
+        "example": "Integers 1-1000 divisible by 3 or 5? 333+200-66 = 467"
+      },
+      {
+        "name": "long",
+        "budget": "512-4,000 tok",
+        "example": "competition geometry proof with case analysis"
+      },
+      {
+        "name": "ultra",
+        "budget": "4,000-32,000",
+        "example": "research problem / multi-step agentic debug with backtracking"
+      }
+    ]
+  }
+}

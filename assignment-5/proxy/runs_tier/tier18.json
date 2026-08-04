@@ -1,0 +1,93 @@
+{
+  "name": "tier18",
+  "seed": 1337,
+  "mixture": {
+    "web": 0.35,
+    "code": 0.21,
+    "math": 0.12,
+    "reasoning": 0.14,
+    "indic_hi": 0.11,
+    "indic_lo": 0.07
+  },
+  "lane_probs": {
+    "web": 0.35,
+    "code": 0.21,
+    "math": 0.12,
+    "reasoning": 0.14,
+    "indic_hi": 0.11,
+    "indic_lo": 0.07
+  },
+  "params_M": 4.85,
+  "steps": 1500,
+  "final_per_lane": {
+    "web": 6.4307,
+    "code": 5.386,
+    "math": 6.4505,
+    "reasoning": 4.9741,
+    "indic_hi": 6.1838,
+    "indic_lo": 4.732
+  },
+  "final_avg": 5.6928,
+  "history": [
+    {
+      "web": 9.7317,
+      "code": 9.7455,
+      "math": 9.7101,
+      "reasoning": 9.7233,
+      "indic_hi": 9.7223,
+      "indic_lo": 9.7193,
+      "_avg": 9.7254,
+      "step": 0
+    },
+    {
+      "web": 7.049,
+      "code": 6.236,
+      "math": 7.302,
+      "reasoning": 6.2513,
+      "indic_hi": 6.8985,
+      "indic_lo": 6.4117,
+      "_avg": 6.6914,
+      "step": 300
+    },
+    {
+      "web": 6.6544,
+      "code": 5.8613,
+      "math": 6.8868,
+      "reasoning": 5.5782,
+      "indic_hi": 6.3514,
+      "indic_lo": 5.5632,
+      "_avg": 6.1492,
+      "step": 600
+    },
+    {
+      "web": 6.5629,
+      "code": 5.7273,
+      "math": 6.3633,
+      "reasoning": 5.2537,
+      "indic_hi": 5.8714,
+      "indic_lo": 5.1533,
+      "_avg": 5.822,
+      "step": 900
+    },
+    {
+      "web": 6.3668,
+      "code": 5.2923,
+      "math": 6.5767,
+      "reasoning": 5.0839,
+      "indic_hi": 5.7858,
+      "indic_lo": 4.8659,
+      "_avg": 5.6619,
+      "step": 1200
+    },
+    {
+      "web": 6.4307,
+      "code": 5.386,
+      "math": 6.4505,
+      "reasoning": 4.9741,
+      "indic_hi": 6.1838,
+      "indic_lo": 4.732,
+      "_avg": 5.6928,
+      "step": 1500
+    }
+  ]
+}

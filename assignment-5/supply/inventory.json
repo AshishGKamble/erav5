@@ -1,0 +1,88 @@
+{
+  "_note": "Real, sourced token supply per capability lane. Tokens in BILLIONS. 'organic' = naturally-occurring text; 'trainable_frac' = fraction of tokens that carry loss (agentic traces are mostly masked context/observations). Indic carries a 4-tier label. Numbers are from the Session-5 inventory widget, our Assignment-3 research sweeps, and public dataset cards; each row cites its source. Conservative where a range exists.",
+  "budget_primary_B": 4000,
+  "budget_future_B": 20000,
+  "lanes": {
+    "web": {
+      "benchmarks": ["MMLU", "MMLU-Pro", "GPQA(easy)", "common-sense"],
+      "trainable_frac": 1.0,
+      "datasets": [
+        {"name": "DCLM-baseline", "tokens_B": 4000, "organic": true, "source": "DCLM arXiv 2406.11794 (4T from a 240T pool)"},
+        {"name": "FineWeb", "tokens_B": 15000, "organic": true, "source": "FineWeb arXiv 2406.17557 (15T)"},
+        {"name": "FineWeb-Edu (score>=3)", "tokens_B": 1300, "organic": true, "source": "FineWeb-Edu (1.3T)"}
+      ]
+    },
+    "code": {
+      "benchmarks": ["LiveCodeBench", "SWE-bench(+Live/Pro)", "Codeforces"],
+      "trainable_frac": 1.0,
+      "datasets": [
+        {"name": "The Stack v2 (dedup, Software Heritage)", "tokens_B": 900, "organic": true, "source": "Session inventory: ~600M files / ~900B tokens; StarCoder2 arXiv 2402.19173"},
+        {"name": "StarCoder2 train subset", "tokens_B": 913, "organic": true, "source": "StarCoder2 (913B unique, overlaps Stack v2)"}
+      ]
+    },
+    "math_stem": {
+      "benchmarks": ["AIME", "GPQA-Diamond", "MMLU-Pro(STEM)", "FrontierMath"],
+      "trainable_frac": 1.0,
+      "datasets": [
+        {"name": "OpenWebMath", "tokens_B": 15, "organic": true, "source": "arXiv 2310.06786 (~14.7B)"},
+        {"name": "Proof-Pile-2", "tokens_B": 55, "organic": true, "source": "Llemma arXiv 2310.10631 (ArXiv 29B + OWM 15B + AlgStack 11B)"},
+        {"name": "peS2o + arXiv (papers)", "tokens_B": 70, "organic": true, "source": "peS2o/arXiv full-text, S2ORC"},
+        {"name": "NuminaMath / MetaMathQA (problems)", "tokens_B": 3, "organic": false, "source": "NuminaMath ~1M problems; templated/augmented"}
+      ]
+    },
+    "reasoning_traces": {
+      "benchmarks": ["AIME", "GPQA", "MMLU-Pro", "depth-control(low/med/high/ultra)"],
+      "trainable_frac": 1.0,
+      "note": "Long chain-of-thought at graded depth. High/ultra depth is NOT freely available; must be distilled from a reasoning teacher.",
+      "datasets": [
+        {"name": "OpenThoughts / OpenR1 (distilled CoT)", "tokens_B": 8, "organic": false, "source": "OpenThoughts-114k -> 1M; R1-distill traces"},
+        {"name": "AM-DeepSeek-Distilled-40M", "tokens_B": 30, "organic": false, "source": "3.34M prompts / 40M responses (mostly EN/ZH)"}
+      ]
+    },
+    "agentic": {
+      "benchmarks": ["tau2-bench", "BFCL", "Terminal-bench", "WebArena", "GAIA", "BrowseComp"],
+      "trainable_frac": 0.35,
+      "note": "Tokens are huge but loss is only on assistant tokens; tool outputs/observations are masked context. Real supply is tiny -> this lane is generation-heavy (distill from Claude/Codex traces + our own cloud-code sessions + simulated tool environments).",
+      "datasets": [
+        {"name": "ToolBench", "tokens_B": 0.08, "organic": false, "source": "Session inventory: 120k examples / 80M tokens; multi-tool over real REST APIs"},
+        {"name": "xLAM / APIGen-60k", "tokens_B": 0.2, "organic": false, "source": "arXiv 2409.03215 (60k verified function-calls)"},
+        {"name": "Glaive-function-calling-v2", "tokens_B": 0.3, "organic": false, "source": "Glaive (~113k)"},
+        {"name": "SWE-bench trajectories / terminal traces", "tokens_B": 2, "organic": true, "source": "scarce; real GitHub patches + shell sessions"},
+        {"name": "Distilled/self-collected agent traces (to generate)", "tokens_B": 40, "organic": false, "source": "GENERATED: Claude/Codex distill + cohort cloud-code sessions + simulated envs"}
+      ]
+    },
+    "long_context": {
+      "benchmarks": ["RULER", "MRCR-v2", "long-doc QA"],
+      "trainable_frac": 1.0,
+      "note": "Each SAMPLE must be long (4K->32K+), trained at length (not truncated). Organic long samples are scarce -> up-sample long docs + synthesize via multi-doc packing and long agent trajectories.",
+      "datasets": [
+        {"name": "Books (Gutenberg/Books3-clean)", "tokens_B": 30, "organic": true, "source": "long-form books"},
+        {"name": "arXiv full papers + repo-level code", "tokens_B": 60, "organic": true, "source": "naturally long documents"},
+        {"name": "Synthetic long (multi-doc packing / long traces)", "tokens_B": 150, "organic": false, "source": "GENERATED: concatenate related docs; long agentic trajectories"}
+      ]
+    },
+    "indic": {
+      "benchmarks": ["MILU", "IndicGenBench", "MMMLU-Indic", "BharatDrishti(ours, A3)"],
+      "trainable_frac": 1.0,
+      "note": "12 Assignment-3 languages. Split across four tiers because most Indic mass is NOT organic. Full Indic conversational would need ~2T tokens (unavailable) -> repetition + translation + synthesis.",
+      "tiers": {
+        "verified": [
+          {"name": "Sangraha-Verified", "tokens_B": 64, "source": "IndicLLMSuite arXiv 2403.06350 (human sites + OCR + ASR)"},
+          {"name": "IndicCorp v2 (cleaned crawl)", "tokens_B": 21, "source": "ACL 2023.acl-long.693"},
+          {"name": "indic-align (our A4-cleaned)", "tokens_B": 0.5, "source": "Assignment-4 pipeline output (MuRIL-counted; overlaps Sangraha family)"}
+        ],
+        "unverified": [
+          {"name": "Sangraha-Unverified", "tokens_B": 24, "source": "perplexity-filtered crawl (CCNet-style)"}
+        ],
+        "translated": [
+          {"name": "IndicTrans2-translated (En->12 langs)", "tokens_B": 300, "source": "arXiv 2305.16307; quality-capped, chrF++ gated"},
+          {"name": "indic-align translated (Dolly/OASST)", "tokens_B": 5, "source": "AI4Bharat indic-align"}
+        ],
+        "synthetic": [
+          {"name": "Sangraha-Synthetic", "tokens_B": 163, "source": "WikiMedia MT to 14 langs + romanized transliteration"},
+          {"name": "BhashaKritika + self-instruct (to generate)", "tokens_B": 200, "source": "GENERATED: newer synthetic pipelines"}
+        ]
+      }
+    }
+  }
+}

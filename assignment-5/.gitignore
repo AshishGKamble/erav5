@@ -1,0 +1,11 @@
+proxy/data/
+# proxy/runs/*.json stay tracked - they are the raw curves the README and dashboard cite
+__pycache__/
+*.pyc
+.hf_cache/
+*.bin
+*.npy
+
+# Local archive of previous versions - kept for our own reference, not part of the submission.
+# Remove this line if you ever want the history versioned in git.
+.archive/
