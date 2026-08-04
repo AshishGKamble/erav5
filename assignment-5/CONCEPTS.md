@@ -205,33 +205,36 @@ Our actual results (4.85M params, 1500 steps):
 | **Balanced (ours)** | 5.475 | **4.407** | 6.649 | **5.273** | 6.541 | **5.669** |
 | Code-forward | **5.208** | 5.473 | **6.321** | 5.482 | 6.754 | 5.848 |
 
-**How to read this table - three habits:**
+**How to read this table - four habits, learned the hard way:**
 
 **1. Read the signs, not the magnitudes.** A 4.85M model is a toy. Loss of 5.67 means nothing in
 absolute terms. What transfers to real scale is the **direction**: does raising a lane's share
 lower that lane's loss? That is the claim.
 
-**2. Check monotonicity, and take it seriously when it fails.** The naive model is "more share =
-more skill". Test it: sort the runs by a lane's share and see if loss falls. For web, code and math
-it does. **For reasoning and Indic it does not**, and that turned out to be the most useful thing
-the proxy told us:
+**2. Measure the noise floor BEFORE you interpret anything.** This is the habit that cost me the
+most to learn. Re-run the *identical* mixture at two or three different seeds and see how much the
+numbers move on their own. Ours moved by **0.14 to 0.35 per lane** while the *average* moved only
+0.05. I had spent four rounds reading differences of 0.07 to 0.12 as signal - most of it was noise,
+and three published findings had to be withdrawn. **A study that reports one run per mixture is
+reporting its seed.** Quote every difference against its lane's floor, and prefer the average, which
+is far steadier than any single lane.
 
-- **Reasoning**: 5% → 5.387, **7% → 5.482**, 8% → 5.273. The middle set gave reasoning a *bigger*
-  share and got a *worse* result, because it starved web and Indic to pay for it.
-- **Indic**: two runs sit at the *same* 5% Indic share and score 4.981 and 5.473 - a gap of 0.49,
-  nearly as large as the headline Indic effect itself. The difference between them is the **web**
-  share (70% vs 8%).
+**3. Check that your metric measures what you think it does.** Two separate failures taught this:
 
-**The lesson: a lane is not bought by its own share in isolation - it rides on the rest of the
-diet.** Web is not merely hygiene; it is scaffolding that other lanes stand on, Indic included. So
-"cut web to fund Indic" can lower Indic. Whenever a lane comes out non-monotone, the mixture is
-telling you there is an interaction, and interactions are where the real design decisions live.
+- Our "Indic" validation set was **98.5% machine-translated and synthetic**, so for six rounds
+  "Indic loss improved" actually meant "got better at translated text" - not the native Indic that
+  MILU scores. Splitting the bin by provenance reversed the conclusion entirely.
+- Our reasoning validation set had **100% overlap with training data**, because the data prep looped
+  the source six times before splitting off the first 5%. That "held-out" loss was measuring
+  memorisation.
 
-**3. Do not just take the best average.** Balanced has the best average (5.669), but that is a
-weak argument on its own - averages hide trades. The strong argument is: it **wins the lanes I said
-I care about** (Indic, reasoning), stays competitive on code, and **loses only on web, which is
-exactly the trade I designed on purpose.** A number that confirms a trade I predicted in advance is
-worth far more than a number that is merely best.
+**Before trusting any number, ask two questions: what distribution is this validation set actually
+drawn from, and is it genuinely unseen?** Sampling 200 windows and grepping for them in the training
+data takes minutes and would have saved me a week.
+
+**4. Prefer the effect you predicted in advance.** Write your prediction down before the run.
+A number that confirms a trade you designed on purpose is worth far more than a number that is
+merely best, because the second kind is what overfitting to noise looks like.
 
 ### Predicting before you look
 

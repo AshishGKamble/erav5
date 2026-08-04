@@ -35,7 +35,7 @@ MIXES = {
     #    pinned to 'ours' (.20/.08); ONLY web moves (.35 -> .20). If Indic loss rises,
     #    web is holding Indic up and cutting web to fund Indic is self-defeating.
     "web_lean":      {"web": .20, "code": .35, "math": .17, "reasoning": .08, "indic": .20},
-    # --- round 3: the revision round 2 argues for (README section 14), renormalised from the
+    # --- round 3: the revision round 2 argued for (later withdrawn), renormalised from the
     #     7-lane proposal web26/code20/math10/reasoning9/agentic8/longctx6/indic21 onto the five
     #     proxy lanes. Moves Indic and reasoning UP, web and code DOWN - each backed by a round-2
     #     result, each stopping short of the proxy's optimum because supply caps it.

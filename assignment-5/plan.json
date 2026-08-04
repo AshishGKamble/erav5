@@ -98,10 +98,10 @@
     },
     {
       "key": "v2_proposed",
-      "name": "v2 proposed (README section 14)",
+      "name": "v2 proposed (revision we later withdrew)",
       "chosen": false,
       "proxy_key": "v2_proposed",
-      "thesis": "The revision round 2 argues for: Indic and reasoning up, web and code down - but each stopping short of the proxy's optimum because real supply caps it. Proposed, not adopted: the 1B run decides.",
+      "thesis": "The revision round 2 argued for: Indic and reasoning up, web and code down. Round 3 ran it and found no measurable difference (0.011 against a 0.051 floor); round 9 then invalidated its reasoning metric entirely. Withdrawn.",
       "recipe": {
         "web": 30,
         "code": 23,
