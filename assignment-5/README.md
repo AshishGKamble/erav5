@@ -5,7 +5,7 @@
 A fixed budget of 4 trillion tokens. This is how we spend it, in what order, and what we hold back
 for the finish. Every share is defended against a benchmark it must win and against the tokens that
 actually exist to fill it. Then we tried to break it: **21 proxy training runs across 9 rounds,
-which killed two of our own proposed revisions.**
+which killed two of our three proposed revisions and confirmed the third.**
 
 *This file is the whole submission. Everything needed to judge it is here; links go to computed
 evidence for anyone who wants to check the arithmetic.*
@@ -16,28 +16,29 @@ evidence for anyone who wants to check the arithmetic.*
 
 | Lane | Share | Must win | Can we buy the tokens? |
 |---|:---:|---|---|
-| **General web** | **30%** | MMLU-Pro, common sense | Yes, 0.06 epochs of 20.3T |
-| **Code** | **22%** | LiveCodeBench, SWE-bench | Yes, 0.49 epochs of 1.8T |
+| **General web** | **29%** | MMLU-Pro, common sense | Yes, 0.06 epochs of 20.3T |
+| **Code** | **20%** | LiveCodeBench, SWE-bench | Yes, 0.44 epochs of 1.8T |
 | **Math + STEM** | **10%** | AIME, GPQA | Repeat 2.8x over 143B |
-| **Reasoning traces** | **6%** | AIME, GPQA, BBEH | 4 epochs **+ 88B generated** |
+| **Reasoning traces** | **9%** | AIME, GPQA, BBEH | 4 epochs **+ 208B generated** |
 | **Agentic / tool-use** | **8%** | tau2-bench, BFCL | 4 epochs **+ 150B generated** |
 | **Long-context** | **6%** | RULER, MRCR-v2 | 1.0 epoch, 60% already synthetic |
 | **Indic** | **18%** | MILU, IndicGenBench | 0.93 epochs, but the tiers matter (§3.3) |
 
 **Three admissions we would rather make ourselves than have a reviewer extract:**
 
-1. **238B tokens (5.9% of budget) do not exist and must be manufactured**, almost all of it agentic
-   and reasoning. §3.2 names every source and marks the imaginary ones.
+1. **358B tokens (8.9% of budget) do not exist and must be manufactured**, almost all of it agentic
+   and reasoning. §3.2 names every source and marks the imaginary ones. That figure rose from 238B
+   when we adopted the one change our experiments supported (§9.3) - the price is stated, not hidden.
 2. **Native Indic is capped at 11.0% of budget no matter what share we pick.** Only 110B organic
    Indic tokens exist; at the 4-epoch reuse ceiling that is 440B, full stop. A bigger Indic lane
    buys machine-translated text, not Indic capability. This is arithmetic (§3.4).
 3. **Our boldest promise rests on the thinnest data.** tau2-bench (≥77) is fed by a lane that is
    4.7% organic, contributes 2.8% of actual gradient, and our proxy cannot test it at all (§6).
 
-**What all the testing changed: nothing. That is the finding.** We twice proposed revising this
-mixture, ran the experiments, and both revisions died - one because it measured the wrong
-distribution, one because its validation set was contaminated. The shares above are the ones we
-first defended, still standing (§9).
+**What all the testing changed: one lane out of seven.** We proposed three revisions and ran the
+experiments. Two died - one measured the wrong distribution, one had a contaminated validation set.
+The third survived: **reasoning 6% → 9%**, the only change in this document backed by a clean,
+replicated, above-noise measurement (§9.3). Everything else is as first defended.
 
 ---
 
@@ -53,7 +54,7 @@ Indic capability across 12 languages.
 ≥80 · GPQA-Diamond ≥84 · BBEH ≥74 · **tau2-bench ≥77** · MMMLU ≥88 · MRCR-v2 (256K) ≥66 · and lead
 the Indic benchmarks Gemma leaves blank.
 
-A general assistant spends ~50% on web. We spend 30% and move the difference into code, agentic and
+A general assistant spends ~50% on web. We spend 29% and move the difference into code, agentic and
 Indic, because we are building a sovereign coding and agentic model, not a chatbot. §3 tests whether
 that ambition is affordable.
 
@@ -68,10 +69,10 @@ the check against wishful accounting, computed by [`supply/ledger.py`](supply/le
 
 | Lane | Demand | Real supply | Epochs | Verdict |
 |---|---:|---:|---:|---|
-| Web | 1200B | 20300B | 0.06 | Organic, abundant |
-| Code | 880B | 1813B | 0.49 | Organic, comfortable |
+| Web | 1160B | 20300B | 0.06 | Organic, abundant |
+| Code | 800B | 1813B | 0.44 | Organic, comfortable |
 | Math + STEM | 400B | 143B | **2.8** | Repetition, under the cap |
-| Reasoning | 240B | 38B | **4.0** | At the cap **+ 88B generated** |
+| Reasoning | 360B | 38B | **4.0** | At the cap **+ 208B generated** |
 | Agentic | 320B | 43B | **4.0** | At the cap **+ 150B generated** |
 | Long-context | 240B | 240B | 1.0 | Exactly enough, 60% already synthetic |
 | Indic | 720B | 778B | 0.93 | Healthy in total, sick in its tiers (§3.3) |
@@ -136,22 +137,22 @@ Long-context → Anneal.** Each cell is that lane's share *within* the stage.
 
 | Lane \ Stage | **Seed** 8% | **General** 45% | **Reasoning** 25% | **Long-ctx** 19% | **Anneal** 3% | → integrated |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
-| General web | 58 | 39 | 21 | 12 | 8 | **29.96** |
-| Code | 12 | 22 | 26 | 22 | 14 | **21.96** |
+| General web | 57 | 37 | 21 | 12 | 8 | **28.98** |
+| Code | 10 | 20 | 24 | 20 | 13 | **19.99** |
 | Math + STEM | 6 | 10 | 12 | 9 | 11 | **10.02** |
-| Reasoning traces | 2 | 4 | 9 | 7 | 16 | **6.02** |
-| Agentic | 1 | 4 | 8 | 18 | 24 | **8.02** |
-| Long-context | 3 | 3 | 6 | 14 | 9 | **6.02** |
+| Reasoning traces | 3 | 6 | 12 | 13 | 20 | **9.01** |
+| Agentic | 1 | 4 | 8 | 18 | 22 | **7.96** |
+| Long-context | 5 | 5 | 5 | 10 | 8 | **6.04** |
 | **Indic (protected floor)** | **18** | **18** | **18** | **18** | **18** | **18.00** |
 | Difficulty band | B0-B1 | B1-B3 | B3-B4 | B4-B5 | **B5 only** | |
 | Sequence length | 4K | 4-8K | 8-16K | **16-32K** | 32K | |
 
 *Every column sums to 100, and the schedule was **solved** so the budget-weighted average reproduces
-§1 within **0.04 points**: web = .08(58)+.45(39)+.25(21)+.19(12)+.03(8) = **29.96**. That precision
+§1 within **0.04 points**: web = .08(57)+.45(37)+.25(21)+.19(12)+.03(8) = **28.98**. That precision
 matters because §3 sizes supply against §1's shares - a curriculum quietly delivering something else
 would make the entire supply analysis fiction.*
 
-**The shape, and the reasoning behind it.** Web fades 58→8: breadth is foundational, then it hands
+**The shape, and the reasoning behind it.** Web fades 57→8: breadth is foundational, then it hands
 its budget over. Code, agentic and long-context climb, because they need a base to stand on. Indic
 sits flat at exactly 18%, well above the 14% floor of §5.1, because a *protected* lane should not
 fluctuate. Reasoning peaks in the anneal, where the hardest material meets the most capable model.
@@ -255,13 +256,13 @@ checkable facts per target instead.
 
 | Benchmark | Target | Effective gradient | Organic backing | Verdict |
 |---|:---:|:---:|:---:|---|
-| MMLU-Pro | ≥85 | 22.0% | 100% | On track |
-| LiveCodeBench-v6 | ≥80 | 22.0% | 100% | On track |
-| MMMLU | ≥88 | 22.8% | 76% | Partly supply-limited |
+| MMLU-Pro | ≥85 | 21.4% | 100% | On track |
+| LiveCodeBench-v6 | ≥80 | 20.0% | 100% | Fed, but mixture-sensitive |
+| MMMLU | ≥88 | 22.4% | 76% | Partly supply-limited |
 | MILU / IndicGenBench | lead | 18.0% | 61% | Partly supply-limited |
-| AIME '26 | ≥89 | 8.4% | 60% | Partly supply-limited |
-| GPQA-Diamond | ≥84 | 8.4% | 60% | Partly supply-limited |
-| BBEH | ≥74 | 13.2% | **30%** | **Supply-limited** |
+| AIME '26 | ≥89 | 9.6% | 60% | Partly supply-limited |
+| GPQA-Diamond | ≥84 | 9.6% | 60% | Partly supply-limited |
+| BBEH | ≥74 | 15.0% | **30%** | **Supply-limited** |
 | MRCR-v2 (256K) | ≥66 | 6.0% | 100% | **Untested** (proxy cannot reach) |
 | tau2-bench | ≥77 | **2.8%** | **2%** | **Untested** (proxy cannot reach) |
 
@@ -274,7 +275,7 @@ checkable facts per target instead.
 
 **Read the bottom row honestly:** our hardest promise has the least real data, the least gradient
 and no test. BBEH is next. The fix is **not** a bigger share - raising agentic to 10% would push
-generated tokens from 238B to ~398B - it is a better generation pipeline and a proxy that scores the
+generated tokens from 358B to ~438B - it is a better generation pipeline and a proxy that scores the
 benchmark itself. A table where every row said "on track" would be a less trustworthy document.
 
 ---
@@ -366,10 +367,11 @@ The useful part of a study is the part that makes its authors look wrong.
 | **v2 revision** (Indic 18→21, reasoning 6→9) improves the mixture | 0.011 against a 0.051 floor: no measurable difference |
 | The clean test **refutes** raising Indic | That "refutation" was 0.073 against the floor: it showed nothing |
 | More Indic buys Indic capability | §8.2: the bin was 98.5% synthetic and native Indic never moved |
-| **Reasoning 6% → 9%** | §9.2: 100% train/validation leakage |
+| **Reasoning 6% → 9%** was unsupported | §9.2: 100% train/validation leakage. Then §9.3 repaired the split and re-measured: the gain is real (−0.647 vs 0.240 floor), so this one came *back* and was adopted |
 
 **Two were revisions already written into this plan.** One was a refutation we announced using the
-same unmeasured-noise error that produced the claim it refuted.
+same unmeasured-noise error that produced the claim it refuted. The last row is the only one that
+came back from the dead, and only after we repaired the instrument that had condemned it.
 
 ### 9.1 Why "replicate seeds" is not boilerplate
 
@@ -392,25 +394,57 @@ validation, so every reasoning validation window also sits in training. **Reason
 was never held out; it measured memorisation.** The 0.468 reasoning gain that survived every
 noise-floor test - our last surviving proposal - is not evidence of capability.
 
-Had we shipped it, we would have committed **+120B generated tokens** (5.9% → 8.9% of budget) on a
-memorisation artefact. That is the price of not auditing your own metric.
+Had we shipped it on that evidence, we would have committed **+120B generated tokens** on what might
+have been a memorisation artefact. That is the price of not auditing your own metric.
 
-### 9.3 The decision record
+### 9.3 Then we fixed the leak and re-measured - and the gain was real
+
+Reporting a broken metric is not the same as answering the question, so we fixed it. `reasoning.txt`
+turned out to be the source repeated exactly 6x, so the 7,473 unique examples were recoverable
+offline. [`proxy/fix_reasoning_split.py`](proxy/fix_reasoning_split.py) splits **by document**
+instead of by token offset - 7,100 train, 373 validation, disjoint by construction - and verifies
+itself: **0/200 validation windows found in training.** The root cause is fixed in `prepare_data.py`
+so a fresh run cannot reintroduce it.
+
+Then we re-ran both mixtures at two seeds each on the clean split:
+
+| Reasoning share | Clean held-out loss (2-seed mean) | Seed spread |
+|---|---:|---:|
+| 8% (`ours`) | 5.448 | 0.240 |
+| 20% (`reasoning_fwd`) | **4.800** | 0.094 |
+
+**Δ = −0.647 against a 0.240 floor: real, and larger than the 0.468 the leaky metric had claimed.**
+Raising the reasoning share genuinely buys reasoning capability, measured on data the model has
+never seen.
+
+**So we adopted it: reasoning 6% → 9%**, funded from web (30→29) and code (22→21→20), both of which
+stay clear of the thresholds §8.1 identified. We stopped at 9% rather than going higher because
+**every point costs ~40B of generated tokens** - the move takes total generation from 238B to 358B,
+5.9% → 8.9% of budget. The capability is worth buying; the honesty about its price is the reason we
+did not buy more. Note the tested jump was 8%→20% in proxy terms and we have not measured the shape
+in between, so 9% is a deliberately conservative step, not an optimum.
+
+**This is the only change in this document that a clean, replicated, above-noise experiment
+supports** - and it exists because we went looking for a flaw in our own metric rather than
+defending the number we had already published.
+
+### 9.4 The decision record
 
 | Lane | Final | On what basis | Confidence |
 |---|:---:|---|---|
-| General web | **30%** | Benchmark floor; starving it measurably costs common sense (0.213 vs 0.144) | **High** |
-| Code | **22%** | Abundant supply makes the share honest; below ~18% measurably hurts | **High** |
+| General web | **29%** | Benchmark floor; starving it measurably costs common sense (0.213 vs 0.144). Trimmed 1 point to fund reasoning, far from any tested threshold | **High** |
+| Code | **20%** | Abundant supply makes the share honest; below ~18% measurably hurts, so 20% keeps a margin while funding reasoning | **High** |
 | Math + STEM | **10%** | Feeds AIME and GPQA; already 2.8 epochs, so raising it is expensive. No readable signal either way | Medium |
-| Reasoning | **6%** | **Held only because its metric is invalid** (§9.2). The one share we cannot currently defend with evidence | **Low, open** |
+| Reasoning | **9%** | **Raised.** The only change the study supports: −0.647 on a repaired, document-disjoint validation set against a 0.240 floor, replicated (§9.3). Priced at +120B generated | **High** |
 | Agentic | **8%** | Generation-bound, not share-bound: +2 points costs +80B generated to move gradient 2.8%→3.5% | Medium, by reasoning not measurement |
 | Long-context | **6%** | Already 1.0 epoch and 62.5% synthetic; won by training at length | Medium, by reasoning not measurement |
 | Indic | **18%** | Settled twice over: experiment (§8.2) and arithmetic (§3.4) | **High** |
 
-**Why "no change" is a result.** These shares came from the A3 benchmarks and the A4 inventory. We
-then spent nine rounds and 21 runs attacking them, including two revisions we had already committed
-to in writing. None survived. **A mixture that withstands its own authors trying that hard is better
-defended than one tuned to a number.**
+**Six lanes unchanged, one raised on evidence.** These shares came from the A3 benchmarks and the A4
+inventory. We then spent ten rounds and 25 runs attacking them, including three revisions we had
+written down. Two died. The one that survived did so on a validation set we had to repair first.
+**A mixture that withstands its own authors trying that hard - and that moves only where a clean
+experiment says to - is better defended than one tuned to a number.**
 
 ---
 
@@ -422,7 +456,8 @@ defended than one tuned to a number.**
    rent-a-GPU job, not a rewrite.
 2. **Held-out loss is not a benchmark.** Even a clean 1B run measures loss, and loss gains do not
    always become benchmark points.
-3. **One lane's metric is invalid** (§9.2). All reasoning conclusions are void until it is fixed.
+3. **The reasoning metric was invalid and is now repaired** (§9.2, §9.3), but only that lane was
+   rebuilt. The other four lanes' validation sets were audited at 0-6% leakage and left as they are.
 4. **Two lanes were never tested.** Agentic needs tool execution, long-context needs 32K sequences.
    Both are argued from the ledger and A3, not measured.
 5. **The noise floor is itself approximate**, from 2-3 seeds per mixture. It is the most
@@ -441,7 +476,7 @@ starved. Starvation is `demand − (organic supply × 4 epochs)`, straight from 
 | Slot | Demand | Organic | Reachable | **Shortfall** | Priority |
 |---|---:|---:|---:|---:|:---:|
 | **Agentic** | 320B | ~2B | 8B | **312B** | **1** |
-| **Reasoning** | 240B | 0B | 0B | **240B** | **2** |
+| **Reasoning** | 360B | 0B | 0B | **360B** | **2** |
 | **Indic, verified tier** | 130B | 86B | 344B | covered, but **86B is a hard ceiling** | **3** |
 | Long-context | 240B | 90B | 360B | covered by synthesis, quality-capped | 4 |
 
@@ -474,9 +509,10 @@ we would still believe more Indic was free. **Cleaning quality is what made this
 - **Native Indic improves when synthetic Indic is added** at 1B → §8.2 does not scale and Indic
   should rise after all.
 
-**Next three steps, in order:** fix the reasoning validation leak (split by document, not by token
-offset) and re-test that share honestly; acquire more verified Indic, since capability there is
-supply-bound; then re-run the ladder at 1B with replicate seeds, scored on MILU and AIME.
+**Next two steps, in order:** acquire more verified Indic, since §3.4 and §8.2 agree capability
+there is supply-bound rather than share-bound; then re-run the whole ladder at 1B with replicate
+seeds, scored on MILU and AIME rather than held-out loss. (The third item on this list - repairing
+the reasoning validation split - is done: §9.3.)
 
 ---
 
@@ -489,6 +525,7 @@ python3 benchmarks.py             # -> benchmarks.md
 python3 proxy/prepare_data.py     # tiny multi-lane corpus (reuses the A4 cleaned corpus)
 python3 proxy/tokenize_lanes.py   # 16K BPE + per-lane train/val bins
 bash    proxy/run_all.sh          # the mixture ladder -> proxy/runs/*.json
+python3 proxy/fix_reasoning_split.py  # document-disjoint reasoning split (the §9.3 repair)
 python3 proxy/tier_prepare.py     # split Indic by provenance (the §8.2 experiment)
 python3 proxy/tier_train.py --name tier18   # also tier30, tier30_ideal
 python3 experiments.py            # -> EXPERIMENTS.md

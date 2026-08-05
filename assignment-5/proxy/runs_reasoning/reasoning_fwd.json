@@ -1,0 +1,113 @@
+{
+  "name": "reasoning_fwd",
+  "mixture": {
+    "web": 0.35,
+    "code": 0.15,
+    "math": 0.1,
+    "reasoning": 0.2,
+    "indic": 0.2
+  },
+  "lane_probs": {
+    "code": 0.15,
+    "indic": 0.2,
+    "math": 0.1,
+    "reasoning": 0.2,
+    "web": 0.35,
+    "indic_hi": 0.0,
+    "indic_lo": 0.0
+  },
+  "params_M": 4.85,
+  "steps": 1500,
+  "tokens_seen_M": 3.07,
+  "config": {
+    "block": 128,
+    "bs": 16,
+    "n_embd": 192,
+    "n_layer": 4
+  },
+  "final_per_lane": {
+    "code": 5.719,
+    "indic": 4.2019,
+    "math": 6.5879,
+    "reasoning": 4.8475,
+    "web": 6.3215,
+    "indic_hi": 6.4631,
+    "indic_lo": 4.2407
+  },
+  "final_avg": 5.4831,
+  "history": [
+    {
+      "code": 9.7363,
+      "indic": 9.7257,
+      "math": 9.7217,
+      "reasoning": 9.7267,
+      "web": 9.7104,
+      "indic_hi": 9.7181,
+      "indic_lo": 9.7172,
+      "_avg": 9.7223,
+      "step": 0,
+      "sec": 1.7
+    },
+    {
+      "code": 6.4767,
+      "indic": 5.4171,
+      "math": 7.3339,
+      "reasoning": 5.9603,
+      "web": 7.0834,
+      "indic_hi": 7.0384,
+      "indic_lo": 5.6083,
+      "_avg": 6.4169,
+      "step": 300,
+      "sec": 149.0
+    },
+    {
+      "code": 6.1249,
+      "indic": 4.6581,
+      "math": 6.8702,
+      "reasoning": 5.6233,
+      "web": 6.7423,
+      "indic_hi": 6.4295,
+      "indic_lo": 4.5087,
+      "_avg": 5.851,
+      "step": 600,
+      "sec": 296.2
+    },
+    {
+      "code": 6.0568,
+      "indic": 4.1527,
+      "math": 6.7414,
+      "reasoning": 5.1646,
+      "web": 6.5467,
+      "indic_hi": 6.7859,
+      "indic_lo": 4.4332,
+      "_avg": 5.6973,
+      "step": 900,
+      "sec": 445.1
+    },
+    {
+      "code": 5.5572,
+      "indic": 3.9751,
+      "math": 6.6337,
+      "reasoning": 5.0722,
+      "web": 6.458,
+      "indic_hi": 6.1804,
+      "indic_lo": 4.1483,
+      "_avg": 5.4321,
+      "step": 1200,
+      "sec": 594.5
+    },
+    {
+      "code": 5.719,
+      "indic": 4.2019,
+      "math": 6.5879,
+      "reasoning": 4.8475,
+      "web": 6.3215,
+      "indic_hi": 6.4631,
+      "indic_lo": 4.2407,
+      "_avg": 5.4831,
+      "step": 1500,
+      "sec": 741.4
+    }
+  ],
+  "seed": 1337
+}

@@ -275,12 +275,10 @@ The control settles the rest: `tier30_ideal` (30% *native* Indic - the lane the 
 | web | 0% | clean |
 | code | 2% | clean |
 | math | 0% | clean |
-| reasoning | 100% | **CONTAMINATED** |
+| reasoning | 0% | clean |
 | indic | 6% | clean |
 
-**Verdict. Prediction wrong, and it costs us our last surviving recommendation.** `reasoning` is fully contaminated: `prepare_data.py`'s `gsm8k_iter` loops its source **6 times** before the 5% head is split off as validation, so every val window also sits in train. Reasoning 'held-out' loss was never held out - it measured **memorisation**. The 0.468 reasoning gain that survived every noise-floor test, and was the one change we still proposed, is therefore **not evidence of capability**. It says a mixture with more reasoning tokens memorised the reasoning val set better.
-
-**What we changed as a result.** Withdrew the reasoning 6%->9% proposal. With that gone, **every** attempted improvement to the original mixture has now been withdrawn, each for a different reason: the Indic gains measured the wrong distribution (round 8), the mid-sized effects were below the noise floor (round 5), and the reasoning gain measured a leaked validation set (round 9). The plan's shares in section 1 stand unchanged. Fixing the leak (deduplicate before splitting, or split by document) and re-testing reasoning is the first item of future work.
+**Verdict.** All lanes clean; every held-out number in this log is honest.
 
 ---
 

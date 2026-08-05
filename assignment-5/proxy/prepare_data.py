@@ -57,13 +57,21 @@ def indic_iter():
 
 
 def gsm8k_iter():
+    """GSM8K, emitted ONCE per example.
+
+    This used to loop the set 6 times to pad the lane out to the size cap. That caused a
+    100% train/validation leak, because tokenize_lanes.py splits validation off by TOKEN
+    OFFSET - so with repeated content every held-out window also sat in training, and the
+    reasoning metric was measuring memorisation (README section 9.2). Never repeat a
+    source before the split; repeat after it, or split by document.
+
+    Run proxy/fix_reasoning_split.py to build the disjoint document-level split.
+    """
     from datasets import load_dataset
     ds = load_dataset("openai/gsm8k", "main", split="train")
     def gen():
-        # loop the (small) set a few times, formatting Q + reasoning answer
-        for _ in range(6):
-            for ex in ds:
-                yield f"Question: {ex['question']}\nAnswer: {ex['answer']}"
+        for ex in ds:
+            yield f"Question: {ex['question']}\nAnswer: {ex['answer']}"
     return gen()
 
 

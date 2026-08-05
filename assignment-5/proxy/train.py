@@ -109,6 +109,7 @@ def main():
     ap.add_argument("--eval_every", type=int, default=250)
     ap.add_argument("--seed", type=int, default=1337)
     ap.add_argument("--tag", default="", help="suffix for the output filename (e.g. seed sweeps)")
+    ap.add_argument("--outdir", default="runs", help="where to write the result json")
     a = ap.parse_args()
     torch.manual_seed(a.seed); np.random.seed(a.seed)
 
@@ -148,7 +149,8 @@ def main():
               "config": {"block": a.block, "bs": a.bs, "n_embd": a.n_embd, "n_layer": a.n_layer},
               "final_per_lane": {l: final[l] for l in lanes}, "final_avg": final["_avg"], "history": hist}
     result["seed"] = a.seed
-    json.dump(result, open(os.path.join(RUNS, f"{a.name}{a.tag}.json"), "w"), indent=2)
+    outdir = os.path.join(HERE, a.outdir); os.makedirs(outdir, exist_ok=True)
+    json.dump(result, open(os.path.join(outdir, f"{a.name}{a.tag}.json"), "w"), indent=2)
     print(f"[{a.name}] DONE in {time.time()-t0:.0f}s  final per-lane: " +
           " ".join(f"{l}={final[l]}" for l in lanes))
 

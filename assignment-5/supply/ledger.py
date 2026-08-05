@@ -19,10 +19,10 @@ BUDGET = INV["budget_primary_B"]                      # 4000 B tokens (primary a
 # Integrated lane shares (% of the 4T budget), defended in the README. These are the
 # run-INTEGRATED averages; the per-stage trajectory (Seed->Anneal) is in the plan.
 SHARES = {
-    "web":              30.0,   # MMLU / common sense - fades from ~51% early to ~18% late
-    "code":             22.0,   # LiveCodeBench / SWE-bench / Codeforces - our priority
+    "web":              29.0,   # MMLU / common sense - fades from ~51% early to ~18% late
+    "code":             20.0,   # LiveCodeBench / SWE-bench / Codeforces - our priority
     "math_stem":        10.0,   # AIME / GPQA / MMLU-Pro(STEM)  (tutor "STEM")
-    "reasoning_traces":  6.0,   # depth-controlled CoT (tutor "Reasoning")
+    "reasoning_traces":  9.0,   # depth-controlled CoT (tutor "Reasoning")
     "agentic":           8.0,   # tau2 / BFCL / Terminal-bench - PROTECTED floor
     "long_context":      6.0,   # RULER / MRCR
     "indic":            18.0,   # MILU / IndicGenBench - PROTECTED floor

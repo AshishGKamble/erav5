@@ -117,7 +117,7 @@
       {
         "key": "web",
         "name": "General web",
-        "share": 30,
+        "share": 29,
         "benchmark": "MMLU-Pro, common sense",
         "supply_B": 20300,
         "epochs": 0.06,
@@ -127,7 +127,7 @@
       {
         "key": "code",
         "name": "Code",
-        "share": 22,
+        "share": 20,
         "benchmark": "LiveCodeBench, SWE-bench, CF",
         "supply_B": 1813,
         "epochs": 0.49,
@@ -147,7 +147,7 @@
       {
         "key": "reasoning",
         "name": "Reasoning",
-        "share": 6,
+        "share": 9,
         "benchmark": "AIME, GPQA, depth-control",
         "supply_B": 38,
         "epochs": 4.0,
@@ -194,12 +194,12 @@
         "band": "B0-B1",
         "note": "warm start: establish language + basic Indic",
         "shares": {
-          "web": 58,
-          "code": 12,
+          "web": 57,
+          "code": 10,
           "math_stem": 6,
-          "reasoning": 2,
+          "reasoning": 3,
           "agentic": 1,
-          "long_ctx": 3,
+          "long_ctx": 5,
           "indic": 18
         }
       },
@@ -211,12 +211,12 @@
         "band": "B1-B3",
         "note": "broad base; web fades, code/STEM climb",
         "shares": {
-          "web": 39,
-          "code": 22,
+          "web": 37,
+          "code": 20,
           "math_stem": 10,
-          "reasoning": 4,
+          "reasoning": 6,
           "agentic": 4,
-          "long_ctx": 3,
+          "long_ctx": 5,
           "indic": 18
         }
       },
@@ -229,11 +229,11 @@
         "note": "code + logic peak; agentic introduced",
         "shares": {
           "web": 21,
-          "code": 26,
+          "code": 24,
           "math_stem": 12,
-          "reasoning": 9,
+          "reasoning": 12,
           "agentic": 8,
-          "long_ctx": 6,
+          "long_ctx": 5,
           "indic": 18
         }
       },
@@ -246,11 +246,11 @@
         "note": "stretch context; agentic trajectories climb",
         "shares": {
           "web": 12,
-          "code": 22,
+          "code": 20,
           "math_stem": 9,
-          "reasoning": 7,
+          "reasoning": 13,
           "agentic": 18,
-          "long_ctx": 14,
+          "long_ctx": 10,
           "indic": 18
         }
       },
@@ -263,11 +263,11 @@
         "note": "low-LR cooldown on the reserved Tier-A gold",
         "shares": {
           "web": 8,
-          "code": 14,
+          "code": 13,
           "math_stem": 11,
-          "reasoning": 16,
-          "agentic": 24,
-          "long_ctx": 9,
+          "reasoning": 20,
+          "agentic": 22,
+          "long_ctx": 8,
           "indic": 18
         }
       }

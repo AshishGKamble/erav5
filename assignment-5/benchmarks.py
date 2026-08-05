@@ -64,15 +64,24 @@ def proxy_evidence():
     for p in glob.glob(os.path.join(HERE, "proxy", "runs", "*.json")):
         r = json.load(open(p))
         runs[os.path.splitext(os.path.basename(p))[0]] = r
+    # Seed-noise floor per lane: the spread of the SAME mixture re-run at other seeds.
+    # Without it, replicate runs look like "the lane is mixture-sensitive" when they are
+    # only showing us chance - the error that cost us three findings (README section 9.1).
+    grp = {}
+    for k, r in runs.items(): grp.setdefault(r.get("name", k), []).append(k)
     out = {}
     for lane in set(PROXY_KEY.values()):
+        spreads = [max(runs[k]["final_per_lane"][lane] for k in g) - min(runs[k]["final_per_lane"][lane] for k in g)
+                   for g in grp.values() if len(g) > 1 and all(lane in runs[k]["final_per_lane"] for k in g)]
+        floor = max(spreads) if spreads else 0.0
         pts = sorted((r["lane_probs"].get(lane, 0), r["final_per_lane"].get(lane))
                      for r in runs.values() if r["final_per_lane"].get(lane) is not None)
         if len(pts) < 2:
             out[lane] = ("none", None); continue
-        mono = all(pts[i][1] >= pts[i + 1][1] for i in range(len(pts) - 1))
+        # a violation only counts if it is bigger than the lane's own seed noise
+        viol = any(b[0] > a[0] + 1e-9 and b[1] - a[1] > max(1e-9, floor) for a in pts for b in pts)
         spread = max(v for _, v in pts) - min(v for _, v in pts)
-        out[lane] = ("responds" if mono else "mixed", spread)
+        out[lane] = ("mixed" if viol else "responds", spread)
     return out, len(runs)
 
 
@@ -123,7 +132,8 @@ def main():
     L.append("- **Organic backing** = `min(1, organic_supply x 4 epochs / demand)`. 100% means real data could "
              "cover the whole demand; 0% means every token behind that benchmark is generated or distilled.")
     L.append(f"- **Proxy evidence** = from {n_runs} tiny-proxy runs. *responds* = loss falls as the lane's share "
-             "rises; *mixed* = the lane depends on the rest of the mixture too; *untested* = the proxy cannot "
+             "rises by more than that lane's seed-noise floor; *mixed* = a real violation survives the "
+             "floor; *untested* = the proxy cannot "
              "reach it at 128-token context with no tool execution.\n")
 
     weakest = sorted(rows, key=lambda r: r[3])[:3]
