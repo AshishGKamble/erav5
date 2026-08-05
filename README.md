@@ -28,4 +28,11 @@ what is held back for the anneal, and the proxy study we ran to attack our own n
 | 3 | [India-first 40B model design](assignment-3/) | The architecture and the benchmark targets Assignment 5 composes backward from |
 | 4 | [Corpus cleaning](assignment-4/) | The cleaned, provenance-stamped Indic corpus. Its `source` labels are what made Assignment 5's decisive experiment possible |
 
+## Licence
+
+Code is [MIT](LICENSE); the written documents are CC BY 4.0. Third-party content keeps its own
+terms - the Wikipedia extracts in `assignment-2/corpus/` are CC BY-SA 4.0, and the datasets named
+in the Assignment-5 inventory are **referenced, never redistributed**. Details in
+[NOTICE.md](NOTICE.md).
+
 _Built by Ashish Kamble_
