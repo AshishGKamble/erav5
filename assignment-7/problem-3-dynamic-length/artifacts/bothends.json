@@ -1,0 +1,837 @@
+{
+  "schemes": {
+    "both_ends_32_bytes": {
+      "D": 8192,
+      "description": "16 leading bytes plus 16 trailing bytes, same D",
+      "per_script": {
+        "ARABIC": {
+          "colliding_groups": 0,
+          "distinct_types": 4445,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "BENGALI": {
+          "colliding_groups": 0,
+          "distinct_types": 13413,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "COMMON": {
+          "colliding_groups": 1,
+          "distinct_types": 12572,
+          "examples": [
+            [
+              "1,2,3,4,5,6,7,8,9)(10,11,12,13,14,15,16,17,18)(19,20,21,22,23,24,25,26,27)(28,29,30,31,32,33,34,35,36)(37,38,39,40,41,42,43,44,45)(46,47,48,49,50,51,52,53,54)(55,56,57,58,59,60,61,62,63)(64,65,66,67,68,69,70,71,72)(73,74,75,76,77,78,79,80,81)(82,83,84,85,86,87,88,89,90)(91,92,93,94,95,96,97,98,99)(100,101,102,103,104,105,106,107,108",
+              "1,2,3,4,5,6,7,8,9),(10,11,12,13,14,15,16,17,18),(19,20,21,22,23,24,25,26,27),(28,29,30,31,32,33,34,35,36),(37,38,39,40,41,42,43,44,45),(46,47,48,49,50,51,52,53,54),(55,56,57,58,59,60,61,62,63),(64,65,66,67,68,69,70,71,72),(73,74,75,76,77,78,79,80,81),(82,83,84,85,86,87,88,89,90),(91,92,93,94,95,96,97,98,99),(100,101,102,103,104,105,106,107,108"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0001590836780146357
+        },
+        "DEVANAGARI": {
+          "colliding_groups": 7,
+          "distinct_types": 17757,
+          "examples": [
+            [
+              "अभियांत्रिकी",
+              "अभियान्त्रिकी"
+            ],
+            [
+              "मुख्यमंत्री",
+              "मुख्य्रमंत्री"
+            ],
+            [
+              "पुरुषबांच्या",
+              "पुरुषांच्या"
+            ],
+            [
+              "प्रतिबंधात्मक",
+              "प्रतिस्पर्धात्मक"
+            ],
+            [
+              "सांख्यिकीदृष्ट्या",
+              "सांख्यिकीयदृष्ट्या"
+            ],
+            [
+              "समुद्रकिनार्यांसाठी",
+              "समुद्रकिनाऱ्यांसाठी"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0007884214675902461
+        },
+        "GUJARATI": {
+          "colliding_groups": 0,
+          "distinct_types": 8249,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "GURMUKHI": {
+          "colliding_groups": 0,
+          "distinct_types": 5001,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "KANNADA": {
+          "colliding_groups": 44,
+          "distinct_types": 9895,
+          "examples": [
+            [
+              "ಅನುಭವಗಳನ್ನು",
+              "ಅನುಭವಿಗಳನ್ನು"
+            ],
+            [
+              "ಸೂಚಿಸಲಾಗುತ್ತದೆ",
+              "ಸೂಚಿಸುತ್ತದೆ"
+            ],
+            [
+              "ಕಾರ್ಯಗಳನ್ನು",
+              "ಕಾರ್ಯನಿರ್ವಹಣೆಗಳನ್ನು"
+            ],
+            [
+              "ಹೊಂದಿಕೊಳ್ಳುತ್ತವೆ",
+              "ಹೊಂದಿರುತ್ತವೆ"
+            ],
+            [
+              "ಪ್ರತಿಬಿಂಬಿಸುತ್ತದೆ",
+              "ಪ್ರತಿಷ್ಠಾಪಿಸಲಾಗುತ್ತದೆ"
+            ],
+            [
+              "ಅಭಿವೃದ್ಧಿಪಡಿಸುತ್ತದೆ",
+              "ಅಭಿವೃದ್ಧಿಯಾಗುತ್ತದೆ"
+            ]
+          ],
+          "types_in_collisions_rate": 0.009297625063163215
+        },
+        "LATIN": {
+          "colliding_groups": 35,
+          "distinct_types": 84044,
+          "examples": [
+            [
+              "www.qr-code-generator.com/api/qr_code_123456.png",
+              "www.qr-code-generator.com/api/qr_code_123456.png](www.qr-code-generator.com/api/qr_code_123456.png"
+            ],
+            [
+              "org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder",
+              "org.elasticsearch.search.aggregations.metrics.avg.AvgAggregationBuilder"
+            ],
+            [
+              "www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500",
+              "www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500](www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500"
+            ],
+            [
+              "timeOut=\"${microej.kf.testsuite.timeout",
+              "timeOut=\"${microej.testsuite.timeout"
+            ],
+            [
+              "commonProperties=\"${microej.kf.launch.propertyfile",
+              "commonProperties=\"${microej.launch.propertyfile"
+            ],
+            [
+              "testsuiteReportDirProperty=\"@{prefix}.testsuite.report.dir",
+              "testsuiteReportDirProperty=\"testkf.testsuite.report.dir"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0009042882299747752
+        },
+        "MALAYALAM": {
+          "colliding_groups": 64,
+          "distinct_types": 12063,
+          "examples": [
+            [
+              "ചെയ്തതായിരിക്കുന്നു",
+              "ചെയ്തിരിക്കുന്നു"
+            ],
+            [
+              "മനസ്സിലാക്കുന്നത്",
+              "മനസ്സിലാവുന്നത്"
+            ],
+            [
+              "ഉപയോഗപ്പെടുന്നു",
+              "ഉപയോഗിക്കപ്പെടുന്നു"
+            ],
+            [
+              "പ്രവർത്തിക്കുന്നത്",
+              "പ്രവർത്തിപ്പിക്കുന്നത്"
+            ],
+            [
+              "പരാമർശിക്കുന്ന",
+              "പരാമർശിച്ചിരിക്കുന്ന"
+            ],
+            [
+              "പ്രശ്നമല്ലെങ്കിൽ",
+              "പ്രശ്നമുണ്ടാകുന്നുണ്ടെങ്കിൽ"
+            ]
+          ],
+          "types_in_collisions_rate": 0.011439940313354886
+        },
+        "ORIYA": {
+          "colliding_groups": 3,
+          "distinct_types": 6275,
+          "examples": [
+            [
+              "ଏକ୍ସଟେନସନଗୁଡ଼ିକୁ",
+              "ଏକ୍ସଟେନସନ୍ଗୁଡ଼ିକୁ"
+            ],
+            [
+              "ଚିଙ୍ଗୁଡ଼ିକୁ",
+              "ଚିଙ୍ଗୁଡ଼ିଗୁଡ଼ିକୁ"
+            ],
+            [
+              "କାର୍ଯ୍ଯ଼କ୍ରମଗୁଡ଼ିକ",
+              "କାର୍ଯ୍ଯ଼ଗୁଡ଼ିକ"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0009561752988047809
+        },
+        "TAMIL": {
+          "colliding_groups": 33,
+          "distinct_types": 10825,
+          "examples": [
+            [
+              "சொல்லுகிறீர்கள்",
+              "சொல்லுவீர்கள்"
+            ],
+            [
+              "அழைக்கப்படுகின்றது",
+              "அழைக்கின்றது"
+            ],
+            [
+              "விளக்கப்படுகின்றது",
+              "விளக்குகின்றது"
+            ],
+            [
+              "பயன்படுகிறது",
+              "பயன்படுத்தப்படுகிறது"
+            ],
+            [
+              "விரும்புகின்றீர்கள்",
+              "விரும்புகிறீர்கள்"
+            ],
+            [
+              "பயன்படுகின்றன",
+              "பயன்படுத்தப்படுகின்றன",
+              "பயன்படுத்துகின்றன"
+            ]
+          ],
+          "types_in_collisions_rate": 0.006558891454965358
+        },
+        "TELUGU": {
+          "colliding_groups": 30,
+          "distinct_types": 12938,
+          "examples": [
+            [
+              "ఎంచుకోడానికి",
+              "ఎంచుకోవడానికి"
+            ],
+            [
+              "ఉపయోగపడుతుంది",
+              "ఉపయోగించబడుతుంది"
+            ],
+            [
+              "చెప్పాలనుకుంటున్నాను",
+              "చెప్పుతున్నాను"
+            ],
+            [
+              "చెప్పాలనుకుంటే",
+              "చెప్పుకుంటే"
+            ],
+            [
+              "నిర్ధరించండి",
+              "నిర్ధారించండి"
+            ],
+            [
+              "మాట్లడేవారు",
+              "మాట్లాడేవారు"
+            ]
+          ],
+          "types_in_collisions_rate": 0.004714793631164013
+        }
+      },
+      "reduction_vs_published": 9.778801843317972,
+      "total_colliding_groups": 217
+    },
+    "fixD_31_chars": {
+      "D": 8192,
+      "description": "script tag plus the first 31 characters",
+      "per_script": {
+        "ARABIC": {
+          "colliding_groups": 0,
+          "distinct_types": 4445,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "BENGALI": {
+          "colliding_groups": 0,
+          "distinct_types": 13413,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "COMMON": {
+          "colliding_groups": 0,
+          "distinct_types": 12572,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "DEVANAGARI": {
+          "colliding_groups": 0,
+          "distinct_types": 17757,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "GUJARATI": {
+          "colliding_groups": 0,
+          "distinct_types": 8249,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "GURMUKHI": {
+          "colliding_groups": 0,
+          "distinct_types": 5001,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "KANNADA": {
+          "colliding_groups": 0,
+          "distinct_types": 9895,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "LATIN": {
+          "colliding_groups": 63,
+          "distinct_types": 84044,
+          "examples": [
+            [
+              "System.Windows.Forms.DataGridView",
+              "System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize"
+            ],
+            [
+              "www.qr-code-generator.com/api/qr_code_123456.png",
+              "www.qr-code-generator.com/api/qr_code_123456.png](www.qr-code-generator.com/api/qr_code_123456.png",
+              "www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500",
+              "www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500](www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500"
+            ],
+            [
+              "https://www.bbc.com/news/climate_change",
+              "https://www.bbc.com/news/climate_change_human_activity",
+              "https://www.bbc.com/news/climate_change_wildlife"
+            ],
+            [
+              "https://www.britannica.com/topic/decolonization",
+              "https://www.britannica.com/topic/globalization",
+              "https://www.britannica.com/topic/international-relations",
+              "https://www.britannica.com/topic/world-war-I"
+            ],
+            [
+              "phone_number.split(extension_format)[-1])[0",
+              "phone_number.split(extension_format)[-1].strip"
+            ],
+            [
+              "org.elasticsearch.search.aggregations.AggregationBuilders",
+              "org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder",
+              "org.elasticsearch.search.aggregations.metrics.avg.AvgAggregationBuilder"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0019513588120508305
+        },
+        "MALAYALAM": {
+          "colliding_groups": 0,
+          "distinct_types": 12063,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "ORIYA": {
+          "colliding_groups": 0,
+          "distinct_types": 6275,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "TAMIL": {
+          "colliding_groups": 0,
+          "distinct_types": 10825,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "TELUGU": {
+          "colliding_groups": 0,
+          "distinct_types": 12938,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        }
+      },
+      "reduction_vs_published": 33.682539682539684,
+      "total_colliding_groups": 63
+    },
+    "fixD_both_ends_31_chars": {
+      "D": 8192,
+      "description": "script tag, 15 leading plus 16 trailing characters",
+      "per_script": {
+        "ARABIC": {
+          "colliding_groups": 0,
+          "distinct_types": 4445,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "BENGALI": {
+          "colliding_groups": 0,
+          "distinct_types": 13413,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "COMMON": {
+          "colliding_groups": 1,
+          "distinct_types": 12572,
+          "examples": [
+            [
+              "1,2,3,4,5,6,7,8,9)(10,11,12,13,14,15,16,17,18)(19,20,21,22,23,24,25,26,27)(28,29,30,31,32,33,34,35,36)(37,38,39,40,41,42,43,44,45)(46,47,48,49,50,51,52,53,54)(55,56,57,58,59,60,61,62,63)(64,65,66,67,68,69,70,71,72)(73,74,75,76,77,78,79,80,81)(82,83,84,85,86,87,88,89,90)(91,92,93,94,95,96,97,98,99)(100,101,102,103,104,105,106,107,108",
+              "1,2,3,4,5,6,7,8,9),(10,11,12,13,14,15,16,17,18),(19,20,21,22,23,24,25,26,27),(28,29,30,31,32,33,34,35,36),(37,38,39,40,41,42,43,44,45),(46,47,48,49,50,51,52,53,54),(55,56,57,58,59,60,61,62,63),(64,65,66,67,68,69,70,71,72),(73,74,75,76,77,78,79,80,81),(82,83,84,85,86,87,88,89,90),(91,92,93,94,95,96,97,98,99),(100,101,102,103,104,105,106,107,108"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0001590836780146357
+        },
+        "DEVANAGARI": {
+          "colliding_groups": 0,
+          "distinct_types": 17757,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "GUJARATI": {
+          "colliding_groups": 0,
+          "distinct_types": 8249,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "GURMUKHI": {
+          "colliding_groups": 0,
+          "distinct_types": 5001,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "KANNADA": {
+          "colliding_groups": 0,
+          "distinct_types": 9895,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "LATIN": {
+          "colliding_groups": 38,
+          "distinct_types": 84044,
+          "examples": [
+            [
+              "www.qr-code-generator.com/api/qr_code_123456.png",
+              "www.qr-code-generator.com/api/qr_code_123456.png](www.qr-code-generator.com/api/qr_code_123456.png"
+            ],
+            [
+              "org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder",
+              "org.elasticsearch.search.aggregations.metrics.avg.AvgAggregationBuilder"
+            ],
+            [
+              "www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500",
+              "www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500](www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500"
+            ],
+            [
+              "timeOut=\"${microej.kf.testsuite.timeout",
+              "timeOut=\"${microej.testsuite.timeout"
+            ],
+            [
+              "commonProperties=\"${microej.kf.launch.propertyfile",
+              "commonProperties=\"${microej.launch.propertyfile"
+            ],
+            [
+              "testsuiteReportDirProperty=\"@{prefix}.testsuite.report.dir",
+              "testsuiteReportDirProperty=\"testkf.testsuite.report.dir"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0009875779353671886
+        },
+        "MALAYALAM": {
+          "colliding_groups": 0,
+          "distinct_types": 12063,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "ORIYA": {
+          "colliding_groups": 0,
+          "distinct_types": 6275,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "TAMIL": {
+          "colliding_groups": 0,
+          "distinct_types": 10825,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "TELUGU": {
+          "colliding_groups": 0,
+          "distinct_types": 12938,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        }
+      },
+      "reduction_vs_published": 54.41025641025641,
+      "total_colliding_groups": 39
+    },
+    "prefix_32_bytes_published": {
+      "D": 8192,
+      "description": "the published construction: first 32 bytes",
+      "per_script": {
+        "ARABIC": {
+          "colliding_groups": 0,
+          "distinct_types": 4445,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "BENGALI": {
+          "colliding_groups": 144,
+          "distinct_types": 13413,
+          "examples": [
+            [
+              "প্রয়োজনীয়",
+              "প্রয়োজনীয়তাঃ"
+            ],
+            [
+              "প্ল্যাটফর্ম",
+              "প্ল্যাটফর্মগুলির",
+              "প্ল্যাটফর্মে",
+              "প্ল্যাটফর্মের"
+            ],
+            [
+              "স্বাভাবিকভাবে",
+              "স্বাভাবিকভাবেই"
+            ],
+            [
+              "বিশ্বাসগুলি",
+              "বিশ্বাসগুলিও"
+            ],
+            [
+              "ডেভেলপমেন্ট",
+              "ডেভেলপমেন্টে"
+            ],
+            [
+              "প্রোগ্রামিং",
+              "প্রোগ্রামিংয়ের"
+            ]
+          ],
+          "types_in_collisions_rate": 0.025348542458808618
+        },
+        "COMMON": {
+          "colliding_groups": 0,
+          "distinct_types": 12572,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "DEVANAGARI": {
+          "colliding_groups": 137,
+          "distinct_types": 17757,
+          "examples": [
+            [
+              "प्रतिष्ठापन",
+              "प्रतिष्ठापनांसह",
+              "प्रतिष्ठापित"
+            ],
+            [
+              "वर्तमानपत्र",
+              "वर्तमानपत्राच्या",
+              "वर्तमानपत्रे"
+            ],
+            [
+              "तंत्रज्ञानांची",
+              "तंत्रज्ञानाची",
+              "तंत्रज्ञानाच्या",
+              "तंत्रज्ञानात"
+            ],
+            [
+              "सर्वसाधारणपणे",
+              "सर्वसाधारणांच्या"
+            ],
+            [
+              "व्यवस्थापना",
+              "व्यवस्थापनाची",
+              "व्यवस्थापनासाठी"
+            ],
+            [
+              "प्रौद्योगिकियों",
+              "प्रौद्योगिकी",
+              "प्रौद्योगिकीचा",
+              "प्रौद्योगिकीचे"
+            ]
+          ],
+          "types_in_collisions_rate": 0.021512642901391002
+        },
+        "GUJARATI": {
+          "colliding_groups": 46,
+          "distinct_types": 8249,
+          "examples": [
+            [
+              "એલ.જી.બી.ટી.કયું",
+              "એલ.જી.બી.ટી.કે"
+            ],
+            [
+              "તીર્થંકરોની",
+              "તીર્થંકરોને"
+            ],
+            [
+              "પ્રધાનમંત્રી",
+              "પ્રધાનમંત્રીપદ"
+            ],
+            [
+              "કાર્યક્રમોના",
+              "કાર્યક્રમોમાં"
+            ],
+            [
+              "સુપરમાર્કેટના",
+              "સુપરમાર્કેટને",
+              "સુપરમાર્કેટમાં"
+            ],
+            [
+              "પ્રતિક્રિયા",
+              "પ્રતિક્રિયાઓ"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0130924960601285
+        },
+        "GURMUKHI": {
+          "colliding_groups": 2,
+          "distinct_types": 5001,
+          "examples": [
+            [
+              "ਕਾਰਬੋਹਾਇਡਰੇਟ",
+              "ਕਾਰਬੋਹਾਇਡਰੇਟਾਂ"
+            ],
+            [
+              "ਟ੍ਰਾਂਸਕ੍ਰਿਪਟੌਮਿਕ",
+              "ਟ੍ਰਾਂਸਕ੍ਰਿਪਸ਼ਨ"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0007998400319936012
+        },
+        "KANNADA": {
+          "colliding_groups": 233,
+          "distinct_types": 9895,
+          "examples": [
+            [
+              "ಸ್ವಾತಂತ್ರ್ಯ",
+              "ಸ್ವಾತಂತ್ರ್ಯದ"
+            ],
+            [
+              "ಪ್ರದೇಶವಾಗಿದೆ",
+              "ಪ್ರದೇಶವಾಗಿದ್ದು"
+            ],
+            [
+              "ಪಡೆದುಕೊಳ್ಳಲು",
+              "ಪಡೆದುಕೊಳ್ಳಿ"
+            ],
+            [
+              "ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದ",
+              "ಪ್ರಯತ್ನಿಸುವ",
+              "ಪ್ರಯತ್ನಿಸುವುದಿಲ್ಲವಾದರೂ",
+              "ಪ್ರಯತ್ನಿಸುವೆನು"
+            ],
+            [
+              "ಜಿಲ್ಲೆಯಲ್ಲಿ",
+              "ಜಿಲ್ಲೆಯಲ್ಲಿರುವ"
+            ],
+            [
+              "ವಾಸ್ತುಶಿಲ್ಪ",
+              "ವಾಸ್ತುಶಿಲ್ಪಿಗಳು"
+            ]
+          ],
+          "types_in_collisions_rate": 0.06306215260232441
+        },
+        "LATIN": {
+          "colliding_groups": 60,
+          "distinct_types": 84044,
+          "examples": [
+            [
+              "System.Windows.Forms.DataGridView",
+              "System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize"
+            ],
+            [
+              "www.qr-code-generator.com/api/qr_code_123456.png",
+              "www.qr-code-generator.com/api/qr_code_123456.png](www.qr-code-generator.com/api/qr_code_123456.png",
+              "www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500",
+              "www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500](www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500"
+            ],
+            [
+              "https://www.bbc.com/news/climate_change",
+              "https://www.bbc.com/news/climate_change_human_activity",
+              "https://www.bbc.com/news/climate_change_wildlife"
+            ],
+            [
+              "https://www.britannica.com/topic/decolonization",
+              "https://www.britannica.com/topic/globalization",
+              "https://www.britannica.com/topic/international-relations",
+              "https://www.britannica.com/topic/world-war-I"
+            ],
+            [
+              "phone_number.split(extension_format)[-1])[0",
+              "phone_number.split(extension_format)[-1].strip"
+            ],
+            [
+              "org.elasticsearch.search.aggregations.AggregationBuilders",
+              "org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder",
+              "org.elasticsearch.search.aggregations.metrics.avg.AvgAggregationBuilder"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0017847794012660035
+        },
+        "MALAYALAM": {
+          "colliding_groups": 687,
+          "distinct_types": 12063,
+          "examples": [
+            [
+              "ഉണ്ടായിരുന്ന",
+              "ഉണ്ടായിരുന്നതായി",
+              "ഉണ്ടായിരുന്നതിനാല്‍",
+              "ഉണ്ടായിരുന്നത്"
+            ],
+            [
+              "സാധാരണക്കാരനായ",
+              "സാധാരണക്കാരെ",
+              "സാധാരണക്കാര്യങ്ങളാണ്",
+              "സാധാരണക്കാര്യമല്ല"
+            ],
+            [
+              "അനുഭവപ്പെടു",
+              "അനുഭവപ്പെടും",
+              "അനുഭവപ്പെടുത്തുന്നു",
+              "അനുഭവപ്പെടുന്ന"
+            ],
+            [
+              "പരിശ്രമിക്കാം",
+              "പരിശ്രമിക്കുന്നത്"
+            ],
+            [
+              "ദിവസത്തിനും",
+              "ദിവസത്തിനുള്ളിൽ",
+              "ദിവസത്തിനുശേഷം"
+            ],
+            [
+              "ചോദിക്കുന്ന",
+              "ചോദിക്കുന്നതാണ്",
+              "ചോദിക്കുന്നതിന്",
+              "ചോദിക്കുന്നത്"
+            ]
+          ],
+          "types_in_collisions_rate": 0.17474923319240654
+        },
+        "ORIYA": {
+          "colliding_groups": 74,
+          "distinct_types": 6275,
+          "examples": [
+            [
+              "ଆର୍ଟିଫିସିଆଲ",
+              "ଆର୍ଟିଫିସିଆଲ୍"
+            ],
+            [
+              "ପଦାର୍ଥଗୁଡ଼ିକ",
+              "ପଦାର୍ଥଗୁଡ଼ିକର",
+              "ପଦାର୍ଥଗୁଡ଼ିକୁ"
+            ],
+            [
+              "କଥାବାର୍ତ୍ତା",
+              "କଥାବାର୍ତ୍ତାର"
+            ],
+            [
+              "ଯାତ୍ରୀମାନଙ୍କ",
+              "ଯାତ୍ରୀମାନଙ୍କର",
+              "ଯାତ୍ରୀମାନଙ୍କୁ"
+            ],
+            [
+              "କାର୍ଯ୍ୟକଳାପର",
+              "କାର୍ଯ୍ୟକଳାପରିଣାମରେ"
+            ],
+            [
+              "ପିତାମାତାଙ୍କ",
+              "ପିତାମାତାଙ୍କର",
+              "ପିତାମାତାଙ୍କୁ"
+            ]
+          ],
+          "types_in_collisions_rate": 0.026772908366533864
+        },
+        "TAMIL": {
+          "colliding_groups": 491,
+          "distinct_types": 10825,
+          "examples": [
+            [
+              "தமிழ்நாட்டின்",
+              "தமிழ்நாட்டில்",
+              "தமிழ்நாட்டில்‌"
+            ],
+            [
+              "பயன்படுத்தக்கூடிய",
+              "பயன்படுத்தத்",
+              "பயன்படுத்தப்படக்கூடாது",
+              "பயன்படுத்தப்படலாம்"
+            ],
+            [
+              "அதிகப்படியாக",
+              "அதிகப்படியான"
+            ],
+            [
+              "பிரச்சனைகளை",
+              "பிரச்சனைகளைக்",
+              "பிரச்சனைகள்"
+            ],
+            [
+              "வெற்றிகரமாக",
+              "வெற்றிகரமான"
+            ],
+            [
+              "முதன்முதலியன",
+              "முதன்முதலியவற்றிற்கும்",
+              "முதன்முதலியவைகளாக",
+              "முதன்முதலியாக"
+            ]
+          ],
+          "types_in_collisions_rate": 0.13062355658198616
+        },
+        "TELUGU": {
+          "colliding_groups": 248,
+          "distinct_types": 12938,
+          "examples": [
+            [
+              "చేస్తున్నాం",
+              "చేస్తున్నాను",
+              "చేస్తున్నాయో",
+              "చేస్తున్నారు"
+            ],
+            [
+              "చేయాలనుకుంటున్న",
+              "చేయాలనుకుంటున్నా",
+              "చేయాలనుకుంటున్నారా",
+              "చేయాలనుకుంటున్నారు"
+            ],
+            [
+              "పెంపొందించుకోవడానికి",
+              "పెంపొందించే",
+              "పెంపొందించేలా"
+            ],
+            [
+              "మొదలుపెట్టండి",
+              "మొదలుపెట్టబడతాయి",
+              "మొదలుపెట్టి",
+              "మొదలుపెట్టిన"
+            ],
+            [
+              "ప్రారంభించండి",
+              "ప్రారంభించడం",
+              "ప్రారంభించడానికి",
+              "ప్రారంభించబడ్డాయి"
+            ],
+            [
+              "గమ్యస్థానంగా",
+              "గమ్యస్థానంపై",
+              "గమ్యస్థానంలో"
+            ]
+          ],
+          "types_in_collisions_rate": 0.05255835523264801
+        }
+      },
+      "reduction_vs_published": 1.0,
+      "total_colliding_groups": 2122
+    }
+  },
+  "verdict": "Reading the word from both ends removes most of the harm with no new parameters, no script table and no Unicode assumptions. It is strictly simpler than fix D and recovers most of fix D's benefit. The two compose: applying both is the best configuration measured.",
+  "why": "Every collision E3 found is a shared prefix with a differing suffix, because Indic morphology is suffixal and the window reads only the front of the word.",
+  "windows_all_at_D": 8192
+}

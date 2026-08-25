@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The window is two problems - ERA V5 Assignment 7, Problem 3</title>
+<meta name="description" content="The Kronecker window wastes space harmlessly and crops words harmfully, and the cropping is not script neutral. Measured over 17.7 million characters of real corpus." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">Dynamic length <span>/ ERA V5 &middot; Assignment 7 &middot; Problem 3</span></div>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme">
+    <span id="themeIcon">&#9788;</span><span id="themeLabel">Light</span>
+  </button>
+</div>
+
+<main class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Kronecker embeddings &middot; the fixed 32 byte window</div>
+    <h1>The window is two problems, and only one of them is about waste.</h1>
+    <p class="thesis">
+      The assignment says a 32 position window wastes space and crops long words. Both are true, and
+      they are not equally serious. The waste is enormous and harmless. The cropping is smaller and
+      it is <strong>not script neutral</strong>: the window is counted in <strong>bytes</strong>
+      while language is written in <strong>characters</strong>, and every Indic script costs exactly
+      three bytes per character against Latin's one. Every number on this page is computed by a
+      script in <span class="mono">src/</span> and read from <span class="mono">artifacts/</span>.
+    </p>
+    <div class="chips" id="chips"></div>
+    <div class="kpi" id="kpi"></div>
+  </header>
+
+  <section id="ask">
+    <div class="sec-head"><span class="sec-num">Q</span><h2>What the assignment asked</h2></div>
+    <div class="asks"><span class="lab">The brief</span><q>Today Kronecker is limiting to presenting
+      32 position for every work (even "apple" or "a" as well). That's a waste of space. What can we
+      do? How can it be dynamic and doesn't force us to crop a word (currently we cannot have a word
+      of len more than 32).</q></div>
+    <p class="sec-lead">Three questions: the waste, the dynamism, and the cropping. This page answers
+      all three, and argues the third is the one that matters.</p>
+  </section>
+
+  <section id="waste">
+    <div class="sec-head"><span class="sec-num">E1</span><h2>The waste is real, and it is the least interesting fact here</h2></div>
+    <p class="sec-lead">Occupancy is the share of the window a token actually fills. Everything else
+      is zeros.</p>
+    <div class="panel"><div id="occChart"></div></div>
+  </section>
+
+  <section id="reframe">
+    <div class="sec-head"><span class="sec-num">E2</span><h2>The window is counted in the wrong unit</h2></div>
+    <p class="sec-lead">Bytes per character is exactly 3.000 for all nine Indic scripts, not
+      approximately. Measured in <em>graphemes</em>, which is what a reader perceives, the gap is
+      wider still, because Indic conjuncts are written with several codepoints and read as one.</p>
+    <div class="legend"><span><i style="background:var(--english)"></i>characters in a 32 byte window</span>
+      <span><i style="background:var(--warn)"></i>graphemes in the same window</span></div>
+    <div class="panel"><div id="scriptChart"></div></div>
+  </section>
+
+  <section id="collisions">
+    <div class="sec-head"><span class="sec-num">E3</span><h2>The harm: two words, one embedding</h2></div>
+    <p class="sec-lead">A truncation collision is two distinct words identical in their first L
+      bytes. They produce byte for byte identical codec vectors, so no model at any depth can tell
+      them apart. Verified, not argued: 200 of 200 sampled pairs differ by exactly 0.0.</p>
+    <div class="panel"><div id="collChart"></div></div>
+    <h3>These are grammar, not curiosities</h3>
+    <p class="sec-lead">Indic languages mark case, number and person with <strong>suffixes</strong>.
+      The window reads prefixes. It is discarding the half of the word that carries the grammar.</p>
+    <div class="tablewrap"><table id="exTable"></table></div>
+  </section>
+
+  <section id="fixes">
+    <div class="sec-head"><span class="sec-num">E4</span><h2>Three fixes, compared at identical cost</h2></div>
+    <p class="sec-lead">A byte window of L costs 256L dimensions and a two block codepoint window of
+      L costs 512L, so byte L=32 and codepoint L=16 are both D=8192 and compare with nothing left
+      over. Fix B helps every Indic script and <strong>makes Latin worse</strong>. Fix D, which the
+      measurement found rather than the plan, helps Indic and leaves Latin exactly where it was.</p>
+    <div class="legend"><span><i style="background:var(--english)"></i>byte L=32, published</span>
+      <span><i style="background:var(--amber)"></i>fix B, codepoint L=16</span>
+      <span><i style="background:var(--good)"></i>fix D, script relative L=32</span></div>
+    <div class="panel"><div id="fixChart"></div></div>
+    <div class="callout" id="entropyNote"></div>
+  </section>
+
+  <section id="bothends">
+    <div class="sec-head"><span class="sec-num">E7</span><h2>The cheapest fix, which the data pointed at</h2></div>
+    <p class="sec-lead">Every collision is a shared prefix with a differing suffix. So spend half the
+      window on the front of the word and half on the back. Same dimensions, same structure,
+      <strong>no new parameters, no script table, no Unicode assumptions</strong>. Only a different
+      choice of which bytes to encode.</p>
+    <div class="panel"><div id="schemeChart"></div></div>
+    <div class="callout good"><b>If only one change is made, it should be this one.</b> Fix D is
+      better in absolute terms but needs a script table, a per token tag, and an assumption about
+      Unicode block layout that this corpus happens to satisfy. Reading both ends needs none of
+      that, and the two compose.</div>
+  </section>
+
+  <section id="cost">
+    <div class="sec-head"><span class="sec-num">E6</span><h2>"Waste of space" means three things</h2></div>
+    <p class="sec-lead">Saying the waste is benign is true about accuracy and evades the question,
+      which is about space. Space means three different things here, with three different answers.</p>
+    <div class="kpi" id="costKpi"></div>
+    <h3>Is it already dynamic? Cost against token length</h3>
+    <p class="sec-lead">If the window charged every token for all L positions this line would be
+      flat. It is not flat. "a" costs one row lookup and a thirty byte word costs thirty.</p>
+    <div class="panel"><div id="scaleChart"></div></div>
+    <div class="callout" id="costNote"></div>
+  </section>
+
+  <section id="downstream">
+    <div class="sec-head"><span class="sec-num">E5</span><h2>The downstream test, and why it could not work</h2></div>
+    <p class="sec-lead">The pre-registered experiment trained the same model with each codec. The
+      result was null on both lanes. A null is worth nothing without knowing why, so the exposure
+      was measured.</p>
+    <div class="callout" id="exposureNote"></div>
+  </section>
+
+  <footer>
+    <p><strong>What is not claimed.</strong> Everything trained here is 2 layers at d_model=96 on
+      CPU, with every effect quoted against a measured seed noise floor. Fix D's assumption that a
+      script uses one Unicode block is measured in this corpus and is not a property of Unicode.
+      Grapheme counts are approximated and are used only to size the codepoint to grapheme gap.
+      Timing figures are re-measured on each run and move with machine load; every collision count
+      is exact.</p>
+    <p>ERA V5 Assignment 7, Problem 3. Ashish Kamble. Code MIT, prose CC BY 4.0.
+      Corpus from assignment 6, referenced and not redistributed.</p>
+  </footer>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

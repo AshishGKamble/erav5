@@ -1,0 +1,217 @@
+{
+  "e1_roundtrip": {
+    "16": {
+      "D": 4096,
+      "_overflow_note": "For overflowing tokens this is the rate at which the RETAINED prefix comes back exactly. The token itself is not recovered and cannot be: the dropped bytes are gone. That loss is Problem 3.",
+      "tokens_fitting": 8384,
+      "tokens_fitting_rate": 1.0,
+      "tokens_fitting_recovered": 8384,
+      "tokens_overflowing": 1360,
+      "tokens_overflowing_prefix_rate": 1.0,
+      "tokens_overflowing_prefix_recovered": 1360,
+      "window": 16
+    },
+    "32": {
+      "D": 8192,
+      "_overflow_note": "For overflowing tokens this is the rate at which the RETAINED prefix comes back exactly. The token itself is not recovered and cannot be: the dropped bytes are gone. That loss is Problem 3.",
+      "tokens_fitting": 9510,
+      "tokens_fitting_rate": 1.0,
+      "tokens_fitting_recovered": 9510,
+      "tokens_overflowing": 234,
+      "tokens_overflowing_prefix_rate": 1.0,
+      "tokens_overflowing_prefix_recovered": 234,
+      "window": 32
+    },
+    "64": {
+      "D": 16384,
+      "_overflow_note": "For overflowing tokens this is the rate at which the RETAINED prefix comes back exactly. The token itself is not recovered and cannot be: the dropped bytes are gone. That loss is Problem 3.",
+      "tokens_fitting": 9726,
+      "tokens_fitting_rate": 1.0,
+      "tokens_fitting_recovered": 9726,
+      "tokens_overflowing": 18,
+      "tokens_overflowing_prefix_rate": 1.0,
+      "tokens_overflowing_prefix_recovered": 18,
+      "window": 64
+    }
+  },
+  "e2_noise": {
+    "D": 8192,
+    "column_margin_after_znorm": 37.831291618347166,
+    "signal_sd": 1.0,
+    "sweep": [
+      {
+        "exact_token_accuracy_inferred_length": 1.0,
+        "exact_token_accuracy_oracle_length": 1.0,
+        "sigma": 0.0,
+        "sigma_relative_to_signal_sd": 0.0
+      },
+      {
+        "exact_token_accuracy_inferred_length": 1.0,
+        "exact_token_accuracy_oracle_length": 1.0,
+        "sigma": 0.05,
+        "sigma_relative_to_signal_sd": 0.05
+      },
+      {
+        "exact_token_accuracy_inferred_length": 1.0,
+        "exact_token_accuracy_oracle_length": 1.0,
+        "sigma": 0.1,
+        "sigma_relative_to_signal_sd": 0.1
+      },
+      {
+        "exact_token_accuracy_inferred_length": 1.0,
+        "exact_token_accuracy_oracle_length": 1.0,
+        "sigma": 0.25,
+        "sigma_relative_to_signal_sd": 0.25
+      },
+      {
+        "exact_token_accuracy_inferred_length": 1.0,
+        "exact_token_accuracy_oracle_length": 1.0,
+        "sigma": 0.5,
+        "sigma_relative_to_signal_sd": 0.5
+      },
+      {
+        "exact_token_accuracy_inferred_length": 1.0,
+        "exact_token_accuracy_oracle_length": 1.0,
+        "sigma": 0.75,
+        "sigma_relative_to_signal_sd": 0.75
+      },
+      {
+        "exact_token_accuracy_inferred_length": 1.0,
+        "exact_token_accuracy_oracle_length": 1.0,
+        "sigma": 1.0,
+        "sigma_relative_to_signal_sd": 1.0
+      },
+      {
+        "exact_token_accuracy_inferred_length": 0.9989759344598055,
+        "exact_token_accuracy_oracle_length": 1.0,
+        "sigma": 1.5,
+        "sigma_relative_to_signal_sd": 1.5
+      },
+      {
+        "exact_token_accuracy_inferred_length": 0.9646697388632872,
+        "exact_token_accuracy_oracle_length": 1.0,
+        "sigma": 2.0,
+        "sigma_relative_to_signal_sd": 2.0
+      },
+      {
+        "exact_token_accuracy_inferred_length": 0.8018433179723502,
+        "exact_token_accuracy_oracle_length": 0.9969278033794163,
+        "sigma": 3.0,
+        "sigma_relative_to_signal_sd": 3.0
+      },
+      {
+        "exact_token_accuracy_inferred_length": 0.5033282130056324,
+        "exact_token_accuracy_oracle_length": 0.8320532514080902,
+        "sigma": 5.0,
+        "sigma_relative_to_signal_sd": 5.0
+      },
+      {
+        "exact_token_accuracy_inferred_length": 0.2565284178187404,
+        "exact_token_accuracy_oracle_length": 0.5427547363031234,
+        "sigma": 8.0,
+        "sigma_relative_to_signal_sd": 8.0
+      },
+      {
+        "exact_token_accuracy_inferred_length": 0.09882232462877624,
+        "exact_token_accuracy_oracle_length": 0.2488479262672811,
+        "sigma": 12.0,
+        "sigma_relative_to_signal_sd": 12.0
+      }
+    ],
+    "tokens_measured": 1953,
+    "window": 32
+  },
+  "e3_projection": {
+    "D": 8192,
+    "codes_measured": 300,
+    "collision": {
+      "d_model": 768,
+      "max_projection_error": 1.2656542480726785e-14,
+      "metric": "relative L2 distance from the vector to the re-encoding of whatever it decodes to; 0 means the vector is a legal codec output",
+      "offmanifold_residual_collision": 0.41662019712751724,
+      "offmanifold_residual_real_code": 0.0,
+      "pairs_tested": 150,
+      "success_rate": 1.0
+    },
+    "d_model_for_50pc_recovery": 128,
+    "d_model_for_99pc_recovery": 768,
+    "occupied_columns_max": 32,
+    "occupied_columns_mean": 7.93,
+    "prediction_in_plan": "near-chance decode accuracy through the projection",
+    "prediction_outcome": "refuted",
+    "sparsity_fraction_mean": 0.000968017578125,
+    "sweep": [
+      {
+        "d_model": 8,
+        "minimum_norm_decode_accuracy": 0.006666666666666667,
+        "nullspace_dimension": 8184
+      },
+      {
+        "d_model": 16,
+        "minimum_norm_decode_accuracy": 0.016666666666666666,
+        "nullspace_dimension": 8176
+      },
+      {
+        "d_model": 32,
+        "minimum_norm_decode_accuracy": 0.11666666666666667,
+        "nullspace_dimension": 8160
+      },
+      {
+        "d_model": 48,
+        "minimum_norm_decode_accuracy": 0.21,
+        "nullspace_dimension": 8144
+      },
+      {
+        "d_model": 64,
+        "minimum_norm_decode_accuracy": 0.27666666666666667,
+        "nullspace_dimension": 8128
+      },
+      {
+        "d_model": 96,
+        "minimum_norm_decode_accuracy": 0.43666666666666665,
+        "nullspace_dimension": 8096
+      },
+      {
+        "d_model": 128,
+        "minimum_norm_decode_accuracy": 0.5566666666666666,
+        "nullspace_dimension": 8064
+      },
+      {
+        "d_model": 192,
+        "minimum_norm_decode_accuracy": 0.6866666666666666,
+        "nullspace_dimension": 8000
+      },
+      {
+        "d_model": 256,
+        "minimum_norm_decode_accuracy": 0.7966666666666666,
+        "nullspace_dimension": 7936
+      },
+      {
+        "d_model": 384,
+        "minimum_norm_decode_accuracy": 0.94,
+        "nullspace_dimension": 7808
+      },
+      {
+        "d_model": 512,
+        "minimum_norm_decode_accuracy": 0.98,
+        "nullspace_dimension": 7680
+      },
+      {
+        "d_model": 768,
+        "minimum_norm_decode_accuracy": 0.9933333333333333,
+        "nullspace_dimension": 7424
+      }
+    ],
+    "verdict": "The projection is not where reversibility dies. A Kronecker code is k-sparse with k in single digits, so a random d_model-dimensional projection retains enough to recover it once d_model comfortably exceeds k. Exact collisions exist but are dense vectors far off the codec manifold, so they are not reachable outputs of the encoder.",
+    "window": 32
+  },
+  "seed": 20260825,
+  "tokenizer": {
+    "byte_fallback": true,
+    "merges": 9444,
+    "path": "/home/ashish/code/aiml/erav5/erav5/assignment-7/problem-5-reversibility/src/../../../assignment-6/frozen/tokenizer.json",
+    "size": 10000,
+    "type": "BPE"
+  },
+  "vocabulary_measured": 9744
+}

@@ -1,0 +1,407 @@
+{
+  "compute": {
+    "d_model": 96,
+    "rows": {
+      "128": {
+        "D": 32768,
+        "arithmetic_ratio": 3608.9250749519365,
+        "dense_multiply_accumulates": 25769803776.0,
+        "dense_seconds": 0.24889753299794393,
+        "factored_multiply_accumulates": 7140576.0,
+        "factored_seconds": 0.03969017900089966,
+        "speedup": 6.271010594139728,
+        "tokens": 8192
+      },
+      "16": {
+        "D": 4096,
+        "arithmetic_ratio": 527.4941755356778,
+        "dense_multiply_accumulates": 3221225472.0,
+        "dense_seconds": 0.030877789999067318,
+        "factored_multiply_accumulates": 6106656.0,
+        "factored_seconds": 0.030921321998903295,
+        "speedup": 0.9985921688653052,
+        "tokens": 8192
+      },
+      "32": {
+        "D": 8192,
+        "arithmetic_ratio": 932.4560789217729,
+        "dense_multiply_accumulates": 6442450944.0,
+        "dense_seconds": 0.06397354900036589,
+        "factored_multiply_accumulates": 6909120.0,
+        "factored_seconds": 0.03680960299971048,
+        "speedup": 1.7379581355677503,
+        "tokens": 8192
+      },
+      "64": {
+        "D": 16384,
+        "arithmetic_ratio": 1811.7699275117777,
+        "dense_multiply_accumulates": 12884901888.0,
+        "dense_seconds": 0.12347590300123557,
+        "factored_multiply_accumulates": 7111776.0,
+        "factored_seconds": 0.0389636280015111,
+        "speedup": 3.16900425690459,
+        "tokens": 8192
+      }
+    },
+    "why": "Only the occupied rows of W are touched, so the arithmetic is proportional to the number of units the token really has. Wall-clock is reported alongside the arithmetic because the two differ: the dense path is one large BLAS call and the factored path is a gather plus a segmented reduction."
+  },
+  "d_model": 96,
+  "dimensions": {
+    "reclaimable": false,
+    "rows": {
+      "128": {
+        "D": 32768,
+        "mean_occupied_columns": 9.1698,
+        "occupancy": 0.0716390625,
+        "zero_column_fraction": 0.9283609375
+      },
+      "16": {
+        "D": 4096,
+        "mean_occupied_columns": 7.7894,
+        "occupancy": 0.4868375,
+        "zero_column_fraction": 0.5131625
+      },
+      "32": {
+        "D": 8192,
+        "mean_occupied_columns": 8.856,
+        "occupancy": 0.27675,
+        "zero_column_fraction": 0.72325
+      },
+      "64": {
+        "D": 16384,
+        "mean_occupied_columns": 9.1345,
+        "occupancy": 0.1427265625,
+        "zero_column_fraction": 0.8572734375
+      }
+    },
+    "why": "The codec output is the input to `Linear(D, d)`, whose weight matrix has a fixed first dimension. A per-token D would mean a per-token weight matrix, which is the per-token parameter table the construction exists to remove. So the dimensional waste is real and cannot be given back without abandoning the idea."
+  },
+  "memory": {
+    "reclaimable": true,
+    "rows": {
+      "128": {
+        "D": 32768,
+        "dense_bytes": 1310720000,
+        "dense_mb": 1250.0,
+        "factored_bytes": 973584,
+        "factored_mb": 0.9284820556640625,
+        "mean_occupied_rows_per_token": 9.1698,
+        "ratio": 1346.283422899308,
+        "vocab": 10000
+      },
+      "16": {
+        "D": 4096,
+        "dense_bytes": 163840000,
+        "dense_mb": 156.25,
+        "factored_bytes": 863152,
+        "factored_mb": 0.8231658935546875,
+        "mean_occupied_rows_per_token": 7.7894,
+        "ratio": 189.81593045025673,
+        "vocab": 10000
+      },
+      "32": {
+        "D": 8192,
+        "dense_bytes": 327680000,
+        "dense_mb": 312.5,
+        "factored_bytes": 948480,
+        "factored_mb": 0.904541015625,
+        "mean_occupied_rows_per_token": 8.856,
+        "ratio": 345.4790823211876,
+        "vocab": 10000
+      },
+      "64": {
+        "D": 16384,
+        "dense_bytes": 655360000,
+        "dense_mb": 625.0,
+        "factored_bytes": 970760,
+        "factored_mb": 0.9257888793945312,
+        "mean_occupied_rows_per_token": 9.1345,
+        "ratio": 675.0999217108246,
+        "vocab": 10000
+      }
+    },
+    "why": "A code is fully described by its occupied row indices plus two scalars, so the zeros are never stored. This is not an approximation: the factored form reproduces the codec definition to about 1e-14."
+  },
+  "question": "The assignment asks 'that's a waste of space, what can we do, how can it be dynamic'. Space means three different things here and they have three different answers.",
+  "raising_L_is_cheap": {
+    "definition_of_short": "tokens occupying 4 or fewer units",
+    "reading": "Encoding a short token costs essentially the same at any window size, because the work follows the units present. What genuinely grows with L is the projection matrix `W`, at 256 x L x d_model parameters, and that is the number to weigh against the truncation E3 counted.",
+    "rows": {
+      "128": {
+        "D": 32768,
+        "factored_mb": 0.9284820556640625,
+        "projection_parameters": 3145728,
+        "short_token_seconds": 0.020068722998985322,
+        "short_token_time_vs_L32": 1.027318742422399
+      },
+      "16": {
+        "D": 4096,
+        "factored_mb": 0.8231658935546875,
+        "projection_parameters": 393216,
+        "short_token_seconds": 0.019548709999071434,
+        "short_token_time_vs_L32": 1.0006992559138732
+      },
+      "32": {
+        "D": 8192,
+        "factored_mb": 0.904541015625,
+        "projection_parameters": 786432,
+        "short_token_seconds": 0.019535049999831244,
+        "short_token_time_vs_L32": 1.0
+      },
+      "64": {
+        "D": 16384,
+        "factored_mb": 0.9257888793945312,
+        "projection_parameters": 1572864,
+        "short_token_seconds": 0.019639660000393633,
+        "short_token_time_vs_L32": 1.0053549901619547
+      }
+    },
+    "tokens_timed": 8192
+  },
+  "scaling_with_length": {
+    "buckets": [
+      {
+        "distinct_tokens_available": 223,
+        "nanoseconds_per_token": 1890.762450607042,
+        "occupied_units": 1,
+        "seconds": 0.007744562997686444,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 879,
+        "nanoseconds_per_token": 2077.727539351315,
+        "occupied_units": 2,
+        "seconds": 0.008510372001182986,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 1288,
+        "nanoseconds_per_token": 2187.843505474518,
+        "occupied_units": 3,
+        "seconds": 0.008961406998423627,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 1046,
+        "nanoseconds_per_token": 2372.4768061228474,
+        "occupied_units": 4,
+        "seconds": 0.009717664997879183,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 692,
+        "nanoseconds_per_token": 2676.679687674266,
+        "occupied_units": 5,
+        "seconds": 0.010963680000713794,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 1034,
+        "nanoseconds_per_token": 3047.569824055074,
+        "occupied_units": 6,
+        "seconds": 0.012482845999329584,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 588,
+        "nanoseconds_per_token": 3354.147705358912,
+        "occupied_units": 7,
+        "seconds": 0.013738589001150103,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 319,
+        "nanoseconds_per_token": 3570.0749512201924,
+        "occupied_units": 8,
+        "seconds": 0.014623027000197908,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 764,
+        "nanoseconds_per_token": 3824.4499513950814,
+        "occupied_units": 9,
+        "seconds": 0.015664947000914253,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 364,
+        "nanoseconds_per_token": 4125.76904285089,
+        "occupied_units": 10,
+        "seconds": 0.01689914999951725,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 139,
+        "nanoseconds_per_token": 4309.053466933221,
+        "occupied_units": 11,
+        "seconds": 0.017649883000558475,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 482,
+        "nanoseconds_per_token": 4724.284668355949,
+        "occupied_units": 12,
+        "seconds": 0.019350670001585968,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 256,
+        "nanoseconds_per_token": 4934.64550821443,
+        "occupied_units": 13,
+        "seconds": 0.020212308001646306,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 79,
+        "nanoseconds_per_token": 5196.770751503265,
+        "occupied_units": 14,
+        "seconds": 0.021285972998157376,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 282,
+        "nanoseconds_per_token": 5555.751465102787,
+        "occupied_units": 15,
+        "seconds": 0.022756358001061017,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 205,
+        "nanoseconds_per_token": 6015.434325767899,
+        "occupied_units": 16,
+        "seconds": 0.024639218998345314,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 73,
+        "nanoseconds_per_token": 6379.3557130154,
+        "occupied_units": 17,
+        "seconds": 0.026129841000511078,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 190,
+        "nanoseconds_per_token": 6904.004394847618,
+        "occupied_units": 18,
+        "seconds": 0.028278802001295844,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 176,
+        "nanoseconds_per_token": 7580.032471032893,
+        "occupied_units": 19,
+        "seconds": 0.031047813001350733,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 65,
+        "nanoseconds_per_token": 8112.582275288105,
+        "occupied_units": 20,
+        "seconds": 0.03322913699958008,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 91,
+        "nanoseconds_per_token": 8894.41430640403,
+        "occupied_units": 21,
+        "seconds": 0.03643152099903091,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 101,
+        "nanoseconds_per_token": 9448.992675409329,
+        "occupied_units": 22,
+        "seconds": 0.03870307399847661,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 74,
+        "nanoseconds_per_token": 10078.298095628214,
+        "occupied_units": 23,
+        "seconds": 0.04128070899969316,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 57,
+        "nanoseconds_per_token": 10730.660644497902,
+        "occupied_units": 24,
+        "seconds": 0.04395278599986341,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 53,
+        "nanoseconds_per_token": 11244.725585335402,
+        "occupied_units": 25,
+        "seconds": 0.04605839599753381,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 35,
+        "nanoseconds_per_token": 11958.858642913128,
+        "occupied_units": 26,
+        "seconds": 0.04898348500137217,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 45,
+        "nanoseconds_per_token": 12699.970703522467,
+        "occupied_units": 27,
+        "seconds": 0.052019080001628026,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 40,
+        "nanoseconds_per_token": 12755.911621198378,
+        "occupied_units": 28,
+        "seconds": 0.05224821400042856,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 26,
+        "nanoseconds_per_token": 12369.060302219736,
+        "occupied_units": 29,
+        "seconds": 0.05066367099789204,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 27,
+        "nanoseconds_per_token": 13569.51684527985,
+        "occupied_units": 30,
+        "seconds": 0.055580740998266265,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 40,
+        "nanoseconds_per_token": 13729.960937958196,
+        "occupied_units": 31,
+        "seconds": 0.05623792000187677,
+        "tokens_timed": 4096
+      },
+      {
+        "distinct_tokens_available": 267,
+        "nanoseconds_per_token": 14372.251708749673,
+        "occupied_units": 32,
+        "seconds": 0.05886874299903866,
+        "tokens_timed": 4096
+      }
+    ],
+    "correlation": 0.9861607438989051,
+    "linear_fit_intercept_ns": 180.41922879878882,
+    "linear_fit_slope_ns_per_unit": 425.9822410070579,
+    "reading": "A positive slope with a high correlation is the dynamic claim in its measurable form: the encoder charges per unit present, not per window slot. A flat line would refute it."
+  },
+  "tokenizer": {
+    "byte_fallback": true,
+    "merges": 9444,
+    "path": "/home/ashish/code/aiml/erav5/erav5/assignment-7/problem-3-dynamic-length/src/../../../assignment-6/frozen/tokenizer.json",
+    "size": 10000,
+    "type": "BPE"
+  },
+  "vocabulary": 10000,
+  "windows": [
+    16,
+    32,
+    64,
+    128
+  ]
+}

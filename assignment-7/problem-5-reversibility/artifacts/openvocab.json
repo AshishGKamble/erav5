@@ -1,0 +1,151 @@
+{
+  "lanes": {
+    "indic": {
+      "d_model": 192,
+      "frequency_bands_mean": {
+        "in_head": 0.03169276659209545,
+        "in_mid": 0.00034094783498124785,
+        "in_tail": 0.0040650406504065045,
+        "outside_far": 0.00039761431411530816,
+        "outside_near": 0.0
+      },
+      "in_inventory_exact_rate_mean": 0.02289532293986637,
+      "input_vocabulary": 8000,
+      "lane": "indic",
+      "outside_exact_rate_mean": 0.0002663825253063399,
+      "runs": [
+        {
+          "control_reading": "in_tail is the rarity-matched control: the least frequent words that ARE in the inventory. If it scores near zero too, a zero on the outside bands says nothing about vocabulary membership and this experiment cannot test the claim.",
+          "correctly_emitted_outside_inventory_examples": [
+            "അ"
+          ],
+          "emissions": {
+            "emitted_outside_inventory": 12935,
+            "emitted_outside_inventory_that_are_real_words": 295,
+            "invalid_utf8": 571,
+            "invalid_utf8_rate": 0.03812003471526804,
+            "real_word_share_of_outside_emissions": 0.02280633938925396,
+            "valid_utf8": 14408
+          },
+          "frequency_bands": {
+            "in_head": {
+              "exact": 255,
+              "exact_rate": 0.03169276659209545,
+              "targets": 8046
+            },
+            "in_mid": {
+              "exact": 1,
+              "exact_rate": 0.00034094783498124785,
+              "targets": 2933
+            },
+            "in_tail": {
+              "exact": 1,
+              "exact_rate": 0.0040650406504065045,
+              "targets": 246
+            },
+            "outside_far": {
+              "exact": 1,
+              "exact_rate": 0.00039761431411530816,
+              "targets": 2515
+            },
+            "outside_near": {
+              "exact": 0,
+              "exact_rate": 0.0,
+              "targets": 1239
+            }
+          },
+          "in_inventory": {
+            "exact_rate": 0.02289532293986637,
+            "exact_reconstructions": 257,
+            "targets": 11225
+          },
+          "outside_inventory": {
+            "exact_rate": 0.0002663825253063399,
+            "exact_reconstructions": 1,
+            "targets": 3754
+          }
+        }
+      ],
+      "steps": 800,
+      "target_vocabulary": 22657,
+      "targets_outside_input_vocabulary": 14657,
+      "train_sequences": 641,
+      "vocab_head_note": "Exactly zero, and not by measurement: a vocabulary softmax has no output row for a word outside its inventory, so it cannot emit one at any amount of training. That asymmetry is the architectural half of the brief's claim and it holds regardless of the numbers above.",
+      "vocab_head_outside_exact_rate": 0.0,
+      "window": 32
+    },
+    "web": {
+      "d_model": 192,
+      "frequency_bands_mean": {
+        "in_head": 0.09093516924842227,
+        "in_mid": 0.0,
+        "in_tail": 0.0,
+        "outside_far": 0.0,
+        "outside_near": 0.0
+      },
+      "in_inventory_exact_rate_mean": 0.07541334602117283,
+      "input_vocabulary": 8000,
+      "lane": "web",
+      "outside_exact_rate_mean": 0.0,
+      "runs": [
+        {
+          "control_reading": "in_tail is the rarity-matched control: the least frequent words that ARE in the inventory. If it scores near zero too, a zero on the outside bands says nothing about vocabulary membership and this experiment cannot test the claim.",
+          "correctly_emitted_outside_inventory_examples": [],
+          "emissions": {
+            "emitted_outside_inventory": 14092,
+            "emitted_outside_inventory_that_are_real_words": 575,
+            "invalid_utf8": 1,
+            "invalid_utf8_rate": 5.2650976675617333e-05,
+            "real_word_share_of_outside_emissions": 0.0408032926483111,
+            "valid_utf8": 18992
+          },
+          "frequency_bands": {
+            "in_head": {
+              "exact": 1268,
+              "exact_rate": 0.09093516924842227,
+              "targets": 13944
+            },
+            "in_mid": {
+              "exact": 0,
+              "exact_rate": 0.0,
+              "targets": 2343
+            },
+            "in_tail": {
+              "exact": 0,
+              "exact_rate": 0.0,
+              "targets": 527
+            },
+            "outside_far": {
+              "exact": 0,
+              "exact_rate": 0.0,
+              "targets": 1479
+            },
+            "outside_near": {
+              "exact": 0,
+              "exact_rate": 0.0,
+              "targets": 700
+            }
+          },
+          "in_inventory": {
+            "exact_rate": 0.07541334602117283,
+            "exact_reconstructions": 1268,
+            "targets": 16814
+          },
+          "outside_inventory": {
+            "exact_rate": 0.0,
+            "exact_reconstructions": 0,
+            "targets": 2179
+          }
+        }
+      ],
+      "steps": 800,
+      "target_vocabulary": 37389,
+      "targets_outside_input_vocabulary": 29389,
+      "train_sequences": 4010,
+      "vocab_head_note": "Exactly zero, and not by measurement: a vocabulary softmax has no output row for a word outside its inventory, so it cannot emit one at any amount of training. That asymmetry is the architectural half of the brief's claim and it holds regardless of the numbers above.",
+      "vocab_head_outside_exact_rate": 0.0,
+      "window": 32
+    }
+  },
+  "seed": 20260825
+}

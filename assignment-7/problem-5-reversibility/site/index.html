@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The codec was never broken - ERA V5 Assignment 7, Problem 5</title>
+<meta name="description" content="Kronecker embeddings invert exactly, survive noise 65x larger than the objection assumes, and survive an 8192 to 768 projection because the codes are sparse. What that does and does not buy." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">Reversibility <span>/ ERA V5 &middot; Assignment 7 &middot; Problem 5</span></div>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme">
+    <span id="themeIcon">&#9788;</span><span id="themeLabel">Light</span>
+  </button>
+</div>
+
+<main class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Kronecker embeddings &middot; can the embedding be run backwards</div>
+    <h1>The codec was never the thing that was broken.</h1>
+    <p class="thesis">
+      The objection is that a trained network emits <span class="mono">0.31</span> where the codec
+      wrote <span class="mono">0.30</span>, so exact inversion looks unreachable and a variational
+      point cloud looks necessary. That reasoning assumes decoding needs the <em>values</em>. It
+      does not. Each column of the code is one hot, so decoding is an <strong>argmax down each
+      column</strong>, and an argmax needs correct <strong>ranking</strong>. Below is how much room
+      that leaves, and what it does and does not buy.
+    </p>
+    <div class="chips" id="chips"></div>
+    <div class="kpi" id="kpi"></div>
+  </header>
+
+  <section id="ask">
+    <div class="sec-head"><span class="sec-num">Q</span><h2>What the assignment asked</h2></div>
+    <div class="asks"><span class="lab">The brief</span><q>Kronecker is forward deterministic (same
+      word will always give same embedding). How do I make a reverse of this (same embedding gives
+      the same Kronecker)? If we can do this, then we can get rid of the final head as well! Then we
+      can have a vocab of 1M as well without any issues!</q></div>
+    <p class="sec-lead">Three promises: reverse it, delete the head, get a huge vocabulary free. The
+      first two hold. The third gets a split verdict, and saying so is more useful than pretending
+      otherwise.</p>
+  </section>
+
+  <section id="noise">
+    <div class="sec-head"><span class="sec-num">E2</span><h2>How much error the decode actually tolerates</h2></div>
+    <p class="sec-lead">The codec output is z-normalised, so its own standard deviation is exactly 1
+      and noise can be quoted as a multiple of the signal's own scale. Two decoders are shown,
+      because they fail differently: one is told the token's length, the other has to infer it from
+      the column margin, as it would at inference time.</p>
+    <div class="legend"><span><i style="background:var(--good)"></i>length known</span>
+      <span><i style="background:var(--amber)"></i>length inferred from the margin</span></div>
+    <div class="panel"><div id="noiseChart"></div></div>
+    <div class="callout good" id="marginNote"></div>
+  </section>
+
+  <section id="projection">
+    <div class="sec-head"><span class="sec-num">E3</span><h2>Where invertibility dies, and a prediction that was wrong</h2></div>
+    <p class="sec-lead">The plan predicted near chance decoding through
+      <span class="mono">Linear(8192, 768)</span>, because that map has a 7,424 dimensional nullspace
+      and no left inverse. <strong>That prediction is refuted</strong>, and the reason is worth more
+      than the prediction was.</p>
+    <div class="panel"><div id="projChart"></div></div>
+    <div class="callout good" id="sparseNote"></div>
+  </section>
+
+  <section id="caveat">
+    <div class="sec-head"><span class="sec-num">&#8987;</span><h2>The caveat that stayed open, and how it closed</h2></div>
+    <p class="sec-lead">E3 used a <strong>random</strong> projection. A trained one might concentrate
+      and lose the property that makes recovery work, so nothing was claimed end to end until that
+      was checked. At first it looked like a refutation.</p>
+    <div class="tablewrap"><table id="caveatTable"></table></div>
+    <div class="callout good" id="caveatNote"></div>
+  </section>
+
+  <section id="heads">
+    <div class="sec-head"><span class="sec-num">E4</span><h2>Delete the output head: it works, and it costs something</h2></div>
+    <p class="sec-lead">Three heads, identical body, identical data, identical seeds. A unit trap
+      governs this comparison: a vocabulary head's loss is nats per <strong>token</strong>, a byte
+      head's is nats per <strong>byte position</strong>, at about 3.2 positions per token. Everything
+      here is converted to nats per token.</p>
+    <div class="tablewrap"><table id="headTable"></table></div>
+    <div class="callout" id="headNote"></div>
+  </section>
+
+  <section id="init">
+    <div class="sec-head"><span class="sec-num">E5</span><h2>Is there any gradient at step 0?</h2></div>
+    <p class="sec-lead">The second objection: at random initialisation nothing is close to a real
+      token, so there is nothing to decode. The plan predicted cross entropy would climb and an MSE
+      regression head would not. <strong>Both climb.</strong></p>
+    <div class="legend"><span><i style="background:var(--good)"></i>cross entropy</span>
+      <span><i style="background:var(--amber)"></i>MSE to the code</span></div>
+    <div class="panel"><div id="initChart"></div></div>
+    <div class="callout good" id="initNote"></div>
+  </section>
+
+  <section id="tying">
+    <div class="sec-head"><span class="sec-num">E6</span><h2>What tying costs</h2></div>
+    <p class="sec-lead">Decoded with the target's true length, so this measures byte prediction alone
+      and not length inference.</p>
+    <div class="kpi" id="tyingKpi"></div>
+    <div class="callout" id="tyingNote"></div>
+  </section>
+
+  <section id="openvocab">
+    <div class="sec-head"><span class="sec-num">E7</span><h2>A vocabulary of 1M: a split verdict</h2></div>
+    <p class="sec-lead">The input vocabulary is deliberately small at 8,000 words. Thousands more
+      appear <strong>only as targets</strong>, entering as an unknown marker. A vocabulary softmax
+      scores exactly zero on those by construction, since no output row exists. The byte head scores
+      zero too, and the control band below is what stops that being read as a refutation.</p>
+    <div class="panel"><div id="bandChart"></div></div>
+    <div class="callout" id="bandNote"></div>
+  </section>
+
+  <section id="lesson">
+    <div class="sec-head"><span class="sec-num">!</span><h2>The mistake this assignment made three times</h2></div>
+    <p class="sec-lead">Three experiments were run on units that <strong>structurally could not
+      exhibit the effect being measured</strong>, and each time the null looked like a finding.</p>
+    <div class="tablewrap"><table>
+      <tr><th>where</th><th>the flaw</th><th>how it was caught</th></tr>
+      <tr><td>Problem 3, E5</td><td>BPE tokens truncate 0.0024% of occurrences, so every codec
+        carried identical information</td><td>an exposure diagnostic</td></tr>
+      <tr><td>Problem 5, E6</td><td>every scored target was already inside the vocabulary</td>
+        <td>separate input and target streams</td></tr>
+      <tr><td>Problem 5, E7</td><td>rare in-vocabulary words score zero too, so a zero on unknown
+        words proves nothing</td><td>a rarity matched control band</td></tr>
+    </table></div>
+    <div class="callout"><b>Measure the exposure before believing a null.</b> Two of these were only
+      found by auditing the writeups against the literal wording of the brief.</div>
+  </section>
+
+  <footer>
+    <p><strong>What is not claimed.</strong> The byte head is not shown to be better: at this scale
+      it is worse on loss, and its case rests on a parameter count at dimensions this machine cannot
+      train. The 1M vocabulary payoff is neither demonstrated nor refuted. Everything trained here is
+      2 layers at d_model=96 on CPU with three seeds, quoted against a measured seed noise floor. The
+      learned inverse is linear, so its recovery figures are a lower bound. Constrained decoding was
+      not implemented, so the invalid UTF-8 rate is what an unconstrained argmax produces.</p>
+    <p>ERA V5 Assignment 7, Problem 5. Ashish Kamble. Code MIT, prose CC BY 4.0.</p>
+  </footer>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

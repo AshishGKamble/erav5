@@ -1,0 +1,2145 @@
+{
+  "blocks": 2,
+  "e4a_capacity": {
+    "blocks": 2,
+    "break_even_bytes_per_character": 2.0,
+    "reading": "At equal D the codepoint codec carries 1/512 characters per dimension for every script alike. The byte codec carries more than that for any script under 2 bytes per character and less for any script over it. The codepoint codec is therefore not uniformly better; it is uniformly *fair*, which is a different and more defensible claim.",
+    "rows": {
+      "ARABIC": {
+        "byte_codec_characters_per_dimension": 0.001953125,
+        "bytes_per_character": 2.0,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 32.0,
+            "codepoint_window_characters": 32,
+            "gain": 1.0
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 8.0,
+            "codepoint_window_characters": 8,
+            "gain": 1.0
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 16.0,
+            "codepoint_window_characters": 16,
+            "gain": 1.0
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 1.0
+      },
+      "BENGALI": {
+        "byte_codec_characters_per_dimension": 0.0013020833333333333,
+        "bytes_per_character": 3.0,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 21.333333333333332,
+            "codepoint_window_characters": 32,
+            "gain": 1.5
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 5.333333333333333,
+            "codepoint_window_characters": 8,
+            "gain": 1.5
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 10.666666666666666,
+            "codepoint_window_characters": 16,
+            "gain": 1.5
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 1.5
+      },
+      "COMMON": {
+        "byte_codec_characters_per_dimension": 0.0038347768126651403,
+        "bytes_per_character": 1.018638160922118,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 62.82898329870566,
+            "codepoint_window_characters": 32,
+            "gain": 0.509319080461059
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 15.707245824676415,
+            "codepoint_window_characters": 8,
+            "gain": 0.509319080461059
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 31.41449164935283,
+            "codepoint_window_characters": 16,
+            "gain": 0.509319080461059
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 0.509319080461059
+      },
+      "DEVANAGARI": {
+        "byte_codec_characters_per_dimension": 0.0013020833333333333,
+        "bytes_per_character": 3.0,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 21.333333333333332,
+            "codepoint_window_characters": 32,
+            "gain": 1.5
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 5.333333333333333,
+            "codepoint_window_characters": 8,
+            "gain": 1.5
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 10.666666666666666,
+            "codepoint_window_characters": 16,
+            "gain": 1.5
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 1.5
+      },
+      "GUJARATI": {
+        "byte_codec_characters_per_dimension": 0.0013020833333333333,
+        "bytes_per_character": 3.0,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 21.333333333333332,
+            "codepoint_window_characters": 32,
+            "gain": 1.5
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 5.333333333333333,
+            "codepoint_window_characters": 8,
+            "gain": 1.5
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 10.666666666666666,
+            "codepoint_window_characters": 16,
+            "gain": 1.5
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 1.5
+      },
+      "GURMUKHI": {
+        "byte_codec_characters_per_dimension": 0.0013020833333333333,
+        "bytes_per_character": 3.0,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 21.333333333333332,
+            "codepoint_window_characters": 32,
+            "gain": 1.5
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 5.333333333333333,
+            "codepoint_window_characters": 8,
+            "gain": 1.5
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 10.666666666666666,
+            "codepoint_window_characters": 16,
+            "gain": 1.5
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 1.5
+      },
+      "HAN": {
+        "byte_codec_characters_per_dimension": 0.0013020833333333333,
+        "bytes_per_character": 3.0,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 21.333333333333332,
+            "codepoint_window_characters": 32,
+            "gain": 1.5
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 5.333333333333333,
+            "codepoint_window_characters": 8,
+            "gain": 1.5
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 10.666666666666666,
+            "codepoint_window_characters": 16,
+            "gain": 1.5
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 1.5
+      },
+      "KANNADA": {
+        "byte_codec_characters_per_dimension": 0.0013020833333333333,
+        "bytes_per_character": 3.0,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 21.333333333333332,
+            "codepoint_window_characters": 32,
+            "gain": 1.5
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 5.333333333333333,
+            "codepoint_window_characters": 8,
+            "gain": 1.5
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 10.666666666666666,
+            "codepoint_window_characters": 16,
+            "gain": 1.5
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 1.5
+      },
+      "LATIN": {
+        "byte_codec_characters_per_dimension": 0.0039055657426406414,
+        "bytes_per_character": 1.00017520057386,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 63.98878912742427,
+            "codepoint_window_characters": 32,
+            "gain": 0.50008760028693
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 15.997197281856067,
+            "codepoint_window_characters": 8,
+            "gain": 0.50008760028693
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 31.994394563712135,
+            "codepoint_window_characters": 16,
+            "gain": 0.50008760028693
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 0.50008760028693
+      },
+      "MALAYALAM": {
+        "byte_codec_characters_per_dimension": 0.0013020833333333333,
+        "bytes_per_character": 3.0,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 21.333333333333332,
+            "codepoint_window_characters": 32,
+            "gain": 1.5
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 5.333333333333333,
+            "codepoint_window_characters": 8,
+            "gain": 1.5
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 10.666666666666666,
+            "codepoint_window_characters": 16,
+            "gain": 1.5
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 1.5
+      },
+      "ORIYA": {
+        "byte_codec_characters_per_dimension": 0.0013020833333333333,
+        "bytes_per_character": 3.0,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 21.333333333333332,
+            "codepoint_window_characters": 32,
+            "gain": 1.5
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 5.333333333333333,
+            "codepoint_window_characters": 8,
+            "gain": 1.5
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 10.666666666666666,
+            "codepoint_window_characters": 16,
+            "gain": 1.5
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 1.5
+      },
+      "TAMIL": {
+        "byte_codec_characters_per_dimension": 0.0013020833333333333,
+        "bytes_per_character": 3.0,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 21.333333333333332,
+            "codepoint_window_characters": 32,
+            "gain": 1.5
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 5.333333333333333,
+            "codepoint_window_characters": 8,
+            "gain": 1.5
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 10.666666666666666,
+            "codepoint_window_characters": 16,
+            "gain": 1.5
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 1.5
+      },
+      "TELUGU": {
+        "byte_codec_characters_per_dimension": 0.0013020833333333333,
+        "bytes_per_character": 3.0,
+        "capacity_at_equal_D": {
+          "16384": {
+            "byte_window_bytes": 64,
+            "byte_window_characters": 21.333333333333332,
+            "codepoint_window_characters": 32,
+            "gain": 1.5
+          },
+          "4096": {
+            "byte_window_bytes": 16,
+            "byte_window_characters": 5.333333333333333,
+            "codepoint_window_characters": 8,
+            "gain": 1.5
+          },
+          "8192": {
+            "byte_window_bytes": 32,
+            "byte_window_characters": 10.666666666666666,
+            "codepoint_window_characters": 16,
+            "gain": 1.5
+          }
+        },
+        "codepoint_codec_characters_per_dimension": 0.001953125,
+        "codepoint_gain": 1.5
+      }
+    }
+  },
+  "e4b_collisions_at_equal_D": {
+    "note": "Both codecs are charged the same D in every comparison. The byte window is the published construction; the codepoint window is fix B.",
+    "pairs": [
+      {
+        "D": 4096,
+        "byte_L": 16,
+        "codepoint_L": 8
+      },
+      {
+        "D": 8192,
+        "byte_L": 32,
+        "codepoint_L": 16
+      },
+      {
+        "D": 16384,
+        "byte_L": 64,
+        "codepoint_L": 32
+      }
+    ],
+    "rows": {
+      "ARABIC": {
+        "16384": {
+          "byte": {
+            "colliding_groups": 0,
+            "distinct_types": 4445,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 0,
+            "types_cropped_rate": 0.0,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 64
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 4445,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 0,
+            "types_cropped_rate": 0.0,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "collision_rate_change": 0.0,
+          "verdict": "tie"
+        },
+        "4096": {
+          "byte": {
+            "colliding_groups": 7,
+            "distinct_types": 4445,
+            "occurrence_rate_in_collisions": 0.0012301599207897027,
+            "types_cropped": 103,
+            "types_cropped_rate": 0.023172103487064118,
+            "types_in_collisions": 15,
+            "types_in_collisions_rate": 0.003374578177727784,
+            "window": 16
+          },
+          "codepoint": {
+            "colliding_groups": 7,
+            "distinct_types": 4445,
+            "occurrence_rate_in_collisions": 0.0012301599207897027,
+            "types_cropped": 105,
+            "types_cropped_rate": 0.023622047244094488,
+            "types_in_collisions": 15,
+            "types_in_collisions_rate": 0.003374578177727784,
+            "window": 8
+          },
+          "collision_rate_change": 0.0,
+          "verdict": "tie"
+        },
+        "8192": {
+          "byte": {
+            "colliding_groups": 0,
+            "distinct_types": 4445,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 0,
+            "types_cropped_rate": 0.0,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 4445,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 0,
+            "types_cropped_rate": 0.0,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 16
+          },
+          "collision_rate_change": 0.0,
+          "verdict": "tie"
+        }
+      },
+      "BENGALI": {
+        "16384": {
+          "byte": {
+            "colliding_groups": 0,
+            "distinct_types": 13413,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 7,
+            "types_cropped_rate": 0.0005218817565048833,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 64
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 13413,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 1,
+            "types_cropped_rate": 7.455453664355477e-05,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "collision_rate_change": 0.0,
+          "verdict": "tie"
+        },
+        "4096": {
+          "byte": {
+            "colliding_groups": 1641,
+            "distinct_types": 13413,
+            "occurrence_rate_in_collisions": 0.28088709304298204,
+            "types_cropped": 8727,
+            "types_cropped_rate": 0.6506374412883024,
+            "types_in_collisions": 5503,
+            "types_in_collisions_rate": 0.41027361514948185,
+            "window": 16
+          },
+          "codepoint": {
+            "colliding_groups": 616,
+            "distinct_types": 13413,
+            "occurrence_rate_in_collisions": 0.06882990700328497,
+            "types_cropped": 3290,
+            "types_cropped_rate": 0.24528442555729515,
+            "types_in_collisions": 1607,
+            "types_in_collisions_rate": 0.1198091403861925,
+            "window": 8
+          },
+          "collision_rate_change": -0.29046447476328935,
+          "verdict": "codepoint better"
+        },
+        "8192": {
+          "byte": {
+            "colliding_groups": 144,
+            "distinct_types": 13413,
+            "occurrence_rate_in_collisions": 0.012137382211872117,
+            "types_cropped": 1335,
+            "types_cropped_rate": 0.0995303064191456,
+            "types_in_collisions": 340,
+            "types_in_collisions_rate": 0.025348542458808618,
+            "window": 32
+          },
+          "codepoint": {
+            "colliding_groups": 3,
+            "distinct_types": 13413,
+            "occurrence_rate_in_collisions": 0.0001233787264230965,
+            "types_cropped": 59,
+            "types_cropped_rate": 0.004398717661969731,
+            "types_in_collisions": 6,
+            "types_in_collisions_rate": 0.00044732721986132855,
+            "window": 16
+          },
+          "collision_rate_change": -0.02490121523894729,
+          "verdict": "codepoint better"
+        }
+      },
+      "COMMON": {
+        "16384": {
+          "byte": {
+            "colliding_groups": 0,
+            "distinct_types": 12572,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 9,
+            "types_cropped_rate": 0.0007158765510658606,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 64
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 12572,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 171,
+            "types_cropped_rate": 0.013601654470251353,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "collision_rate_change": 0.0,
+          "verdict": "tie"
+        },
+        "4096": {
+          "byte": {
+            "colliding_groups": 10,
+            "distinct_types": 12572,
+            "occurrence_rate_in_collisions": 0.0003154858482062376,
+            "types_cropped": 2288,
+            "types_cropped_rate": 0.18199172764874325,
+            "types_in_collisions": 23,
+            "types_in_collisions_rate": 0.0018294622971683106,
+            "window": 16
+          },
+          "codepoint": {
+            "colliding_groups": 288,
+            "distinct_types": 12572,
+            "occurrence_rate_in_collisions": 0.009216693708310799,
+            "types_cropped": 6598,
+            "types_cropped_rate": 0.5248170537702832,
+            "types_in_collisions": 657,
+            "types_in_collisions_rate": 0.05225898822780783,
+            "window": 8
+          },
+          "collision_rate_change": 0.05042952593063952,
+          "verdict": "byte better"
+        },
+        "8192": {
+          "byte": {
+            "colliding_groups": 0,
+            "distinct_types": 12572,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 171,
+            "types_cropped_rate": 0.013601654470251353,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "codepoint": {
+            "colliding_groups": 10,
+            "distinct_types": 12572,
+            "occurrence_rate_in_collisions": 0.0003154858482062376,
+            "types_cropped": 2286,
+            "types_cropped_rate": 0.1818326439707286,
+            "types_in_collisions": 23,
+            "types_in_collisions_rate": 0.0018294622971683106,
+            "window": 16
+          },
+          "collision_rate_change": 0.0018294622971683106,
+          "verdict": "byte better"
+        }
+      },
+      "DEVANAGARI": {
+        "16384": {
+          "byte": {
+            "colliding_groups": 0,
+            "distinct_types": 17757,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 8,
+            "types_cropped_rate": 0.00045052655290871206,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 64
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 17757,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 7,
+            "types_cropped_rate": 0.00039421073379512306,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "collision_rate_change": 0.0,
+          "verdict": "tie"
+        },
+        "4096": {
+          "byte": {
+            "colliding_groups": 1859,
+            "distinct_types": 17757,
+            "occurrence_rate_in_collisions": 0.22945119994294477,
+            "types_cropped": 11232,
+            "types_cropped_rate": 0.6325392802838318,
+            "types_in_collisions": 6838,
+            "types_in_collisions_rate": 0.3850875710987216,
+            "window": 16
+          },
+          "codepoint": {
+            "colliding_groups": 678,
+            "distinct_types": 17757,
+            "occurrence_rate_in_collisions": 0.053801305138537245,
+            "types_cropped": 4614,
+            "types_cropped_rate": 0.2598411893900997,
+            "types_in_collisions": 1902,
+            "types_in_collisions_rate": 0.1071126879540463,
+            "window": 8
+          },
+          "collision_rate_change": -0.27797488314467533,
+          "verdict": "codepoint better"
+        },
+        "8192": {
+          "byte": {
+            "colliding_groups": 137,
+            "distinct_types": 17757,
+            "occurrence_rate_in_collisions": 0.006730734942766466,
+            "types_cropped": 1991,
+            "types_cropped_rate": 0.11212479585515571,
+            "types_in_collisions": 382,
+            "types_in_collisions_rate": 0.021512642901391002,
+            "window": 32
+          },
+          "codepoint": {
+            "colliding_groups": 2,
+            "distinct_types": 17757,
+            "occurrence_rate_in_collisions": 6.240416503227187e-05,
+            "types_cropped": 82,
+            "types_cropped_rate": 0.004617897167314299,
+            "types_in_collisions": 5,
+            "types_in_collisions_rate": 0.00028157909556794506,
+            "window": 16
+          },
+          "collision_rate_change": -0.021231063805823056,
+          "verdict": "codepoint better"
+        }
+      },
+      "GUJARATI": {
+        "16384": {
+          "byte": {
+            "colliding_groups": 0,
+            "distinct_types": 8249,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 2,
+            "types_cropped_rate": 0.0002424536307431204,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 64
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 8249,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 1,
+            "types_cropped_rate": 0.0001212268153715602,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "collision_rate_change": 0.0,
+          "verdict": "tie"
+        },
+        "4096": {
+          "byte": {
+            "colliding_groups": 943,
+            "distinct_types": 8249,
+            "occurrence_rate_in_collisions": 0.19588158891654942,
+            "types_cropped": 5083,
+            "types_cropped_rate": 0.6161959025336404,
+            "types_in_collisions": 2953,
+            "types_in_collisions_rate": 0.35798278579221726,
+            "window": 16
+          },
+          "codepoint": {
+            "colliding_groups": 227,
+            "distinct_types": 8249,
+            "occurrence_rate_in_collisions": 0.03174044810044377,
+            "types_cropped": 1539,
+            "types_cropped_rate": 0.18656806885683114,
+            "types_in_collisions": 577,
+            "types_in_collisions_rate": 0.06994787246939023,
+            "window": 8
+          },
+          "collision_rate_change": -0.28803491332282705,
+          "verdict": "codepoint better"
+        },
+        "8192": {
+          "byte": {
+            "colliding_groups": 46,
+            "distinct_types": 8249,
+            "occurrence_rate_in_collisions": 0.004410650503301223,
+            "types_cropped": 506,
+            "types_cropped_rate": 0.06134076857800946,
+            "types_in_collisions": 108,
+            "types_in_collisions_rate": 0.0130924960601285,
+            "window": 32
+          },
+          "codepoint": {
+            "colliding_groups": 2,
+            "distinct_types": 8249,
+            "occurrence_rate_in_collisions": 0.00018941443879207705,
+            "types_cropped": 20,
+            "types_cropped_rate": 0.002424536307431204,
+            "types_in_collisions": 6,
+            "types_in_collisions_rate": 0.0007273608922293612,
+            "window": 16
+          },
+          "collision_rate_change": -0.012365135167899138,
+          "verdict": "codepoint better"
+        }
+      },
+      "GURMUKHI": {
+        "16384": {
+          "byte": {
+            "colliding_groups": 0,
+            "distinct_types": 5001,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 3,
+            "types_cropped_rate": 0.0005998800239952009,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 64
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 5001,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 1,
+            "types_cropped_rate": 0.0001999600079984003,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "collision_rate_change": 0.0,
+          "verdict": "tie"
+        },
+        "4096": {
+          "byte": {
+            "colliding_groups": 272,
+            "distinct_types": 5001,
+            "occurrence_rate_in_collisions": 0.0755031179138322,
+            "types_cropped": 2190,
+            "types_cropped_rate": 0.4379124175164967,
+            "types_in_collisions": 674,
+            "types_in_collisions_rate": 0.1347730453909218,
+            "window": 16
+          },
+          "codepoint": {
+            "colliding_groups": 29,
+            "distinct_types": 5001,
+            "occurrence_rate_in_collisions": 0.005066609977324263,
+            "types_cropped": 417,
+            "types_cropped_rate": 0.08338332333533294,
+            "types_in_collisions": 59,
+            "types_in_collisions_rate": 0.011797640471905619,
+            "window": 8
+          },
+          "collision_rate_change": -0.12297540491901618,
+          "verdict": "codepoint better"
+        },
+        "8192": {
+          "byte": {
+            "colliding_groups": 2,
+            "distinct_types": 5001,
+            "occurrence_rate_in_collisions": 0.00017715419501133787,
+            "types_cropped": 107,
+            "types_cropped_rate": 0.021395720855828835,
+            "types_in_collisions": 4,
+            "types_in_collisions_rate": 0.0007998400319936012,
+            "window": 32
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 5001,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 7,
+            "types_cropped_rate": 0.0013997200559888023,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 16
+          },
+          "collision_rate_change": -0.0007998400319936012,
+          "verdict": "codepoint better"
+        }
+      },
+      "KANNADA": {
+        "16384": {
+          "byte": {
+            "colliding_groups": 0,
+            "distinct_types": 9895,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 15,
+            "types_cropped_rate": 0.0015159171298635675,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 64
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 9895,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 1,
+            "types_cropped_rate": 0.0001010611419909045,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "collision_rate_change": 0.0,
+          "verdict": "tie"
+        },
+        "4096": {
+          "byte": {
+            "colliding_groups": 1482,
+            "distinct_types": 9895,
+            "occurrence_rate_in_collisions": 0.43752736826740624,
+            "types_cropped": 8118,
+            "types_cropped_rate": 0.8204143506821627,
+            "types_in_collisions": 5676,
+            "types_in_collisions_rate": 0.573623041940374,
+            "window": 16
+          },
+          "codepoint": {
+            "colliding_groups": 779,
+            "distinct_types": 9895,
+            "occurrence_rate_in_collisions": 0.16731134141001314,
+            "types_cropped": 4952,
+            "types_cropped_rate": 0.5004547751389591,
+            "types_in_collisions": 2243,
+            "types_in_collisions_rate": 0.22668014148559879,
+            "window": 8
+          },
+          "collision_rate_change": -0.34694290045477516,
+          "verdict": "codepoint better"
+        },
+        "8192": {
+          "byte": {
+            "colliding_groups": 233,
+            "distinct_types": 9895,
+            "occurrence_rate_in_collisions": 0.04251204203765874,
+            "types_cropped": 2911,
+            "types_cropped_rate": 0.294188984335523,
+            "types_in_collisions": 624,
+            "types_in_collisions_rate": 0.06306215260232441,
+            "window": 32
+          },
+          "codepoint": {
+            "colliding_groups": 8,
+            "distinct_types": 9895,
+            "occurrence_rate_in_collisions": 0.0012406947890818859,
+            "types_cropped": 250,
+            "types_cropped_rate": 0.025265285497726123,
+            "types_in_collisions": 17,
+            "types_in_collisions_rate": 0.0017180394138453764,
+            "window": 16
+          },
+          "collision_rate_change": -0.06134411318847903,
+          "verdict": "codepoint better"
+        }
+      },
+      "LATIN": {
+        "16384": {
+          "byte": {
+            "colliding_groups": 4,
+            "distinct_types": 84044,
+            "occurrence_rate_in_collisions": 6.197092324281447e-06,
+            "types_cropped": 145,
+            "types_cropped_rate": 0.0017252867545571367,
+            "types_in_collisions": 8,
+            "types_in_collisions_rate": 9.518823473418685e-05,
+            "window": 64
+          },
+          "codepoint": {
+            "colliding_groups": 58,
+            "distinct_types": 84044,
+            "occurrence_rate_in_collisions": 0.00011211103386654618,
+            "types_cropped": 1035,
+            "types_cropped_rate": 0.012314977868735425,
+            "types_in_collisions": 145,
+            "types_in_collisions_rate": 0.0017252867545571367,
+            "window": 32
+          },
+          "collision_rate_change": 0.0016300985198229498,
+          "verdict": "byte better"
+        },
+        "4096": {
+          "byte": {
+            "colliding_groups": 438,
+            "distinct_types": 84044,
+            "occurrence_rate_in_collisions": 0.001228714396296167,
+            "types_cropped": 4915,
+            "types_cropped_rate": 0.05848127171481605,
+            "types_in_collisions": 1271,
+            "types_in_collisions_rate": 0.015123030793393936,
+            "window": 16
+          },
+          "codepoint": {
+            "colliding_groups": 6353,
+            "distinct_types": 84044,
+            "occurrence_rate_in_collisions": 0.10558211541690093,
+            "types_cropped": 36014,
+            "types_cropped_rate": 0.4285136357146257,
+            "types_in_collisions": 18976,
+            "types_in_collisions_rate": 0.22578649278949123,
+            "window": 8
+          },
+          "collision_rate_change": 0.21066346199609728,
+          "verdict": "byte better"
+        },
+        "8192": {
+          "byte": {
+            "colliding_groups": 60,
+            "distinct_types": 84044,
+            "occurrence_rate_in_collisions": 0.00011492789401394684,
+            "types_cropped": 1058,
+            "types_cropped_rate": 0.012588644043596211,
+            "types_in_collisions": 150,
+            "types_in_collisions_rate": 0.0017847794012660035,
+            "window": 32
+          },
+          "codepoint": {
+            "colliding_groups": 429,
+            "distinct_types": 84044,
+            "occurrence_rate_in_collisions": 0.001202799282940081,
+            "types_cropped": 4666,
+            "types_cropped_rate": 0.055518537908714485,
+            "types_in_collisions": 1246,
+            "types_in_collisions_rate": 0.014825567559849602,
+            "window": 16
+          },
+          "collision_rate_change": 0.013040788158583599,
+          "verdict": "byte better"
+        }
+      },
+      "MALAYALAM": {
+        "16384": {
+          "byte": {
+            "colliding_groups": 5,
+            "distinct_types": 12063,
+            "occurrence_rate_in_collisions": 0.0005551314967732982,
+            "types_cropped": 241,
+            "types_cropped_rate": 0.019978446489264695,
+            "types_in_collisions": 13,
+            "types_in_collisions_rate": 0.0010776755367653155,
+            "window": 64
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 12063,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 4,
+            "types_cropped_rate": 0.0003315924728508663,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "collision_rate_change": -0.0010776755367653155,
+          "verdict": "codepoint better"
+        },
+        "4096": {
+          "byte": {
+            "colliding_groups": 1755,
+            "distinct_types": 12063,
+            "occurrence_rate_in_collisions": 0.624800499618347,
+            "types_cropped": 10571,
+            "types_cropped_rate": 0.8763160076266269,
+            "types_in_collisions": 8112,
+            "types_in_collisions_rate": 0.6724695349415568,
+            "window": 16
+          },
+          "codepoint": {
+            "colliding_groups": 1277,
+            "distinct_types": 12063,
+            "occurrence_rate_in_collisions": 0.31181042259385194,
+            "types_cropped": 7320,
+            "types_cropped_rate": 0.6068142253170853,
+            "types_in_collisions": 4352,
+            "types_in_collisions_rate": 0.3607726104617425,
+            "window": 8
+          },
+          "collision_rate_change": -0.3116969244798143,
+          "verdict": "codepoint better"
+        },
+        "8192": {
+          "byte": {
+            "colliding_groups": 687,
+            "distinct_types": 12063,
+            "occurrence_rate_in_collisions": 0.12178197210464228,
+            "types_cropped": 5150,
+            "types_cropped_rate": 0.42692530879549034,
+            "types_in_collisions": 2108,
+            "types_in_collisions_rate": 0.17474923319240654,
+            "window": 32
+          },
+          "codepoint": {
+            "colliding_groups": 107,
+            "distinct_types": 12063,
+            "occurrence_rate_in_collisions": 0.012455762958850878,
+            "types_cropped": 1251,
+            "types_cropped_rate": 0.10370554588410844,
+            "types_in_collisions": 265,
+            "types_in_collisions_rate": 0.02196800132636989,
+            "window": 16
+          },
+          "collision_rate_change": -0.15278123186603665,
+          "verdict": "codepoint better"
+        }
+      },
+      "ORIYA": {
+        "16384": {
+          "byte": {
+            "colliding_groups": 0,
+            "distinct_types": 6275,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 2,
+            "types_cropped_rate": 0.00031872509960159364,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 64
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 6275,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 0,
+            "types_cropped_rate": 0.0,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "collision_rate_change": 0.0,
+          "verdict": "tie"
+        },
+        "4096": {
+          "byte": {
+            "colliding_groups": 759,
+            "distinct_types": 6275,
+            "occurrence_rate_in_collisions": 0.32174434287426945,
+            "types_cropped": 4347,
+            "types_cropped_rate": 0.6927490039840637,
+            "types_in_collisions": 2368,
+            "types_in_collisions_rate": 0.37737051792828685,
+            "window": 16
+          },
+          "codepoint": {
+            "colliding_groups": 251,
+            "distinct_types": 6275,
+            "occurrence_rate_in_collisions": 0.07627753634047654,
+            "types_cropped": 1634,
+            "types_cropped_rate": 0.260398406374502,
+            "types_in_collisions": 666,
+            "types_in_collisions_rate": 0.10613545816733068,
+            "window": 8
+          },
+          "collision_rate_change": -0.2712350597609562,
+          "verdict": "codepoint better"
+        },
+        "8192": {
+          "byte": {
+            "colliding_groups": 74,
+            "distinct_types": 6275,
+            "occurrence_rate_in_collisions": 0.011951146410909635,
+            "types_cropped": 721,
+            "types_cropped_rate": 0.1149003984063745,
+            "types_in_collisions": 168,
+            "types_in_collisions_rate": 0.026772908366533864,
+            "window": 32
+          },
+          "codepoint": {
+            "colliding_groups": 3,
+            "distinct_types": 6275,
+            "occurrence_rate_in_collisions": 0.00026225086168140267,
+            "types_cropped": 36,
+            "types_cropped_rate": 0.0057370517928286855,
+            "types_in_collisions": 6,
+            "types_in_collisions_rate": 0.0009561752988047809,
+            "window": 16
+          },
+          "collision_rate_change": -0.025816733067729084,
+          "verdict": "codepoint better"
+        }
+      },
+      "TAMIL": {
+        "16384": {
+          "byte": {
+            "colliding_groups": 1,
+            "distinct_types": 10825,
+            "occurrence_rate_in_collisions": 5.827675631574347e-05,
+            "types_cropped": 63,
+            "types_cropped_rate": 0.005819861431870669,
+            "types_in_collisions": 2,
+            "types_in_collisions_rate": 0.00018475750577367207,
+            "window": 64
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 10825,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 3,
+            "types_cropped_rate": 0.0002771362586605081,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "collision_rate_change": -0.00018475750577367207,
+          "verdict": "codepoint better"
+        },
+        "4096": {
+          "byte": {
+            "colliding_groups": 1567,
+            "distinct_types": 10825,
+            "occurrence_rate_in_collisions": 0.5747545091640199,
+            "types_cropped": 9419,
+            "types_cropped_rate": 0.8701154734411085,
+            "types_in_collisions": 7194,
+            "types_in_collisions_rate": 0.6645727482678984,
+            "window": 16
+          },
+          "codepoint": {
+            "colliding_groups": 1072,
+            "distinct_types": 10825,
+            "occurrence_rate_in_collisions": 0.2375943354992861,
+            "types_cropped": 6065,
+            "types_cropped_rate": 0.5602771362586605,
+            "types_in_collisions": 3486,
+            "types_in_collisions_rate": 0.3220323325635104,
+            "window": 8
+          },
+          "collision_rate_change": -0.342540415704388,
+          "verdict": "codepoint better"
+        },
+        "8192": {
+          "byte": {
+            "colliding_groups": 491,
+            "distinct_types": 10825,
+            "occurrence_rate_in_collisions": 0.08671581339782627,
+            "types_cropped": 3776,
+            "types_cropped_rate": 0.34882217090069284,
+            "types_in_collisions": 1414,
+            "types_in_collisions_rate": 0.13062355658198616,
+            "window": 32
+          },
+          "codepoint": {
+            "colliding_groups": 36,
+            "distinct_types": 10825,
+            "occurrence_rate_in_collisions": 0.00437075672368076,
+            "types_cropped": 508,
+            "types_cropped_rate": 0.0469284064665127,
+            "types_in_collisions": 83,
+            "types_in_collisions_rate": 0.00766743648960739,
+            "window": 16
+          },
+          "collision_rate_change": -0.12295612009237876,
+          "verdict": "codepoint better"
+        }
+      },
+      "TELUGU": {
+        "16384": {
+          "byte": {
+            "colliding_groups": 0,
+            "distinct_types": 12938,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 23,
+            "types_cropped_rate": 0.0017777090740454474,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 64
+          },
+          "codepoint": {
+            "colliding_groups": 0,
+            "distinct_types": 12938,
+            "occurrence_rate_in_collisions": 0.0,
+            "types_cropped": 3,
+            "types_cropped_rate": 0.0002318750966146236,
+            "types_in_collisions": 0,
+            "types_in_collisions_rate": 0.0,
+            "window": 32
+          },
+          "collision_rate_change": 0.0,
+          "verdict": "tie"
+        },
+        "4096": {
+          "byte": {
+            "colliding_groups": 1703,
+            "distinct_types": 12938,
+            "occurrence_rate_in_collisions": 0.4525530534704847,
+            "types_cropped": 10474,
+            "types_cropped_rate": 0.8095532539805225,
+            "types_in_collisions": 7204,
+            "types_in_collisions_rate": 0.5568093986705828,
+            "window": 16
+          },
+          "codepoint": {
+            "colliding_groups": 884,
+            "distinct_types": 12938,
+            "occurrence_rate_in_collisions": 0.14975442498378277,
+            "types_cropped": 5213,
+            "types_cropped_rate": 0.40292162621734423,
+            "types_in_collisions": 2720,
+            "types_in_collisions_rate": 0.21023342093059205,
+            "window": 8
+          },
+          "collision_rate_change": -0.3465759777399907,
+          "verdict": "codepoint better"
+        },
+        "8192": {
+          "byte": {
+            "colliding_groups": 248,
+            "distinct_types": 12938,
+            "occurrence_rate_in_collisions": 0.0326197757390418,
+            "types_cropped": 2669,
+            "types_cropped_rate": 0.20629154428814345,
+            "types_in_collisions": 680,
+            "types_in_collisions_rate": 0.05255835523264801,
+            "window": 32
+          },
+          "codepoint": {
+            "colliding_groups": 10,
+            "distinct_types": 12938,
+            "occurrence_rate_in_collisions": 0.0008108609026040219,
+            "types_cropped": 178,
+            "types_cropped_rate": 0.013757922399134334,
+            "types_in_collisions": 21,
+            "types_in_collisions_rate": 0.001623125676302365,
+            "window": 16
+          },
+          "collision_rate_change": -0.05093522955634565,
+          "verdict": "codepoint better"
+        }
+      }
+    }
+  },
+  "e4c_block_entropy": {
+    "reading": "Each codepoint position spends 512 dimensions, 256 on each base-256 digit. The high digit is a script selector and is nearly constant inside monolingual text, so roughly half of fix B's dimensions carry a fraction of a bit. A script-relative or hashed high digit would recover most of the doubling, at the price of reintroducing collisions of a different kind, which is the cost PLAN.md said must not be glossed over.",
+    "rows": {
+      "ARABIC": {
+        "characters": 117096,
+        "high_digit_distinct_values": 1,
+        "high_digit_entropy_bits": -0.0,
+        "high_digit_utilisation": -0.0,
+        "low_digit_entropy_bits": 4.541197605560641,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.5
+      },
+      "BENGALI": {
+        "characters": 341603,
+        "high_digit_distinct_values": 1,
+        "high_digit_entropy_bits": -0.0,
+        "high_digit_utilisation": -0.0,
+        "low_digit_entropy_bits": 5.010310950677207,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.5
+      },
+      "COMMON": {
+        "characters": 4993797,
+        "high_digit_distinct_values": 24,
+        "high_digit_entropy_bits": 0.0896521939023226,
+        "high_digit_utilisation": 0.011206524237790325,
+        "low_digit_entropy_bits": 2.6248445019599265,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.49439673788110483
+      },
+      "DEVANAGARI": {
+        "characters": 532792,
+        "high_digit_distinct_values": 1,
+        "high_digit_entropy_bits": -0.0,
+        "high_digit_utilisation": -0.0,
+        "low_digit_entropy_bits": 5.025395353823105,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.5
+      },
+      "GUJARATI": {
+        "characters": 174052,
+        "high_digit_distinct_values": 1,
+        "high_digit_entropy_bits": -0.0,
+        "high_digit_utilisation": -0.0,
+        "low_digit_entropy_bits": 4.947791487100255,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.5
+      },
+      "GURMUKHI": {
+        "characters": 114733,
+        "high_digit_distinct_values": 1,
+        "high_digit_entropy_bits": -0.0,
+        "high_digit_utilisation": -0.0,
+        "low_digit_entropy_bits": 5.126129867843831,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.5
+      },
+      "HAN": {
+        "characters": 12300,
+        "high_digit_distinct_values": 79,
+        "high_digit_entropy_bits": 5.371029942431391,
+        "high_digit_utilisation": 0.6713787428039238,
+        "low_digit_entropy_bits": 7.09847131196369,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.16431062859803808
+      },
+      "KANNADA": {
+        "characters": 196103,
+        "high_digit_distinct_values": 1,
+        "high_digit_entropy_bits": -0.0,
+        "high_digit_utilisation": -0.0,
+        "low_digit_entropy_bits": 4.862441178580526,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.5
+      },
+      "LATIN": {
+        "characters": 10228277,
+        "high_digit_distinct_values": 5,
+        "high_digit_entropy_bits": 0.0006047145719384201,
+        "high_digit_utilisation": 7.558932149230252e-05,
+        "low_digit_entropy_bits": 4.442352949729435,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.49996220533925384
+      },
+      "MALAYALAM": {
+        "characters": 244056,
+        "high_digit_distinct_values": 1,
+        "high_digit_entropy_bits": -0.0,
+        "high_digit_utilisation": -0.0,
+        "low_digit_entropy_bits": 4.909566571350271,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.5
+      },
+      "ORIYA": {
+        "characters": 152058,
+        "high_digit_distinct_values": 1,
+        "high_digit_entropy_bits": -0.0,
+        "high_digit_utilisation": -0.0,
+        "low_digit_entropy_bits": 4.937769902574607,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.5
+      },
+      "TAMIL": {
+        "characters": 265186,
+        "high_digit_distinct_values": 1,
+        "high_digit_entropy_bits": -0.0,
+        "high_digit_utilisation": -0.0,
+        "low_digit_entropy_bits": 4.502079969067071,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.5
+      },
+      "TELUGU": {
+        "characters": 285678,
+        "high_digit_distinct_values": 1,
+        "high_digit_entropy_bits": -0.0,
+        "high_digit_utilisation": -0.0,
+        "low_digit_entropy_bits": 4.85694346973476,
+        "max_bits_per_digit": 8.0,
+        "wasted_dimensions_fraction_of_codepoint_codec": 0.5
+      }
+    }
+  },
+  "e4d_fixes_a_and_c": {
+    "fix_a_length_aware_normalisation": {
+      "decode_identical_rate": 1.0,
+      "decode_identical_to_published_normalisation": 400,
+      "effect_on_truncation_collisions": "none",
+      "tokens_checked": 400,
+      "why": "Normalisation is a positive rescale followed by a shift applied to every entry alike. Decoding is a per-column argmax, which is invariant to that. So fix A changes the scale the model sees and changes nothing the decoder does, and it cannot affect a collision caused by bytes that were never encoded."
+    },
+    "fix_c_dynamic_allocation": {
+      "effect_on_truncation_collisions": "none for a fixed dimension budget",
+      "measured_waste_it_could_reclaim": "see e1_occupancy in window.json: 92 to 95 percent of columns are zero at L=32",
+      "why": "Dynamic allocation lets a short token occupy fewer columns. It reclaims the zeros E1 measured, which is the waste half of the problem. The unit stays the byte, so a 3-byte-per-character script still spends three slots per character and still crops at the same character count. Whatever is cropped is cropped identically, so every collision in E3 survives fix C unchanged."
+    }
+  },
+  "e4e_representability": {
+    "characters_above_bmp": 131,
+    "characters_total": 17659426,
+    "consequence": "With blocks=2 these characters cannot be encoded and are dropped. They are emoji and a handful of mathematical letters, 0.0007 percent of this corpus. blocks=3 covers all of Unicode at D=768L, which is 1.5x the two-block cost and 3x the byte cost. For an India-first corpus blocks=2 is the right default, and this is the number that justifies saying so.",
+    "distinct_above_bmp": 16,
+    "examples": [
+      "🔹",
+      "𝔽",
+      "🔷",
+      "🙂",
+      "👉",
+      "🏻",
+      "🎉",
+      "💯",
+      "🕺",
+      "💃"
+    ],
+    "rate": 7.4181346551128e-06
+  },
+  "e4f_script_relative": {
+    "D": 8192,
+    "caveats": [
+      "One high digit per script is measured in this corpus, not guaranteed by Unicode. Devanagari Extended (U+A8E0) and Vedic Extensions (U+1CD0) sit in other blocks, so a production codec needs a script-to-block table and a fallback path. Not exercised here.",
+      "Latin genuinely spans several high digits here (Latin Extended-A and -B, Latin Extended Additional), so Latin is not a single-block script even in this corpus, though its high-digit entropy is 0.0006 bits."
+    ],
+    "compare_at_same_D": {
+      "byte_codec_window": "32 bytes, which is 32 Latin characters and 10.7 Indic characters",
+      "this_fix": "32 characters, every script",
+      "two_block_codepoint_window": "16 characters, every script"
+    },
+    "cross_script_alias_groups_untagged": 3214,
+    "fix": "single-block script-relative codepoint codec",
+    "mixed_script_word_types": 323,
+    "residual_finding": "The tagged variant is lossless for pure-script words and NOT lossless for words that mix their script with another, which in practice means embedded ASCII digits. Devanagari `केल` collides with `के`+`2` because ल is U+0932 and `2` is U+0032: same low digit, different high digit, and the per-token tag has thrown the high digit away. The residual is small and is counted per script in `tagged_residual_groups` rather than rounded to zero. Removing it needs a tag per character-run instead of per token, which costs one more channel.",
+    "rows": {
+      "ARABIC": {
+        "D": 8192,
+        "high_digits_of_this_scripts_characters": [
+          6
+        ],
+        "high_digits_present_in_these_words": [
+          0,
+          6
+        ],
+        "lossless_for_these_words": false,
+        "single_high_digit_script": true,
+        "tagged": {
+          "colliding_groups": 0,
+          "distinct_types": 4445,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 0,
+          "types_cropped_rate": 0.0,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "tagged_matches_two_block": true,
+        "tagged_residual_examples": [],
+        "tagged_residual_groups": 0,
+        "two_block_same_L_at_double_D": {
+          "colliding_groups": 0,
+          "distinct_types": 4445,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 0,
+          "types_cropped_rate": 0.0,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "untagged": {
+          "colliding_groups": 0,
+          "distinct_types": 4445,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 0,
+          "types_cropped_rate": 0.0,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "window_characters": 32
+      },
+      "BENGALI": {
+        "D": 8192,
+        "high_digits_of_this_scripts_characters": [
+          9
+        ],
+        "high_digits_present_in_these_words": [
+          0,
+          9,
+          13,
+          32
+        ],
+        "lossless_for_these_words": false,
+        "single_high_digit_script": true,
+        "tagged": {
+          "colliding_groups": 0,
+          "distinct_types": 13413,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 1,
+          "types_cropped_rate": 7.455453664355477e-05,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "tagged_matches_two_block": true,
+        "tagged_residual_examples": [],
+        "tagged_residual_groups": 0,
+        "two_block_same_L_at_double_D": {
+          "colliding_groups": 0,
+          "distinct_types": 13413,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 1,
+          "types_cropped_rate": 7.455453664355477e-05,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "untagged": {
+          "colliding_groups": 0,
+          "distinct_types": 13413,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 1,
+          "types_cropped_rate": 7.455453664355477e-05,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "window_characters": 32
+      },
+      "COMMON": {
+        "D": 8192,
+        "high_digits_of_this_scripts_characters": [
+          0,
+          2,
+          3,
+          5,
+          6,
+          9,
+          10,
+          11,
+          12,
+          32,
+          33,
+          34,
+          35,
+          37,
+          38,
+          39,
+          48,
+          224,
+          226,
+          228,
+          230,
+          240,
+          254,
+          255
+        ],
+        "high_digits_present_in_these_words": [
+          0,
+          5,
+          9,
+          10,
+          11,
+          12,
+          32,
+          33,
+          34,
+          48,
+          240,
+          254
+        ],
+        "lossless_for_these_words": false,
+        "single_high_digit_script": false,
+        "tagged": {
+          "colliding_groups": 10,
+          "distinct_types": 12572,
+          "occurrence_rate_in_collisions": 0.0008450513791238507,
+          "types_cropped": 171,
+          "types_cropped_rate": 0.013601654470251353,
+          "types_in_collisions": 20,
+          "types_in_collisions_rate": 0.001590836780146357
+        },
+        "tagged_matches_two_block": false,
+        "tagged_residual_examples": [
+          [
+            "১",
+            "૧"
+          ],
+          [
+            "২",
+            "૨"
+          ],
+          [
+            "৩",
+            "૩"
+          ],
+          [
+            "૫",
+            "৫"
+          ],
+          [
+            "୧",
+            "१"
+          ]
+        ],
+        "tagged_residual_groups": 10,
+        "two_block_same_L_at_double_D": {
+          "colliding_groups": 0,
+          "distinct_types": 12572,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 171,
+          "types_cropped_rate": 0.013601654470251353,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "untagged": {
+          "colliding_groups": 10,
+          "distinct_types": 12572,
+          "occurrence_rate_in_collisions": 0.0008450513791238507,
+          "types_cropped": 171,
+          "types_cropped_rate": 0.013601654470251353,
+          "types_in_collisions": 20,
+          "types_in_collisions_rate": 0.001590836780146357
+        },
+        "window_characters": 32
+      },
+      "DEVANAGARI": {
+        "D": 8192,
+        "high_digits_of_this_scripts_characters": [
+          9
+        ],
+        "high_digits_present_in_these_words": [
+          0,
+          9,
+          32
+        ],
+        "lossless_for_these_words": false,
+        "single_high_digit_script": true,
+        "tagged": {
+          "colliding_groups": 1,
+          "distinct_types": 17757,
+          "occurrence_rate_in_collisions": 7.131904575116785e-05,
+          "types_cropped": 7,
+          "types_cropped_rate": 0.00039421073379512306,
+          "types_in_collisions": 2,
+          "types_in_collisions_rate": 0.00011263163822717802
+        },
+        "tagged_matches_two_block": false,
+        "tagged_residual_examples": [
+          [
+            "केल",
+            "के2"
+          ]
+        ],
+        "tagged_residual_groups": 1,
+        "two_block_same_L_at_double_D": {
+          "colliding_groups": 0,
+          "distinct_types": 17757,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 7,
+          "types_cropped_rate": 0.00039421073379512306,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "untagged": {
+          "colliding_groups": 1,
+          "distinct_types": 17757,
+          "occurrence_rate_in_collisions": 7.131904575116785e-05,
+          "types_cropped": 7,
+          "types_cropped_rate": 0.00039421073379512306,
+          "types_in_collisions": 2,
+          "types_in_collisions_rate": 0.00011263163822717802
+        },
+        "window_characters": 32
+      },
+      "GUJARATI": {
+        "D": 8192,
+        "high_digits_of_this_scripts_characters": [
+          10
+        ],
+        "high_digits_present_in_these_words": [
+          0,
+          6,
+          10
+        ],
+        "lossless_for_these_words": false,
+        "single_high_digit_script": true,
+        "tagged": {
+          "colliding_groups": 0,
+          "distinct_types": 8249,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 1,
+          "types_cropped_rate": 0.0001212268153715602,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "tagged_matches_two_block": true,
+        "tagged_residual_examples": [],
+        "tagged_residual_groups": 0,
+        "two_block_same_L_at_double_D": {
+          "colliding_groups": 0,
+          "distinct_types": 8249,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 1,
+          "types_cropped_rate": 0.0001212268153715602,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "untagged": {
+          "colliding_groups": 0,
+          "distinct_types": 8249,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 1,
+          "types_cropped_rate": 0.0001212268153715602,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "window_characters": 32
+      },
+      "GURMUKHI": {
+        "D": 8192,
+        "high_digits_of_this_scripts_characters": [
+          10
+        ],
+        "high_digits_present_in_these_words": [
+          0,
+          6,
+          9,
+          10
+        ],
+        "lossless_for_these_words": false,
+        "single_high_digit_script": true,
+        "tagged": {
+          "colliding_groups": 0,
+          "distinct_types": 5001,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 1,
+          "types_cropped_rate": 0.0001999600079984003,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "tagged_matches_two_block": true,
+        "tagged_residual_examples": [],
+        "tagged_residual_groups": 0,
+        "two_block_same_L_at_double_D": {
+          "colliding_groups": 0,
+          "distinct_types": 5001,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 1,
+          "types_cropped_rate": 0.0001999600079984003,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "untagged": {
+          "colliding_groups": 0,
+          "distinct_types": 5001,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 1,
+          "types_cropped_rate": 0.0001999600079984003,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "window_characters": 32
+      },
+      "KANNADA": {
+        "D": 8192,
+        "high_digits_of_this_scripts_characters": [
+          12
+        ],
+        "high_digits_present_in_these_words": [
+          0,
+          12,
+          32,
+          139
+        ],
+        "lossless_for_these_words": false,
+        "single_high_digit_script": true,
+        "tagged": {
+          "colliding_groups": 0,
+          "distinct_types": 9895,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 1,
+          "types_cropped_rate": 0.0001010611419909045,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "tagged_matches_two_block": true,
+        "tagged_residual_examples": [],
+        "tagged_residual_groups": 0,
+        "two_block_same_L_at_double_D": {
+          "colliding_groups": 0,
+          "distinct_types": 9895,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 1,
+          "types_cropped_rate": 0.0001010611419909045,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "untagged": {
+          "colliding_groups": 0,
+          "distinct_types": 9895,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 1,
+          "types_cropped_rate": 0.0001010611419909045,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "window_characters": 32
+      },
+      "LATIN": {
+        "D": 8192,
+        "high_digits_of_this_scripts_characters": [
+          0,
+          1,
+          2,
+          29,
+          30
+        ],
+        "high_digits_present_in_these_words": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          9,
+          10,
+          11,
+          12,
+          13,
+          29,
+          30,
+          32,
+          33,
+          34,
+          35,
+          39,
+          48,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          87,
+          89,
+          91,
+          92,
+          94,
+          97,
+          98,
+          99,
+          101,
+          102,
+          103,
+          104,
+          107,
+          108,
+          109,
+          117,
+          118,
+          119,
+          120,
+          121,
+          123,
+          124,
+          126,
+          127,
+          128,
+          137,
+          138,
+          139,
+          143,
+          144,
+          151,
+          152,
+          154,
+          158,
+          159,
+          224,
+          240,
+          254,
+          255
+        ],
+        "lossless_for_these_words": false,
+        "single_high_digit_script": false,
+        "tagged": {
+          "colliding_groups": 60,
+          "distinct_types": 84044,
+          "occurrence_rate_in_collisions": 0.00024675694891229764,
+          "types_cropped": 1035,
+          "types_cropped_rate": 0.012314977868735425,
+          "types_in_collisions": 149,
+          "types_in_collisions_rate": 0.0017728808719242302
+        },
+        "tagged_matches_two_block": false,
+        "tagged_residual_examples": [
+          [
+            "System.Windows.Forms.DataGridView",
+            "System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize"
+          ],
+          [
+            "www.qr-code-generator.com/api/qr_code_123456.png",
+            "www.qr-code-generator.com/api/qr_code_123456.png](www.qr-code-generator.com/api/qr_code_123456.png",
+            "www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500",
+            "www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500](www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500"
+          ],
+          [
+            "https://www.bbc.com/news/climate_change",
+            "https://www.bbc.com/news/climate_change_wildlife",
+            "https://www.bbc.com/news/climate_change_human_activity"
+          ],
+          [
+            "https://www.britannica.com/topic/world-war-I",
+            "https://www.britannica.com/topic/decolonization",
+            "https://www.britannica.com/topic/globalization",
+            "https://www.britannica.com/topic/international-relations"
+          ],
+          [
+            "phone_number.split(extension_format)[-1].strip",
+            "phone_number.split(extension_format)[-1])[0"
+          ]
+        ],
+        "tagged_residual_groups": 60,
+        "two_block_same_L_at_double_D": {
+          "colliding_groups": 58,
+          "distinct_types": 84044,
+          "occurrence_rate_in_collisions": 0.00011211103386654618,
+          "types_cropped": 1035,
+          "types_cropped_rate": 0.012314977868735425,
+          "types_in_collisions": 145,
+          "types_in_collisions_rate": 0.0017252867545571367
+        },
+        "untagged": {
+          "colliding_groups": 60,
+          "distinct_types": 84044,
+          "occurrence_rate_in_collisions": 0.00024675694891229764,
+          "types_cropped": 1035,
+          "types_cropped_rate": 0.012314977868735425,
+          "types_in_collisions": 149,
+          "types_in_collisions_rate": 0.0017728808719242302
+        },
+        "window_characters": 32
+      },
+      "MALAYALAM": {
+        "D": 8192,
+        "high_digits_of_this_scripts_characters": [
+          13
+        ],
+        "high_digits_present_in_these_words": [
+          0,
+          2,
+          3,
+          9,
+          13,
+          32
+        ],
+        "lossless_for_these_words": false,
+        "single_high_digit_script": true,
+        "tagged": {
+          "colliding_groups": 0,
+          "distinct_types": 12063,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 4,
+          "types_cropped_rate": 0.0003315924728508663,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "tagged_matches_two_block": true,
+        "tagged_residual_examples": [],
+        "tagged_residual_groups": 0,
+        "two_block_same_L_at_double_D": {
+          "colliding_groups": 0,
+          "distinct_types": 12063,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 4,
+          "types_cropped_rate": 0.0003315924728508663,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "untagged": {
+          "colliding_groups": 0,
+          "distinct_types": 12063,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 4,
+          "types_cropped_rate": 0.0003315924728508663,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "window_characters": 32
+      },
+      "ORIYA": {
+        "D": 8192,
+        "high_digits_of_this_scripts_characters": [
+          11
+        ],
+        "high_digits_present_in_these_words": [
+          0,
+          9,
+          11,
+          32
+        ],
+        "lossless_for_these_words": false,
+        "single_high_digit_script": true,
+        "tagged": {
+          "colliding_groups": 1,
+          "distinct_types": 6275,
+          "occurrence_rate_in_collisions": 7.49288176232579e-05,
+          "types_cropped": 0,
+          "types_cropped_rate": 0.0,
+          "types_in_collisions": 2,
+          "types_in_collisions_rate": 0.00031872509960159364
+        },
+        "tagged_matches_two_block": false,
+        "tagged_residual_examples": [
+          [
+            "ସମ",
+            "8ମ"
+          ]
+        ],
+        "tagged_residual_groups": 1,
+        "two_block_same_L_at_double_D": {
+          "colliding_groups": 0,
+          "distinct_types": 6275,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 0,
+          "types_cropped_rate": 0.0,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "untagged": {
+          "colliding_groups": 1,
+          "distinct_types": 6275,
+          "occurrence_rate_in_collisions": 7.49288176232579e-05,
+          "types_cropped": 0,
+          "types_cropped_rate": 0.0,
+          "types_in_collisions": 2,
+          "types_in_collisions_rate": 0.00031872509960159364
+        },
+        "window_characters": 32
+      },
+      "TAMIL": {
+        "D": 8192,
+        "high_digits_of_this_scripts_characters": [
+          11
+        ],
+        "high_digits_present_in_these_words": [
+          0,
+          11,
+          32
+        ],
+        "lossless_for_these_words": false,
+        "single_high_digit_script": true,
+        "tagged": {
+          "colliding_groups": 0,
+          "distinct_types": 10825,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 3,
+          "types_cropped_rate": 0.0002771362586605081,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "tagged_matches_two_block": true,
+        "tagged_residual_examples": [],
+        "tagged_residual_groups": 0,
+        "two_block_same_L_at_double_D": {
+          "colliding_groups": 0,
+          "distinct_types": 10825,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 3,
+          "types_cropped_rate": 0.0002771362586605081,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "untagged": {
+          "colliding_groups": 0,
+          "distinct_types": 10825,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 3,
+          "types_cropped_rate": 0.0002771362586605081,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "window_characters": 32
+      },
+      "TELUGU": {
+        "D": 8192,
+        "high_digits_of_this_scripts_characters": [
+          12
+        ],
+        "high_digits_present_in_these_words": [
+          0,
+          2,
+          12,
+          32
+        ],
+        "lossless_for_these_words": false,
+        "single_high_digit_script": true,
+        "tagged": {
+          "colliding_groups": 0,
+          "distinct_types": 12938,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 3,
+          "types_cropped_rate": 0.0002318750966146236,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "tagged_matches_two_block": true,
+        "tagged_residual_examples": [],
+        "tagged_residual_groups": 0,
+        "two_block_same_L_at_double_D": {
+          "colliding_groups": 0,
+          "distinct_types": 12938,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 3,
+          "types_cropped_rate": 0.0002318750966146236,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "untagged": {
+          "colliding_groups": 0,
+          "distinct_types": 12938,
+          "occurrence_rate_in_collisions": 0.0,
+          "types_cropped": 3,
+          "types_cropped_rate": 0.0002318750966146236,
+          "types_in_collisions": 0,
+          "types_in_collisions_rate": 0.0
+        },
+        "window_characters": 32
+      }
+    },
+    "window_characters_every_script": 32
+  },
+  "equal_D_pairs": [
+    {
+      "D": 4096,
+      "byte_L": 16,
+      "codepoint_L": 8
+    },
+    {
+      "D": 8192,
+      "byte_L": 32,
+      "codepoint_L": 16
+    },
+    {
+      "D": 16384,
+      "byte_L": 64,
+      "codepoint_L": 32
+    }
+  ],
+  "tokenizer": {
+    "byte_fallback": true,
+    "merges": 9444,
+    "path": "/home/ashish/code/aiml/erav5/erav5/assignment-7/problem-3-dynamic-length/src/../../../assignment-6/frozen/tokenizer.json",
+    "size": 10000,
+    "type": "BPE"
+  }
+}

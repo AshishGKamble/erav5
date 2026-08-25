@@ -1,0 +1,2156 @@
+{
+  "config": {
+    "D": 8192,
+    "d_model": 96,
+    "head": "vocab softmax, held fixed so only the input codec varies",
+    "max_docs_per_lane": 400,
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "steps": 300
+  },
+  "e5_verdict": "E5 at token level is null on both lanes and CANNOT be otherwise: see truncation_exposure, where every codec truncates essentially nothing, so all three carry identical information and differ only in layout. The BPE tokenizer sits between the corpus and the window and removes the phenomenon under test, converting it into fertility instead. E5b repeats the experiment at word level, where the truncation E3 counted is actually present.",
+  "e5b_note": "The first, smaller pass is kept as `e5b_word_level_small`. It is superseded rather than deleted, because its indic delta sat within a hair of its own noise floor and the difference between the two passes is the point.",
+  "e5b_word_level": {
+    "indic": {
+      "arms": {
+        "byte": {
+          "D": 8192,
+          "arm": "byte",
+          "exact_full_word_mean": 0.000988250796090919,
+          "exact_full_word_sd": 0.00010980564401010212,
+          "runs": [
+            {
+              "exact_full_word_rate": 0.000988250796090919,
+              "targets_scored": 9107,
+              "targets_truncated_rate": 0.04007906006368727
+            },
+            {
+              "exact_full_word_rate": 0.0010980564401010212,
+              "targets_scored": 9107,
+              "targets_truncated_rate": 0.04007906006368727
+            },
+            {
+              "exact_full_word_rate": 0.000878445152080817,
+              "targets_scored": 9107,
+              "targets_truncated_rate": 0.04007906006368727
+            }
+          ],
+          "target_occurrences_truncated": 0.04007906006368727,
+          "window_capacity": "32 bytes",
+          "word_types": 40000,
+          "word_types_representable": 0.8896
+        },
+        "script_relative": {
+          "D": 8192,
+          "arm": "script_relative",
+          "exact_full_word_mean": 0.005819699132535412,
+          "exact_full_word_sd": 0.0010474790835807025,
+          "runs": [
+            {
+              "exact_full_word_rate": 0.007027561216646536,
+              "targets_scored": 9107,
+              "targets_truncated_rate": 0.0
+            },
+            {
+              "exact_full_word_rate": 0.005270670912484902,
+              "targets_scored": 9107,
+              "targets_truncated_rate": 0.0
+            },
+            {
+              "exact_full_word_rate": 0.005160865268474799,
+              "targets_scored": 9107,
+              "targets_truncated_rate": 0.0
+            }
+          ],
+          "target_occurrences_truncated": 0.0,
+          "window_capacity": "1 script tag + 31 characters",
+          "word_types": 40000,
+          "word_types_representable": 0.999975
+        }
+      },
+      "exceeds_seed_noise": true,
+      "head": "byte_tied (zero vocabulary parameters)",
+      "lane": "indic",
+      "scale": {
+        "max_docs": 2000,
+        "seeds": [
+          1,
+          2,
+          3
+        ],
+        "sequence_length": 96,
+        "steps": 400,
+        "word_inventory": 40000
+      },
+      "script_relative_minus_byte": 0.004831448336444492,
+      "seed_noise_floor_sd": 0.0010474790835807025,
+      "train_sequences": 1973,
+      "unit": "word",
+      "val_sequences": 493
+    },
+    "web": {
+      "arms": {
+        "byte": {
+          "D": 8192,
+          "arm": "byte",
+          "exact_full_word_mean": 0.04786981166575242,
+          "exact_full_word_sd": 0.006848120269054488,
+          "runs": [
+            {
+              "exact_full_word_rate": 0.04651673066374109,
+              "targets_scored": 9115,
+              "targets_truncated_rate": 0.0
+            },
+            {
+              "exact_full_word_rate": 0.05529347229840922,
+              "targets_scored": 9115,
+              "targets_truncated_rate": 0.0
+            },
+            {
+              "exact_full_word_rate": 0.041799232035106965,
+              "targets_scored": 9115,
+              "targets_truncated_rate": 0.0
+            }
+          ],
+          "target_occurrences_truncated": 0.0,
+          "window_capacity": "32 bytes",
+          "word_types": 37391,
+          "word_types_representable": 0.999946511192533
+        },
+        "script_relative": {
+          "D": 8192,
+          "arm": "script_relative",
+          "exact_full_word_mean": 0.04984457853355275,
+          "exact_full_word_sd": 0.007635901832099744,
+          "runs": [
+            {
+              "exact_full_word_rate": 0.04245748765770708,
+              "targets_scored": 9115,
+              "targets_truncated_rate": 0.0
+            },
+            {
+              "exact_full_word_rate": 0.04936917169500823,
+              "targets_scored": 9115,
+              "targets_truncated_rate": 0.0
+            },
+            {
+              "exact_full_word_rate": 0.057707076247942954,
+              "targets_scored": 9115,
+              "targets_truncated_rate": 0.0
+            }
+          ],
+          "target_occurrences_truncated": 0.0,
+          "window_capacity": "1 script tag + 31 characters",
+          "word_types": 37391,
+          "word_types_representable": 1.0
+        }
+      },
+      "exceeds_seed_noise": false,
+      "head": "byte_tied (zero vocabulary parameters)",
+      "lane": "web",
+      "scale": {
+        "max_docs": 2000,
+        "seeds": [
+          1,
+          2,
+          3
+        ],
+        "sequence_length": 96,
+        "steps": 400,
+        "word_inventory": 40000
+      },
+      "script_relative_minus_byte": 0.0019747668678003344,
+      "seed_noise_floor_sd": 0.007635901832099744,
+      "train_sequences": 4010,
+      "unit": "word",
+      "val_sequences": 1002
+    }
+  },
+  "e5b_word_level_small": {
+    "indic": {
+      "arms": {
+        "byte": {
+          "D": 8192,
+          "arm": "byte",
+          "exact_full_word_mean": 0.0029185867895545315,
+          "exact_full_word_sd": 0.0010861855317765706,
+          "runs": [
+            {
+              "exact_full_word_rate": 0.002150537634408602,
+              "targets_scored": 3255,
+              "targets_truncated_rate": 0.04423963133640553
+            },
+            {
+              "exact_full_word_rate": 0.003686635944700461,
+              "targets_scored": 3255,
+              "targets_truncated_rate": 0.04423963133640553
+            }
+          ],
+          "target_occurrences_truncated": 0.04423963133640553,
+          "window_capacity": "32 bytes",
+          "word_types": 20000,
+          "word_types_representable": 0.93335
+        },
+        "script_relative": {
+          "D": 8192,
+          "arm": "script_relative",
+          "exact_full_word_mean": 0.0052227342549923195,
+          "exact_full_word_sd": 0.0,
+          "runs": [
+            {
+              "exact_full_word_rate": 0.0052227342549923195,
+              "targets_scored": 3255,
+              "targets_truncated_rate": 0.0
+            },
+            {
+              "exact_full_word_rate": 0.0052227342549923195,
+              "targets_scored": 3255,
+              "targets_truncated_rate": 0.0
+            }
+          ],
+          "target_occurrences_truncated": 0.0,
+          "window_capacity": "1 script tag + 31 characters",
+          "word_types": 20000,
+          "word_types_representable": 1.0
+        }
+      },
+      "exceeds_seed_noise": true,
+      "head": "byte_tied (zero vocabulary parameters)",
+      "lane": "indic",
+      "script_relative_minus_byte": 0.002304147465437788,
+      "seed_noise_floor_sd": 0.0010861855317765706,
+      "train_sequences": 210,
+      "unit": "word",
+      "val_sequences": 53
+    },
+    "web": {
+      "arms": {
+        "byte": {
+          "D": 8192,
+          "arm": "byte",
+          "exact_full_word_mean": 0.0593150231634679,
+          "exact_full_word_sd": 0.003158815865657971,
+          "runs": [
+            {
+              "exact_full_word_rate": 0.06154864328259431,
+              "targets_scored": 6044,
+              "targets_truncated_rate": 0.0
+            },
+            {
+              "exact_full_word_rate": 0.0570814030443415,
+              "targets_scored": 6044,
+              "targets_truncated_rate": 0.0
+            }
+          ],
+          "target_occurrences_truncated": 0.0,
+          "window_capacity": "32 bytes",
+          "word_types": 20000,
+          "word_types_representable": 1.0
+        },
+        "script_relative": {
+          "D": 8192,
+          "arm": "script_relative",
+          "exact_full_word_mean": 0.05459960291197882,
+          "exact_full_word_sd": 0.0051476999292204015,
+          "runs": [
+            {
+              "exact_full_word_rate": 0.05823957643944408,
+              "targets_scored": 6044,
+              "targets_truncated_rate": 0.0
+            },
+            {
+              "exact_full_word_rate": 0.050959629384513566,
+              "targets_scored": 6044,
+              "targets_truncated_rate": 0.0
+            }
+          ],
+          "target_occurrences_truncated": 0.0,
+          "window_capacity": "1 script tag + 31 characters",
+          "word_types": 20000,
+          "word_types_representable": 1.0
+        }
+      },
+      "exceeds_seed_noise": false,
+      "head": "byte_tied (zero vocabulary parameters)",
+      "lane": "web",
+      "script_relative_minus_byte": -0.0047154202514890775,
+      "seed_noise_floor_sd": 0.0051476999292204015,
+      "train_sequences": 5789,
+      "unit": "word",
+      "val_sequences": 1447
+    }
+  },
+  "lanes": {
+    "indic": {
+      "arms": {
+        "byte": {
+          "D": 8192,
+          "arm": "byte",
+          "delta_vs_byte": 0.0,
+          "exceeds_seed_noise": false,
+          "final_accuracy_mean": 0.4396381578947368,
+          "final_loss_per_token_mean": 2.6454388288754145,
+          "final_loss_per_token_runs": [
+            2.633402188480224,
+            2.6420238306429145,
+            2.6608904675031058
+          ],
+          "final_loss_per_token_sd": 0.014058735028655104,
+          "mean_units_encoded_per_token": 8.856,
+          "runs": [
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.44161184210526316,
+                "loss_native": 2.633402188480224,
+                "loss_per_token": 2.633402188480224,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 147.70432472229004,
+                "step": 300,
+                "tokens_scored": 6080
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.21145452723821,
+                  "loss_per_token": 9.21145452723821,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.5215365886688232,
+                  "step": 0,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.31891447368421055,
+                  "loss_native": 3.5427289202542673,
+                  "loss_per_token": 3.5427289202542673,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 31.35219931602478,
+                  "step": 50,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.3669407894736842,
+                  "loss_native": 3.0997872613809987,
+                  "loss_per_token": 3.0997872613809987,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 53.934375047683716,
+                  "step": 100,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.428125,
+                  "loss_native": 2.83470244964405,
+                  "loss_per_token": 2.83470244964405,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 75.8711564540863,
+                  "step": 150,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.42483552631578947,
+                  "loss_native": 2.7404888953236455,
+                  "loss_per_token": 2.7404888953236455,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 98.55180287361145,
+                  "step": 200,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4368421052631579,
+                  "loss_native": 2.663092851544927,
+                  "loss_per_token": 2.663092851544927,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 121.01528000831604,
+                  "step": 250,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.44161184210526316,
+                  "loss_native": 2.633402188480224,
+                  "loss_per_token": 2.633402188480224,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 147.70432472229004,
+                  "step": 300,
+                  "tokens_scored": 6080
+                }
+              ],
+              "seed": 1
+            },
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.43700657894736844,
+                "loss_native": 2.6420238306429145,
+                "loss_per_token": 2.6420238306429145,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 179.95201873779297,
+                "step": 300,
+                "tokens_scored": 6080
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.2403782119076,
+                  "loss_per_token": 9.2403782119076,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.7321975231170654,
+                  "step": 0,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.24605263157894736,
+                  "loss_native": 3.642246566832898,
+                  "loss_per_token": 3.642246566832898,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 30.11426877975464,
+                  "step": 50,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.3569078947368421,
+                  "loss_native": 3.1582416550455235,
+                  "loss_per_token": 3.1582416550455235,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 56.97939443588257,
+                  "step": 100,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.42680921052631576,
+                  "loss_native": 2.8471019355892335,
+                  "loss_per_token": 2.8471019355892335,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 87.2054193019867,
+                  "step": 150,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.42467105263157895,
+                  "loss_native": 2.779985239149346,
+                  "loss_per_token": 2.779985239149346,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 117.79823732376099,
+                  "step": 200,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4486842105263158,
+                  "loss_native": 2.6438666308492773,
+                  "loss_per_token": 2.6438666308492773,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 146.03937411308289,
+                  "step": 250,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.43700657894736844,
+                  "loss_native": 2.6420238306429145,
+                  "loss_per_token": 2.6420238306429145,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 179.95201873779297,
+                  "step": 300,
+                  "tokens_scored": 6080
+                }
+              ],
+              "seed": 2
+            },
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.44029605263157895,
+                "loss_native": 2.6608904675031058,
+                "loss_per_token": 2.6608904675031058,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 160.60876321792603,
+                "step": 300,
+                "tokens_scored": 6080
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.22178582010559,
+                  "loss_per_token": 9.22178582010559,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.5732555389404297,
+                  "step": 0,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.24095394736842105,
+                  "loss_native": 3.6417831482991554,
+                  "loss_per_token": 3.6417831482991554,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 24.985516786575317,
+                  "step": 50,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.36661184210526315,
+                  "loss_native": 3.1637404929314417,
+                  "loss_per_token": 3.1637404929314417,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 54.94199275970459,
+                  "step": 100,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.38536184210526314,
+                  "loss_native": 2.8866876553789216,
+                  "loss_per_token": 2.8866876553789216,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 84.94922113418579,
+                  "step": 150,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4231907894736842,
+                  "loss_native": 2.7691876693318616,
+                  "loss_per_token": 2.7691876693318616,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 113.33737111091614,
+                  "step": 200,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4251644736842105,
+                  "loss_native": 2.7324313385354944,
+                  "loss_per_token": 2.7324313385354944,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 137.0371913909912,
+                  "step": 250,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.44029605263157895,
+                  "loss_native": 2.6608904675031058,
+                  "loss_per_token": 2.6608904675031058,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 160.60876321792603,
+                  "step": 300,
+                  "tokens_scored": 6080
+                }
+              ],
+              "seed": 3
+            }
+          ],
+          "verdict": "not established, inside the seed noise floor",
+          "window_capacity": "32 bytes"
+        },
+        "codepoint": {
+          "D": 8192,
+          "arm": "codepoint",
+          "delta_vs_byte": 0.003416983554054731,
+          "exceeds_seed_noise": false,
+          "final_accuracy_mean": 0.43898026315789473,
+          "final_loss_per_token_mean": 2.648855812429469,
+          "final_loss_per_token_runs": [
+            2.6497032039336386,
+            2.6322278784850135,
+            2.6646363548697556
+          ],
+          "final_loss_per_token_sd": 0.01622084737817665,
+          "mean_units_encoded_per_token": 10.279,
+          "runs": [
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.44342105263157894,
+                "loss_native": 2.6497032039336386,
+                "loss_per_token": 2.6497032039336386,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 148.53811645507812,
+                "step": 300,
+                "tokens_scored": 6080
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.271897535218422,
+                  "loss_per_token": 9.271897535218422,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.551591396331787,
+                  "step": 0,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.3111842105263158,
+                  "loss_native": 3.491611349391548,
+                  "loss_per_token": 3.491611349391548,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 25.24543523788452,
+                  "step": 50,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.3975328947368421,
+                  "loss_native": 3.021820231992634,
+                  "loss_per_token": 3.021820231992634,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 49.13953685760498,
+                  "step": 100,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.42269736842105265,
+                  "loss_native": 2.8464311163198683,
+                  "loss_per_token": 2.8464311163198683,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 73.78939890861511,
+                  "step": 150,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4328947368421053,
+                  "loss_native": 2.7477794247022733,
+                  "loss_per_token": 2.7477794247022733,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 100.18911480903625,
+                  "step": 200,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4376644736842105,
+                  "loss_native": 2.689827195701704,
+                  "loss_per_token": 2.689827195701704,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 122.3032066822052,
+                  "step": 250,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.44342105263157894,
+                  "loss_native": 2.6497032039336386,
+                  "loss_per_token": 2.6497032039336386,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 148.53811645507812,
+                  "step": 300,
+                  "tokens_scored": 6080
+                }
+              ],
+              "seed": 1
+            },
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.4376644736842105,
+                "loss_native": 2.6322278784850135,
+                "loss_per_token": 2.6322278784850135,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 131.1727876663208,
+                "step": 300,
+                "tokens_scored": 6080
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.208988506714299,
+                  "loss_per_token": 9.208988506714299,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.6339976787567139,
+                  "step": 0,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.2513157894736842,
+                  "loss_native": 3.56740116314124,
+                  "loss_per_token": 3.56740116314124,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 23.53381323814392,
+                  "step": 50,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4131578947368421,
+                  "loss_native": 3.02485367555099,
+                  "loss_per_token": 3.02485367555099,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 44.965861558914185,
+                  "step": 100,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4161184210526316,
+                  "loss_native": 2.7981162021579467,
+                  "loss_per_token": 2.7981162021579467,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 66.34478640556335,
+                  "step": 150,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4373355263157895,
+                  "loss_native": 2.697742290256167,
+                  "loss_per_token": 2.697742290256167,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 87.9044578075409,
+                  "step": 200,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4444078947368421,
+                  "loss_native": 2.6194430656096617,
+                  "loss_per_token": 2.6194430656096617,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 109.7338809967041,
+                  "step": 250,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4376644736842105,
+                  "loss_native": 2.6322278784850135,
+                  "loss_per_token": 2.6322278784850135,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 131.1727876663208,
+                  "step": 300,
+                  "tokens_scored": 6080
+                }
+              ],
+              "seed": 2
+            },
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.43585526315789475,
+                "loss_native": 2.6646363548697556,
+                "loss_per_token": 2.6646363548697556,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 131.75988388061523,
+                "step": 300,
+                "tokens_scored": 6080
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.23014582731245,
+                  "loss_per_token": 9.23014582731245,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.497847557067871,
+                  "step": 0,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.23273026315789475,
+                  "loss_native": 3.560885178461165,
+                  "loss_per_token": 3.560885178461165,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 23.16895627975464,
+                  "step": 50,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.38766447368421053,
+                  "loss_native": 3.1099409925939456,
+                  "loss_per_token": 3.1099409925939456,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 45.130836486816406,
+                  "step": 100,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.41546052631578945,
+                  "loss_native": 2.8662977488955197,
+                  "loss_per_token": 2.8662977488955197,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 66.76068663597107,
+                  "step": 150,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4299342105263158,
+                  "loss_native": 2.7360650494696936,
+                  "loss_per_token": 2.7360650494696936,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 88.02625799179077,
+                  "step": 200,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4328947368421053,
+                  "loss_native": 2.7182391621424844,
+                  "loss_per_token": 2.7182391621424844,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 110.12240481376648,
+                  "step": 250,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.43585526315789475,
+                  "loss_native": 2.6646363548697556,
+                  "loss_per_token": 2.6646363548697556,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 131.75988388061523,
+                  "step": 300,
+                  "tokens_scored": 6080
+                }
+              ],
+              "seed": 3
+            }
+          ],
+          "verdict": "not established, inside the seed noise floor",
+          "window_capacity": "16 characters"
+        },
+        "script_relative": {
+          "D": 8192,
+          "arm": "script_relative",
+          "delta_vs_byte": -0.006121068920776462,
+          "exceeds_seed_noise": false,
+          "final_accuracy_mean": 0.4425986842105263,
+          "final_loss_per_token_mean": 2.639317759954638,
+          "final_loss_per_token_runs": [
+            2.6384285527455864,
+            2.615110086829369,
+            2.664414640288958
+          ],
+          "final_loss_per_token_sd": 0.02466430143056642,
+          "mean_units_encoded_per_token": 6.4998,
+          "runs": [
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.44391447368421055,
+                "loss_native": 2.6384285527455864,
+                "loss_per_token": 2.6384285527455864,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 129.94917917251587,
+                "step": 300,
+                "tokens_scored": 6080
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.262739687852354,
+                  "loss_per_token": 9.262739687852354,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.4744527339935303,
+                  "step": 0,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.24342105263157895,
+                  "loss_native": 3.507526764501702,
+                  "loss_per_token": 3.507526764501702,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 22.990964889526367,
+                  "step": 50,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.3717105263157895,
+                  "loss_native": 3.078949545099931,
+                  "loss_per_token": 3.078949545099931,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 44.30625629425049,
+                  "step": 100,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.42023026315789475,
+                  "loss_native": 2.859460075838304,
+                  "loss_per_token": 2.859460075838304,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 66.45915746688843,
+                  "step": 150,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4284539473684211,
+                  "loss_native": 2.7250136309867026,
+                  "loss_per_token": 2.7250136309867026,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 87.66427659988403,
+                  "step": 200,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4319078947368421,
+                  "loss_native": 2.6614253982577907,
+                  "loss_per_token": 2.6614253982577907,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 108.81856036186218,
+                  "step": 250,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.44391447368421055,
+                  "loss_native": 2.6384285527455864,
+                  "loss_per_token": 2.6384285527455864,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 129.94917917251587,
+                  "step": 300,
+                  "tokens_scored": 6080
+                }
+              ],
+              "seed": 1
+            },
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.4465460526315789,
+                "loss_native": 2.615110086829369,
+                "loss_per_token": 2.615110086829369,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 131.34293055534363,
+                "step": 300,
+                "tokens_scored": 6080
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0001644736842105263,
+                  "loss_native": 9.266217885933697,
+                  "loss_per_token": 9.266217885933697,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.5009355545043945,
+                  "step": 0,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.24523026315789473,
+                  "loss_native": 3.568651042628817,
+                  "loss_per_token": 3.568651042628817,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 22.801534414291382,
+                  "step": 50,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.3662828947368421,
+                  "loss_native": 3.1321944692596095,
+                  "loss_per_token": 3.1321944692596095,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 45.7021963596344,
+                  "step": 100,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.42713815789473686,
+                  "loss_native": 2.7945695650091364,
+                  "loss_per_token": 2.7945695650091364,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 67.12528848648071,
+                  "step": 150,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.44473684210526315,
+                  "loss_native": 2.6879270009209577,
+                  "loss_per_token": 2.6879270009209577,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 88.28318738937378,
+                  "step": 200,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4421052631578947,
+                  "loss_native": 2.638399962017075,
+                  "loss_per_token": 2.638399962017075,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 110.05148911476135,
+                  "step": 250,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4465460526315789,
+                  "loss_native": 2.615110086829369,
+                  "loss_per_token": 2.615110086829369,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 131.34293055534363,
+                  "step": 300,
+                  "tokens_scored": 6080
+                }
+              ],
+              "seed": 2
+            },
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.4373355263157895,
+                "loss_native": 2.664414640288958,
+                "loss_per_token": 2.664414640288958,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 129.9062888622284,
+                "step": 300,
+                "tokens_scored": 6080
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.258948234076296,
+                  "loss_per_token": 9.258948234076296,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.5334248542785645,
+                  "step": 0,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.23601973684210525,
+                  "loss_native": 3.5664213562173543,
+                  "loss_per_token": 3.5664213562173543,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 23.138625144958496,
+                  "step": 50,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.30608552631578945,
+                  "loss_native": 3.200626330081928,
+                  "loss_per_token": 3.200626330081928,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 44.5700945854187,
+                  "step": 100,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.38108552631578946,
+                  "loss_native": 2.9903587407948056,
+                  "loss_per_token": 2.9903587407948056,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 65.8881163597107,
+                  "step": 150,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4296052631578947,
+                  "loss_native": 2.758566680843739,
+                  "loss_per_token": 2.758566680843739,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 87.0818133354187,
+                  "step": 200,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.42351973684210525,
+                  "loss_native": 2.7398216201904497,
+                  "loss_per_token": 2.7398216201904497,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 108.62564182281494,
+                  "step": 250,
+                  "tokens_scored": 6080
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.4373355263157895,
+                  "loss_native": 2.664414640288958,
+                  "loss_per_token": 2.664414640288958,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 129.9062888622284,
+                  "step": 300,
+                  "tokens_scored": 6080
+                }
+              ],
+              "seed": 3
+            }
+          ],
+          "verdict": "not established, inside the seed noise floor",
+          "window_capacity": "1 script tag + 31 characters"
+        }
+      },
+      "comparison_threshold": "2 x the largest per-arm standard deviation across seeds",
+      "lane": "indic",
+      "seed_noise_floor_sd": 0.02466430143056642,
+      "train_sequences": 1566,
+      "truncation_exposure": {
+        "byte": {
+          "capacity_units": 32,
+          "truncated_occurrences": 6,
+          "truncated_rate": 2.3954486475696177e-05
+        },
+        "codepoint": {
+          "capacity_units": 16,
+          "truncated_occurrences": 0,
+          "truncated_rate": 0.0
+        },
+        "script_relative": {
+          "capacity_units": 32,
+          "truncated_occurrences": 0,
+          "truncated_rate": 0.0
+        },
+        "token_occurrences": 250475
+      },
+      "val_sequences": 391
+    },
+    "web": {
+      "arms": {
+        "byte": {
+          "D": 8192,
+          "arm": "byte",
+          "delta_vs_byte": 0.0,
+          "exceeds_seed_noise": false,
+          "final_accuracy_mean": 0.1458811946176567,
+          "final_loss_per_token_mean": 4.787778861041315,
+          "final_loss_per_token_runs": [
+            4.781389934066979,
+            4.790044244426529,
+            4.791902404630436
+          ],
+          "final_loss_per_token_sd": 0.005610434987448844,
+          "mean_units_encoded_per_token": 8.856,
+          "runs": [
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.1470298654414178,
+                "loss_native": 4.781389934066979,
+                "loss_per_token": 4.781389934066979,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 130.66657996177673,
+                "step": 300,
+                "tokens_scored": 6094
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0008204791598293403,
+                  "loss_native": 9.234233892066316,
+                  "loss_per_token": 9.234233892066316,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.4793779850006104,
+                  "step": 0,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.09566787003610108,
+                  "loss_native": 5.657281839856874,
+                  "loss_per_token": 5.657281839856874,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 22.83666706085205,
+                  "step": 50,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.12422054479816212,
+                  "loss_native": 5.208266379876191,
+                  "loss_per_token": 5.208266379876191,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 44.166624784469604,
+                  "step": 100,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.13193304890055793,
+                  "loss_native": 5.0242761434580165,
+                  "loss_per_token": 5.0242761434580165,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 65.7800087928772,
+                  "step": 150,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14374794880210043,
+                  "loss_native": 4.889712596397213,
+                  "loss_per_token": 4.889712596397213,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 87.28944945335388,
+                  "step": 200,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14210699048244174,
+                  "loss_native": 4.83059136435634,
+                  "loss_per_token": 4.83059136435634,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 108.602787733078,
+                  "step": 250,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1470298654414178,
+                  "loss_native": 4.781389934066979,
+                  "loss_per_token": 4.781389934066979,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 130.66657996177673,
+                  "step": 300,
+                  "tokens_scored": 6094
+                }
+              ],
+              "seed": 1
+            },
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.14670167377748605,
+                "loss_native": 4.790044244426529,
+                "loss_per_token": 4.790044244426529,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 159.27541303634644,
+                "step": 300,
+                "tokens_scored": 6094
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.238732932888984,
+                  "loss_per_token": 9.238732932888984,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.5071401596069336,
+                  "step": 0,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.09796521168362324,
+                  "loss_native": 5.712990425237931,
+                  "loss_per_token": 5.712990425237931,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 23.119640111923218,
+                  "step": 50,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1176567115195274,
+                  "loss_native": 5.230944127960869,
+                  "loss_per_token": 5.230944127960869,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 49.56054973602295,
+                  "step": 100,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.13012799474893338,
+                  "loss_native": 5.005131023788826,
+                  "loss_per_token": 5.005131023788826,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 76.62509369850159,
+                  "step": 150,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.13997374466688547,
+                  "loss_native": 4.907221069141417,
+                  "loss_per_token": 4.907221069141417,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 101.30403399467468,
+                  "step": 200,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1463734821135543,
+                  "loss_native": 4.853140389795368,
+                  "loss_per_token": 4.853140389795368,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 134.24273443222046,
+                  "step": 250,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14670167377748605,
+                  "loss_native": 4.790044244426529,
+                  "loss_per_token": 4.790044244426529,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 159.27541303634644,
+                  "step": 300,
+                  "tokens_scored": 6094
+                }
+              ],
+              "seed": 2
+            },
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.1439120446340663,
+                "loss_native": 4.791902404630436,
+                "loss_per_token": 4.791902404630436,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 148.51713681221008,
+                "step": 300,
+                "tokens_scored": 6094
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.223335840862278,
+                  "loss_per_token": 9.223335840862278,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.7268927097320557,
+                  "step": 0,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0986215950114867,
+                  "loss_native": 5.6553074104605345,
+                  "loss_per_token": 5.6553074104605345,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 28.324119806289673,
+                  "step": 50,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.12553331145388907,
+                  "loss_native": 5.157937080850912,
+                  "loss_per_token": 5.157937080850912,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 53.28822660446167,
+                  "step": 100,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.11995405316704956,
+                  "loss_native": 5.028783712053765,
+                  "loss_per_token": 5.028783712053765,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 77.03852224349976,
+                  "step": 150,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1422710863144076,
+                  "loss_native": 4.901816676465645,
+                  "loss_per_token": 4.901816676465645,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 100.43142604827881,
+                  "step": 200,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.13800459468329504,
+                  "loss_native": 4.8576332495742385,
+                  "loss_per_token": 4.8576332495742385,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 124.39837527275085,
+                  "step": 250,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1439120446340663,
+                  "loss_native": 4.791902404630436,
+                  "loss_per_token": 4.791902404630436,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 148.51713681221008,
+                  "step": 300,
+                  "tokens_scored": 6094
+                }
+              ],
+              "seed": 3
+            }
+          ],
+          "verdict": "not established, inside the seed noise floor",
+          "window_capacity": "32 bytes"
+        },
+        "codepoint": {
+          "D": 8192,
+          "arm": "codepoint",
+          "delta_vs_byte": 0.006474060817502014,
+          "exceeds_seed_noise": false,
+          "final_accuracy_mean": 0.14834263209714474,
+          "final_loss_per_token_mean": 4.794252921858817,
+          "final_loss_per_token_runs": [
+            4.803485429166302,
+            4.791787345499499,
+            4.787485990910651
+          ],
+          "final_loss_per_token_sd": 0.008279782980961593,
+          "mean_units_encoded_per_token": 10.279,
+          "runs": [
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.14588119461765672,
+                "loss_native": 4.803485429166302,
+                "loss_per_token": 4.803485429166302,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 156.24543285369873,
+                "step": 300,
+                "tokens_scored": 6094
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0003281916639317361,
+                  "loss_native": 9.239957626247858,
+                  "loss_per_token": 9.239957626247858,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.6189806461334229,
+                  "step": 0,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1002625533311454,
+                  "loss_native": 5.628824742541166,
+                  "loss_per_token": 5.628824742541166,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 26.583963871002197,
+                  "step": 50,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.12061043649491303,
+                  "loss_native": 5.204070569376325,
+                  "loss_per_token": 5.204070569376325,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 51.9126923084259,
+                  "step": 100,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1284870364292747,
+                  "loss_native": 5.033250141096278,
+                  "loss_per_token": 5.033250141096278,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 78.57144951820374,
+                  "step": 150,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1427633738103052,
+                  "loss_native": 4.884321873559969,
+                  "loss_per_token": 4.884321873559969,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 106.24050807952881,
+                  "step": 200,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14341975713816868,
+                  "loss_native": 4.845314730360837,
+                  "loss_per_token": 4.845314730360837,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 131.46167182922363,
+                  "step": 250,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14588119461765672,
+                  "loss_native": 4.803485429166302,
+                  "loss_per_token": 4.803485429166302,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 156.24543285369873,
+                  "step": 300,
+                  "tokens_scored": 6094
+                }
+              ],
+              "seed": 1
+            },
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.14883491959304235,
+                "loss_native": 4.791787345499499,
+                "loss_per_token": 4.791787345499499,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 138.59798908233643,
+                "step": 300,
+                "tokens_scored": 6094
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.00016409583196586806,
+                  "loss_native": 9.211200873735248,
+                  "loss_per_token": 9.211200873735248,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.6020452976226807,
+                  "step": 0,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.09533967837216935,
+                  "loss_native": 5.686633295379129,
+                  "loss_per_token": 5.686633295379129,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 27.30199408531189,
+                  "step": 50,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.11946176567115195,
+                  "loss_native": 5.230128617271305,
+                  "loss_per_token": 5.230128617271305,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 49.455811977386475,
+                  "step": 100,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1304561864128651,
+                  "loss_native": 5.018290002018743,
+                  "loss_per_token": 5.018290002018743,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 71.82020616531372,
+                  "step": 150,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.13439448638004595,
+                  "loss_native": 4.9169055344285075,
+                  "loss_per_token": 4.9169055344285075,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 94.28177523612976,
+                  "step": 200,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14046603216278306,
+                  "loss_native": 4.854915189615108,
+                  "loss_per_token": 4.854915189615108,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 116.48652005195618,
+                  "step": 250,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14883491959304235,
+                  "loss_native": 4.791787345499499,
+                  "loss_per_token": 4.791787345499499,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 138.59798908233643,
+                  "step": 300,
+                  "tokens_scored": 6094
+                }
+              ],
+              "seed": 2
+            },
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.15031178208073515,
+                "loss_native": 4.787485990910651,
+                "loss_per_token": 4.787485990910651,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 134.96015644073486,
+                "step": 300,
+                "tokens_scored": 6094
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.00016409583196586806,
+                  "loss_native": 9.221370002786944,
+                  "loss_per_token": 9.221370002786944,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.5434200763702393,
+                  "step": 0,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.10042664916311125,
+                  "loss_native": 5.65768961854926,
+                  "loss_per_token": 5.65768961854926,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 23.380150079727173,
+                  "step": 50,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.11995405316704956,
+                  "loss_native": 5.1723599648189715,
+                  "loss_per_token": 5.1723599648189715,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 45.88849496841431,
+                  "step": 100,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.126846078109616,
+                  "loss_native": 5.038062528324325,
+                  "loss_per_token": 5.038062528324325,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 67.94245052337646,
+                  "step": 150,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14506071545782737,
+                  "loss_native": 4.89891169191922,
+                  "loss_per_token": 4.89891169191922,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 89.82946228981018,
+                  "step": 200,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1429274696422711,
+                  "loss_native": 4.858288800819679,
+                  "loss_per_token": 4.858288800819679,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 111.79946541786194,
+                  "step": 250,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.15031178208073515,
+                  "loss_native": 4.787485990910651,
+                  "loss_per_token": 4.787485990910651,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 134.96015644073486,
+                  "step": 300,
+                  "tokens_scored": 6094
+                }
+              ],
+              "seed": 3
+            }
+          ],
+          "verdict": "not established, inside the seed noise floor",
+          "window_capacity": "16 characters"
+        },
+        "script_relative": {
+          "D": 8192,
+          "arm": "script_relative",
+          "delta_vs_byte": 5.8022254552092534e-05,
+          "exceeds_seed_noise": false,
+          "final_accuracy_mean": 0.14719396127338366,
+          "final_loss_per_token_mean": 4.787836883295867,
+          "final_loss_per_token_runs": [
+            4.786176615985804,
+            4.783640851661637,
+            4.793693182240159
+          ],
+          "final_loss_per_token_sd": 0.005227781859509721,
+          "mean_units_encoded_per_token": 6.4998,
+          "runs": [
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.14981949458483754,
+                "loss_native": 4.786176615985804,
+                "loss_per_token": 4.786176615985804,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 137.32415056228638,
+                "step": 300,
+                "tokens_scored": 6094
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.24374190787159,
+                  "loss_per_token": 9.24374190787159,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.5382461547851562,
+                  "step": 0,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.10206760748276994,
+                  "loss_native": 5.61268494131335,
+                  "loss_per_token": 5.61268494131335,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 23.825209617614746,
+                  "step": 50,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.12372825730226453,
+                  "loss_native": 5.209239639420088,
+                  "loss_per_token": 5.209239639420088,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 46.43281936645508,
+                  "step": 100,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.13029209058089924,
+                  "loss_native": 5.03466596514043,
+                  "loss_per_token": 5.03466596514043,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 69.69239163398743,
+                  "step": 150,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14965539875287168,
+                  "loss_native": 4.895552512035864,
+                  "loss_per_token": 4.895552512035864,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 92.69075775146484,
+                  "step": 200,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1465375779455202,
+                  "loss_native": 4.833287415997431,
+                  "loss_per_token": 4.833287415997431,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 114.90840744972229,
+                  "step": 250,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14981949458483754,
+                  "loss_native": 4.786176615985804,
+                  "loss_per_token": 4.786176615985804,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 137.32415056228638,
+                  "step": 300,
+                  "tokens_scored": 6094
+                }
+              ],
+              "seed": 1
+            },
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.1470298654414178,
+                "loss_native": 4.783640851661637,
+                "loss_per_token": 4.783640851661637,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 134.82263135910034,
+                "step": 300,
+                "tokens_scored": 6094
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.237878406680156,
+                  "loss_per_token": 9.237878406680156,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.4838099479675293,
+                  "step": 0,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1043649491302921,
+                  "loss_native": 5.634064285549253,
+                  "loss_per_token": 5.634064285549253,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 23.31317901611328,
+                  "step": 50,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.11896947817525434,
+                  "loss_native": 5.222405091434651,
+                  "loss_per_token": 5.222405091434651,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 45.363057374954224,
+                  "step": 100,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.12815884476534295,
+                  "loss_native": 4.996505913359325,
+                  "loss_per_token": 4.996505913359325,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 67.42311692237854,
+                  "step": 150,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.13948145717098787,
+                  "loss_native": 4.903100243864003,
+                  "loss_per_token": 4.903100243864003,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 90.3405351638794,
+                  "step": 200,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14538890712175911,
+                  "loss_native": 4.84883189569275,
+                  "loss_per_token": 4.84883189569275,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 112.67213749885559,
+                  "step": 250,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1470298654414178,
+                  "loss_native": 4.783640851661637,
+                  "loss_per_token": 4.783640851661637,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 134.82263135910034,
+                  "step": 300,
+                  "tokens_scored": 6094
+                }
+              ],
+              "seed": 2
+            },
+            {
+              "final": {
+                "byte_accuracy": null,
+                "exact_token_accuracy_oracle_length": 0.14473252379389565,
+                "loss_native": 4.793693182240159,
+                "loss_per_token": 4.793693182240159,
+                "native_unit": "nats per token",
+                "scored_units_per_token": 1.0,
+                "seconds": 136.64713859558105,
+                "step": 300,
+                "tokens_scored": 6094
+              },
+              "history": [
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.0,
+                  "loss_native": 9.23863723289022,
+                  "loss_per_token": 9.23863723289022,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 1.5164155960083008,
+                  "step": 0,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.10321627830653102,
+                  "loss_native": 5.612740556881359,
+                  "loss_per_token": 5.612740556881359,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 24.233182907104492,
+                  "step": 50,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1212668198227765,
+                  "loss_native": 5.1621574147729925,
+                  "loss_per_token": 5.1621574147729925,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 46.59519362449646,
+                  "step": 100,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.13078437807679685,
+                  "loss_native": 5.025406505731686,
+                  "loss_per_token": 5.025406505731686,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 69.46559762954712,
+                  "step": 150,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.1444043321299639,
+                  "loss_native": 4.890204901131162,
+                  "loss_per_token": 4.890204901131162,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 91.5373945236206,
+                  "step": 200,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14095831965868066,
+                  "loss_native": 4.864609724798597,
+                  "loss_per_token": 4.864609724798597,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 113.9681453704834,
+                  "step": 250,
+                  "tokens_scored": 6094
+                },
+                {
+                  "byte_accuracy": null,
+                  "exact_token_accuracy_oracle_length": 0.14473252379389565,
+                  "loss_native": 4.793693182240159,
+                  "loss_per_token": 4.793693182240159,
+                  "native_unit": "nats per token",
+                  "scored_units_per_token": 1.0,
+                  "seconds": 136.64713859558105,
+                  "step": 300,
+                  "tokens_scored": 6094
+                }
+              ],
+              "seed": 3
+            }
+          ],
+          "verdict": "not established, inside the seed noise floor",
+          "window_capacity": "1 script tag + 31 characters"
+        }
+      },
+      "comparison_threshold": "2 x the largest per-arm standard deviation across seeds",
+      "lane": "web",
+      "seed_noise_floor_sd": 0.008279782980961593,
+      "train_sequences": 7028,
+      "truncation_exposure": {
+        "byte": {
+          "capacity_units": 32,
+          "truncated_occurrences": 0,
+          "truncated_rate": 0.0
+        },
+        "codepoint": {
+          "capacity_units": 16,
+          "truncated_occurrences": 0,
+          "truncated_rate": 0.0
+        },
+        "script_relative": {
+          "capacity_units": 32,
+          "truncated_occurrences": 0,
+          "truncated_rate": 0.0
+        },
+        "token_occurrences": 1124430
+      },
+      "val_sequences": 1757
+    }
+  },
+  "script_ids": {
+    "ARABIC": 11,
+    "BENGALI": 3,
+    "COMMON": 0,
+    "CYRILLIC": 14,
+    "DEVANAGARI": 2,
+    "GREEK": 13,
+    "GUJARATI": 4,
+    "GURMUKHI": 5,
+    "HAN": 12,
+    "KANNADA": 6,
+    "LATIN": 1,
+    "MALAYALAM": 7,
+    "ORIYA": 8,
+    "TAMIL": 9,
+    "TELUGU": 10
+  },
+  "seed": 20260825,
+  "tokenizer": {
+    "byte_fallback": true,
+    "merges": 9444,
+    "path": "/home/ashish/code/aiml/erav5/erav5/assignment-7/problem-3-dynamic-length/src/../../../assignment-6/frozen/tokenizer.json",
+    "size": 10000,
+    "type": "BPE"
+  },
+  "wall_seconds": 3147.0387001037598
+}

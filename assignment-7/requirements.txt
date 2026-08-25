@@ -1,0 +1,6 @@
+# Assignment 7 runs on two libraries and no network.
+#   numpy       the codec, the transformer, forward and backward
+#   tokenizers  reading the assignment-2 tokenizer and encoding the frozen corpus
+# There is no torch dependency. Nothing here needs a GPU, and nothing here used one.
+numpy==2.5.2
+tokenizers==0.23.1

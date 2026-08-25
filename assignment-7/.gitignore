@@ -1,0 +1,9 @@
+# Local virtualenv, bootstrapped with get-pip.py because this machine's python3-venv
+# lacks ensurepip. Never committed; requirements.txt is the contract.
+.venv/
+__pycache__/
+*.pyc
+
+# Trained weight matrices saved by exp_recheck.py for inspection. Regenerated on demand and
+# not referenced by any reported number, so they stay out of the repository.
+*.npy

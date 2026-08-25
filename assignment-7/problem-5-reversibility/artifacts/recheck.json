@@ -1,0 +1,52 @@
+{
+  "D": 8192,
+  "after_training": {
+    "learned_linear_inverse": {
+      "fit_tokens": 2500,
+      "held_out_decode_accuracy": 0.5683333333333334,
+      "test_tokens": 600
+    },
+    "separation": {
+      "exact_duplicates": 0,
+      "mean_norm": 131.14408730850093,
+      "nearest_neighbour_mean": 30.030164850515686,
+      "nearest_neighbour_min": 6.455225997223719,
+      "relative_separation_mean": 0.22898603716592483,
+      "relative_separation_min": 0.049222394464788675,
+      "tokens": 600
+    }
+  },
+  "d_model": 256,
+  "fit_tokens": 2500,
+  "probe_tokens": 600,
+  "random_init": {
+    "learned_linear_inverse": {
+      "fit_tokens": 2500,
+      "held_out_decode_accuracy": 0.5916666666666667,
+      "test_tokens": 600
+    },
+    "separation": {
+      "exact_duplicates": 0,
+      "mean_norm": 15.842161724399611,
+      "nearest_neighbour_mean": 13.322577105919212,
+      "nearest_neighbour_min": 4.110125109091206,
+      "relative_separation_mean": 0.8409570194830285,
+      "relative_separation_min": 0.25944218854683937,
+      "tokens": 600
+    }
+  },
+  "tokenizer": {
+    "byte_fallback": true,
+    "merges": 9444,
+    "path": "/home/ashish/code/aiml/erav5/erav5/assignment-7/problem-5-reversibility/src/../../../assignment-6/frozen/tokenizer.json",
+    "size": 10000,
+    "type": "BPE"
+  },
+  "training_steps": 300,
+  "verdict": {
+    "injective_after_training": true,
+    "learned_inverse_accuracy_change": -0.023333333333333317,
+    "reading": "Separation greater than zero means distinct tokens remain distinguishable after the trained projection, so the information survives. The learned inverse says whether a decoder that knows the code distribution can act on it. Minimum-norm recovery collapsing while these hold means the earlier E3 result was about a structure-blind decoder, not about the encoding."
+  },
+  "window": 32
+}
