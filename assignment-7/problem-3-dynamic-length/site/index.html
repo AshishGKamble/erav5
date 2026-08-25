@@ -33,6 +33,13 @@
     <div class="kpi" id="kpi"></div>
   </header>
 
+  <section id="answers">
+    <div class="sec-head"><span class="sec-num">TL;DR</span><h2>The answer to each of the three questions</h2></div>
+    <p class="sec-lead">The brief asks three things. All three are answered below, and the rest of
+      this page is how those answers were arrived at, in the order the experiments ran.</p>
+    <div class="tablewrap"><table id="answersTable"></table></div>
+  </section>
+
   <section id="ask">
     <div class="sec-head"><span class="sec-num">Q</span><h2>What the assignment asked</h2></div>
     <div class="asks"><span class="lab">The brief</span><q>Today Kronecker is limiting to presenting
@@ -70,6 +77,15 @@
     <p class="sec-lead">Indic languages mark case, number and person with <strong>suffixes</strong>.
       The window reads prefixes. It is discarding the half of the word that carries the grammar.</p>
     <div class="tablewrap"><table id="exTable"></table></div>
+  </section>
+
+  <section id="corrections">
+    <div class="sec-head"><span class="sec-num">&#9888;</span><h2>Two corrections that cut against this finding</h2></div>
+    <p class="sec-lead">A first pass measured a much higher English collision rate, which would have
+      made the gap look smaller and the measurement look careless. Two things were wrong with it,
+      and fixing both <strong>widened</strong> the gap.</p>
+    <div class="tablewrap"><table id="corrTable"></table></div>
+    <div class="callout" id="corrNote"></div>
   </section>
 
   <section id="fixes">
@@ -116,6 +132,15 @@
       result was null on both lanes. A null is worth nothing without knowing why, so the exposure
       was measured.</p>
     <div class="callout" id="exposureNote"></div>
+  </section>
+
+  <section id="e5b">
+    <div class="sec-head"><span class="sec-num">E5b</span><h2>The same test rebuilt so it can see the effect</h2></div>
+    <p class="sec-lead">Words as units instead of BPE tokens, and a tied byte head so there are zero
+      per word output parameters. The metric is exact <strong>full word</strong> reconstruction,
+      with truncated targets counted as failures rather than dropped from the denominator.</p>
+    <div class="tablewrap"><table id="e5bTable"></table></div>
+    <div class="callout" id="e5bNote"></div>
   </section>
 
   <footer>

@@ -126,12 +126,12 @@
 
   /* ---------- render ---------- */
   fetch("data/dashboard.json").then(function (r) { return r.json(); }).then(function (D) {
-    var h32 = D.headline["32"], h16 = D.headline["16"];
+    var h32 = D.headline["32"], h16 = D.headline["16"], e = null;
 
     document.getElementById("chips").innerHTML =
       '<span class="chip"><b>' + fmtN(D.corpus.characters) + '</b> characters measured</span>' +
       '<span class="chip"><b>' + fmtN(D.corpus.distinct_word_types) + '</b> word types</span>' +
-      '<span class="chip"><b>10</b> scripts</span>' +
+      '<span class="chip"><b>' + D.indic_script_count + '</b> Indic scripts</span>' +
       '<span class="chip">window <b>L = 32 bytes</b></span>';
 
     document.getElementById("kpi").innerHTML =
@@ -203,9 +203,11 @@
           tick: function (v) { return (v * 100).toFixed(0) + "%"; } });
 
     var lowest = Object.keys(D.entropy).filter(function (s) { return D.entropy[s] < 0.001; });
+    var worstLow = Math.max.apply(null, lowest.map(function (s) { return Math.abs(D.entropy[s]); }));
     document.getElementById("entropyNote").innerHTML =
       "<b>Why fix D exists.</b> The high byte of a codepoint is a script selector, and in this " +
-      "corpus it carries <b>0.0000 bits</b> of entropy for " + lowest.length + " of the measured " +
+      "corpus it carries <b>" + worstLow.toFixed(4) + " bits</b> of entropy for " + lowest.length +
+      " of the measured " +
       "scripts, including every Indic one. Half of fix B's dimensions carry nothing. Send the " +
       "script once per token instead, drop that block, and a position costs 256 rows again while " +
       "holding a whole character: <b>32 characters for every script</b> at the same total cost.";
@@ -256,12 +258,13 @@
 
     /* E5 exposure */
     if (D.downstream && D.downstream.indic && D.downstream.indic.exposure) {
-      var e = D.downstream.indic.exposure;
+      e = D.downstream.indic.exposure;
       document.getElementById("exposureNote").innerHTML =
         "<b>The experiment had no exposure to the effect.</b> Of " + fmtN(e.token_occurrences) +
         " indic token occurrences, the byte codec truncates <b>" + e.byte.truncated_occurrences +
         "</b>. Codepoint and script relative truncate <b>zero</b>. All three codecs therefore " +
-        "carry identical information for 99.998% of tokens and differ only in layout, which a " +
+        "carry identical information for " + ((1 - e.byte.truncated_rate) * 100).toFixed(3) +
+        "% of tokens and differ only in layout, which a " +
         "linear projection learns equally well either way. A BPE tokenizer sits between the corpus " +
         "and the window and removes the phenomenon under test, converting truncation into " +
         "fertility instead. The pre-registered experiment was <b>mis-specified, not " +
@@ -269,6 +272,73 @@
     } else {
       document.getElementById("exposureNote").textContent =
         "Run python run_demo.py --full to generate the downstream artefacts.";
+    }
+    /* answers summary */
+    var sch = D.schemes, mem = D.cost.memory["32"], cmp = D.cost.compute["32"];
+    var ar = [
+      ["\u201cThat\u2019s a waste of space. What can we do?\u201d",
+       "Nothing needs to change. The zeros cost <b>dimensions</b>, which genuinely cannot be " +
+       "reclaimed, but they cost no memory and no compute once the encoder is factored: <b>" +
+       Math.round(mem.ratio) + "x</b> less memory and <b>" + Math.round(cmp.arithmetic_ratio) +
+       "x</b> less arithmetic.", "E1, E6"],
+      ["\u201cHow can it be dynamic?\u201d",
+       "<b>It already is</b>, with no architectural change. Cost tracks the token\u2019s real " +
+       "length, correlation <b>" + D.cost.scaling_fit.corr.toFixed(4) + "</b>. Per token " +
+       "<i>dimensions</i> are impossible, because the projection needs a fixed input width.", "E6"],
+      ["\u201c...doesn\u2019t force us to crop a word\u201d",
+       "<b>Read the word from both ends</b>: <b>" +
+       sch.both_ends_32_bytes.reduction.toFixed(1) + "x</b> fewer collisions for no new " +
+       "parameters. A script relative codec reaches " + sch.fixD_31_chars.reduction.toFixed(1) +
+       "x, and the two compose for <b>" + sch.fixD_both_ends_31_chars.reduction.toFixed(1) +
+       "x</b>.", "E7, E4"]
+    ];
+    document.getElementById("answersTable").innerHTML =
+      "<tr><th>what was asked</th><th>the answer</th><th>where</th></tr>" +
+      ar.map(function (r) {
+        return "<tr><td><b>" + r[0] + "</b></td><td>" + r[1] + "</td><td>" + r[2] + "</td></tr>";
+      }).join("");
+
+    /* corrections */
+    var C = D.corrections;
+    document.getElementById("corrTable").innerHTML =
+      "<tr><th>pooled collision rate at L=16</th><th class='num'>naive measurement</th>" +
+      "<th class='num'>after both corrections</th></tr>" +
+      "<tr><td>Latin</td><td class='num'>" + fmtPct(C.latin_raw_16) + "</td><td class='num'>" +
+      fmtPct(C.latin_prose_16) + "</td></tr>" +
+      "<tr><td>Malayalam</td><td class='num'>" + fmtPct(C.malayalam_raw_16) +
+      "</td><td class='num'>" + fmtPct(C.malayalam_prose_16) + "</td></tr>";
+    document.getElementById("corrNote").innerHTML =
+      "<b>What was wrong.</b> First, whitespace splitting <b>source code</b> does not produce " +
+      "words: nearly all pooled Latin collisions were identifiers and LaTeX, " +
+      "<span class='mono'>self.assertEqual(</span> against " +
+      "<span class='mono'>self.assertEqual(0,</span>. Second, <b>trailing punctuation</b> is a " +
+      "fake collision: <span class='script'>\u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd</span> " +
+      "against the same word with a comma counted as two types sharing a prefix. Correcting both " +
+      "cut Latin by " + (C.latin_raw_16 / C.latin_prose_16).toFixed(1) + "x and left Malayalam " +
+      "almost unchanged, so the gap <b>widened</b>. Both sets of numbers are kept in the " +
+      "artefacts as <span class='mono'>word_raw</span> and <span class='mono'>word_prose</span>.";
+
+    /* E5b */
+    if (D.e5b) {
+      var rows5 = ["<tr><th>lane</th><th>codec</th><th class='num'>word types representable</th>" +
+                   "<th class='num'>exact full word</th><th class='num'>targets truncated</th></tr>"];
+      Object.keys(D.e5b).forEach(function (lane) {
+        Object.keys(D.e5b[lane]).forEach(function (a, i) {
+          var v = D.e5b[lane][a];
+          rows5.push("<tr><td>" + (i === 0 ? lane : "") + "</td><td>" + a +
+            "</td><td class='num'>" + fmtPct(v.representable) + "</td><td class='num'>" +
+            fmtPct(v.exact, 2) + "</td><td class='num'>" + fmtPct(v.truncated) + "</td></tr>");
+        });
+      });
+      document.getElementById("e5bTable").innerHTML = rows5.join("");
+      document.getElementById("e5bNote").innerHTML =
+        "<b>The web control is the one that matters, and it passes.</b> Helping Indic by hurting " +
+        "English would not be a fix, and this does not do that. <b>The indic result is weak and is " +
+        "labelled weak</b>: both arms sit near the floor of the metric, and the byte codec " +
+        "truncates only " + fmtPct(D.e5b.indic.byte.truncated) + " of targets, so truncation is " +
+        "not what limits it. The model is simply poor at word level prediction at this scale. " +
+        "Everything above this section is a property of the encoding and does not depend on this " +
+        "experiment at all.";
     }
   }).catch(function (err) {
     document.querySelector(".wrap").insertAdjacentHTML("afterbegin",

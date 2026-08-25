@@ -38,7 +38,23 @@ def main():
         }
 
     tp = w["e3_truncation"]["word_prose"]
+    tr = w["e3_truncation"]["word_raw"]
+    # The two measurement corrections, as numbers rather than as a story. Pooled Latin before and
+    # after excluding the code lane and stripping edge punctuation.
+    corrections = {"latin_raw_16": tr["LATIN"]["16"]["types_in_collisions_rate"],
+                   "latin_prose_16": tp["LATIN"]["16"]["types_in_collisions_rate"],
+                   "malayalam_raw_16": tr["MALAYALAM"]["16"]["types_in_collisions_rate"],
+                   "malayalam_prose_16": tp["MALAYALAM"]["16"]["types_in_collisions_rate"]}
+    # Three bytes per character is a UTF-8 fact, not a definition of "Indic": Han costs three bytes
+    # too. So the two lists are kept apart, and the collision tables use the explicit Indic list.
+    three_byte = sorted(s for s, r in w["e2_characters_per_window"]["rows"].items()
+                        if abs(r["bytes_per_character"] - 3.0) < 1e-9)
+    indic_present = [s for s in INDIC if s in w["e2_characters_per_window"]["rows"]]
     payload = {
+        "corrections": corrections,
+        "three_byte_scripts": three_byte,
+        "indic_scripts": indic_present,
+        "indic_script_count": len(indic_present),
         "corpus": w["corpus"],
         "headline": headline,
         "collision_check": w["e3_collision_check"],

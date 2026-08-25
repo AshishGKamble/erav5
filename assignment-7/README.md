@@ -13,6 +13,26 @@ writeups. This page is the hub, because the submission form accepts one link.
 
 ---
 
+## The answer to each question the brief asked
+
+**Problem 3** asked three things. All three are answered, and only the third turned out to be serious.
+
+| what was asked | the answer | where |
+|---|---|---|
+| "That's a waste of space. What can we do?" | Nothing needs to change. The zeros cost **dimensions**, which genuinely cannot be reclaimed, but they cost no memory and no compute once the encoder is factored: **345x** less memory, **932x** less arithmetic. | E1, E6 |
+| "How can it be dynamic?" | **It already is**, if you implement it correctly. Cost tracks the token's real length, correlation **above 0.98**: "a" costs one row lookup, a thirty byte word costs thirty. Per token dimensions are impossible, because `Linear(D, d)` needs a fixed width. | E6 |
+| "...doesn't force us to crop a word" | **Read the word from both ends.** 9.8x fewer collisions, no new parameters. A script relative codec gets 33.7x, and the two compose for **54.4x**. And because compute follows length, simply raising L is nearly free. | E7, E4 |
+
+**Problem 5** promised three payoffs. Two hold, and the third gets an honest split verdict.
+
+| what was promised | the answer | where |
+|---|---|---|
+| "How do I make a reverse of this?" | **It already reverses.** Exact inversion, tolerates **60x** more error than the objection implies, and survives the 8192 to 768 projection because a code is only 8-sparse, which makes this compressed sensing. | E1, E2, E3 |
+| "We can get rid of the final head!" | **Yes, at zero parameters** (0 against 100.7M at the paper's dimensions). But it costs accuracy: at this scale the vocabulary head **wins** on loss, and that is reported rather than buried. | E4 |
+| "A vocab of 1M without any issues!" | **Split verdict.** The capability is architecturally true and needs no experiment. The competence is **not demonstrated and not testable** on this machine. | E6, E7 |
+
+---
+
 ## The construction both problems are about
 
 ```
@@ -26,8 +46,8 @@ input side is `Linear(D, d_model)` with no bias.
 
 ## The two findings, in one line each
 
-**Problem 5.** Reversibility was never blocked. The codec inverts exactly, it survives noise about
-**65 times** larger than the objection assumes, and it survives an 8192 to 768 projection because a
+**Problem 5.** Reversibility was never blocked. The codec inverts exactly, it tolerates **60 times**
+more error than the objection implies, and it survives an 8192 to 768 projection because a
 code is only about 8-sparse, which makes recovery a compressed sensing problem rather than an
 impossible one. The output head can indeed be deleted at zero parameter cost. Whether that is a good
 idea is a separate question and the measured answer at this scale is **no**, which is reported as

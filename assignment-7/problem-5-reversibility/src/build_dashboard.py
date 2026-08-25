@@ -34,6 +34,14 @@ def main():
                "projection": [{"d": r["d_model"], "acc": r["minimum_norm_decode_accuracy"],
                                "null": r["nullspace_dimension"]}
                               for r in k["e3_projection"]["sweep"]]}
+    # How much noise the decode tolerates, against how much the objection actually implies.
+    # "0.31 instead of 0.30" is a relative error of 0.01/0.30. The tolerated sigma is the largest
+    # one at which exact accuracy is still 1.0, and the ratio between them is the headroom.
+    tolerated = max([r["sigma"] for r in k["e2_noise"]["sweep"]
+                     if r["exact_token_accuracy_oracle_length"] >= 1.0] or [0.0])
+    objection = 0.01 / 0.30
+    payload["headroom"] = {"tolerated_sigma": tolerated, "objection_relative_error": objection,
+                           "ratio": tolerated / objection}
     try:
         t = load("train.json")
     except FileNotFoundError:

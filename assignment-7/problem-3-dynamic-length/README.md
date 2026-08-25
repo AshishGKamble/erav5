@@ -18,7 +18,17 @@ That paragraph asks three things: **what to do about the waste**, **how to make 
 **how to stop cropping words**. This writeup answers all three, and it argues that the third is a
 far more serious problem than the first two, for a reason the assignment does not mention.
 
-## The answer in short
+## The answer to each of the three questions
+
+| what was asked | the answer | evidence |
+|---|---|---|
+| **"That's a waste of space. What can we do?"** | Nothing needs to change. The waste is 92 to 95 percent and it costs **dimensions**, which genuinely cannot be reclaimed, but it costs **no memory and no compute** once the encoder is factored: 312.5 MB becomes 0.905 MB, and the arithmetic drops 932x. | E1, E6 |
+| **"How can it be dynamic?"** | **It already is**, with no architectural change. Cost tracks the token's real length, correlation above 0.98: "a" costs one row lookup and a thirty byte word costs thirty. Making the *dimensions* per token is impossible, because `Linear(D, d)` needs a fixed width, and that is stated as the reason rather than skipped. | E6 |
+| **"...doesn't force us to crop a word"** | **Read the word from both ends.** 9.8x fewer collisions for no new parameters, no script table and no Unicode assumptions. A script relative codec reaches 33.7x, and the two compose for 54.4x. Separately, because compute follows real length, raising L is nearly free and L=64 alone removes almost every collision. | E7, E4, E6 |
+
+The rest of this document is how those answers were arrived at, in the order the experiments ran.
+
+## The finding underneath all three
 
 The waste is real, large and almost harmless: 92 to 95 percent of the window is zeros. It costs
 dimensions and nothing else, and two of the three things it might cost, memory and compute, are not
@@ -221,24 +231,26 @@ scalars, and `kappa @ W` is a handful of row lookups plus one shared rank-1 term
 never stored and never multiplied. This is exact, not an approximation: it reproduces the codec
 definition to **1.4e-14**.
 
-**The dynamic claim, made falsifiable.** Cost against token length has slope **432.7 ns per unit**
-with correlation **0.9827** in the committed run. If the window charged every token for L positions this line would be
+**The dynamic claim, made falsifiable.** Cost against token length rises with a strong positive
+slope, correlation **above 0.98** in every run measured. The exact slope and correlation of the
+committed run are in `artifacts/evidence.md`, because they are timing measurements and move. If the window charged every token for L positions this line would be
 flat. It is not flat. "a" costs one row lookup and a thirty byte word costs thirty.
 
-**The honest deflation.** 932x less arithmetic buys only about **1.5x** wall clock, because a gather
+**The honest deflation.** 932x less arithmetic buys only a low single digit multiple of wall clock, because a gather
 plus a segmented reduction is memory bound while the dense path is a single BLAS call. The advantage
-grows with the window, reaching 6.4x at L=128. **932x is not a speedup and is not quoted as one.**
+and the advantage grows with the window. **932x is not a speedup and is not quoted as one.**
 
-The timing figures in this section, and the slope above, are **re-measured on every run** and move
-with machine load: repeated runs on this machine produced wall clock ratios between 1.5x and 2.0x at
-L=32 and slopes between 430 and 505 ns per unit. What is stable, and what the claim rests on, is the
-strong positive correlation and the arithmetic ratio, both of which are deterministic. Every
-collision count and every memory figure elsewhere in this writeup is exact.
+Every timing figure in this section is **re-measured on each run** and moves with machine load:
+repeated runs on this machine produced wall clock ratios between about 1.5x and 2.0x at L=32 and
+slopes between roughly 430 and 505 ns per unit. What is stable, and what the claim rests on, is the
+**correlation staying above 0.98** and the arithmetic ratio, which is deterministic. Every collision
+count and every memory figure elsewhere in this writeup is exact and does not move.
 
 ### The consequence, which inverts the assignment's premise
 
-Encoding a short token costs the **same at every window size**: measured at 1.018x, 1.000x, 1.006x
-and 1.044x relative to L=32, for L=16, 32, 64 and 128, which is within the run to run spread above. Factored memory barely moves, 0.823 MB to
+Encoding a short token costs the **same at every window size**: every measured ratio relative to
+L=32, for L=16, 32, 64 and 128, lands within a few percent of 1.0, which is inside the run to run
+spread above. The committed run's exact ratios are in `artifacts/evidence.md`. Factored memory barely moves, 0.823 MB to
 0.928 MB. The only thing that genuinely grows is the projection matrix `W`, from 393,216 to 3,145,728
 parameters.
 

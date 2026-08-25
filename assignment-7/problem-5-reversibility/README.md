@@ -18,11 +18,21 @@ Three promises: **reverse it**, **delete the output head**, **get a 1M vocabular
 writeup delivers the first two and returns a split verdict on the third, because the third turned
 out not to be testable on this machine and saying so is more useful than pretending otherwise.
 
-## The answer in short
+## The answer to each of the three promises
+
+| what was promised | the answer | evidence |
+|---|---|---|
+| **"How do I make a reverse of this?"** | **It already reverses**, in three independent senses. Exact inversion of every token that fits the window; tolerates **60x** more error than the objection implies; and survives `Linear(8192, 768)` because a code is only 7.93-sparse, which makes recovery compressed sensing rather than magic. | E1, E2, E3 |
+| **"We can get rid of the final head!"** | **Yes, at zero new parameters**, 0 against 100.7M at the paper's dimensions. But it costs accuracy: at this scale the **vocabulary head wins** on loss, 2.6454 against 4.7197 nats per token. The byte head's case is parameter scaling, which is arithmetic here and not measurement. | E4 |
+| **"A vocab of 1M without any issues!"** | **Split verdict.** The **capability** is architecturally true and needs no experiment: a vocabulary softmax has no output row for an unknown word and scores exactly zero at any amount of training. The **competence** is not demonstrated, and two experiments that tried to demonstrate it both failed for reasons unrelated to the claim. | E6, E7 |
+
+The rest of this document is how those answers were arrived at, in the order the experiments ran.
+
+## The shape of the argument
 
 Reversibility is not blocked. It holds in three independent senses and the margins say by how much.
 The objection that makes it look impossible is an artefact of an assumed decoding rule, and the
-measured margin is roughly **65 times** larger than the objection requires.
+decode tolerates **60 times** more error than the objection implies.
 
 Deleting the head works: a head tied to `W` transposed adds **zero parameters**. It also costs
 accuracy at the scale this machine can reach, and that cost is stated in the table rather than
@@ -60,7 +70,11 @@ standard deviations and is still 99.69% at three.
 | 2.00 | 100.00% | 96.47% |
 | 3.00 | 99.69% | 80.18% |
 
-The point cloud is not needed. The margin is not marginal.
+**The headroom, derived rather than asserted.** "0.31 instead of 0.30" is a relative error of
+`0.01 / 0.30 = 0.0333`. Exact accuracy is still 100% at a noise sigma of **2.0**, and the codec is
+z-normalised so sigma is measured in units of the signal's own standard deviation. The decode
+therefore tolerates `2.0 / 0.0333 =` **60 times** the error the objection describes. The point cloud
+is not needed.
 
 ## E1, the codec inverts exactly
 

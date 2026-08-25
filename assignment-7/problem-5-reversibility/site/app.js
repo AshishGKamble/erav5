@@ -160,8 +160,10 @@
       "<b>The objection, in numbers.</b> The gap between the correct row and the runner up is <b>" +
       D.margin.toFixed(2) + "</b> after z-normalisation, against a signal standard deviation of " +
       "1.0. Predicting <span class='mono'>0.31</span> instead of <span class='mono'>0.30</span> is " +
-      "a relative error of about 0.03, so the measured margin is roughly <b>65 times</b> larger " +
-      "than the objection requires. Accuracy is still 100% at twice the signal's own scale. The " +
+      "a relative error of " + D.headroom.objection_relative_error.toFixed(4) + ". Exact accuracy " +
+      "is still 100% at a noise sigma of <b>" + D.headroom.tolerated_sigma.toFixed(1) + "</b>, and " +
+      "sigma is measured in units of the signal's own standard deviation. So the decode tolerates " +
+      "<b>" + D.headroom.ratio.toFixed(0) + " times</b> the error the objection describes. The " +
       "point cloud is not needed.";
 
     /* E3 projection */
@@ -226,9 +228,10 @@
         "<b>The vocabulary head wins at this scale, and that is the measured result.</b> It is " +
         "stated first because the alternative is to hide it. Seed noise floor is " +
         D.noise_floor.toFixed(4) + " nats per token, and both byte deltas exceed it. Two things " +
-        "complicate the simple reading, and both are real: per token loss compounds over about 3.2 " +
+        "complicate the simple reading, and both are real: per token loss compounds over several " +
         "byte positions while argmax accuracy does not, which is why the untied byte head sits " +
-        "within 1.5 points of the vocabulary head on exact token accuracy while looking far worse " +
+        "within <b>" + ((D.heads.vocab.exact - D.heads.byte_untied.exact) * 100).toFixed(2) +
+        " points</b> of the vocabulary head on exact token accuracy while looking far worse " +
         "on loss. And the byte head's argument was never that it wins at " + fmtN(D.vocab) +
         " tokens: it is that its head does not grow with the vocabulary. The last column is " +
         "<b>arithmetic, not measurement</b>, and the two comparisons point in opposite directions.";
@@ -298,6 +301,30 @@
         "exactly zero at any amount of training. The <b>competence</b> is not demonstrated, and " +
         "this page does not claim the payoff is false, only that this scale cannot decide.";
     }
+    /* answers summary */
+    var ar = [
+      ["\u201cHow do I make a reverse of this?\u201d",
+       "<b>It already reverses</b>, in three independent senses: exact inversion of every token " +
+       "that fits the window, tolerance of <b>" + D.headroom.ratio.toFixed(0) + "x</b> more error " +
+       "than the objection implies, and survival of the projection because a code is only " +
+       D.sparsity.k.toFixed(2) + "-sparse.", "E1, E2, E3"],
+      ["\u201cWe can get rid of the final head!\u201d",
+       D.heads ? "<b>Yes, at zero new parameters</b>, " + fmtN(D.heads.byte_tied.head_params_at_scale) +
+         " against " + fmtN(D.heads.vocab.head_params_at_scale) + " at the paper\u2019s " +
+         "dimensions. But it costs accuracy: at this scale the <b>vocabulary head wins</b> on " +
+         "loss, " + D.heads.vocab.loss.toFixed(4) + " against " + D.heads.byte_tied.loss.toFixed(4) +
+         " nats per token." : "Run the training experiments to populate this row.", "E4"],
+      ["\u201cA vocab of 1M without any issues!\u201d",
+       "<b>Split verdict.</b> The <b>capability</b> is architecturally true and needs no " +
+       "experiment: a vocabulary softmax has no output row for an unknown word and scores exactly " +
+       "zero at any amount of training. The <b>competence</b> is not demonstrated, and is not " +
+       "testable at this scale.", "E6, E7"]
+    ];
+    document.getElementById("answersTable").innerHTML =
+      "<tr><th>what was promised</th><th>the answer</th><th>where</th></tr>" +
+      ar.map(function (r) {
+        return "<tr><td><b>" + r[0] + "</b></td><td>" + r[1] + "</td><td>" + r[2] + "</td></tr>";
+      }).join("");
   }).catch(function (err) {
     document.querySelector(".wrap").insertAdjacentHTML("afterbegin",
       '<div class="callout">Could not load <span class="mono">data/dashboard.json</span>. ' +

@@ -33,6 +33,14 @@
     <div class="kpi" id="kpi"></div>
   </header>
 
+  <section id="answers">
+    <div class="sec-head"><span class="sec-num">TL;DR</span><h2>The answer to each of the three promises</h2></div>
+    <p class="sec-lead">The brief promises three payoffs. Two hold, the third gets a split verdict,
+      and the rest of this page is how those answers were arrived at, in the order the experiments
+      ran.</p>
+    <div class="tablewrap"><table id="answersTable"></table></div>
+  </section>
+
   <section id="ask">
     <div class="sec-head"><span class="sec-num">Q</span><h2>What the assignment asked</h2></div>
     <div class="asks"><span class="lab">The brief</span><q>Kronecker is forward deterministic (same
@@ -79,8 +87,8 @@
     <div class="sec-head"><span class="sec-num">E4</span><h2>Delete the output head: it works, and it costs something</h2></div>
     <p class="sec-lead">Three heads, identical body, identical data, identical seeds. A unit trap
       governs this comparison: a vocabulary head's loss is nats per <strong>token</strong>, a byte
-      head's is nats per <strong>byte position</strong>, at about 3.2 positions per token. Everything
-      here is converted to nats per token.</p>
+      head's is nats per <strong>byte position</strong>, and a token spans several positions.
+      Everything here is converted to nats per token.</p>
     <div class="tablewrap"><table id="headTable"></table></div>
     <div class="callout" id="headNote"></div>
   </section>
@@ -120,8 +128,8 @@
       exhibit the effect being measured</strong>, and each time the null looked like a finding.</p>
     <div class="tablewrap"><table>
       <tr><th>where</th><th>the flaw</th><th>how it was caught</th></tr>
-      <tr><td>Problem 3, E5</td><td>BPE tokens truncate 0.0024% of occurrences, so every codec
-        carried identical information</td><td>an exposure diagnostic</td></tr>
+      <tr><td>Problem 3, E5</td><td>BPE tokens truncate a negligible fraction of occurrences, so
+        every codec carried identical information</td><td>an exposure diagnostic</td></tr>
       <tr><td>Problem 5, E6</td><td>every scored target was already inside the vocabulary</td>
         <td>separate input and target streams</td></tr>
       <tr><td>Problem 5, E7</td><td>rare in-vocabulary words score zero too, so a zero on unknown
