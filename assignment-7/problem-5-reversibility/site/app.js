@@ -54,12 +54,18 @@
     var Y = function (v) { return padT + plotH - (v - y0) / (y1 - y0) * plotH; };
     var s = svg(W, H);
 
-    for (var i = 0; i <= 4; i++) {
-      var yv = y0 + (y1 - y0) * i / 4;
+    // Explicit tick values where given, so a chart with headroom above its data does not
+    // label its gridlines 26%, 51%, 77%, 102%.
+    var yticks = opts.yticks;
+    if (!yticks) {
+      yticks = [];
+      for (var i = 0; i <= 4; i++) yticks.push(y0 + (y1 - y0) * i / 4);
+    }
+    yticks.forEach(function (yv) {
       s.appendChild(el("line", { x1: padL, y1: Y(yv), x2: W - padR, y2: Y(yv), "class": "grid" }));
       s.appendChild(txt(opts.ytick ? opts.ytick(yv) : yv.toFixed(1),
         { x: padL - 8, y: Y(yv) + 4, "text-anchor": "end" }));
-    }
+    });
     s.appendChild(el("line", { x1: padL, y1: padT, x2: padL, y2: padT + plotH, "class": "axis" }));
     (opts.xticks || []).forEach(function (v) {
       s.appendChild(txt(opts.xtick ? opts.xtick(v) : v, { x: X(v), y: H - padB + 18,
@@ -146,7 +152,7 @@
         color: "var(--good)" },
       { pts: D.noise.map(function (n) { return { x: n.sigma, y: n.inferred }; }),
         color: "var(--amber)", dash: "5 3" }
-    ], { x0: 0, y1: 1.02, xticks: [0, 2, 4, 6, 8, 10, 12],
+    ], { x0: 0, y1: 1.02, xticks: [0, 2, 4, 6, 8, 10, 12], yticks: [0, .25, .5, .75, 1],
          ytick: function (v) { return Math.round(v * 100) + "%"; },
          xlab: "noise sigma, as a multiple of the signal's own standard deviation",
          ylab: "exact token accuracy" });
@@ -161,7 +167,7 @@
     /* E3 projection */
     lineChart(document.getElementById("projChart"), [
       { pts: D.projection.map(function (p) { return { x: p.d, y: p.acc }; }), color: "var(--accent)" }
-    ], { logx: true, y1: 1.02, xticks: [8, 32, 128, 512, 768],
+    ], { logx: true, y1: 1.02, xticks: [8, 32, 128, 512, 768], yticks: [0, .25, .5, .75, 1],
          ytick: function (v) { return Math.round(v * 100) + "%"; },
          xlab: "d_model (log scale)", ylab: "minimum norm decode accuracy" });
     document.getElementById("sparseNote").innerHTML =
@@ -235,7 +241,7 @@
           color: "var(--good)" },
         { pts: D.objectives.mse.curve.map(function (h) { return { x: h.step, y: h.acc }; }),
           color: "var(--amber)", dash: "5 3" }
-      ], { x0: 0, y1: 0.6, xticks: [0, 30, 60, 90, 120, 150],
+      ], { x0: 0, y1: 0.6, xticks: [0, 30, 60, 90, 120, 150], yticks: [0, .15, .3, .45, .6],
            ytick: function (v) { return Math.round(v * 100) + "%"; },
            xlab: "training step", ylab: "byte accuracy" });
       document.getElementById("initNote").innerHTML =
@@ -263,8 +269,10 @@
         "zero without retraining anything. The out of vocabulary strings are " +
         D.tying.out_of_vocabulary_examples.slice(0, 5).map(function (w) {
           return "<span class='mono script'>" + w + "</span>";
-        }).join(", ") + " and similar: degenerate repeats and unassigned codepoints, <b>not " +
-        "plausible words</b>.";
+        }).join(", ") + " and similar. If some of those render as empty boxes, that is the "  +
+        "finding rather than a missing font: the head emits codepoints Unicode has not assigned, " +
+        "so no font anywhere has a glyph for them. They are degenerate repeats and near misses, " +
+        "<b>not plausible words</b>.";
     }
 
     /* E7 bands */

@@ -45,7 +45,7 @@
   function barChart(mount, rows, opts) {
     opts = opts || {};
     var colors = opts.colors || ["var(--english)"];
-    var padL = opts.padL || 118, padR = 74, rowH = opts.rowH || 26, gap = 9;
+    var padL = opts.padL || 118, padR = opts.padR || 74, rowH = opts.rowH || 26, gap = 9;
     var series = rows[0].values.length;
     var barH = (rowH - 4) / series;
     var H = rows.length * (rowH + gap) + 34, W = 720;
@@ -90,10 +90,16 @@
     var Y = function (v) { return padT + plotH - (v - y0) / (y1 - y0) * plotH; };
     var s = svg(W, H);
 
-    for (var i = 0; i <= 4; i++) {
-      var yv = y0 + (y1 - y0) * i / 4;
+    // Round the axis to a readable step. Dividing the data maximum by four gives ticks like
+    // 3881 and 11642, which are exact and unreadable.
+    var raw = (y1 - y0) / 4, mag = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
+    var step = [1, 2, 2.5, 5, 10].map(function (m) { return m * mag; })
+      .filter(function (v) { return v >= raw; })[0] || 10 * mag;
+    y1 = step * Math.ceil(y1 / step);
+    for (var yv = y0; yv <= y1 + 1e-9; yv += step) {
       s.appendChild(el("line", { x1: padL, y1: Y(yv), x2: W - padR, y2: Y(yv), "class": "grid" }));
-      s.appendChild(txt(Math.round(yv), { x: padL - 8, y: Y(yv) + 4, "text-anchor": "end" }));
+      s.appendChild(txt(yv.toLocaleString("en-US"),
+        { x: padL - 8, y: Y(yv) + 4, "text-anchor": "end" }));
     }
     s.appendChild(el("line", { x1: padL, y1: padT, x2: padL, y2: padT + plotH, "class": "axis" }));
     for (var k = 0; k <= 4; k++) {
@@ -215,7 +221,7 @@
       var r = D.schemes[k];
       return { label: labels[k], values: [r.groups],
                notes: [fmtN(r.groups) + " groups  (" + r.reduction.toFixed(1) + "x better)"] };
-    }), { colors: ["var(--warn)"], padL: 168, rowH: 28,
+    }), { colors: ["var(--warn)"], padL: 168, padR: 172, rowH: 28,
           tick: function (v) { return fmtN(Math.round(v)); } });
 
     /* E6 cost */
