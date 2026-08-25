@@ -1,0 +1,16 @@
+{
+  "batches": 60,
+  "batches_per_s": 1.05,
+  "elapsed_s": 57.129,
+  "final_loss": 5.908292,
+  "first_loss": 9.208623,
+  "loss_bearing_frac_of_capacity": 0.8272,
+  "loss_bearing_tokens": 195240,
+  "loss_bearing_tokens_per_s": 3417.5,
+  "note": "Recomputed from ledgers/consumption.jsonl and ledgers/learning.jsonl, not from a counter held during the run.",
+  "packing_utilisation": 0.9048,
+  "padding_tokens": 22480,
+  "sequences": 461,
+  "tokens_per_s": 3738.0,
+  "tokens_total": 213552
+}

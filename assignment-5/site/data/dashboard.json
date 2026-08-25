@@ -726,7 +726,7 @@
         "benchmark": "AIME, GPQA, depth-control",
         "supply_B": 38,
         "epochs": 4.0,
-        "generated_B": 88,
+        "generated_B": 208,
         "trainable_frac": 1.0
       },
       {
@@ -919,8 +919,8 @@
       ]
     },
     "supply_totals": {
-      "generated_B": 238,
-      "generated_pct": 5.9,
+      "generated_B": 358,
+      "generated_pct": 8.9,
       "organic_indic_B": 110,
       "verified_pct_of_budget": 3.2
     },

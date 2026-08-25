@@ -1,0 +1,15 @@
+{"reason":"deliberate attack: admit non-train shard","shard_id":"agentic-eval-0000","split":"eval"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"code-eval-0000","split":"eval"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"indic-eval-0000","split":"eval"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"indic-eval-0001","split":"eval"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"long_ctx-eval-0000","split":"eval"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"math-eval-0000","split":"eval"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"reasoning-eval-0000","split":"eval"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"web-eval-0000","split":"eval"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"agentic-holdout-0000","split":"holdout"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"code-holdout-0000","split":"holdout"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"indic-holdout-0000","split":"holdout"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"long_ctx-holdout-0000","split":"holdout"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"math-holdout-0000","split":"holdout"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"reasoning-holdout-0000","split":"holdout"}
+{"reason":"deliberate attack: admit non-train shard","shard_id":"web-holdout-0000","split":"holdout"}

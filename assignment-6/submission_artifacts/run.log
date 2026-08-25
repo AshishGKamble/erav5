@@ -1,0 +1,113 @@
+
+=== 0. verify frozen inputs ===
+[PASS] tokenizer_hash_verified  sha256 ec93367beecc356c  vocab 10000
+[PASS] plan_hash_verified  sha256 da446663f1da3515
+
+=== 1. shards created ===
+  tokenizer sha256 ec93367beecc356c...  vocab 10000
+  web          7 shards  1,124,430 tokens  fertility 0.374  {'eval': '72,660', 'holdout': '23,854', 'train': '1,027,916'}
+  code         9 shards  1,894,126 tokens  fertility 0.614  {'eval': '42,861', 'holdout': '39,129', 'train': '1,812,136'}
+  math         6 shards    904,084 tokens  fertility 0.449  {'eval': '83,492', 'holdout': '28,141', 'train': '792,451'}
+  reasoning    6 shards    662,690 tokens  fertility 0.442  {'eval': '33,431', 'holdout': '17,405', 'train': '611,854'}
+  indic       28 shards  5,488,811 tokens  fertility 1.829  {'eval': '288,123', 'holdout': '178,453', 'train': '5,022,235'}
+  agentic      7 shards    897,576 tokens  fertility 0.449  {'eval': '58,923', 'holdout': '18,259', 'train': '820,394'}
+  long_ctx     8 shards  1,223,189 tokens  fertility 0.402  {'eval': '47,841', 'holdout': '70,870', 'train': '1,104,478'}
+  71 shards, 12,194,906 tokens, 8,737 documents
+
+=== 2. manifests validated ===
+[PASS] manifest_validated  71 shards, 8,737 documents, 0 problems
+
+=== 3. evaluation data blocked ===
+  attacking the firewall with 8 eval and 7 holdout shards
+[PASS] eval_shard_blocked  15 admission attempts refused, splits ['eval', 'holdout']
+[PASS] firewall_guards_live_pool  candidate pool holds 704 non-train documents across ['eval', 'holdout', 'train']
+
+=== 4. mixture compiled ===
+  stage seed       through step 5
+  stage general    through step 32
+  stage reasoning  through step 47
+  stage long_ctx   through step 58
+  stage anneal     through step 60
+  lanes ['web', 'code', 'math', 'reasoning', 'agentic', 'long_ctx', 'indic']
+  indic floor 14%  ·  opus keep 0.5  ·  protected ['agentic', 'indic']
+
+=== 5. batches packed - reference run ===
+  batches passed through packing, masking and the firewall
+  model: 560,352 params, d=48, 2 layers, seq 512, 8 sequences/batch
+    [PASS] checkpoint_saved  main step 20  weights 945485c92a09
+    [PASS] checkpoint_saved  main step 40  weights d686deb0ebcc
+  60 batches in 57.1s  ·  loss 9.2086 -> 5.9083
+  OPUS decisions recorded: 1,689 candidates
+[PASS] opus_decisions_recorded  1,689 candidate decisions
+
+=== 6. crash simulated ===
+    [PASS] checkpoint_saved  crash step 20  weights 945485c92a09
+  simulated crash at step 35
+[PASS] crash_simulated  deliberate failure at step 35
+
+=== 7. run resumed ===
+  resuming from checkpoint step 20 (ledger held 36 records at crash)
+[PASS] checkpoint_verified  bindings and scheduler state match the ledger prefix
+[PASS] scheduler_state_reconstructed  recomputed from 21 ledger records
+  rewound partial tail: 15 consumption and 14 learning records dropped
+[PASS] weights_restored  sha256 945485c92a0921c5
+[PASS] optimiser_state_restored  Adam step 21 restored (moments, not just weights)
+[PASS] resume_next_batch_matched  step 21 hash f07edba1bd219997
+[PASS] resume_rejects_modified_plan  checkpoint refuses to resume against a different plan.json
+[PASS] resume_reproduces_losses  60/60 losses bit-identical (39/39 after the resume point), worst delta 0.00e+00
+[PASS] ledger_equivalence  60 batches compared record-for-record
+
+=== 8. historical stream replayed ===
+[PASS] replay_hash_matched  steps 12-23 re-derived, 12 batches, 0 mismatches
+
+=== 9. branch forked ===
+[PASS] fork_lineage_verified  prefix of 21 steps identical, 10/10 diverged after fork
+
+=== 10. audit completed ===
+  lane        planned   actual   delta
+  web            29.0    30.45   +1.45
+  code           20.0    20.38   +0.38
+  math           10.0    10.01   +0.01
+  reasoning       9.0     8.29   -0.71
+  agentic         8.0     6.61   -1.39
+  long_ctx        6.0     6.23   +0.23
+  indic          18.0    18.02   +0.02
+  max |delta| 1.45 pts
+[PASS] mixture_compliance  max |delta| 1.45 pts
+[PASS] protected_floor_held  indic cumulative minimum 14.55% vs floor 14%, present in 60/60 batches
+  curriculum gating: 2,597 candidates outside the stage band, 290 held by the anneal reserve, 19 slots relaxed
+[PASS] anneal_reserve_held  290 reserved-document draws refused before the anneal stage (1 anneal batches)
+[PASS] curriculum_band_gating  stage difficulty bands enforced on every draw
+  OPUS: 1,689 candidates, 163 protected overrides across ['agentic', 'indic'], 634 deferrals, 3 snapshots
+  slots filled from: {'accept': 405, 'defer': 129, 'exhaustion': 17}
+[PASS] opus_audit_trail  0 protected candidates rejected, all four decision types exercised
+[PASS] packing_report  utilisation 0.9048, 461 sequences
+  learning: loss 9.2086 -> 5.9083 (first fifth 8.4797, last fifth 6.0524)
+  per-lane final loss: {'agentic': 4.007995, 'code': 5.986816, 'indic': 5.689389, 'long_ctx': 6.559116, 'math': 6.661897, 'reasoning': 6.423769, 'web': 6.557454}
+[PASS] learning_trace  loss attributable per lane and per sequence
+
+=== 11. performance measured ===
+  3,738 tokens/s  ·  3,418 loss-bearing tokens/s
+  packing utilisation 0.9048  ·  padding 22,480 tokens
+[PASS] performance_measured  derived from the ledgers
+
+=== 12. evidence bundle ===
+  10/10 requirements passed
+
+=== execution log - event sequence ===
+  shards created
+  manifests validated
+  evaluation data blocked
+  mixture compiled
+  batches packed
+  OPUS decisions recorded
+  checkpoint saved
+  crash simulated
+  run resumed
+  historical stream replayed
+  branch forked
+  audit completed
+  performance measured
+
+total wall clock 152.8s
+artifacts in /home/ashish/code/aiml/erav5/erav5/assignment-6/submission_artifacts

@@ -1,0 +1,67 @@
+{
+  "bindings": {
+    "manifest_sha256": "40391c0463663aa49b8841fbfe784248e90ca91d5ea8eed2f15af321068133f2",
+    "plan_sha256": "da446663f1da35154b02103a55228dac42febc8c912f5f579cfc8ac387413373",
+    "tokenizer_sha256": "ec93367beecc356c7dc052b52669685f07b92c2b4cf1643e4cda5dab286df7d8"
+  },
+  "branch": "main",
+  "ledger_offsets": {
+    "consumption": 41,
+    "learning": 41
+  },
+  "model_cfg": {
+    "d": 48,
+    "max_pos": 512,
+    "n_head": 4,
+    "n_layer": 2,
+    "seed": 1234,
+    "vocab": 10000
+  },
+  "next_step": 41,
+  "optimiser_saved": true,
+  "optimiser_step": 41,
+  "parent": null,
+  "scheduler": {
+    "by_stage": {
+      "general": {
+        "agentic": 4332,
+        "code": 20992,
+        "indic": 18603,
+        "long_ctx": 5120,
+        "math": 10240,
+        "reasoning": 6420,
+        "web": 38912
+      },
+      "reasoning": {
+        "agentic": 2673,
+        "code": 8192,
+        "indic": 6144,
+        "long_ctx": 1536,
+        "math": 4096,
+        "reasoning": 4044,
+        "web": 7168
+      },
+      "seed": {
+        "code": 2048,
+        "indic": 3073,
+        "long_ctx": 1024,
+        "math": 1024,
+        "reasoning": 329,
+        "web": 10240
+      }
+    },
+    "consumed": {
+      "agentic": 7005,
+      "code": 31232,
+      "indic": 27820,
+      "long_ctx": 7680,
+      "math": 15360,
+      "reasoning": 10793,
+      "web": 56320
+    }
+  },
+  "scheduler_hash": "c04f9f63a56f5e30474083ec0aa92067e5d77d3ab37037f629fb0f7cbdb175c1",
+  "step": 40,
+  "weights_file": "main-step00040.npz",
+  "weights_sha256": "d686deb0ebcc3bee2baadbeb923a5e7b99edbcc0204006c7abeb0d61314a7e4b"
+}
