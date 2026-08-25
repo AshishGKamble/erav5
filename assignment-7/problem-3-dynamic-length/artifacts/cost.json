@@ -6,40 +6,40 @@
         "D": 32768,
         "arithmetic_ratio": 3608.9250749519365,
         "dense_multiply_accumulates": 25769803776.0,
-        "dense_seconds": 0.25530094299756456,
+        "dense_seconds": 0.2616784359997837,
         "factored_multiply_accumulates": 7140576.0,
-        "factored_seconds": 0.039277834999666084,
-        "speedup": 6.49987309635918,
+        "factored_seconds": 0.037611088999256026,
+        "speedup": 6.957480970704142,
         "tokens": 8192
       },
       "16": {
         "D": 4096,
         "arithmetic_ratio": 527.4941755356778,
         "dense_multiply_accumulates": 3221225472.0,
-        "dense_seconds": 0.03209112200056552,
+        "dense_seconds": 0.033453912001277786,
         "factored_multiply_accumulates": 6106656.0,
-        "factored_seconds": 0.029838671998732025,
-        "speedup": 1.075487608896576,
+        "factored_seconds": 0.03063319599823444,
+        "speedup": 1.0920803693877035,
         "tokens": 8192
       },
       "32": {
         "D": 8192,
         "arithmetic_ratio": 932.4560789217729,
         "dense_multiply_accumulates": 6442450944.0,
-        "dense_seconds": 0.06516261999786366,
+        "dense_seconds": 0.06909509400065872,
         "factored_multiply_accumulates": 6909120.0,
-        "factored_seconds": 0.03785980400061817,
-        "speedup": 1.721155767124407,
+        "factored_seconds": 0.03546373100107303,
+        "speedup": 1.9483312119237568,
         "tokens": 8192
       },
       "64": {
         "D": 16384,
         "arithmetic_ratio": 1811.7699275117777,
         "dense_multiply_accumulates": 12884901888.0,
-        "dense_seconds": 0.1256277409993345,
+        "dense_seconds": 0.13268370299920207,
         "factored_multiply_accumulates": 7111776.0,
-        "factored_seconds": 0.039116718999139266,
-        "speedup": 3.21161243104512,
+        "factored_seconds": 0.03794740000012098,
+        "speedup": 3.4965163093855987,
         "tokens": 8192
       }
     },
@@ -131,29 +131,29 @@
         "D": 32768,
         "factored_mb": 0.9284820556640625,
         "projection_parameters": 3145728,
-        "short_token_seconds": 0.020339745002274867,
-        "short_token_time_vs_L32": 1.0348210456015827
+        "short_token_seconds": 0.020354430002043955,
+        "short_token_time_vs_L32": 1.0618395531509848
       },
       "16": {
         "D": 4096,
         "factored_mb": 0.8231658935546875,
         "projection_parameters": 393216,
-        "short_token_seconds": 0.019914868000341812,
-        "short_token_time_vs_L32": 1.0132046652908533
+        "short_token_seconds": 0.019533352002326865,
+        "short_token_time_vs_L32": 1.019005973618954
       },
       "32": {
         "D": 8192,
         "factored_mb": 0.904541015625,
         "projection_parameters": 786432,
-        "short_token_seconds": 0.019655325999337947,
+        "short_token_seconds": 0.019169025999872247,
         "short_token_time_vs_L32": 1.0
       },
       "64": {
         "D": 16384,
         "factored_mb": 0.9257888793945312,
         "projection_parameters": 1572864,
-        "short_token_seconds": 0.02011272299932898,
-        "short_token_time_vs_L32": 1.023270893599345
+        "short_token_seconds": 0.019530898996890755,
+        "short_token_time_vs_L32": 1.0188780064788332
       }
     },
     "tokens_timed": 8192
@@ -162,232 +162,232 @@
     "buckets": [
       {
         "distinct_tokens_available": 223,
-        "nanoseconds_per_token": 2001.323974099023,
+        "nanoseconds_per_token": 1970.5097651367964,
         "occupied_units": 1,
-        "seconds": 0.008197422997909598,
+        "seconds": 0.008071207998000318,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 879,
-        "nanoseconds_per_token": 2179.4248041828723,
+        "nanoseconds_per_token": 1864.9179684970818,
         "occupied_units": 2,
-        "seconds": 0.008926923997933045,
+        "seconds": 0.007638703998964047,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 1288,
-        "nanoseconds_per_token": 2224.045165810651,
+        "nanoseconds_per_token": 2119.4162593829446,
         "occupied_units": 3,
-        "seconds": 0.009109688999160426,
+        "seconds": 0.008681128998432541,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 1046,
-        "nanoseconds_per_token": 2380.567870829964,
+        "nanoseconds_per_token": 2389.753174014686,
         "occupied_units": 4,
-        "seconds": 0.009750805998919532,
+        "seconds": 0.009788429000764154,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 692,
-        "nanoseconds_per_token": 2596.226318374306,
+        "nanoseconds_per_token": 2641.6369633963654,
         "occupied_units": 5,
-        "seconds": 0.010634143000061158,
+        "seconds": 0.010820145002071513,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 1034,
-        "nanoseconds_per_token": 2853.315917761279,
+        "nanoseconds_per_token": 2940.2690433499856,
         "occupied_units": 6,
-        "seconds": 0.011687181999150198,
+        "seconds": 0.012043342001561541,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 588,
-        "nanoseconds_per_token": 3065.329590157262,
+        "nanoseconds_per_token": 3221.037353284828,
         "occupied_units": 7,
-        "seconds": 0.012555590001284145,
+        "seconds": 0.013193368999054655,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 319,
-        "nanoseconds_per_token": 3366.927002090847,
+        "nanoseconds_per_token": 3514.1977532404667,
         "occupied_units": 8,
-        "seconds": 0.01379093300056411,
+        "seconds": 0.014394153997272952,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 764,
-        "nanoseconds_per_token": 3704.084716282807,
+        "nanoseconds_per_token": 3728.430176153097,
         "occupied_units": 9,
-        "seconds": 0.015171930997894378,
+        "seconds": 0.015271650001523085,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 364,
-        "nanoseconds_per_token": 4104.281738470661,
+        "nanoseconds_per_token": 4062.826904238648,
         "occupied_units": 10,
-        "seconds": 0.016811138000775827,
+        "seconds": 0.0166413389997615,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 139,
-        "nanoseconds_per_token": 4397.635009922851,
+        "nanoseconds_per_token": 4365.348632795474,
         "occupied_units": 11,
-        "seconds": 0.018012713000644,
+        "seconds": 0.01788046799993026,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 482,
-        "nanoseconds_per_token": 4739.272460696498,
+        "nanoseconds_per_token": 4622.896240036312,
         "occupied_units": 12,
-        "seconds": 0.019412059999012854,
+        "seconds": 0.018935382999188732,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 256,
-        "nanoseconds_per_token": 4970.674316595591,
+        "nanoseconds_per_token": 4850.45629883274,
         "occupied_units": 13,
-        "seconds": 0.020359882000775542,
+        "seconds": 0.0198674690000189,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 79,
-        "nanoseconds_per_token": 5250.067626860755,
+        "nanoseconds_per_token": 5236.707274924867,
         "occupied_units": 14,
-        "seconds": 0.021504276999621652,
+        "seconds": 0.02144955299809226,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 282,
-        "nanoseconds_per_token": 5601.302490276794,
+        "nanoseconds_per_token": 5481.022949282988,
         "occupied_units": 15,
-        "seconds": 0.022942935000173748,
+        "seconds": 0.022450270000263117,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 205,
-        "nanoseconds_per_token": 6061.142822311183,
+        "nanoseconds_per_token": 5967.180664256944,
         "occupied_units": 16,
-        "seconds": 0.024826441000186605,
+        "seconds": 0.02444157200079644,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 73,
-        "nanoseconds_per_token": 6576.743164288246,
+        "nanoseconds_per_token": 7139.681396317599,
         "occupied_units": 17,
-        "seconds": 0.026938340000924654,
+        "seconds": 0.029244134999316884,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 190,
-        "nanoseconds_per_token": 7099.1354972349545,
+        "nanoseconds_per_token": 7013.199707195383,
         "occupied_units": 18,
-        "seconds": 0.029078058996674372,
+        "seconds": 0.02872606600067229,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 176,
-        "nanoseconds_per_token": 7668.216552403351,
+        "nanoseconds_per_token": 7715.151123299791,
         "occupied_units": 19,
-        "seconds": 0.031409014998644125,
+        "seconds": 0.03160125900103594,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 65,
-        "nanoseconds_per_token": 8227.385985826175,
+        "nanoseconds_per_token": 8266.622314678785,
         "occupied_units": 20,
-        "seconds": 0.03369937299794401,
+        "seconds": 0.0338600850009243,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 91,
-        "nanoseconds_per_token": 8767.40502953055,
+        "nanoseconds_per_token": 8725.0251459281,
         "occupied_units": 21,
-        "seconds": 0.035911291000957135,
+        "seconds": 0.0357377029977215,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 101,
-        "nanoseconds_per_token": 9599.05688535656,
+        "nanoseconds_per_token": 9289.450927596477,
         "occupied_units": 22,
-        "seconds": 0.03931773700242047,
+        "seconds": 0.03804959099943517,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 74,
-        "nanoseconds_per_token": 10414.193603480726,
+        "nanoseconds_per_token": 10109.181641126952,
         "occupied_units": 23,
-        "seconds": 0.04265653699985705,
+        "seconds": 0.041407208002055995,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 57,
-        "nanoseconds_per_token": 10896.636229773549,
+        "nanoseconds_per_token": 11230.776366666361,
         "occupied_units": 24,
-        "seconds": 0.044632621997152455,
+        "seconds": 0.04600125999786542,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 53,
-        "nanoseconds_per_token": 11366.52221678247,
+        "nanoseconds_per_token": 11310.631103711443,
         "occupied_units": 25,
-        "seconds": 0.046557274999941,
+        "seconds": 0.046328345000802074,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 35,
-        "nanoseconds_per_token": 12038.297851901803,
+        "nanoseconds_per_token": 11431.41455095531,
         "occupied_units": 26,
-        "seconds": 0.04930886800138978,
+        "seconds": 0.04682307400071295,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 45,
-        "nanoseconds_per_token": 12146.087402520323,
+        "nanoseconds_per_token": 12183.773193008563,
         "occupied_units": 27,
-        "seconds": 0.04975037400072324,
+        "seconds": 0.04990473499856307,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 40,
-        "nanoseconds_per_token": 12881.32128873798,
+        "nanoseconds_per_token": 12683.911377209257,
         "occupied_units": 28,
-        "seconds": 0.05276189199867076,
+        "seconds": 0.05195330100104911,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 26,
-        "nanoseconds_per_token": 13445.301513037577,
+        "nanoseconds_per_token": 13235.15234386008,
         "occupied_units": 29,
-        "seconds": 0.05507195499740192,
+        "seconds": 0.054211184000450885,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 27,
-        "nanoseconds_per_token": 13748.41186496667,
+        "nanoseconds_per_token": 13347.944579855664,
         "occupied_units": 30,
-        "seconds": 0.05631349499890348,
+        "seconds": 0.0546731809990888,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 40,
-        "nanoseconds_per_token": 14224.062011791717,
+        "nanoseconds_per_token": 13632.033446953074,
         "occupied_units": 31,
-        "seconds": 0.05826175800029887,
+        "seconds": 0.05583680899871979,
         "tokens_timed": 4096
       },
       {
         "distinct_tokens_available": 267,
-        "nanoseconds_per_token": 15005.992187511198,
+        "nanoseconds_per_token": 14834.08325242408,
         "occupied_units": 32,
-        "seconds": 0.06146454400004586,
+        "seconds": 0.06076040500192903,
         "tokens_timed": 4096
       }
     ],
-    "correlation": 0.9860498231003648,
-    "linear_fit_intercept_ns": 36.85761614909441,
-    "linear_fit_slope_ns_per_unit": 440.19118824450004,
+    "correlation": 0.9875421200687029,
+    "linear_fit_intercept_ns": 109.01201643347454,
+    "linear_fit_slope_ns_per_unit": 431.12927152602236,
     "reading": "A positive slope with a high correlation is the dynamic claim in its measurable form: the encoder charges per unit present, not per window slot. A flat line would refute it."
   },
   "tokenizer": {

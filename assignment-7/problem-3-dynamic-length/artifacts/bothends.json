@@ -1,4 +1,54 @@
 {
+  "choose_L": {
+    "d_model": 96,
+    "reading": "Compare like for like on dimensions, not on window size. The composite scheme at L=32 costs D=8192, and the published construction needs D=16384 at L=64 to do worse. Raising the window is the expensive way to buy what a different choice of units gives away.",
+    "rows": {
+      "both ends + hash": {
+        "128": {
+          "D": 32768,
+          "colliding_groups": 0,
+          "projection_parameters": 3145728
+        },
+        "16": {
+          "D": 4096,
+          "colliding_groups": 152,
+          "projection_parameters": 393216
+        },
+        "32": {
+          "D": 8192,
+          "colliding_groups": 3,
+          "projection_parameters": 786432
+        },
+        "64": {
+          "D": 16384,
+          "colliding_groups": 0,
+          "projection_parameters": 1572864
+        }
+      },
+      "published prefix": {
+        "128": {
+          "D": 32768,
+          "colliding_groups": 0,
+          "projection_parameters": 3145728
+        },
+        "16": {
+          "D": 4096,
+          "colliding_groups": 12436,
+          "projection_parameters": 393216
+        },
+        "32": {
+          "D": 8192,
+          "colliding_groups": 2122,
+          "projection_parameters": 786432
+        },
+        "64": {
+          "D": 16384,
+          "colliding_groups": 10,
+          "projection_parameters": 1572864
+        }
+      }
+    }
+  },
   "schemes": {
     "both_ends_32_bytes": {
       "D": 8192,
@@ -249,6 +299,388 @@
       "reduction_vs_published": 9.778801843317972,
       "total_colliding_groups": 217
     },
+    "both_ends_32_bytes_aligned": {
+      "D": 8192,
+      "description": "16 front + 16 back bytes, each cut moved to a character boundary",
+      "per_script": {
+        "ARABIC": {
+          "colliding_groups": 0,
+          "distinct_types": 4445,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "BENGALI": {
+          "colliding_groups": 5,
+          "distinct_types": 13413,
+          "examples": [
+            [
+              "শিক্ষাগ্ৰহীসকলৰ",
+              "শিক্ষাৰ্থীসকলৰ"
+            ],
+            [
+              "প্রতিযোগিতামূলক",
+              "প্রতিরক্ষামূলক"
+            ],
+            [
+              "পর্যায়ক্রমে",
+              "পর্যায়ক্রমে"
+            ],
+            [
+              "প্ৰতিযোগিতামূলক",
+              "প্ৰতিৰক্ষামূলক"
+            ],
+            [
+              "বেক্টেৰিয়া",
+              "বেক্ট্ৰিয়া"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0007455453664355476
+        },
+        "COMMON": {
+          "colliding_groups": 1,
+          "distinct_types": 12572,
+          "examples": [
+            [
+              "1,2,3,4,5,6,7,8,9)(10,11,12,13,14,15,16,17,18)(19,20,21,22,23,24,25,26,27)(28,29,30,31,32,33,34,35,36)(37,38,39,40,41,42,43,44,45)(46,47,48,49,50,51,52,53,54)(55,56,57,58,59,60,61,62,63)(64,65,66,67,68,69,70,71,72)(73,74,75,76,77,78,79,80,81)(82,83,84,85,86,87,88,89,90)(91,92,93,94,95,96,97,98,99)(100,101,102,103,104,105,106,107,108",
+              "1,2,3,4,5,6,7,8,9),(10,11,12,13,14,15,16,17,18),(19,20,21,22,23,24,25,26,27),(28,29,30,31,32,33,34,35,36),(37,38,39,40,41,42,43,44,45),(46,47,48,49,50,51,52,53,54),(55,56,57,58,59,60,61,62,63),(64,65,66,67,68,69,70,71,72),(73,74,75,76,77,78,79,80,81),(82,83,84,85,86,87,88,89,90),(91,92,93,94,95,96,97,98,99),(100,101,102,103,104,105,106,107,108"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0001590836780146357
+        },
+        "DEVANAGARI": {
+          "colliding_groups": 22,
+          "distinct_types": 17757,
+          "examples": [
+            [
+              "संस्कृतमध्ये",
+              "संस्कृतीमध्ये"
+            ],
+            [
+              "विमानतळाच्या",
+              "विमानाच्या"
+            ],
+            [
+              "अभियांत्रिकी",
+              "अभियान्त्रिकी"
+            ],
+            [
+              "प्राणींच्या",
+              "प्राण्यांच्या"
+            ],
+            [
+              "आवश्यकतानुसार",
+              "आवश्यकतेनुसार"
+            ],
+            [
+              "मुख्यमंत्री",
+              "मुख्य्रमंत्री"
+            ]
+          ],
+          "types_in_collisions_rate": 0.002534211860111505
+        },
+        "GUJARATI": {
+          "colliding_groups": 1,
+          "distinct_types": 8249,
+          "examples": [
+            [
+              "દુકાનમાંથી",
+              "દુકાનોમાંથી"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0002424536307431204
+        },
+        "GURMUKHI": {
+          "colliding_groups": 0,
+          "distinct_types": 5001,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "KANNADA": {
+          "colliding_groups": 65,
+          "distinct_types": 9895,
+          "examples": [
+            [
+              "ಅನುಭವಗಳನ್ನು",
+              "ಅನುಭವಿಗಳನ್ನು"
+            ],
+            [
+              "ತೋರಿಸಲಾಗಿದೆ",
+              "ತೋರಿಸುವುದಾಗಿದೆ"
+            ],
+            [
+              "ಸೂಚಿಸಲಾಗುತ್ತದೆ",
+              "ಸೂಚಿಸುತ್ತದೆ"
+            ],
+            [
+              "ಕಾರ್ಯಗಳನ್ನು",
+              "ಕಾರ್ಯನಿರ್ವಹಣೆಗಳನ್ನು"
+            ],
+            [
+              "ಚಿತ್ರದಲ್ಲಿ",
+              "ಚಿತ್ರರಂಗದಲ್ಲಿ"
+            ],
+            [
+              "ಉತ್ತಮವಾಗಬಹುದು",
+              "ಉತ್ತಮವಾಗಿರಬಹುದು"
+            ]
+          ],
+          "types_in_collisions_rate": 0.013542193026781203
+        },
+        "LATIN": {
+          "colliding_groups": 35,
+          "distinct_types": 84044,
+          "examples": [
+            [
+              "www.qr-code-generator.com/api/qr_code_123456.png",
+              "www.qr-code-generator.com/api/qr_code_123456.png](www.qr-code-generator.com/api/qr_code_123456.png"
+            ],
+            [
+              "org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder",
+              "org.elasticsearch.search.aggregations.metrics.avg.AvgAggregationBuilder"
+            ],
+            [
+              "www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500",
+              "www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500](www.qr-code-generator.com/api/qrcode?data=www.mywebsite.com&size=500"
+            ],
+            [
+              "timeOut=\"${microej.kf.testsuite.timeout",
+              "timeOut=\"${microej.testsuite.timeout"
+            ],
+            [
+              "commonProperties=\"${microej.kf.launch.propertyfile",
+              "commonProperties=\"${microej.launch.propertyfile"
+            ],
+            [
+              "testsuiteReportDirProperty=\"@{prefix}.testsuite.report.dir",
+              "testsuiteReportDirProperty=\"testkf.testsuite.report.dir"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0009042882299747752
+        },
+        "MALAYALAM": {
+          "colliding_groups": 145,
+          "distinct_types": 12063,
+          "examples": [
+            [
+              "ഉണ്ടാക്കാമെന്ന്",
+              "ഉണ്ടായിരുന്നുവെന്ന്"
+            ],
+            [
+              "ചെയ്തതായിരിക്കുന്നു",
+              "ചെയ്തിരിക്കുന്നു"
+            ],
+            [
+              "മനസ്സിലാക്കുന്നത്",
+              "മനസ്സിലാവുന്നത്"
+            ],
+            [
+              "ഉപയോഗപ്പെടുന്നു",
+              "ഉപയോഗിക്കപ്പെടുന്നു",
+              "ഉപയോഗിക്കാവുന്നു",
+              "ഉപയോഗിക്കുന്നു"
+            ],
+            [
+              "ഉണ്ടാകുന്ന",
+              "ഉണ്ടാക്കുന്ന"
+            ],
+            [
+              "പ്രവർത്തിക്കുന്നത്",
+              "പ്രവർത്തിപ്പിക്കുന്നത്"
+            ]
+          ],
+          "types_in_collisions_rate": 0.02611290723700572
+        },
+        "ORIYA": {
+          "colliding_groups": 5,
+          "distinct_types": 6275,
+          "examples": [
+            [
+              "ଏକ୍ସଟେନସନଗୁଡ଼ିକୁ",
+              "ଏକ୍ସଟେନସନ୍ଗୁଡ଼ିକୁ"
+            ],
+            [
+              "ଚିଙ୍ଗୁଡ଼ିକୁ",
+              "ଚିଙ୍ଗୁଡ଼ିଗୁଡ଼ିକୁ"
+            ],
+            [
+              "ନେଦରଲାଣ୍ଡର",
+              "ନେଦରଲ୍ଯ଼ାଣ୍ଡର"
+            ],
+            [
+              "କାର୍ଯ୍ଯ଼କ୍ରମଗୁଡ଼ିକ",
+              "କାର୍ଯ୍ଯ଼ଗୁଡ଼ିକ"
+            ],
+            [
+              "କୁବେରନେଟସ୍",
+              "କୁବେର୍ନେଟସ୍"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0015936254980079682
+        },
+        "TAMIL": {
+          "colliding_groups": 77,
+          "distinct_types": 10825,
+          "examples": [
+            [
+              "பிரச்சனைகளை",
+              "பிரச்சினைகளை"
+            ],
+            [
+              "கொண்டாடப்படுகிறது",
+              "கொண்டாடுகிறது",
+              "கொண்டிருக்கிறது"
+            ],
+            [
+              "மன்னிக்கவும்",
+              "மன்னிப்பாகவும்"
+            ],
+            [
+              "கோப்புகளையும்",
+              "கோப்பையையும்"
+            ],
+            [
+              "செய்வார்கள்",
+              "செய்வீர்கள்"
+            ],
+            [
+              "சொல்லுகிறீர்கள்",
+              "சொல்லுவீர்கள்"
+            ]
+          ],
+          "types_in_collisions_rate": 0.015150115473441108
+        },
+        "TELUGU": {
+          "colliding_groups": 63,
+          "distinct_types": 12938,
+          "examples": [
+            [
+              "ప్రతిపాదించబడుతుంది",
+              "ప్రతిపాదిస్తుంది"
+            ],
+            [
+              "ఎంచుకోడానికి",
+              "ఎంచుకోవడానికి"
+            ],
+            [
+              "ప్రాంగణానికి",
+              "ప్రాంతానికి"
+            ],
+            [
+              "సామర్థ్యంతో",
+              "సామర్ధ్యంతో"
+            ],
+            [
+              "కార్యకలాపాన్ని",
+              "కార్యక్రమాన్ని",
+              "కార్యాన్ని"
+            ],
+            [
+              "ఉపయోగపడుతుంది",
+              "ఉపయోగించబడుతుంది",
+              "ఉపయోగిస్తుంది"
+            ]
+          ],
+          "types_in_collisions_rate": 0.010434379347658061
+        }
+      },
+      "reduction_vs_published": 5.064439140811456,
+      "total_colliding_groups": 419
+    },
+    "both_ends_plus_hash_32_bytes": {
+      "D": 8192,
+      "description": "15 front and 16 back bytes plus a checksum byte of the discarded middle",
+      "per_script": {
+        "ARABIC": {
+          "colliding_groups": 0,
+          "distinct_types": 4445,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "BENGALI": {
+          "colliding_groups": 0,
+          "distinct_types": 13413,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "COMMON": {
+          "colliding_groups": 0,
+          "distinct_types": 12572,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "DEVANAGARI": {
+          "colliding_groups": 0,
+          "distinct_types": 17757,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "GUJARATI": {
+          "colliding_groups": 0,
+          "distinct_types": 8249,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "GURMUKHI": {
+          "colliding_groups": 0,
+          "distinct_types": 5001,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "KANNADA": {
+          "colliding_groups": 1,
+          "distinct_types": 9895,
+          "examples": [
+            [
+              "ತಿಳಿದಿರದಿದ್ದರೆ",
+              "ತಿಳಿದಿಲ್ಲದಿದ್ದರೆ"
+            ]
+          ],
+          "types_in_collisions_rate": 0.000202122283981809
+        },
+        "LATIN": {
+          "colliding_groups": 0,
+          "distinct_types": 84044,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "MALAYALAM": {
+          "colliding_groups": 1,
+          "distinct_types": 12063,
+          "examples": [
+            [
+              "കൊണ്ടുപോകാനുള്ള",
+              "കൊണ്ടുപോകുന്നതിനുള്ള"
+            ]
+          ],
+          "types_in_collisions_rate": 0.00016579623642543314
+        },
+        "ORIYA": {
+          "colliding_groups": 0,
+          "distinct_types": 6275,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "TAMIL": {
+          "colliding_groups": 0,
+          "distinct_types": 10825,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "TELUGU": {
+          "colliding_groups": 1,
+          "distinct_types": 12938,
+          "examples": [
+            [
+              "నిర్ణయానికి",
+              "నిర్ణయించడానికి"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0001545833977430824
+        }
+      },
+      "reduction_vs_published": 707.3333333333334,
+      "total_colliding_groups": 3
+    },
     "fixD_31_chars": {
       "D": 8192,
       "description": "script tag plus the first 31 characters",
@@ -469,6 +901,172 @@
       },
       "reduction_vs_published": 54.41025641025641,
       "total_colliding_groups": 39
+    },
+    "overflow_hash_32_bytes": {
+      "D": 8192,
+      "description": "31 leading bytes plus a checksum byte of everything discarded",
+      "per_script": {
+        "ARABIC": {
+          "colliding_groups": 0,
+          "distinct_types": 4445,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "BENGALI": {
+          "colliding_groups": 1,
+          "distinct_types": 13413,
+          "examples": [
+            [
+              "প্ৰতিযোগিতাখন",
+              "প্ৰতিযোগিতামূলক"
+            ]
+          ],
+          "types_in_collisions_rate": 0.00014910907328710953
+        },
+        "COMMON": {
+          "colliding_groups": 0,
+          "distinct_types": 12572,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "DEVANAGARI": {
+          "colliding_groups": 3,
+          "distinct_types": 17757,
+          "examples": [
+            [
+              "सर्वेक्षणाच्या",
+              "सर्वेक्षणासाठी"
+            ],
+            [
+              "विद्यार्थ्यांच्या",
+              "विद्यार्थ्यांसाठी"
+            ],
+            [
+              "संकेतस्थळाच्या",
+              "संकेतस्थळासाठी"
+            ]
+          ],
+          "types_in_collisions_rate": 0.00033789491468153406
+        },
+        "GUJARATI": {
+          "colliding_groups": 0,
+          "distinct_types": 8249,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "GURMUKHI": {
+          "colliding_groups": 0,
+          "distinct_types": 5001,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "KANNADA": {
+          "colliding_groups": 2,
+          "distinct_types": 9895,
+          "examples": [
+            [
+              "ಇಂಟೆಲಿಜೆನ್ಸ್",
+              "ಇಂಟೆಲಿಜೆನ್ಸ್‌"
+            ],
+            [
+              "ವಿಶ್ವವಿದ್ಯಾಲಯಗಳ",
+              "ವಿಶ್ವವಿದ್ಯಾಲಯಗಳಿವೆ"
+            ]
+          ],
+          "types_in_collisions_rate": 0.000404244567963618
+        },
+        "LATIN": {
+          "colliding_groups": 0,
+          "distinct_types": 84044,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "MALAYALAM": {
+          "colliding_groups": 22,
+          "distinct_types": 12063,
+          "examples": [
+            [
+              "സന്ദർശിക്കാം",
+              "സന്ദർശിക്കാനും"
+            ],
+            [
+              "പ്രശ്നങ്ങളും",
+              "പ്രശ്നങ്ങളുണ്ടായാൽ"
+            ],
+            [
+              "നിർമ്മിക്കാം",
+              "നിർമ്മിക്കാനും"
+            ],
+            [
+              "കുടുംബത്തിന്റെ",
+              "കുടുംബത്തിൽ"
+            ],
+            [
+              "ചരിത്രത്തിന്റെ",
+              "ചരിത്രത്തിൽ"
+            ],
+            [
+              "പ്രസിദ്ധീകരിച്ചതോടെ",
+              "പ്രസിദ്ധീകരിച്ചു"
+            ]
+          ],
+          "types_in_collisions_rate": 0.003647517201359529
+        },
+        "ORIYA": {
+          "colliding_groups": 0,
+          "distinct_types": 6275,
+          "examples": [],
+          "types_in_collisions_rate": 0.0
+        },
+        "TAMIL": {
+          "colliding_groups": 18,
+          "distinct_types": 10825,
+          "examples": [
+            [
+              "பயன்படுத்தப்பட்டவுடன்",
+              "பயன்படுத்தி"
+            ],
+            [
+              "முயற்சிக்கவும்",
+              "முயற்சிக்கிறீர்கள்"
+            ],
+            [
+              "அழைக்கப்படுகின்றது",
+              "அழைக்கப்படுகின்றன"
+            ],
+            [
+              "இருக்கின்றன",
+              "இருக்கின்றேன்"
+            ],
+            [
+              "எடுத்துக்கொள்ளலாம்",
+              "எடுத்துக்கொள்ளும்"
+            ],
+            [
+              "முதன்முதலியவைகளாக",
+              "முதன்முதலிலிருந்து"
+            ]
+          ],
+          "types_in_collisions_rate": 0.003325635103926097
+        },
+        "TELUGU": {
+          "colliding_groups": 2,
+          "distinct_types": 12938,
+          "examples": [
+            [
+              "ప్రదర్శించండి",
+              "ప్రదర్శించుటకు"
+            ],
+            [
+              "ఫ్రాన్సిస్కో",
+              "ఫ్రాన్సిస్కోలో"
+            ]
+          ],
+          "types_in_collisions_rate": 0.0003091667954861648
+        }
+      },
+      "reduction_vs_published": 44.208333333333336,
+      "total_colliding_groups": 48
     },
     "prefix_32_bytes_published": {
       "D": 8192,

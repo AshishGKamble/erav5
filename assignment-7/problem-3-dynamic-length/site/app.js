@@ -203,28 +203,96 @@
           tick: function (v) { return (v * 100).toFixed(0) + "%"; } });
 
     var lowest = Object.keys(D.entropy).filter(function (s) { return D.entropy[s] < 0.001; });
-    var worstLow = Math.max.apply(null, lowest.map(function (s) { return Math.abs(D.entropy[s]); }));
+    // Quote the entropy of the INDIC scripts, which is the finding. Taking the worst across every
+    // low-entropy script instead reports Latin's 0.0006 and understates it.
+    var indicE = D.indic_scripts.filter(function (s) { return s in D.entropy; });
+    var worstLow = Math.max.apply(null, indicE.map(function (s) { return Math.abs(D.entropy[s]); }));
     document.getElementById("entropyNote").innerHTML =
       "<b>Why fix D exists.</b> The high byte of a codepoint is a script selector, and in this " +
-      "corpus it carries <b>" + worstLow.toFixed(4) + " bits</b> of entropy for " + lowest.length +
-      " of the measured " +
-      "scripts, including every Indic one. Half of fix B's dimensions carry nothing. Send the " +
+      "corpus it carries <b>" + worstLow.toFixed(4) + " bits</b> of entropy for every one of the " +
+      indicE.length + " Indic scripts, and under 0.001 bits for " + lowest.length +
+      " scripts in total. Half of fix B's dimensions carry nothing. Send the " +
       "script once per token instead, drop that block, and a position costs 256 rows again while " +
       "holding a whole character: <b>32 characters for every script</b> at the same total cost.";
 
     /* E7 schemes */
     var labels = { prefix_32_bytes_published: "first 32 bytes (published)",
+                   both_ends_32_bytes_aligned: "both ends, cuts aligned",
                    both_ends_32_bytes: "16 front + 16 back bytes",
                    fixD_31_chars: "fix D, 31 characters",
-                   fixD_both_ends_31_chars: "fix D + both ends" };
-    var order = ["prefix_32_bytes_published", "both_ends_32_bytes", "fixD_31_chars",
-                 "fixD_both_ends_31_chars"];
+                   overflow_hash_32_bytes: "31 bytes + checksum of the tail",
+                   fixD_both_ends_31_chars: "fix D + both ends",
+                   both_ends_plus_hash_32_bytes: "both ends + checksum of the middle" };
+    var order = ["prefix_32_bytes_published", "both_ends_32_bytes_aligned", "both_ends_32_bytes",
+                 "fixD_31_chars", "overflow_hash_32_bytes", "fixD_both_ends_31_chars",
+                 "both_ends_plus_hash_32_bytes"];
     barChart(document.getElementById("schemeChart"), order.map(function (k) {
       var r = D.schemes[k];
       return { label: labels[k], values: [r.groups],
                notes: [fmtN(r.groups) + " groups  (" + r.reduction.toFixed(1) + "x better)"] };
     }), { colors: ["var(--warn)"], padL: 168, padR: 172, rowH: 28,
           tick: function (v) { return fmtN(Math.round(v)); } });
+
+    var best = D.schemes.both_ends_plus_hash_32_bytes;
+    document.getElementById("schemeNote").innerHTML =
+      "<b>The recommendation, which changed once the ideas were combined.</b> The tail is not the " +
+      "only thing thrown away, so the second idea handles the rest: spend one position on a " +
+      "<b>checksum of whatever the window discarded</b>. It does not recover those bytes and is " +
+      "not meant to; it makes the resulting collision <b>random</b> rather than systematic, about " +
+      "1 in 256 instead of always. Separately the checksum reaches " +
+      D.schemes.overflow_hash_32_bytes.reduction.toFixed(1) + "x and both ends reaches " +
+      D.schemes.both_ends_32_bytes.reduction.toFixed(1) + "x. <b>Together they reach " +
+      best.reduction.toFixed(1) + "x</b>, leaving " + best.groups +
+      " colliding groups in the whole corpus, because they fix different things: the front and back " +
+      "carry the morphology the collisions turn on, and the checksum discriminates the middle. " +
+      "It needs no script table, no tag and no Unicode assumption, so unlike fix D it applies to " +
+      "scripts this corpus never contained. One qualification the metric does not capture: a " +
+      "checksum <b>discriminates but does not generalise</b>, whereas a shared case ending is a " +
+      "real feature that recurs across words. The composite keeps both.";
+
+    if (D.codec_check) {
+      var cc = D.codec_check, mal = cc.cut_quality.MALAYALAM, malA = cc.cut_quality_aligned.MALAYALAM;
+      document.getElementById("codecCheck").innerHTML =
+        "<b>Round trip</b>: encode then decode returns the units it was given, rate " +
+        cc.roundtrip_both_ends.toFixed(4) + ". <b>Bitwise</b>: " + cc.bitwise.bitwise_identical +
+        " of " + cc.bitwise.pairs_checked + " colliding pairs produce identical vectors, maximum " +
+        "difference " + cc.bitwise.max_absolute_difference + ".<br><br>" +
+        "<b>The check also found something the collision counts had hidden.</b> The published " +
+        "window cuts a word mid-character essentially always for Indic: <b>" +
+        fmtPct(mal.prefix_invalid_utf8_rate) + "</b> of cropped Malayalam types, against " +
+        fmtPct(cc.cut_quality.LATIN.prefix_invalid_utf8_rate) + " of Latin. That is arithmetic, " +
+        "not bad luck: 32 is not a multiple of 3 and every Indic character is exactly 3 bytes, so " +
+        "the retained prefix cannot end on a character boundary. Those bytes are not truncated " +
+        "text, they are <b>not valid UTF-8 at all</b>. Aligning both cuts removes it completely, " +
+        "to " + fmtPct(malA.both_ends_invalid_utf8_rate) + ", for about " +
+        (cc.capacity.mean_units_kept_unaligned - cc.capacity.mean_units_kept_aligned).toFixed(1) +
+        " units of the 32, and halves the collision benefit. Fix D avoids it by construction.";
+    }
+
+    if (D.choose_L) {
+      var rowsL = ["<tr><th>scheme</th><th class='num'>L</th><th class='num'>D</th>" +
+                   "<th class='num'>projection parameters</th>" +
+                   "<th class='num'>colliding groups</th></tr>"];
+      Object.keys(D.choose_L.rows).forEach(function (name) {
+        var r = D.choose_L.rows[name];
+        Object.keys(r).sort(function (a, b) { return a - b; }).forEach(function (L) {
+          var v = r[L];
+          rowsL.push("<tr><td>" + name + "</td><td class='num'>" + L + "</td><td class='num'>" +
+            fmtN(v.D) + "</td><td class='num'>" + fmtN(v.projection_parameters) +
+            "</td><td class='num'>" + fmtN(v.colliding_groups) + "</td></tr>");
+        });
+      });
+      document.getElementById("chooseLTable").innerHTML = rowsL.join("");
+      var comp = D.choose_L.rows["both ends + hash"], pub = D.choose_L.rows["published prefix"];
+      document.getElementById("chooseLNote").innerHTML =
+        "<b>Keep L=32 and change the units.</b> The composite at L=32 leaves " +
+        comp["32"].colliding_groups + " colliding groups; the published construction at L=64 " +
+        "leaves " + pub["64"].colliding_groups + " while spending <b>twice</b> the dimensions and " +
+        "twice the projection parameters. To reach zero the published construction needs L=128 and " +
+        fmtN(pub["128"].projection_parameters) + " parameters; the composite reaches zero at L=64 " +
+        "for half that. Raising the window is the expensive way to buy what a different choice of " +
+        "units gives away.";
+    }
 
     /* E6 cost */
     var m32 = D.cost.memory["32"], c32 = D.cost.compute["32"], fit = D.cost.scaling_fit;

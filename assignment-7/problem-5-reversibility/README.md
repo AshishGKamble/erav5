@@ -23,7 +23,7 @@ out not to be testable on this machine and saying so is more useful than pretend
 | what was promised | the answer | evidence |
 |---|---|---|
 | **"How do I make a reverse of this?"** | **It already reverses**, in three independent senses. Exact inversion of every token that fits the window; tolerates **60x** more error than the objection implies; and survives `Linear(8192, 768)` because a code is only 7.93-sparse, which makes recovery compressed sensing rather than magic. | E1, E2, E3 |
-| **"We can get rid of the final head!"** | **Yes, at zero new parameters**, 0 against 100.7M at the paper's dimensions. But it costs accuracy: at this scale the **vocabulary head wins** on loss, 2.6454 against 4.7197 nats per token. The byte head's case is parameter scaling, which is arithmetic here and not measurement. | E4 |
+| **"We can get rid of the final head!"** | **Yes, at zero new parameters**, 0 against 100.7M at the paper's dimensions. But it costs accuracy: at this scale the **vocabulary head wins** on loss, 2.6454 against 4.7197 nats per token. The byte head's case is parameter scaling, which is arithmetic here and not measurement. Its one genuine defect, 12.20% invalid UTF-8, is **removed entirely** by constrained decoding at no cost. | E4, E8 |
 | **"A vocab of 1M without any issues!"** | **Split verdict.** The **capability** is architecturally true and needs no experiment: a vocabulary softmax has no output row for an unknown word and scores exactly zero at any amount of training. The **competence** is not demonstrated, and two experiments that tried to demonstrate it both failed for reasons unrelated to the claim. | E6, E7 |
 
 The rest of this document is how those answers were arrived at, in the order the experiments ran.
@@ -241,11 +241,48 @@ alone and not length inference.
 | exact match to the target token | 37.22% |
 
 **The invalid UTF-8 rate is a genuine defect**, and it is the direct cost of predicting positions
-independently. It has an obvious remedy that this work did not implement: constrain the decode to
-emit only valid UTF-8 sequences, which would drive it to zero without retraining anything.
+independently. It also has a remedy, which E8 below implements and measures.
 
 The out of vocabulary strings are `तत`, `ततत`, `ర఍` and similar: degenerate repeats and strings
 carrying unassigned codepoints. **They are not plausible words**, which matters for the next section.
+
+## E8, constrained decoding, which removes that defect entirely
+
+E6's diagnosis was right and the conclusion drawn from it was too pessimistic. The head is not wrong
+about the distribution; it is simply never asked for a coherent sequence. Each position takes its
+argmax alone, so nothing prevents a lead byte where a continuation byte was required.
+
+So ask for a coherent one. At each position, mask the bytes that cannot legally follow what has
+already been emitted, then take the argmax. **Same trained model, same logits, no retraining and no
+architectural change.** It is a decoding rule.
+
+| metric | unconstrained | constrained |
+|---|---|---|
+| invalid UTF-8 | 11.62% | **0.00%** |
+| empty output | 0.00% | **0.00%** |
+| in vocabulary | 83.95% | **89.79%** |
+| exact match to the target | 41.25% | **44.52%** |
+
+The defect is gone, and exact match **improves by 3.27 points** rather than being traded away. That
+is worth stating carefully: a constraint cannot make a model better at predicting, only better at
+being well formed. It helps here because the head's second choice at a position is often right when
+its first choice was structurally impossible.
+
+**Three implementation details, each of which was wrong first and each of which mattered:**
+
+1. **Length structure is not validity.** Enforcing only "a lead byte expects N continuations" still
+   left about 8% of decodes invalid, because `0xE0` must be followed by `0xA0..0xBF` or the sequence
+   is overlong, and `0xED` must be followed by `0x80..0x9F` or it encodes a UTF-16 surrogate.
+2. **The trailing trim must remove the lead byte too.** Popping continuation bytes until the
+   expected count reaches zero leaves the lead byte in place, which is still invalid.
+3. **A character must fit the remaining budget.** Without that check the decoder starts a three byte
+   character with one position left, the trim then removes it, and a short token decodes to the
+   **empty string**, which is trivially valid UTF-8 and flatters the validity rate while saying
+   nothing. Fixing it also raised exact match by 3.2 points, since the budget forces a character
+   that can actually be completed.
+
+What this does **not** do is fix E7. Being well formed is not the same as being right, and the open
+vocabulary question below is unaffected.
 
 ---
 
@@ -318,8 +355,9 @@ assignment and it is worth more than any single result in it.
   scale. E4 to E7 do.
 - **The learned inverse in the caveat check is linear.** A nonlinear decoder was not tried, so the
   recovery numbers after training are a lower bound rather than the best achievable.
-- **Constrained decoding was not implemented**, so the 12.20% invalid UTF-8 figure is what an
-  unconstrained argmax produces and not what the architecture is capable of.
+- **Constrained decoding is greedy, not optimal.** It masks illegal bytes and takes the argmax; the
+  highest scoring valid sequence would need a beam search, which was not run. So 44.52% exact match
+  is a lower bound on what the same logits can support.
 
 ## Reproducing
 
@@ -343,6 +381,7 @@ head's dual path, worst relative error about **5e-7**.
 | `src/exp_train.py` | E4 to E6, three heads, gradient at init, the cost of tying |
 | `src/exp_recheck.py` | the open caveat, injectivity and a learned inverse under a trained W |
 | `src/exp_openvocab.py` | E7, the open vocabulary test and its rarity matched control |
+| `src/exp_constrained.py` | E8, constrained decoding against the unconstrained argmax |
 | `src/evidence.py` | regenerates every number in this README from the artefacts |
 | `src/build_dashboard.py` | extracts the dashboard payload from the same artefacts |
 | `site/` | static dashboard. No framework, no build step, no network. Open `site/index.html` |

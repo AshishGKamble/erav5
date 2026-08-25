@@ -108,10 +108,17 @@
       <strong>no new parameters, no script table, no Unicode assumptions</strong>. Only a different
       choice of which bytes to encode.</p>
     <div class="panel"><div id="schemeChart"></div></div>
-    <div class="callout good"><b>If only one change is made, it should be this one.</b> Fix D is
-      better in absolute terms but needs a script table, a per token tag, and an assumption about
-      Unicode block layout that this corpus happens to satisfy. Reading both ends needs none of
-      that, and the two compose.</div>
+    <div class="callout good" id="schemeNote"></div>
+    <h3>Verified as a codec, not only as a key</h3>
+    <p class="sec-lead">The chart groups words by a byte key. That is a statement about the key, and
+      this page recommends a codec, so the recommendation is checked the way E3 checked the
+      published construction.</p>
+    <div class="callout" id="codecCheck"></div>
+    <h3>Which window to use</h3>
+    <p class="sec-lead">E6 shows that raising L is nearly free in compute, which invites "just use a
+      bigger window". Compared on dimensions rather than on window size, the answer is no.</p>
+    <div class="tablewrap"><table id="chooseLTable"></table></div>
+    <div class="callout good" id="chooseLNote"></div>
   </section>
 
   <section id="cost">

@@ -16,7 +16,8 @@ PY = sys.executable
 FAST = [("E1 to E3, round trip, noise tolerance, and the projection", "exp_codec.py")]
 SLOW = [("E4 to E6, three heads, gradient at init, the cost of tying", "exp_train.py"),
         ("the open caveat, injectivity and a learned inverse under a trained W", "exp_recheck.py"),
-        ("E7, can the head emit words it was never given an id for", "exp_openvocab.py")]
+        ("E7, can the head emit words it was never given an id for", "exp_openvocab.py"),
+        ("E8, constrained decoding against the unconstrained argmax", "exp_constrained.py")]
 
 
 def run(label, script):

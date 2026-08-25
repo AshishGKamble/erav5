@@ -17,7 +17,9 @@ PY = sys.executable
 FAST = [("E1 to E3, occupancy, characters per window, truncation collisions", "exp_window.py"),
         ("E4, the three fixes at equal D, plus fix D", "exp_fixes.py"),
         ("E6, what the window costs in dimensions, memory and compute", "exp_cost.py"),
-        ("E7, reading the word from both ends", "exp_bothends.py")]
+        ("E7, reading the word from both ends, hashing the overflow, and the window choice",
+         "exp_bothends.py"),
+        ("E7 verified as a codec rather than only as a key", "exp_bothends_codec.py")]
 SLOW = [("E5 and E5b, downstream, token level and word level", "exp_downstream.py"),
         ("E5b at larger scale", "exp_e5b.py")]
 

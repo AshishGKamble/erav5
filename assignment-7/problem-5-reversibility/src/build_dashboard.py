@@ -93,6 +93,14 @@ def main():
                                 for lane, v in o["lanes"].items()}
     except FileNotFoundError:
         pass
+    try:
+        cn = load("constrained.json")
+        payload["constrained"] = {"unconstrained": cn["unconstrained"],
+                                  "constrained": cn["constrained"],
+                                  "improvement": cn["improvement"],
+                                  "predictions": cn["predictions"]}
+    except FileNotFoundError:
+        pass
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as fh:
         json.dump(payload, fh, ensure_ascii=False, separators=(",", ":"))

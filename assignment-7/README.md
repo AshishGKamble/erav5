@@ -21,14 +21,14 @@ writeups. This page is the hub, because the submission form accepts one link.
 |---|---|---|
 | "That's a waste of space. What can we do?" | Nothing needs to change. The zeros cost **dimensions**, which genuinely cannot be reclaimed, but they cost no memory and no compute once the encoder is factored: **345x** less memory, **932x** less arithmetic. | E1, E6 |
 | "How can it be dynamic?" | **It already is**, if you implement it correctly. Cost tracks the token's real length, correlation **above 0.98**: "a" costs one row lookup, a thirty byte word costs thirty. Per token dimensions are impossible, because `Linear(D, d)` needs a fixed width. | E6 |
-| "...doesn't force us to crop a word" | **Read the word from both ends.** 9.8x fewer collisions, no new parameters. A script relative codec gets 33.7x, and the two compose for **54.4x**. And because compute follows length, simply raising L is nearly free. | E7, E4 |
+| "...doesn't force us to crop a word" | **15 front bytes, 16 back bytes, one checksum byte of the discarded middle: 707x fewer collisions** at the same D, with no script table and no Unicode assumption. It also beats the published construction at L=64 while using half the dimensions, so the right window is still 32. | E7, E4 |
 
 **Problem 5** promised three payoffs. Two hold, and the third gets an honest split verdict.
 
 | what was promised | the answer | where |
 |---|---|---|
 | "How do I make a reverse of this?" | **It already reverses.** Exact inversion, tolerates **60x** more error than the objection implies, and survives the 8192 to 768 projection because a code is only 8-sparse, which makes this compressed sensing. | E1, E2, E3 |
-| "We can get rid of the final head!" | **Yes, at zero parameters** (0 against 100.7M at the paper's dimensions). But it costs accuracy: at this scale the vocabulary head **wins** on loss, and that is reported rather than buried. | E4 |
+| "We can get rid of the final head!" | **Yes, at zero parameters** (0 against 100.7M at the paper's dimensions). But it costs accuracy: at this scale the vocabulary head **wins** on loss, and that is reported rather than buried. Its one real defect, 12.20% invalid UTF-8, is **removed entirely** by constrained decoding. | E4, E8 |
 | "A vocab of 1M without any issues!" | **Split verdict.** The capability is architecturally true and needs no experiment. The competence is **not demonstrated and not testable** on this machine. | E6, E7 |
 
 ---
@@ -61,15 +61,19 @@ embedding, because Indic morphology is suffixal and the window reads prefixes.
 
 ## What each problem contributes beyond answering the question
 
-- **Problem 3 found a fix nobody proposed and it is nearly free.** Every collision is a shared prefix
-  with a differing suffix, so spending half the window on the front of the word and half on the back
-  removes about **90 percent** of the harm with no new parameters, no script table and no
-  assumptions about Unicode.
+- **Problem 3 found a fix nobody proposed, and it is nearly free.** Every collision is a shared
+  prefix with a differing suffix, so half the window goes on the front of the word and half on the
+  back, and one position holds a checksum of whatever was discarded. Together that is **707 times**
+  fewer collisions at the same cost, with no new parameters, no script table and no assumptions
+  about Unicode.
 - **Problem 3 also measured that the high byte of an Indic codepoint carries 0.0000 bits**, which
   makes a second fix possible: send the script once per token, drop the high block, and get 32
   characters for every script at the same cost as 10.7.
 - **Problem 5 turned an objection into a number.** "The model predicts 0.31 not 0.30" is a relative
   error of about 0.03 against a measured decode margin of 37.83.
+- **Problem 5's one real defect turned out to be a decoding rule, not an architecture.** Constrained
+  decoding removes 12.20% invalid UTF-8 entirely and raises exact match by 3.27 points, with no
+  retraining.
 - **Both problems refuted their own pre-registered predictions** and kept the refutations in the
   writeups rather than quietly editing the plans.
 

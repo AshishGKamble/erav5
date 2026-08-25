@@ -161,6 +161,28 @@ def main():
           "cliff and says nothing about vocabulary membership. This experiment cannot test the "
           "claim at this scale.\n")
 
+    try:
+        cn = load("constrained.json")
+    except FileNotFoundError:
+        cn = None
+    if cn:
+        A("\n## E8, constrained decoding, which removes E6's defect\n")
+        A(f"Same trained head, same logits, {cn['predictions']:,} predictions. The only change is "
+          f"that bytes which cannot legally follow what has been emitted are masked before the "
+          f"argmax, and any incomplete trailing character is dropped.\n")
+        A("| metric | unconstrained | constrained |")
+        A("|---|---|---|")
+        for key, lab in (("invalid_utf8_rate", "invalid UTF-8"),
+                         ("valid_utf8_rate", "valid UTF-8"),
+                         ("empty_output_rate", "empty output"),
+                         ("in_vocabulary_rate", "in vocabulary"),
+                         ("exact_match_rate", "exact match to the target")):
+            A(f"| {lab} | {pct(cn['unconstrained'][key])} | {pct(cn['constrained'][key])} |")
+        imp = cn["improvement"]
+        A(f"\nInvalid UTF-8 removed: {pct(imp['invalid_utf8_removed'])}. Exact match change: "
+          f"{imp['exact_match_change'] * 100:+.2f} points. No retraining, no architectural "
+          f"change.\n")
+
     A("\n## Verification\n")
     ce = t["codec_equivalence_check"]
     A(f"- Factored codec against the float64 definition: max absolute difference "

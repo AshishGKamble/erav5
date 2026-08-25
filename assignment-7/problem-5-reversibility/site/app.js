@@ -272,10 +272,33 @@
         "zero without retraining anything. The out of vocabulary strings are " +
         D.tying.out_of_vocabulary_examples.slice(0, 5).map(function (w) {
           return "<span class='mono script'>" + w + "</span>";
-        }).join(", ") + " and similar. If some of those render as empty boxes, that is the "  +
+        }).join(", ") + " and similar, from the <b>unconstrained</b> decode. If some render as " +
+        "empty boxes, that is the " +
         "finding rather than a missing font: the head emits codepoints Unicode has not assigned, " +
         "so no font anywhere has a glyph for them. They are degenerate repeats and near misses, " +
         "<b>not plausible words</b>.";
+    }
+
+    /* E8 constrained decoding */
+    if (D.constrained) {
+      var u = D.constrained.unconstrained, c = D.constrained.constrained;
+      var rowsC = ["<tr><th>metric</th><th class='num'>unconstrained</th>" +
+                   "<th class='num'>constrained</th></tr>"];
+      [["invalid_utf8_rate", "invalid UTF-8"], ["empty_output_rate", "empty output"],
+       ["in_vocabulary_rate", "in vocabulary"],
+       ["exact_match_rate", "exact match to the target"]].forEach(function (kv) {
+        rowsC.push("<tr><td>" + kv[1] + "</td><td class='num'>" + fmtPct(u[kv[0]]) +
+          "</td><td class='num'><b>" + fmtPct(c[kv[0]]) + "</b></td></tr>");
+      });
+      document.getElementById("constrainedTable").innerHTML = rowsC.join("");
+      document.getElementById("constrainedNote").innerHTML =
+        "<b>The defect is gone, and exact match improves by " +
+        (D.constrained.improvement.exact_match_change * 100).toFixed(2) + " points</b> rather than " +
+        "being traded away, over " + fmtN(D.constrained.predictions) + " predictions. That is " +
+        "worth stating carefully: a constraint cannot make a model better at predicting, only " +
+        "better at being well formed. It helps here because the head's second choice at a position " +
+        "is often right when its first choice was structurally impossible. What it does <b>not</b> " +
+        "do is fix the open vocabulary question below: being well formed is not being right.";
     }
 
     /* E7 bands */

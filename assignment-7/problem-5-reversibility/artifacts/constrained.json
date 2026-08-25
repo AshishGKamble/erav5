@@ -1,0 +1,96 @@
+{
+  "config": {
+    "d_model": 96,
+    "lane": "indic",
+    "seed": 1,
+    "steps": 300,
+    "window": 32
+  },
+  "constrained": {
+    "empty_output_rate": 0.0,
+    "exact_match_rate": 0.44519754516550414,
+    "in_vocabulary_rate": 0.897863110935844,
+    "invalid_utf8": 0,
+    "invalid_utf8_rate": 0.0,
+    "scored": 40573,
+    "valid_utf8_rate": 1.0
+  },
+  "improvement": {
+    "exact_match_change": 0.03270647967860396,
+    "in_vocabulary_change": 0.05833928967539992,
+    "invalid_utf8_removed": 0.11621028762970448
+  },
+  "predictions": 40573,
+  "reading": "Constrained decoding costs nothing to apply and cannot make the model better at predicting, only better at being well formed. Whether the repaired strings are also *correct* is the number that matters, and it is reported next to the validity rate rather than instead of it.",
+  "repaired_examples": [
+    {
+      "correct": true,
+      "repaired_to": " ",
+      "target": " "
+    },
+    {
+      "correct": false,
+      "repaired_to": " ",
+      "target": "."
+    },
+    {
+      "correct": true,
+      "repaired_to": " ",
+      "target": " "
+    },
+    {
+      "correct": true,
+      "repaired_to": " ",
+      "target": " "
+    },
+    {
+      "correct": true,
+      "repaired_to": " ",
+      "target": " "
+    },
+    {
+      "correct": true,
+      "repaired_to": " ",
+      "target": " "
+    },
+    {
+      "correct": true,
+      "repaired_to": " ",
+      "target": " "
+    },
+    {
+      "correct": true,
+      "repaired_to": " ",
+      "target": " "
+    },
+    {
+      "correct": true,
+      "repaired_to": " ",
+      "target": " "
+    },
+    {
+      "correct": false,
+      "repaired_to": " ",
+      "target": "."
+    },
+    {
+      "correct": true,
+      "repaired_to": " ",
+      "target": " "
+    },
+    {
+      "correct": true,
+      "repaired_to": " ",
+      "target": " "
+    }
+  ],
+  "unconstrained": {
+    "empty_output_rate": 0.0,
+    "exact_match_rate": 0.4124910654869002,
+    "in_vocabulary_rate": 0.8395238212604441,
+    "invalid_utf8": 4715,
+    "invalid_utf8_rate": 0.11621028762970448,
+    "scored": 40573,
+    "valid_utf8_rate": 0.8837897123702955
+  }
+}

@@ -110,28 +110,65 @@ Fix D costs, measured: 3,214 cross-script alias groups if the script tag is drop
 
 | window | arithmetic reduction | wall-clock speedup |
 |---|---|---|
-| L=16 | 527x | 1.08x |
-| L=32 | 932x | 1.72x |
-| L=64 | 1812x | 3.21x |
-| L=128 | 3609x | 6.50x |
+| L=16 | 527x | 1.09x |
+| L=32 | 932x | 1.95x |
+| L=64 | 1812x | 3.50x |
+| L=128 | 3609x | 6.96x |
 
-Cost against token length: slope **440.2 ns per unit**, correlation **0.9860**. A flat line would refute the dynamic claim.
+Cost against token length: slope **431.1 ns per unit**, correlation **0.9875**. A flat line would refute the dynamic claim.
 
 | window | time for a short token, relative to L=32 | projection W parameters |
 |---|---|---|
-| L=16 | 1.013x | 393,216 |
+| L=16 | 1.019x | 393,216 |
 | L=32 | 1.000x | 786,432 |
-| L=64 | 1.023x | 1,572,864 |
-| L=128 | 1.035x | 3,145,728 |
+| L=64 | 1.019x | 1,572,864 |
+| L=128 | 1.062x | 3,145,728 |
 
 ## E7, reading the word from both ends
 
 | scheme | colliding groups | Malayalam | reduction |
 |---|---|---|---|
 | 16 leading bytes plus 16 trailing bytes, same D | 217 | 1.14% | 9.8x |
+| 16 front + 16 back bytes, each cut moved to a character boundary | 419 | 2.61% | 5.1x |
+| 15 front and 16 back bytes plus a checksum byte of the discarded middle | 3 | 0.02% | 707.3x |
 | script tag plus the first 31 characters | 63 | 0.00% | 33.7x |
 | script tag, 15 leading plus 16 trailing characters | 39 | 0.00% | 54.4x |
+| 31 leading bytes plus a checksum byte of everything discarded | 48 | 0.36% | 44.2x |
 | the published construction: first 32 bytes | 2,122 | 17.47% | 1.0x |
+
+### E7 verified as a codec, not only as a key
+
+- Round trip, published prefix: 1.0000. Both ends: 1.0000.
+- Bitwise: 217/217 colliding pairs produce identical vectors, max difference 0.0. Verdict: confirmed.
+
+| script | prefix cut lands mid-character | both ends | both cuts aligned |
+|---|---|---|---|
+| BENGALI | 99.40% | 99.55% | 0.00% |
+| DEVANAGARI | 99.55% | 99.70% | 0.00% |
+| GUJARATI | 99.60% | 99.41% | 0.00% |
+| GURMUKHI | 95.33% | 98.13% | 0.00% |
+| KANNADA | 99.86% | 99.79% | 0.00% |
+| LATIN | 2.27% | 3.59% | 0.00% |
+| MALAYALAM | 99.67% | 99.88% | 0.00% |
+| ORIYA | 99.72% | 99.72% | 0.00% |
+| TAMIL | 99.42% | 99.81% | 0.00% |
+| TELUGU | 99.78% | 99.78% | 0.00% |
+
+Aligning both cuts costs capacity: 32.00 units retained against 30.12 aligned.
+
+
+## Which window to use
+
+| scheme | L | D | projection parameters | colliding groups |
+|---|---|---|---|---|
+| both ends + hash | 16 | 4,096 | 393,216 | 152 |
+| both ends + hash | 32 | 8,192 | 786,432 | 3 |
+| both ends + hash | 64 | 16,384 | 1,572,864 | 0 |
+| both ends + hash | 128 | 32,768 | 3,145,728 | 0 |
+| published prefix | 16 | 4,096 | 393,216 | 12,436 |
+| published prefix | 32 | 8,192 | 786,432 | 2,122 |
+| published prefix | 64 | 16,384 | 1,572,864 | 10 |
+| published prefix | 128 | 32,768 | 3,145,728 | 0 |
 
 ## E5, downstream, and why the token-level version is null
 

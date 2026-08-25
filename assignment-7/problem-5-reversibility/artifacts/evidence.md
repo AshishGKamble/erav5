@@ -149,6 +149,21 @@ A vocabulary softmax scores exactly 0.0 on the outside bands, by construction ra
 `in_tail` is the rarity-matched control: the least frequent words that ARE in the inventory. It scores at the floor too, so the zero on the outside bands is a rarity cliff and says nothing about vocabulary membership. This experiment cannot test the claim at this scale.
 
 
+## E8, constrained decoding, which removes E6's defect
+
+Same trained head, same logits, 40,573 predictions. The only change is that bytes which cannot legally follow what has been emitted are masked before the argmax, and any incomplete trailing character is dropped.
+
+| metric | unconstrained | constrained |
+|---|---|---|
+| invalid UTF-8 | 11.62% | 0.00% |
+| valid UTF-8 | 88.38% | 100.00% |
+| empty output | 0.00% | 0.00% |
+| in vocabulary | 83.95% | 89.79% |
+| exact match to the target | 41.25% | 44.52% |
+
+Invalid UTF-8 removed: 11.62%. Exact match change: +3.27 points. No retraining, no architectural change.
+
+
 ## Verification
 
 - Factored codec against the float64 definition: max absolute difference **1.42e-14**.

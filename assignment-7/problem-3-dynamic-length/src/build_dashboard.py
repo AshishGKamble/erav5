@@ -95,7 +95,20 @@ def main():
             "raising_L": c["raising_L_is_cheap"]["rows"],
             "zeros": {L: r["zero_column_fraction"] for L, r in c["dimensions"]["rows"].items()},
         },
+        "choose_L": b.get("choose_L"),
     }
+    try:
+        bc = load("bothends_codec.json")
+        payload["codec_check"] = {
+            "roundtrip_prefix": bc["roundtrip_prefix"]["rate"],
+            "roundtrip_both_ends": bc["roundtrip_both_ends"]["rate"],
+            "bitwise": bc["bitwise_collisions"],
+            "cut_quality": bc["cut_quality"],
+            "cut_quality_aligned": bc["cut_quality_aligned"],
+            "capacity": bc["capacity_cost_of_aligning"],
+        }
+    except FileNotFoundError:
+        pass
     if d:
         payload["downstream"] = {
             lane: {"noise": L["seed_noise_floor_sd"],

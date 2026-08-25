@@ -24,7 +24,7 @@ far more serious problem than the first two, for a reason the assignment does no
 |---|---|---|
 | **"That's a waste of space. What can we do?"** | Nothing needs to change. The waste is 92 to 95 percent and it costs **dimensions**, which genuinely cannot be reclaimed, but it costs **no memory and no compute** once the encoder is factored: 312.5 MB becomes 0.905 MB, and the arithmetic drops 932x. | E1, E6 |
 | **"How can it be dynamic?"** | **It already is**, with no architectural change. Cost tracks the token's real length, correlation above 0.98: "a" costs one row lookup and a thirty byte word costs thirty. Making the *dimensions* per token is impossible, because `Linear(D, d)` needs a fixed width, and that is stated as the reason rather than skipped. | E6 |
-| **"...doesn't force us to crop a word"** | **Read the word from both ends.** 9.8x fewer collisions for no new parameters, no script table and no Unicode assumptions. A script relative codec reaches 33.7x, and the two compose for 54.4x. Separately, because compute follows real length, raising L is nearly free and L=64 alone removes almost every collision. | E7, E4, E6 |
+| **"...doesn't force us to crop a word"** | **15 front bytes, 16 back bytes, and one checksum byte of the discarded middle.** **707x** fewer collisions at the same D, with no new parameters, no script table and no Unicode assumption. Reading both ends alone gives 9.8x and the checksum alone 44.2x; they fix different things and compose. And the right window is still **L=32**: this beats the published construction at L=64 for half the dimensions. | E7, E4, E6 |
 
 The rest of this document is how those answers were arrived at, in the order the experiments ran.
 
@@ -215,14 +215,77 @@ choice of which units to encode.
 | scheme, all at D=8192 | colliding groups | Malayalam | reduction |
 |---|---|---|---|
 | first 32 bytes (published) | 2,122 | 17.47% | 1.0x |
-| **16 leading plus 16 trailing bytes** | **217** | **1.14%** | **9.8x** |
+| 16 leading plus 16 trailing bytes, each cut aligned | 419 | 2.61% | 5.1x |
+| 16 leading plus 16 trailing bytes | 217 | 1.14% | 9.8x |
 | fix D, script tag plus 31 characters | 63 | 0.00% | 33.7x |
-| **fix D plus both ends** | **39** | 0.00% | **54.4x** |
+| **31 bytes plus a checksum of the discarded tail** | **48** | 0.36% | **44.2x** |
+| fix D plus both ends | 39 | 0.00% | 54.4x |
+| **15 front, 16 back, plus a checksum of the middle** | **3** | **0.02%** | **707.3x** |
 
-Reading the word from both ends removes about ninety percent of the harm for free. Fix D is better
-in absolute terms but needs a script table, a tag, and an assumption about Unicode block layout that
-this corpus happens to satisfy. **If only one change is made, it should be this one.** The two
-compose, and together they are the best configuration measured.
+### The recommendation, which changed once the ideas were combined
+
+Reading both ends removes about ninety percent of the harm. But the tail is not the only thing being
+thrown away, and the second idea addresses the rest: **spend one position on a checksum of whatever
+the window discarded**. That does not recover the discarded bytes, and it is not meant to. It makes
+the resulting collision **random** rather than systematic: two different tails now agree with
+probability about 1/256 instead of always.
+
+Separately, the checksum reaches 44.2x and reading both ends reaches 9.8x. **Together they reach
+707.3x**, leaving three colliding groups in the entire corpus, because they fix different things.
+The front and back carry the morphology the collisions actually turn on, and the checksum
+discriminates whatever is left in the middle.
+
+**The recommendation is therefore 15 front bytes, 16 back bytes and one checksum byte.** It needs no
+script table, no per token tag, no Unicode assumption and no new parameters, so unlike fix D it
+applies to scripts this corpus never contained.
+
+One honest qualification, because the collision metric does not capture it. A checksum byte
+**discriminates but does not generalise**: it is an arbitrary value, whereas a shared suffix like a
+case ending is a real feature that recurs across words. The composite keeps both, which is why it is
+preferred over the checksum alone despite the two scoring similarly on Indic scripts.
+
+### Verified as a codec, not only as a key
+
+The table above groups words by a byte key. That is a statement about the key, and this writeup
+recommends a codec, so the recommendation is checked the way E3 checked the published construction:
+
+- **Round trip**: encode then decode returns the units it was given, rate **1.0000**, for both the
+  published prefix and the both-ends scheme.
+- **Bitwise**: 217 of 217 colliding pairs produce byte for byte identical codec vectors, maximum
+  absolute difference **0.0**.
+
+That check also turned up something the collision counts had hidden. **The published window cuts a
+word mid-character essentially always for Indic**: 99.67% of cropped Malayalam types, 99.42% of
+Tamil, against 2.27% of Latin. It is not bad luck, it is arithmetic, because 32 is not a multiple of
+3 and every Indic character is exactly 3 bytes, so the retained prefix cannot end on a character
+boundary. The retained bytes are not merely truncated text, they are **not valid UTF-8 at all**.
+
+Reading both ends does not make this materially worse (99.88% for Malayalam), and aligning **both**
+cuts to character boundaries removes it completely, to **0.00%** for every script, at a cost of
+about 1.9 units of the 32. It also halves the collision benefit, 9.8x to 5.1x, which is the trade.
+Fix D avoids the whole problem by construction, since a codec whose units are characters cannot cut
+inside one.
+
+### Which window to use, which is the question E6 left open
+
+E6 showed that raising L is nearly free in compute, which invites "just use a bigger window". The
+comparison below settles it, and the answer is no.
+
+| scheme | L | D | projection parameters | colliding groups |
+|---|---|---|---|---|
+| published prefix | 16 | 4,096 | 393,216 | 12,436 |
+| published prefix | 32 | 8,192 | 786,432 | 2,122 |
+| published prefix | 64 | 16,384 | 1,572,864 | 10 |
+| published prefix | 128 | 32,768 | 3,145,728 | 0 |
+| both ends plus checksum | 16 | 4,096 | 393,216 | 152 |
+| **both ends plus checksum** | **32** | **8,192** | **786,432** | **3** |
+| both ends plus checksum | 64 | 16,384 | 1,572,864 | 0 |
+
+**The composite at L=32 beats the published construction at L=64 while using half the dimensions and
+half the projection parameters.** To reach zero, the published construction needs L=128 and 3.1M
+projection parameters; the composite reaches zero at L=64 for half that. So the answer to "what
+window should I use" is **keep L=32 and change the units**. Raising the window is the expensive way
+to buy what a different choice of units gives away.
 
 ---
 

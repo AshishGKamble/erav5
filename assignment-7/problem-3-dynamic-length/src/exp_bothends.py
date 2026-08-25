@@ -18,13 +18,13 @@ Unicode assumptions, no tag**. Only a different choice of which units to encode.
 It is measured against the published construction and against fix D, at identical D, so the three
 can be compared without an asterisk.
 """
-import sys, os, json
+import sys, os, json, zlib
 from collections import Counter, defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "..", "common"))
 sys.path.insert(0, HERE)
-import corpus  # noqa: E402
+import codec, corpus  # noqa: E402
 import exp_window as W  # noqa: E402
 
 SCRIPTS = ["MALAYALAM", "TAMIL", "KANNADA", "TELUGU", "DEVANAGARI", "BENGALI", "ORIYA",
@@ -46,6 +46,42 @@ def both_ends_chars(s, total=31):
     return s[:total - back] + s[-back:]
 
 
+def overflow_hash_bytes(s, total=32):
+    """Fold everything past the window into a hash byte instead of dropping it.
+
+    The published construction discards the tail, so two words identical in their first L bytes are
+    identical to the model. Spending the last position on a checksum of the discarded bytes makes
+    that a **random** collision rather than a systematic one: two different tails now agree with
+    probability about 1/256 instead of always. It costs one position and does not recover the tail,
+    which stays unreadable. `zlib.crc32` is used because it is deterministic across processes,
+    unlike Python's salted `hash`.
+    """
+    b = s.encode("utf-8")
+    if len(b) <= total:
+        return b
+    return b[:total - 1] + bytes([zlib.crc32(b[total - 1:]) & 0xFF])
+
+
+def both_ends_plus_hash(s, total=32):
+    """Both ends and a checksum of the middle, to see whether the two ideas compose.
+
+    They address different things: the tail carries the morphology that E3 showed the collisions
+    turn on, and the checksum discriminates whatever is left over. If they compose, the combination
+    should beat either alone.
+    """
+    b = s.encode("utf-8")
+    if len(b) <= total:
+        return b
+    back = (total - 1) // 2
+    front = total - 1 - back
+    return b[:front] + b[len(b) - back:] + bytes([zlib.crc32(b[front:len(b) - back]) & 0xFF])
+
+
+def both_ends_aligned(s, total=32):
+    """Both ends, with each cut moved to a character boundary."""
+    return bytes(codec.both_ends_units(s, total, "byte", align=True))
+
+
 SCHEMES = {
     "prefix_32_bytes_published": (lambda s: both_ends_bytes(s, 32) if False else s.encode("utf-8")[:32],
                                   "the published construction: first 32 bytes"),
@@ -55,6 +91,14 @@ SCHEMES = {
                       "script tag plus the first 31 characters"),
     "fixD_both_ends_31_chars": (lambda s: both_ends_chars(s, 31),
                                 "script tag, 15 leading plus 16 trailing characters"),
+    "both_ends_32_bytes_aligned": (lambda s: both_ends_aligned(s, 32),
+                                   "16 front + 16 back bytes, each cut moved to a character "
+                                   "boundary"),
+    "overflow_hash_32_bytes": (lambda s: overflow_hash_bytes(s, 32),
+                               "31 leading bytes plus a checksum byte of everything discarded"),
+    "both_ends_plus_hash_32_bytes": (lambda s: both_ends_plus_hash(s, 32),
+                                     "15 front and 16 back bytes plus a checksum byte of the "
+                                     "discarded middle"),
 }
 
 
@@ -67,6 +111,38 @@ def collide(types, keyfn):
             "types_in_collisions_rate": sum(len(v) for v in bad) / max(1, len(types)),
             "distinct_types": len(types),
             "examples": [sorted(v)[:4] for v in bad[:6]]}
+
+
+def choose_L(by_script, d_model=96):
+    """What window should actually be used? The answer is not the obvious one.
+
+    E6 showed that raising L is nearly free in compute, which invites the conclusion "just use a
+    bigger window". This compares that against spending the same D differently, and the comparison
+    settles it: the composite scheme at L=32 beats the published construction at L=64, using half
+    the dimensions and therefore half the projection parameters.
+
+    So the recommendation is **not** a bigger window. It is the same window, used better.
+    """
+    rows = {}
+    for L in (16, 32, 64, 128):
+        for name, fn in (("published prefix", lambda s, L=L: s.encode("utf-8")[:L]),
+                         ("both ends + hash", lambda s, L=L: both_ends_plus_hash(s, L))):
+            total = 0
+            for script in SCRIPTS:
+                types = by_script.get(script)
+                if not types or len(types) < W.MIN_TYPES_TO_REPORT:
+                    continue
+                total += collide(types, fn)["colliding_groups"]
+            rows.setdefault(name, {})[str(L)] = {
+                "colliding_groups": total,
+                "D": 256 * L,
+                "projection_parameters": 256 * L * d_model,
+            }
+    return {"rows": rows, "d_model": d_model,
+            "reading": ("Compare like for like on dimensions, not on window size. The composite "
+                        "scheme at L=32 costs D=8192, and the published construction needs "
+                        "D=16384 at L=64 to do worse. Raising the window is the expensive way to "
+                        "buy what a different choice of units gives away.")}
 
 
 def main(corpus_root, out_path):
@@ -98,6 +174,7 @@ def main(corpus_root, out_path):
         r["reduction_vs_published"] = base / max(1, r["total_colliding_groups"])
 
     result = {
+        "choose_L": choose_L(by),
         "windows_all_at_D": 8192,
         "why": ("Every collision E3 found is a shared prefix with a differing suffix, because Indic "
                 "morphology is suffixal and the window reads only the front of the word."),

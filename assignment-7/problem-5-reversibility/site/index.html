@@ -112,6 +112,17 @@
     <div class="callout" id="tyingNote"></div>
   </section>
 
+  <section id="constrained">
+    <div class="sec-head"><span class="sec-num">E8</span><h2>Constrained decoding, which removes that defect entirely</h2></div>
+    <p class="sec-lead">E6's diagnosis was right and the conclusion drawn from it was too
+      pessimistic. The head is not wrong about the distribution, it is simply never asked for a
+      coherent sequence. So ask for one: mask the bytes that cannot legally follow what has already
+      been emitted, then take the argmax. <strong>Same trained model, same logits, no retraining and
+      no architectural change.</strong></p>
+    <div class="tablewrap"><table id="constrainedTable"></table></div>
+    <div class="callout good" id="constrainedNote"></div>
+  </section>
+
   <section id="openvocab">
     <div class="sec-head"><span class="sec-num">E7</span><h2>A vocabulary of 1M: a split verdict</h2></div>
     <p class="sec-lead">The input vocabulary is deliberately small at 8,000 words. Thousands more
@@ -179,6 +190,12 @@
       <tr><td><b>Rarity matched control band</b></td>
         <td><b>Needed because</b> without it, E7 reads as a refutation of the brief rather than as
           an untestable question.</td></tr>
+      <tr><td><b>Constrained decoding</b></td>
+        <td>Mask bytes that cannot legally continue the sequence before taking the argmax.
+          <b>Needed because</b> per position independence is what produced the invalid UTF-8, and
+          three separate details had to be right: length structure is not validity, the trailing
+          trim must remove the lead byte too, and a character must fit the remaining budget or a
+          short token decodes to the empty string and flatters the rate.</td></tr>
       <tr><td><b>Central difference gradient check</b></td>
         <td><b>Needed because</b> it caught a float32 truncation on the input path that was
           invisible during training, showing only as one parameter checking three orders of

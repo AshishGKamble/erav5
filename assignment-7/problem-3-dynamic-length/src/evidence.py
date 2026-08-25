@@ -131,6 +131,38 @@ def main():
         A(f"| {v['description']} | {v['total_colliding_groups']:,} | {pct(mal)} | "
           f"{v['reduction_vs_published']:.1f}x |")
 
+    try:
+        bc = load("bothends_codec.json")
+    except FileNotFoundError:
+        bc = None
+    if bc:
+        A("\n### E7 verified as a codec, not only as a key\n")
+        A(f"- Round trip, published prefix: {bc['roundtrip_prefix']['rate']:.4f}. "
+          f"Both ends: {bc['roundtrip_both_ends']['rate']:.4f}.")
+        cc = bc["bitwise_collisions"]
+        A(f"- Bitwise: {cc['bitwise_identical']}/{cc['pairs_checked']} colliding pairs produce "
+          f"identical vectors, max difference {cc['max_absolute_difference']}. "
+          f"Verdict: {cc['verdict']}.\n")
+        A("| script | prefix cut lands mid-character | both ends | both cuts aligned |")
+        A("|---|---|---|---|")
+        for sc, r in bc["cut_quality"].items():
+            al = bc["cut_quality_aligned"].get(sc, {})
+            A(f"| {sc} | {pct(r['prefix_invalid_utf8_rate'])} | "
+              f"{pct(r['both_ends_invalid_utf8_rate'])} | "
+              f"{pct(al.get('both_ends_invalid_utf8_rate'))} |")
+        cap = bc["capacity_cost_of_aligning"]
+        A(f"\nAligning both cuts costs capacity: {cap['mean_units_kept_unaligned']:.2f} units "
+          f"retained against {cap['mean_units_kept_aligned']:.2f} aligned.\n")
+
+    if "choose_L" in b:
+        A("\n## Which window to use\n")
+        A("| scheme | L | D | projection parameters | colliding groups |")
+        A("|---|---|---|---|---|")
+        for name, rows in b["choose_L"]["rows"].items():
+            for L, v in sorted(rows.items(), key=lambda kv: int(kv[0])):
+                A(f"| {name} | {L} | {v['D']:,} | {v['projection_parameters']:,} | "
+                  f"{v['colliding_groups']:,} |")
+
     if d:
         A("\n## E5, downstream, and why the token-level version is null\n")
         for lane, L in d["lanes"].items():

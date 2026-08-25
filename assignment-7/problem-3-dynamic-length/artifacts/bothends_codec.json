@@ -1,0 +1,160 @@
+{
+  "bitwise_collisions": {
+    "bitwise_identical": 217,
+    "max_absolute_difference": 0.0,
+    "pairs_checked": 217,
+    "verdict": "confirmed"
+  },
+  "bitwise_collisions_aligned": {
+    "bitwise_identical": 300,
+    "max_absolute_difference": 0.0,
+    "pairs_checked": 300,
+    "verdict": "confirmed"
+  },
+  "capacity_cost_of_aligning": {
+    "cropped_types": 20224,
+    "mean_units_kept_aligned": 30.123615506329113,
+    "mean_units_kept_unaligned": 32.0
+  },
+  "cut_quality": {
+    "BENGALI": {
+      "both_ends_invalid_utf8_rate": 0.9955056179775281,
+      "cropped_types": 1335,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9940074906367041
+    },
+    "DEVANAGARI": {
+      "both_ends_invalid_utf8_rate": 0.9969864389753893,
+      "cropped_types": 1991,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9954796584630838
+    },
+    "GUJARATI": {
+      "both_ends_invalid_utf8_rate": 0.9940711462450593,
+      "cropped_types": 506,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9960474308300395
+    },
+    "GURMUKHI": {
+      "both_ends_invalid_utf8_rate": 0.9813084112149533,
+      "cropped_types": 107,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9532710280373832
+    },
+    "KANNADA": {
+      "both_ends_invalid_utf8_rate": 0.9979388526279629,
+      "cropped_types": 2911,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9986259017519753
+    },
+    "LATIN": {
+      "both_ends_invalid_utf8_rate": 0.035916824196597356,
+      "cropped_types": 1058,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.022684310018903593
+    },
+    "MALAYALAM": {
+      "both_ends_invalid_utf8_rate": 0.9988349514563106,
+      "cropped_types": 5150,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9966990291262136
+    },
+    "ORIYA": {
+      "both_ends_invalid_utf8_rate": 0.9972260748959778,
+      "cropped_types": 721,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9972260748959778
+    },
+    "TAMIL": {
+      "both_ends_invalid_utf8_rate": 0.998146186440678,
+      "cropped_types": 3776,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9941737288135594
+    },
+    "TELUGU": {
+      "both_ends_invalid_utf8_rate": 0.9977519670288497,
+      "cropped_types": 2669,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9977519670288497
+    }
+  },
+  "cut_quality_aligned": {
+    "BENGALI": {
+      "both_ends_invalid_utf8_rate": 0.0,
+      "cropped_types": 1335,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9940074906367041
+    },
+    "DEVANAGARI": {
+      "both_ends_invalid_utf8_rate": 0.0,
+      "cropped_types": 1991,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9954796584630838
+    },
+    "GUJARATI": {
+      "both_ends_invalid_utf8_rate": 0.0,
+      "cropped_types": 506,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9960474308300395
+    },
+    "GURMUKHI": {
+      "both_ends_invalid_utf8_rate": 0.0,
+      "cropped_types": 107,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9532710280373832
+    },
+    "KANNADA": {
+      "both_ends_invalid_utf8_rate": 0.0,
+      "cropped_types": 2911,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9986259017519753
+    },
+    "LATIN": {
+      "both_ends_invalid_utf8_rate": 0.0,
+      "cropped_types": 1058,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.022684310018903593
+    },
+    "MALAYALAM": {
+      "both_ends_invalid_utf8_rate": 0.0,
+      "cropped_types": 5150,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9966990291262136
+    },
+    "ORIYA": {
+      "both_ends_invalid_utf8_rate": 0.0,
+      "cropped_types": 721,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9972260748959778
+    },
+    "TAMIL": {
+      "both_ends_invalid_utf8_rate": 0.0,
+      "cropped_types": 3776,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9941737288135594
+    },
+    "TELUGU": {
+      "both_ends_invalid_utf8_rate": 0.0,
+      "cropped_types": 2669,
+      "fix_d_character_units_invalid_rate": 0.0,
+      "prefix_invalid_utf8_rate": 0.9977519670288497
+    }
+  },
+  "question": "E7 measured a key. This file checks whether that key is a working codec, because the writeup recommends it.",
+  "roundtrip_both_ends": {
+    "rate": 1.0,
+    "recovered": 4000,
+    "tokens": 4000
+  },
+  "roundtrip_both_ends_aligned": {
+    "rate": 1.0,
+    "recovered": 4000,
+    "tokens": 4000
+  },
+  "roundtrip_prefix": {
+    "rate": 1.0,
+    "recovered": 4000,
+    "tokens": 4000
+  },
+  "window": 32
+}

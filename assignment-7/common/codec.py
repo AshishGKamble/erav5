@@ -76,6 +76,43 @@ def script_relative_units(text, script_id, limit=None):
     return units
 
 
+def both_ends_units(text, pos_dim, unit="byte", blocks=2, align=False):
+    """Units for the both-ends window of Problem 3's E7.
+
+    Problem 3's E3 found that every truncation collision is a shared **prefix** with a differing
+    **suffix**, because Indic morphology is suffixal while the window reads only the front of the
+    word. So spend half the window on the front and half on the back. Nothing about the codec
+    changes: these are still ordinary units and `encode(..., unit)` takes them unaltered.
+
+    The cost, which is real and is measured rather than assumed: the published window cuts a word
+    **once**, at the end, so only that boundary can land mid-character. This scheme cuts **twice**,
+    and the second cut opens the back half, so a multi-byte character can be split at the front of
+    the retained tail as well. `align=True` moves the back cut forward to the next character
+    boundary, which costs a little capacity and removes that failure.
+
+    Decoding recovers the retained units, not the word: the dropped middle is gone, exactly as the
+    dropped tail is gone under the published construction.
+    """
+    units = text_units(text, unit, blocks)
+    if len(units) <= pos_dim:
+        return units
+    back = pos_dim // 2
+    front = pos_dim - back
+    if align and unit == "byte":
+        # Align BOTH cuts to character boundaries: trim the front back to the last complete
+        # character, and walk the back cut forward to the next lead byte. Aligning only the back
+        # cut fixes nothing, because the front cut is the one that is essentially always
+        # misaligned for a three-byte script when the window is not a multiple of three.
+        f = front
+        while f > 0 and 0x80 <= units[f] < 0xC0:
+            f -= 1
+        start = len(units) - back
+        while start < len(units) and 0x80 <= units[start] < 0xC0:
+            start += 1
+        return units[:f] + units[start:]
+    return units[:front] + units[len(units) - back:]
+
+
 def dim(pos_dim, unit, blocks=2):
     """Codec output dimensionality D."""
     return CHAR_DIM * pos_dim if unit == "byte" else CHAR_DIM * blocks * pos_dim
@@ -163,6 +200,89 @@ def decode(v, pos_dim, unit="byte", blocks=2, length=None, margin_threshold=None
                 length = p
                 break
     return units[:length], margins
+
+
+def _utf8_lead(b):
+    """(continuations required, allowed range for the FIRST continuation) for a lead byte.
+
+    Length structure alone is not UTF-8 validity. Three lead bytes restrict what may follow them,
+    and ignoring that leaves roughly a third of constrained decodes still invalid:
+
+      * `0xE0` must be followed by 0xA0..0xBF, otherwise the sequence is an overlong encoding
+      * `0xED` must be followed by 0x80..0x9F, otherwise it encodes a UTF-16 surrogate
+      * `0xF0` must be followed by 0x90..0xBF and `0xF4` by 0x80..0x8F, for overlong and range
+
+    Returns None if `b` cannot start a sequence at all.
+    """
+    if b < 0x80:
+        return 0, None
+    if 0xC2 <= b <= 0xDF:
+        return 1, (0x80, 0xBF)
+    if b == 0xE0:
+        return 2, (0xA0, 0xBF)
+    if b == 0xED:
+        return 2, (0x80, 0x9F)
+    if 0xE1 <= b <= 0xEF:
+        return 2, (0x80, 0xBF)
+    if b == 0xF0:
+        return 3, (0x90, 0xBF)
+    if b == 0xF4:
+        return 3, (0x80, 0x8F)
+    if 0xF1 <= b <= 0xF3:
+        return 3, (0x80, 0xBF)
+    return None
+
+
+def decode_constrained(logits, pos_dim):
+    """Greedy decode restricted to byte sequences that are valid UTF-8.
+
+    Problem 5's E6 measured a 12.20% invalid UTF-8 rate from a tied byte head, and the cause is
+    structural: each position takes its argmax independently, so nothing stops position p+1 from
+    being a lead byte where a continuation byte was required. The head is not wrong about the
+    distribution, it is simply never asked for a coherent sequence.
+
+    This asks for one. At each position the bytes that cannot legally follow what has been emitted
+    are masked out before the argmax, and any incomplete trailing sequence is dropped. It needs no
+    retraining and no architectural change: it is a decoding rule applied to the same logits.
+
+    `logits` is (256, pos_dim). Returns the emitted byte values.
+
+    Greedy under a constraint is not the highest scoring valid sequence, which would need a beam,
+    and it is reported as what it is.
+    """
+    lg = np.asarray(logits, dtype=np.float64)
+    leads = [b for b in range(256) if _utf8_lead(b) is not None]
+    out, expect, rng = [], 0, None
+    for p in range(pos_dim):
+        col = lg[:, p]
+        if expect > 0:
+            lo, hi = rng if rng else (0x80, 0xBF)
+            cand = range(lo, hi + 1)
+        else:
+            # Only a character that FITS in the remaining positions may start here. Without this
+            # the decoder happily starts a three byte character with one slot left, the trailing
+            # trim then removes it, and a short token decodes to the empty string, which is
+            # trivially valid UTF-8 and therefore flatters the validity rate while saying nothing.
+            room = pos_dim - p
+            cand = [b for b in leads if _utf8_lead(b)[0] < room]
+            if not cand:
+                break
+        best = max(cand, key=lambda b: col[b])
+        out.append(best)
+        if expect > 0:
+            expect -= 1
+            rng = (0x80, 0xBF) if expect else None
+        else:
+            expect, rng = _utf8_lead(best)
+    if expect > 0:
+        # Drop the incomplete trailing character: pop its continuation bytes and then its lead.
+        # Stopping when `expect` reaches zero instead would leave the lead byte in place, which is
+        # still invalid, and was worth about eight percent of decodes before it was fixed.
+        while out:
+            b = out.pop()
+            if not (0x80 <= b < 0xC0):
+                break
+    return out
 
 
 def units_to_text(units, unit):
