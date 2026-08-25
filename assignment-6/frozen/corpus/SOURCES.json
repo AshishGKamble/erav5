@@ -1,0 +1,75 @@
+{
+  "_note": "Frozen corpus slices committed so run_demo.py reproduces offline. Each lane keeps its own licence; see ../../NOTICE.md. run_demo.py verifies these hashes before building shards and aborts on mismatch.",
+  "lanes": [
+    {
+      "bytes": 3039563,
+      "docs": 164,
+      "file": "web.jsonl",
+      "lane": "web",
+      "licence": "CC BY-SA 3.0/4.0",
+      "raw_chars": 3002859,
+      "sha256": "e8ef29975da28010958e9422706bdfc923ae22b75aad36d51b9f9c209f5eb1ae",
+      "source": "Salesforce/wikitext (wikitext-103-raw-v1)"
+    },
+    {
+      "bytes": 3242165,
+      "docs": 260,
+      "file": "code.jsonl",
+      "lane": "code",
+      "licence": "per-file: MIT/Apache-2.0/BSD/ISC",
+      "raw_chars": 3085255,
+      "sha256": "0c2eeefc49c7428f4a519ca302f6cc36071337794384cef999853584c6b382fc",
+      "source": "codeparrot/codeparrot-clean-valid (permissive-filtered)"
+    },
+    {
+      "bytes": 2110889,
+      "docs": 246,
+      "file": "math.jsonl",
+      "lane": "math",
+      "licence": "ODC-By 1.0 (Common Crawl ToU applies)",
+      "raw_chars": 2015416,
+      "sha256": "97aafdee2cf67cfb56da5c3711e1bf75fb3847214ddda6619a4ae4c95ea00b41",
+      "source": "open-web-math/open-web-math"
+    },
+    {
+      "bytes": 1956434,
+      "docs": 2818,
+      "file": "reasoning.jsonl",
+      "lane": "reasoning",
+      "licence": "MIT",
+      "raw_chars": 1500156,
+      "sha256": "3a99dcde6a9510525080da1d5af55ae107927214b48b570d72100166172ba89a",
+      "source": "openai/gsm8k (main)"
+    },
+    {
+      "bytes": 8464797,
+      "docs": 4275,
+      "file": "indic.jsonl",
+      "lane": "indic",
+      "licence": "CC BY 4.0",
+      "raw_chars": 3000465,
+      "sha256": "c7624ff0e648b641eef7c8ac23972d81966b180499bea179f9397187c3ae6539",
+      "source": "ai4bharat/indic-align (Anudesh, Dolly_T, WikiHow)"
+    },
+    {
+      "bytes": 2402684,
+      "docs": 922,
+      "file": "agentic.jsonl",
+      "lane": "agentic",
+      "licence": "Apache-2.0",
+      "raw_chars": 2000469,
+      "sha256": "c88929cc15e66e4707d59df0929f8e25173d854d4e6e9644fed6cd92e235ede7",
+      "source": "glaiveai/glaive-function-calling-v2"
+    },
+    {
+      "bytes": 3157311,
+      "docs": 52,
+      "file": "long_ctx.jsonl",
+      "lane": "long_ctx",
+      "licence": "Public domain in the US",
+      "raw_chars": 3046137,
+      "sha256": "252dc983e60be62c1ae5f475faaa9c2f5d75ae16b2ba25ad5e68adab564510a2",
+      "source": "Project Gutenberg"
+    }
+  ]
+}

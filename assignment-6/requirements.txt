@@ -1,0 +1,8 @@
+# Runtime dependencies for run_demo.py and the test suite.
+# Deliberately minimal: no torch, no framework, ~30 MB installed.
+numpy>=1.24
+tokenizers>=0.15
+
+# fetch_corpus.py additionally needs `datasets`, but it is a BUILD-TIME tool that was already run
+# and whose output is committed under frozen/corpus/. The grader never runs it, and run_demo.py
+# never touches the network.

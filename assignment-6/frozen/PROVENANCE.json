@@ -1,0 +1,20 @@
+{
+  "_note": "Inputs vendored into this assignment so run_demo.py works from a clean clone with no network. Copied, not referenced: assignment-4/data/ and assignment-5/proxy/data/ are gitignored, so a cross-folder reference would fail on a fresh clone. run_demo.py verifies these hashes before doing anything else.",
+  "plan": {
+    "file": "plan.json",
+    "origin": "assignment-5/plan.json",
+    "origin_commit": "892fcb1",
+    "sha256": "da446663f1da35154b02103a55228dac42febc8c912f5f579cfc8ac387413373",
+    "supplies": "lane shares, five curriculum stages, protected floors, OPUS parameters"
+  },
+  "tokenizer": {
+    "byte_fallback": true,
+    "caveat": "Trained in Assignment 2 on four Wikipedia articles (en/hi/mr/te). It has never seen code, so the code lane falls back to bytes and shows poor fertility. Reused anyway because a tokenizer frozen months ago for another purpose is stronger evidence of immutability than one minted for this demo. Fertility is measured per lane and reported rather than hidden.",
+    "file": "tokenizer.json",
+    "merges": 9444,
+    "origin": "assignment-2/tokenizer/tokenizer.json",
+    "origin_commit": "892fcb1",
+    "sha256": "ec93367beecc356c7dc052b52669685f07b92c2b4cf1643e4cda5dab286df7d8",
+    "vocab_size": 10000
+  }
+}

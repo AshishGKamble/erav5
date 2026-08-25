@@ -1,0 +1,58 @@
+{
+  "bindings": {
+    "manifest_sha256": "40391c0463663aa49b8841fbfe784248e90ca91d5ea8eed2f15af321068133f2",
+    "plan_sha256": "da446663f1da35154b02103a55228dac42febc8c912f5f579cfc8ac387413373",
+    "tokenizer_sha256": "ec93367beecc356c7dc052b52669685f07b92c2b4cf1643e4cda5dab286df7d8"
+  },
+  "branch": "crash",
+  "ledger_offsets": {
+    "consumption": 21,
+    "learning": 21
+  },
+  "model_cfg": {
+    "d": 48,
+    "max_pos": 512,
+    "n_head": 4,
+    "n_layer": 2,
+    "seed": 1234,
+    "vocab": 10000
+  },
+  "next_step": 21,
+  "optimiser_saved": true,
+  "optimiser_step": 21,
+  "parent": null,
+  "scheduler": {
+    "by_stage": {
+      "general": {
+        "agentic": 2286,
+        "code": 12288,
+        "indic": 11033,
+        "long_ctx": 3072,
+        "math": 6144,
+        "reasoning": 3932,
+        "web": 22528
+      },
+      "seed": {
+        "code": 2048,
+        "indic": 3073,
+        "long_ctx": 1024,
+        "math": 1024,
+        "reasoning": 329,
+        "web": 10240
+      }
+    },
+    "consumed": {
+      "agentic": 2286,
+      "code": 14336,
+      "indic": 14106,
+      "long_ctx": 4096,
+      "math": 7168,
+      "reasoning": 4261,
+      "web": 32768
+    }
+  },
+  "scheduler_hash": "63289011ac453b6fd60b9df5cedb8e6afb55501c300749e9bc9f79788cade536",
+  "step": 20,
+  "weights_file": "crash-step00020.npz",
+  "weights_sha256": "945485c92a0921c5c75a43be572d06bc5748d88cd5448337cc15fcabca26ff2c"
+}
