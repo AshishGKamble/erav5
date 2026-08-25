@@ -143,6 +143,50 @@
     <div class="callout" id="e5bNote"></div>
   </section>
 
+  <section id="methods">
+    <div class="sec-head"><span class="sec-num">&#9881;</span><h2>How this was measured</h2></div>
+    <p class="sec-lead">Several of these exist because a naive version of the same measurement gave
+      a wrong answer first. Those are marked, because the reason a technique is needed is usually
+      more informative than the technique.</p>
+    <div class="tablewrap"><table>
+      <tr><th>technique</th><th>what it is for</th></tr>
+      <tr><td><b>Script detection from <span class="mono">unicodedata.name</span></b></td>
+        <td>Derive a character's script from the Unicode database rather than a hand written table,
+          so the classification cannot be accused of being tuned to produce this result.</td></tr>
+      <tr><td><b>Extended grapheme approximation</b></td>
+        <td>Count what a reader perceives as one unit: a base character plus its combining marks,
+          plus consonants joined by a virama. No segmentation dependency was added.</td></tr>
+      <tr><td><b>Prefix grouping</b></td>
+        <td>Group distinct word types by their first L bytes. Any group larger than one is a set of
+          words that receive the identical embedding.</td></tr>
+      <tr><td><b>Bitwise verification</b></td>
+        <td>Re-encode colliding pairs and compare the actual float vectors, instead of trusting that
+          the definition implies it.</td></tr>
+      <tr><td><b>Equal-D comparison</b></td>
+        <td>Charge every codec the same dimension budget, so no fix can look good merely by spending
+          more. A byte window of L costs 256L and a two block codepoint window costs 512L.</td></tr>
+      <tr><td><b>Shannon entropy per base-256 digit</b></td>
+        <td>Measure how much information a codec block actually carries. This is the measurement
+          that exposed fix D.</td></tr>
+      <tr><td><b>Affine factorisation of z-normalisation</b></td>
+        <td>A code is a sparse support plus two closed form scalars, exact to 1.4e-14. This is why
+          memory and compute are not actually paid.</td></tr>
+      <tr><td><b>Gather plus segmented reduction</b></td>
+        <td><b>Needed because</b> a per token Python loop loses a wall clock race to dense BLAS
+          despite doing far less arithmetic, and reporting that would measure the implementation
+          rather than the construction.</td></tr>
+      <tr><td><b>Seed noise floor</b></td>
+        <td>Repeat every trained comparison across seeds and report any effect inside two standard
+          deviations as not established.</td></tr>
+      <tr><td><b>Exposure diagnostic</b></td>
+        <td><b>Needed because</b> E5's null turned out to be a measurement with no exposure to the
+          effect, rather than a finding about the codecs.</td></tr>
+      <tr><td><b>Lane separation and punctuation stripping</b></td>
+        <td><b>Needed because</b> pooled Latin first measured a far higher collision rate, almost
+          all of it source code and trailing commas.</td></tr>
+    </table></div>
+  </section>
+
   <footer>
     <p><strong>What is not claimed.</strong> Everything trained here is 2 layers at d_model=96 on
       CPU, with every effect quoted against a measured seed noise floor. Fix D's assumption that a

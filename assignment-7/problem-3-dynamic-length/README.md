@@ -28,6 +28,27 @@ far more serious problem than the first two, for a reason the assignment does no
 
 The rest of this document is how those answers were arrived at, in the order the experiments ran.
 
+## The techniques used, and what each one is for
+
+Several of these exist because a naive version of the same measurement gave a wrong answer first.
+Those are marked, because the reason a technique is needed is usually more informative than the
+technique.
+
+| technique | what it is for | where |
+|---|---|---|
+| **Script detection from `unicodedata.name`** | Derive a character's script from the Unicode database rather than a hand written table, so the classification cannot be accused of being tuned to produce this result. | `common/corpus.py` |
+| **Extended grapheme approximation** | Count what a reader perceives as one unit: a base character plus its combining marks, plus consonants joined by a virama. No segmentation dependency was added. | E2 |
+| **Prefix grouping** | Group distinct word types by their first L bytes. Any group larger than one is a set of words that receive the identical embedding. | E3 |
+| **Bitwise verification** | Re-encode colliding pairs and compare the actual float vectors, instead of trusting that the definition implies it. | E3 |
+| **Equal-D comparison** | Charge every codec the same dimension budget, so no fix can look good merely by spending more. Byte L=32 and two block codepoint L=16 are both 8192. | E4, E7 |
+| **Shannon entropy per base-256 digit** | Measure how much information a codec block actually carries. This is the measurement that exposed fix D: the Indic high digit carries 0.0000 bits. | E4c |
+| **Affine factorisation of z-normalisation** | Because `kappa = (m/sqrt(L) - mu)/sigma` is affine, a code is a sparse support plus two closed form scalars. Exact to 1.4e-14, and the reason memory and compute are not actually paid. | E6 |
+| **Gather plus segmented reduction** | Vectorise the factored path with `np.add.reduceat`. **Needed because** a per token Python loop loses a wall clock race to dense BLAS despite doing 932x less arithmetic, and reporting that would measure the implementation rather than the construction. | E6 |
+| **Seed noise floor** | Repeat every trained comparison across seeds and report any effect inside two standard deviations as not established. | E5, E5b |
+| **Exposure diagnostic** | Before believing a null, measure how much of the effect the experiment could even see. **Needed because** E5's null turned out to be a measurement with no exposure rather than a finding. | E5 |
+| **Lane separation and punctuation stripping** | Remove measurement artefacts that flatter the result. **Needed because** pooled Latin first measured 7.53% collisions, almost all of it source code and trailing commas. | corrections |
+| **Type versus occurrence weighting** | Report both, since they answer different questions: what the vocabulary looks like against what training actually spends. | E1 |
+
 ## The finding underneath all three
 
 The waste is real, large and almost harmless: 92 to 95 percent of the window is zeros. It costs

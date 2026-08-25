@@ -139,6 +139,53 @@
       found by auditing the writeups against the literal wording of the brief.</div>
   </section>
 
+  <section id="methods">
+    <div class="sec-head"><span class="sec-num">&#9881;</span><h2>How this was measured</h2></div>
+    <p class="sec-lead">Several of these exist because a naive version of the same measurement gave
+      a wrong answer first. Those are marked, because the reason a technique is needed is usually
+      more informative than the technique.</p>
+    <div class="tablewrap"><table>
+      <tr><th>technique</th><th>what it is for</th></tr>
+      <tr><td><b>Per column argmax decoding</b></td>
+        <td>Invert the codec by <i>ranking</i> rather than by values. This is the whole reason noise
+          tolerance exists, and why z-normalisation cannot break decoding.</td></tr>
+      <tr><td><b>Margin relative length inference</b></td>
+        <td><b>Needed because</b> a fixed global threshold silently truncates the longest tokens:
+          the margin scales with occupancy, so long tokens genuinely have smaller margins.</td></tr>
+      <tr><td><b>Noise sweep in z-normalised units</b></td>
+        <td>Quote noise as a multiple of the signal's own standard deviation, which is exactly 1 by
+          construction, so the numbers are scale free.</td></tr>
+      <tr><td><b>Minimum norm preimage</b></td>
+        <td>The standard structure blind linear inverse, used to probe what a projection retains.</td></tr>
+      <tr><td><b>Constructive collision generation</b></td>
+        <td>Build exact collisions at machine precision rather than searching for them.</td></tr>
+      <tr><td><b>Off manifold residual test</b></td>
+        <td><b>Needed because</b> after z-normalisation no entry is zero and every code has the same
+          norm, so counting zeros or comparing norms measures nothing at all.</td></tr>
+      <tr><td><b>Nearest neighbour separation</b></td>
+        <td>Test injectivity directly. If distinct tokens stay distinguishable then no information
+          was destroyed, whatever any particular decoder manages.</td></tr>
+      <tr><td><b>Learned linear inverse on a split</b></td>
+        <td><b>Needed because</b> minimum norm is the wrong tool for a trained projection, and using
+          it alone would have reported a refutation.</td></tr>
+      <tr><td><b>Per token loss normalisation</b></td>
+        <td><b>Needed because</b> the heads live in different output spaces and an unconverted table
+          would make either look arbitrarily better.</td></tr>
+      <tr><td><b>Copy diagnostic</b></td>
+        <td><b>Needed because</b> an untrained tied head is already an autoencoder, so its step 0
+          accuracy is wiring and would otherwise read as learning.</td></tr>
+      <tr><td><b>Separate input and target streams</b></td>
+        <td><b>Needed because</b> it is the only way to ask a model for a word it has no id for.</td></tr>
+      <tr><td><b>Rarity matched control band</b></td>
+        <td><b>Needed because</b> without it, E7 reads as a refutation of the brief rather than as
+          an untestable question.</td></tr>
+      <tr><td><b>Central difference gradient check</b></td>
+        <td><b>Needed because</b> it caught a float32 truncation on the input path that was
+          invisible during training, showing only as one parameter checking three orders of
+          magnitude worse than the rest.</td></tr>
+    </table></div>
+  </section>
+
   <footer>
     <p><strong>What is not claimed.</strong> The byte head is not shown to be better: at this scale
       it is worse on loss, and its case rests on a parameter count at dimensions this machine cannot

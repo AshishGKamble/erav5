@@ -28,6 +28,29 @@ out not to be testable on this machine and saying so is more useful than pretend
 
 The rest of this document is how those answers were arrived at, in the order the experiments ran.
 
+## The techniques used, and what each one is for
+
+Several of these exist because a naive version of the same measurement gave a wrong answer first.
+Those are marked, because the reason a technique is needed is usually more informative than the
+technique.
+
+| technique | what it is for | where |
+|---|---|---|
+| **Per column argmax decoding** | Invert the codec by *ranking* rather than by values. This is the whole reason noise tolerance exists, and why z-normalisation cannot break decoding. | E1, E2 |
+| **Margin relative length inference** | Infer where a token ends from each vector's own peak margin. **Needed because** a fixed global threshold silently truncates the longest tokens: the margin scales with occupancy, so long tokens genuinely have smaller margins. | E1, E2 |
+| **Noise sweep in z-normalised units** | Quote noise as a multiple of the signal's own standard deviation, which is exactly 1 by construction, so the numbers are scale free and comparable across window sizes. | E2 |
+| **Minimum norm preimage** | The standard structure blind linear inverse, used to probe what a projection retains. | E3 |
+| **Constructive collision generation** | Build exact collisions at machine precision, `x = k_b - P(k_b - k_a)`, rather than searching for them. | E3 |
+| **Off manifold residual test** | Re-encode whatever a vector decodes to and measure the distance back to it. **Needed because** after z-normalisation no entry is zero and every code has the same norm, so counting zeros or comparing norms measures nothing at all. | E3 |
+| **Nearest neighbour separation** | Test injectivity directly. If distinct tokens stay distinguishable then no information was destroyed, whatever any particular decoder manages. | caveat |
+| **Learned linear inverse on a split** | Fit a decoder on one set of tokens and score it on tokens it never saw. **Needed because** minimum norm is the wrong tool for a trained projection, and using it alone would have reported a refutation. | caveat |
+| **Per token loss normalisation** | Convert nats per byte position into nats per token. **Needed because** the two heads live in different output spaces and an unconverted table would make either look arbitrarily better. | E4 |
+| **Copy diagnostic** | Score predictions against the *current* token as well as the next. **Needed because** an untrained tied head is an 83.43% autoencoder, so its step 0 accuracy is wiring and would otherwise read as learning. | E5 |
+| **Separate input and target streams** | Let a word enter as an unknown marker while still being required as a target. **Needed because** it is the only way to ask a model for a word it has no id for. | E7 |
+| **Rarity matched control band** | Hold frequency constant so a zero can be attributed to vocabulary membership rather than to rarity. **Needed because** without it, E7 reads as a refutation of the brief rather than as an untestable question. | E7 |
+| **Central difference gradient check** | Verify every parameter's gradient numerically, including the tied head's dual path where `W` receives gradient as both input projection and unembedding. **Needed because** it caught a float32 truncation on the input path that was invisible in training. | all trained |
+| **Seed noise floor** | Repeat across seeds and report any effect inside two standard deviations as not established. | E4 |
+
 ## The shape of the argument
 
 Reversibility is not blocked. It holds in three independent senses and the margins say by how much.

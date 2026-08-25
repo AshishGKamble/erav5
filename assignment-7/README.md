@@ -73,6 +73,24 @@ embedding, because Indic morphology is suffixal and the window reads prefixes.
 - **Both problems refuted their own pre-registered predictions** and kept the refutations in the
   writeups rather than quietly editing the plans.
 
+## The shared machinery
+
+Both problems are built on the same small set of pieces in `common/`, and two of them are worth
+naming because they are what made the measurements affordable.
+
+- **The codec is held factored, not dense.** z-normalisation is affine, so a code is
+  `(m/sqrt(L) - mu)/sigma`: a sparse support plus two closed form scalars. A 10,000 token vocabulary
+  at D=8192 is 312.5 MB dense and **0.905 MB** factored, and `kappa @ W` becomes a handful of row
+  lookups instead of an 8192 dimensional dot product. It reproduces the float64 codec definition to
+  **1.4e-14**, so nothing is approximated. This is also the answer to Problem 3's first two
+  questions.
+- **Assignment 6's transformer is imported, not copied.** The model under test is one that has
+  already been used and checked, and the only new parts are the two ends: a Kronecker input with no
+  per token table, and three interchangeable output heads.
+
+Each problem's README carries a table of the techniques it used and what each one is for, including
+the ones that exist only because a naive version of the same measurement gave a wrong answer first.
+
 ## The methodological result, which applies to both
 
 Three separate experiments here were run on units that **structurally could not exhibit the effect
