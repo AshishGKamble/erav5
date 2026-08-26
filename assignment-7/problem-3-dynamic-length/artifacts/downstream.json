@@ -1,14 +1,15 @@
 {
   "_provenance": {
-    "backfilled": true,
     "code": {
-      "common/codec.py": "7c7dd97e2e1b4917",
+      "common/codec.py": "2aeec5ae34594c15",
       "common/corpus.py": "ea91e2d2e1cca8a8",
       "common/data.py": "5e217b9cbe9d42e4",
       "common/kron_model.py": "b001a515f246d4fb",
-      "common/vocabulary.py": "b3fd85daef192fe8"
+      "common/vocabulary.py": "b3fd85daef192fe8",
+      "script": "037ff9440dca1e6a",
+      "script_name": "exp_downstream.py"
     },
-    "reason": "Stamped after the full regeneration of 2026-08-26, which rebuilt every artefact from scratch with this exact common/ code. Fingerprints taken at write time from here on."
+    "note": "SHA-256 prefixes of the code that produced this artefact. If these disagree with the working tree, the artefact predates a code change and must be regenerated. Check with `python -m provenance` from `common/`."
   },
   "config": {
     "D": 8192,
@@ -320,7 +321,7 @@
                 "loss_per_token": 2.6334054153636237,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 134.6831214427948,
+                "seconds": 204.05421471595764,
                 "step": 300,
                 "tokens_scored": 6080
               },
@@ -332,7 +333,7 @@
                   "loss_per_token": 9.211454527240427,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.3331778049468994,
+                  "seconds": 1.866347312927246,
                   "step": 0,
                   "tokens_scored": 6080
                 },
@@ -343,7 +344,7 @@
                   "loss_per_token": 3.5427289252265584,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 22.563072204589844,
+                  "seconds": 39.85557413101196,
                   "step": 50,
                   "tokens_scored": 6080
                 },
@@ -354,7 +355,7 @@
                   "loss_per_token": 3.099787565060282,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 48.414977073669434,
+                  "seconds": 69.60802936553955,
                   "step": 100,
                   "tokens_scored": 6080
                 },
@@ -365,7 +366,7 @@
                   "loss_per_token": 2.8347011348985562,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 69.97226238250732,
+                  "seconds": 94.14823746681213,
                   "step": 150,
                   "tokens_scored": 6080
                 },
@@ -376,7 +377,7 @@
                   "loss_per_token": 2.740566158153416,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 92.02495813369751,
+                  "seconds": 123.33261108398438,
                   "step": 200,
                   "tokens_scored": 6080
                 },
@@ -387,7 +388,7 @@
                   "loss_per_token": 2.6634954274807834,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 113.64769148826599,
+                  "seconds": 171.26142573356628,
                   "step": 250,
                   "tokens_scored": 6080
                 },
@@ -398,7 +399,7 @@
                   "loss_per_token": 2.6334054153636237,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 134.6831214427948,
+                  "seconds": 204.05421471595764,
                   "step": 300,
                   "tokens_scored": 6080
                 }
@@ -413,7 +414,7 @@
                 "loss_per_token": 2.6303992324732857,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 129.2112843990326,
+                "seconds": 151.01030778884888,
                 "step": 300,
                 "tokens_scored": 6080
               },
@@ -425,7 +426,7 @@
                   "loss_per_token": 9.240378211679799,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.4633803367614746,
+                  "seconds": 1.5046749114990234,
                   "step": 0,
                   "tokens_scored": 6080
                 },
@@ -436,7 +437,7 @@
                   "loss_per_token": 3.6422465763747027,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 22.626914024353027,
+                  "seconds": 28.913767099380493,
                   "step": 50,
                   "tokens_scored": 6080
                 },
@@ -447,7 +448,7 @@
                   "loss_per_token": 3.1582454791819106,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 44.05857229232788,
+                  "seconds": 60.11415481567383,
                   "step": 100,
                   "tokens_scored": 6080
                 },
@@ -458,7 +459,7 @@
                   "loss_per_token": 2.847113716774032,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 65.09010148048401,
+                  "seconds": 83.82226300239563,
                   "step": 150,
                   "tokens_scored": 6080
                 },
@@ -469,7 +470,7 @@
                   "loss_per_token": 2.7807186472333414,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 86.43321084976196,
+                  "seconds": 106.51686477661133,
                   "step": 200,
                   "tokens_scored": 6080
                 },
@@ -480,7 +481,7 @@
                   "loss_per_token": 2.6526239209157856,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 107.90405654907227,
+                  "seconds": 128.91576504707336,
                   "step": 250,
                   "tokens_scored": 6080
                 },
@@ -491,7 +492,7 @@
                   "loss_per_token": 2.6303992324732857,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 129.2112843990326,
+                  "seconds": 151.01030778884888,
                   "step": 300,
                   "tokens_scored": 6080
                 }
@@ -506,7 +507,7 @@
                 "loss_per_token": 2.64642447179655,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 130.10979175567627,
+                "seconds": 134.56839776039124,
                 "step": 300,
                 "tokens_scored": 6080
               },
@@ -518,7 +519,7 @@
                   "loss_per_token": 9.221785820498154,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.4680812358856201,
+                  "seconds": 1.4679465293884277,
                   "step": 0,
                   "tokens_scored": 6080
                 },
@@ -529,7 +530,7 @@
                   "loss_per_token": 3.641783133595671,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 22.67470932006836,
+                  "seconds": 23.614601850509644,
                   "step": 50,
                   "tokens_scored": 6080
                 },
@@ -540,7 +541,7 @@
                   "loss_per_token": 3.1637387771184695,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 44.1045446395874,
+                  "seconds": 45.821651458740234,
                   "step": 100,
                   "tokens_scored": 6080
                 },
@@ -551,7 +552,7 @@
                   "loss_per_token": 2.8865990640038746,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 66.51024389266968,
+                  "seconds": 67.9807505607605,
                   "step": 150,
                   "tokens_scored": 6080
                 },
@@ -562,7 +563,7 @@
                   "loss_per_token": 2.784563178900733,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 87.81609272956848,
+                  "seconds": 89.54666686058044,
                   "step": 200,
                   "tokens_scored": 6080
                 },
@@ -573,7 +574,7 @@
                   "loss_per_token": 2.7420505527555687,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 109.06569242477417,
+                  "seconds": 112.21857237815857,
                   "step": 250,
                   "tokens_scored": 6080
                 },
@@ -584,7 +585,7 @@
                   "loss_per_token": 2.64642447179655,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 130.10979175567627,
+                  "seconds": 134.56839776039124,
                   "step": 300,
                   "tokens_scored": 6080
                 }
@@ -618,7 +619,7 @@
                 "loss_per_token": 2.6583598540963727,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 130.10270047187805,
+                "seconds": 139.24867582321167,
                 "step": 300,
                 "tokens_scored": 6080
               },
@@ -630,7 +631,7 @@
                   "loss_per_token": 9.271897535474364,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.4312028884887695,
+                  "seconds": 1.38323974609375,
                   "step": 0,
                   "tokens_scored": 6080
                 },
@@ -641,7 +642,7 @@
                   "loss_per_token": 3.4916113380356126,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 22.677417755126953,
+                  "seconds": 25.497404098510742,
                   "step": 50,
                   "tokens_scored": 6080
                 },
@@ -652,7 +653,7 @@
                   "loss_per_token": 3.0218202811813684,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 44.49851632118225,
+                  "seconds": 48.53508710861206,
                   "step": 100,
                   "tokens_scored": 6080
                 },
@@ -663,7 +664,7 @@
                   "loss_per_token": 2.8460735154792456,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 66.11892700195312,
+                  "seconds": 70.99970507621765,
                   "step": 150,
                   "tokens_scored": 6080
                 },
@@ -674,7 +675,7 @@
                   "loss_per_token": 2.7527650414957594,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 87.33588647842407,
+                  "seconds": 93.81720232963562,
                   "step": 200,
                   "tokens_scored": 6080
                 },
@@ -685,7 +686,7 @@
                   "loss_per_token": 2.6842043692582185,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 108.44345498085022,
+                  "seconds": 116.60208749771118,
                   "step": 250,
                   "tokens_scored": 6080
                 },
@@ -696,7 +697,7 @@
                   "loss_per_token": 2.6583598540963727,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 130.10270047187805,
+                  "seconds": 139.24867582321167,
                   "step": 300,
                   "tokens_scored": 6080
                 }
@@ -711,7 +712,7 @@
                 "loss_per_token": 2.6318782353936476,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 130.9507439136505,
+                "seconds": 133.99916410446167,
                 "step": 300,
                 "tokens_scored": 6080
               },
@@ -723,7 +724,7 @@
                   "loss_per_token": 9.208988506584438,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.5149867534637451,
+                  "seconds": 1.6236367225646973,
                   "step": 0,
                   "tokens_scored": 6080
                 },
@@ -734,7 +735,7 @@
                   "loss_per_token": 3.5674011590264554,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 22.642340421676636,
+                  "seconds": 24.71148991584778,
                   "step": 50,
                   "tokens_scored": 6080
                 },
@@ -745,7 +746,7 @@
                   "loss_per_token": 3.0248537130516224,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 43.85044550895691,
+                  "seconds": 46.51264691352844,
                   "step": 100,
                   "tokens_scored": 6080
                 },
@@ -756,7 +757,7 @@
                   "loss_per_token": 2.7981161306114863,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 65.76652932167053,
+                  "seconds": 68.60046005249023,
                   "step": 150,
                   "tokens_scored": 6080
                 },
@@ -767,7 +768,7 @@
                   "loss_per_token": 2.6977429307796963,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 86.9201352596283,
+                  "seconds": 90.79911971092224,
                   "step": 200,
                   "tokens_scored": 6080
                 },
@@ -778,7 +779,7 @@
                   "loss_per_token": 2.6194687120398967,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 108.8656497001648,
+                  "seconds": 112.37828040122986,
                   "step": 250,
                   "tokens_scored": 6080
                 },
@@ -789,7 +790,7 @@
                   "loss_per_token": 2.6318782353936476,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 130.9507439136505,
+                  "seconds": 133.99916410446167,
                   "step": 300,
                   "tokens_scored": 6080
                 }
@@ -804,7 +805,7 @@
                 "loss_per_token": 2.663301650437075,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 129.17376279830933,
+                "seconds": 1848.052630662918,
                 "step": 300,
                 "tokens_scored": 6080
               },
@@ -816,7 +817,7 @@
                   "loss_per_token": 9.230145827399529,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.796865463256836,
+                  "seconds": 1.3700520992279053,
                   "step": 0,
                   "tokens_scored": 6080
                 },
@@ -827,7 +828,7 @@
                   "loss_per_token": 3.560885186651553,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 23.54671025276184,
+                  "seconds": 23.166288375854492,
                   "step": 50,
                   "tokens_scored": 6080
                 },
@@ -838,7 +839,7 @@
                   "loss_per_token": 3.1099407982559715,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 44.79178214073181,
+                  "seconds": 45.192859411239624,
                   "step": 100,
                   "tokens_scored": 6080
                 },
@@ -849,7 +850,7 @@
                   "loss_per_token": 2.866296472995607,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 65.81502032279968,
+                  "seconds": 1784.6469576358795,
                   "step": 150,
                   "tokens_scored": 6080
                 },
@@ -860,7 +861,7 @@
                   "loss_per_token": 2.736096665051729,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 86.71709275245667,
+                  "seconds": 1805.8966929912567,
                   "step": 200,
                   "tokens_scored": 6080
                 },
@@ -871,7 +872,7 @@
                   "loss_per_token": 2.717164911317978,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 107.9751091003418,
+                  "seconds": 1826.8824682235718,
                   "step": 250,
                   "tokens_scored": 6080
                 },
@@ -882,7 +883,7 @@
                   "loss_per_token": 2.663301650437075,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 129.17376279830933,
+                  "seconds": 1848.052630662918,
                   "step": 300,
                   "tokens_scored": 6080
                 }
@@ -916,7 +917,7 @@
                 "loss_per_token": 2.639041767085316,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 128.75766491889954,
+                "seconds": 130.44854593276978,
                 "step": 300,
                 "tokens_scored": 6080
               },
@@ -928,7 +929,7 @@
                   "loss_per_token": 9.26273968773608,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.4306867122650146,
+                  "seconds": 1.343576431274414,
                   "step": 0,
                   "tokens_scored": 6080
                 },
@@ -939,7 +940,7 @@
                   "loss_per_token": 3.5075267627378026,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 22.871723890304565,
+                  "seconds": 22.494957447052002,
                   "step": 50,
                   "tokens_scored": 6080
                 },
@@ -950,7 +951,7 @@
                   "loss_per_token": 3.0789495615863927,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 44.0570011138916,
+                  "seconds": 43.56811261177063,
                   "step": 100,
                   "tokens_scored": 6080
                 },
@@ -961,7 +962,7 @@
                   "loss_per_token": 2.859404228685934,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 65.1729998588562,
+                  "seconds": 65.85404920578003,
                   "step": 150,
                   "tokens_scored": 6080
                 },
@@ -972,7 +973,7 @@
                   "loss_per_token": 2.7252442605512597,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 86.1660988330841,
+                  "seconds": 87.11754202842712,
                   "step": 200,
                   "tokens_scored": 6080
                 },
@@ -983,7 +984,7 @@
                   "loss_per_token": 2.662685584739065,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 107.36946606636047,
+                  "seconds": 108.86398220062256,
                   "step": 250,
                   "tokens_scored": 6080
                 },
@@ -994,7 +995,7 @@
                   "loss_per_token": 2.639041767085316,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 128.75766491889954,
+                  "seconds": 130.44854593276978,
                   "step": 300,
                   "tokens_scored": 6080
                 }
@@ -1009,7 +1010,7 @@
                 "loss_per_token": 2.6145982616732706,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 130.13130283355713,
+                "seconds": 134.1013367176056,
                 "step": 300,
                 "tokens_scored": 6080
               },
@@ -1021,7 +1022,7 @@
                   "loss_per_token": 9.266217885649445,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.4848401546478271,
+                  "seconds": 1.3839111328125,
                   "step": 0,
                   "tokens_scored": 6080
                 },
@@ -1032,7 +1033,7 @@
                   "loss_per_token": 3.5686510342803954,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 23.623302936553955,
+                  "seconds": 23.093204021453857,
                   "step": 50,
                   "tokens_scored": 6080
                 },
@@ -1043,7 +1044,7 @@
                   "loss_per_token": 3.132195481975853,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 45.8076114654541,
+                  "seconds": 44.73176455497742,
                   "step": 100,
                   "tokens_scored": 6080
                 },
@@ -1054,7 +1055,7 @@
                   "loss_per_token": 2.7945700053759435,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 66.90086579322815,
+                  "seconds": 66.47989416122437,
                   "step": 150,
                   "tokens_scored": 6080
                 },
@@ -1065,7 +1066,7 @@
                   "loss_per_token": 2.6879290549898127,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 87.98965334892273,
+                  "seconds": 88.22431802749634,
                   "step": 200,
                   "tokens_scored": 6080
                 },
@@ -1076,7 +1077,7 @@
                   "loss_per_token": 2.6387147410130423,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 109.2900595664978,
+                  "seconds": 110.90622925758362,
                   "step": 250,
                   "tokens_scored": 6080
                 },
@@ -1087,7 +1088,7 @@
                   "loss_per_token": 2.6145982616732706,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 130.13130283355713,
+                  "seconds": 134.1013367176056,
                   "step": 300,
                   "tokens_scored": 6080
                 }
@@ -1102,7 +1103,7 @@
                 "loss_per_token": 2.695714363840003,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 126.93310022354126,
+                "seconds": 135.4823362827301,
                 "step": 300,
                 "tokens_scored": 6080
               },
@@ -1114,7 +1115,7 @@
                   "loss_per_token": 9.258948233876167,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.5659303665161133,
+                  "seconds": 1.4746551513671875,
                   "step": 0,
                   "tokens_scored": 6080
                 },
@@ -1125,7 +1126,7 @@
                   "loss_per_token": 3.566421356316418,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 22.371663093566895,
+                  "seconds": 23.856096267700195,
                   "step": 50,
                   "tokens_scored": 6080
                 },
@@ -1136,7 +1137,7 @@
                   "loss_per_token": 3.2006212263367315,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 43.192771911621094,
+                  "seconds": 45.85077667236328,
                   "step": 100,
                   "tokens_scored": 6080
                 },
@@ -1147,7 +1148,7 @@
                   "loss_per_token": 2.990844785490174,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 64.42361235618591,
+                  "seconds": 68.11712551116943,
                   "step": 150,
                   "tokens_scored": 6080
                 },
@@ -1158,7 +1159,7 @@
                   "loss_per_token": 2.757864617230584,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 85.2839035987854,
+                  "seconds": 90.15880584716797,
                   "step": 200,
                   "tokens_scored": 6080
                 },
@@ -1169,7 +1170,7 @@
                   "loss_per_token": 2.7390737237558214,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 106.07044768333435,
+                  "seconds": 113.24377202987671,
                   "step": 250,
                   "tokens_scored": 6080
                 },
@@ -1180,7 +1181,7 @@
                   "loss_per_token": 2.695714363840003,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 126.93310022354126,
+                  "seconds": 135.4823362827301,
                   "step": 300,
                   "tokens_scored": 6080
                 }
@@ -1241,7 +1242,7 @@
                 "loss_per_token": 4.780619556946333,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 127.66751742362976,
+                "seconds": 133.81600689888,
                 "step": 300,
                 "tokens_scored": 6094
               },
@@ -1253,7 +1254,7 @@
                   "loss_per_token": 9.23423389216335,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.4740729331970215,
+                  "seconds": 1.5111896991729736,
                   "step": 0,
                   "tokens_scored": 6094
                 },
@@ -1264,7 +1265,7 @@
                   "loss_per_token": 5.657281852250894,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 22.726577043533325,
+                  "seconds": 23.345550060272217,
                   "step": 50,
                   "tokens_scored": 6094
                 },
@@ -1275,7 +1276,7 @@
                   "loss_per_token": 5.208266302600272,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 43.60106801986694,
+                  "seconds": 45.20493745803833,
                   "step": 100,
                   "tokens_scored": 6094
                 },
@@ -1286,7 +1287,7 @@
                   "loss_per_token": 5.024276444176141,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 64.46925854682922,
+                  "seconds": 67.32149839401245,
                   "step": 150,
                   "tokens_scored": 6094
                 },
@@ -1297,7 +1298,7 @@
                   "loss_per_token": 4.889716119136981,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 86.2258026599884,
+                  "seconds": 89.56607341766357,
                   "step": 200,
                   "tokens_scored": 6094
                 },
@@ -1308,7 +1309,7 @@
                   "loss_per_token": 4.830480387332999,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 107.0283784866333,
+                  "seconds": 111.49445152282715,
                   "step": 250,
                   "tokens_scored": 6094
                 },
@@ -1319,7 +1320,7 @@
                   "loss_per_token": 4.780619556946333,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 127.66751742362976,
+                  "seconds": 133.81600689888,
                   "step": 300,
                   "tokens_scored": 6094
                 }
@@ -1334,7 +1335,7 @@
                 "loss_per_token": 4.792962479367238,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 130.45439076423645,
+                "seconds": 132.023197889328,
                 "step": 300,
                 "tokens_scored": 6094
               },
@@ -1346,7 +1347,7 @@
                   "loss_per_token": 9.23873293305747,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.506974220275879,
+                  "seconds": 1.4505629539489746,
                   "step": 0,
                   "tokens_scored": 6094
                 },
@@ -1357,7 +1358,7 @@
                   "loss_per_token": 5.712990431733949,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 23.359281063079834,
+                  "seconds": 23.660693645477295,
                   "step": 50,
                   "tokens_scored": 6094
                 },
@@ -1368,7 +1369,7 @@
                   "loss_per_token": 5.230944146065847,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 44.81041502952576,
+                  "seconds": 45.61502003669739,
                   "step": 100,
                   "tokens_scored": 6094
                 },
@@ -1379,7 +1380,7 @@
                   "loss_per_token": 5.0051311923048285,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 66.35100436210632,
+                  "seconds": 67.19980764389038,
                   "step": 150,
                   "tokens_scored": 6094
                 },
@@ -1390,7 +1391,7 @@
                   "loss_per_token": 4.908195864092257,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 87.8541693687439,
+                  "seconds": 88.5619170665741,
                   "step": 200,
                   "tokens_scored": 6094
                 },
@@ -1401,7 +1402,7 @@
                   "loss_per_token": 4.855261237399447,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 109.06108689308167,
+                  "seconds": 110.18704509735107,
                   "step": 250,
                   "tokens_scored": 6094
                 },
@@ -1412,7 +1413,7 @@
                   "loss_per_token": 4.792962479367238,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 130.45439076423645,
+                  "seconds": 132.023197889328,
                   "step": 300,
                   "tokens_scored": 6094
                 }
@@ -1427,7 +1428,7 @@
                 "loss_per_token": 4.794526311034782,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 130.1109538078308,
+                "seconds": 131.88033962249756,
                 "step": 300,
                 "tokens_scored": 6094
               },
@@ -1439,7 +1440,7 @@
                   "loss_per_token": 9.22333584105243,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.5025444030761719,
+                  "seconds": 1.5291085243225098,
                   "step": 0,
                   "tokens_scored": 6094
                 },
@@ -1450,7 +1451,7 @@
                   "loss_per_token": 5.655307407654735,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 22.589688539505005,
+                  "seconds": 23.708650827407837,
                   "step": 50,
                   "tokens_scored": 6094
                 },
@@ -1461,7 +1462,7 @@
                   "loss_per_token": 5.157937117525935,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 44.13765335083008,
+                  "seconds": 45.89192199707031,
                   "step": 100,
                   "tokens_scored": 6094
                 },
@@ -1472,7 +1473,7 @@
                   "loss_per_token": 5.028783216494259,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 65.42976117134094,
+                  "seconds": 67.50434350967407,
                   "step": 150,
                   "tokens_scored": 6094
                 },
@@ -1483,7 +1484,7 @@
                   "loss_per_token": 4.901817972790721,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 86.59729290008545,
+                  "seconds": 88.96984553337097,
                   "step": 200,
                   "tokens_scored": 6094
                 },
@@ -1494,7 +1495,7 @@
                   "loss_per_token": 4.857365403128928,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 108.2008125782013,
+                  "seconds": 110.58588647842407,
                   "step": 250,
                   "tokens_scored": 6094
                 },
@@ -1505,7 +1506,7 @@
                   "loss_per_token": 4.794526311034782,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 130.1109538078308,
+                  "seconds": 131.88033962249756,
                   "step": 300,
                   "tokens_scored": 6094
                 }
@@ -1539,7 +1540,7 @@
                 "loss_per_token": 4.800588491251879,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 130.2482771873474,
+                "seconds": 128.27801895141602,
                 "step": 300,
                 "tokens_scored": 6094
               },
@@ -1551,7 +1552,7 @@
                   "loss_per_token": 9.23995762680092,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.4791324138641357,
+                  "seconds": 1.5046930313110352,
                   "step": 0,
                   "tokens_scored": 6094
                 },
@@ -1562,7 +1563,7 @@
                   "loss_per_token": 5.628824742561684,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 23.665628671646118,
+                  "seconds": 22.434312343597412,
                   "step": 50,
                   "tokens_scored": 6094
                 },
@@ -1573,7 +1574,7 @@
                   "loss_per_token": 5.20406990705077,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 45.22664833068848,
+                  "seconds": 43.53098917007446,
                   "step": 100,
                   "tokens_scored": 6094
                 },
@@ -1584,7 +1585,7 @@
                   "loss_per_token": 5.033262504238577,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 66.10561871528625,
+                  "seconds": 64.56307792663574,
                   "step": 150,
                   "tokens_scored": 6094
                 },
@@ -1595,7 +1596,7 @@
                   "loss_per_token": 4.884746535041265,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 87.09200119972229,
+                  "seconds": 85.54851126670837,
                   "step": 200,
                   "tokens_scored": 6094
                 },
@@ -1606,7 +1607,7 @@
                   "loss_per_token": 4.847080803315319,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 108.52791166305542,
+                  "seconds": 107.08163785934448,
                   "step": 250,
                   "tokens_scored": 6094
                 },
@@ -1617,7 +1618,7 @@
                   "loss_per_token": 4.800588491251879,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 130.2482771873474,
+                  "seconds": 128.27801895141602,
                   "step": 300,
                   "tokens_scored": 6094
                 }
@@ -1632,7 +1633,7 @@
                 "loss_per_token": 4.793137339403822,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 130.0959837436676,
+                "seconds": 131.16412615776062,
                 "step": 300,
                 "tokens_scored": 6094
               },
@@ -1644,7 +1645,7 @@
                   "loss_per_token": 9.211200873778523,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.5026164054870605,
+                  "seconds": 1.4371695518493652,
                   "step": 0,
                   "tokens_scored": 6094
                 },
@@ -1655,7 +1656,7 @@
                   "loss_per_token": 5.686633284821169,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 22.877849578857422,
+                  "seconds": 22.92908763885498,
                   "step": 50,
                   "tokens_scored": 6094
                 },
@@ -1666,7 +1667,7 @@
                   "loss_per_token": 5.230128616539565,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 44.3830931186676,
+                  "seconds": 44.59168767929077,
                   "step": 100,
                   "tokens_scored": 6094
                 },
@@ -1677,7 +1678,7 @@
                   "loss_per_token": 5.018289991251357,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 65.61385893821716,
+                  "seconds": 66.372305393219,
                   "step": 150,
                   "tokens_scored": 6094
                 },
@@ -1688,7 +1689,7 @@
                   "loss_per_token": 4.9169031202443545,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 85.39336705207825,
+                  "seconds": 87.89900970458984,
                   "step": 200,
                   "tokens_scored": 6094
                 },
@@ -1699,7 +1700,7 @@
                   "loss_per_token": 4.855393246765777,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 106.85290455818176,
+                  "seconds": 108.82565426826477,
                   "step": 250,
                   "tokens_scored": 6094
                 },
@@ -1710,7 +1711,7 @@
                   "loss_per_token": 4.793137339403822,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 130.0959837436676,
+                  "seconds": 131.16412615776062,
                   "step": 300,
                   "tokens_scored": 6094
                 }
@@ -1725,7 +1726,7 @@
                 "loss_per_token": 4.78731791046395,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 136.21651911735535,
+                "seconds": 130.2670590877533,
                 "step": 300,
                 "tokens_scored": 6094
               },
@@ -1737,7 +1738,7 @@
                   "loss_per_token": 9.221370002423798,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.5506596565246582,
+                  "seconds": 1.4210655689239502,
                   "step": 0,
                   "tokens_scored": 6094
                 },
@@ -1748,7 +1749,7 @@
                   "loss_per_token": 5.657689609498675,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 23.951828241348267,
+                  "seconds": 23.240432024002075,
                   "step": 50,
                   "tokens_scored": 6094
                 },
@@ -1759,7 +1760,7 @@
                   "loss_per_token": 5.172359901009385,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 46.960835695266724,
+                  "seconds": 45.39590549468994,
                   "step": 100,
                   "tokens_scored": 6094
                 },
@@ -1770,7 +1771,7 @@
                   "loss_per_token": 5.038061125227928,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 68.53455638885498,
+                  "seconds": 66.63714623451233,
                   "step": 150,
                   "tokens_scored": 6094
                 },
@@ -1781,7 +1782,7 @@
                   "loss_per_token": 4.898909010207558,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 91.53145623207092,
+                  "seconds": 88.05191564559937,
                   "step": 200,
                   "tokens_scored": 6094
                 },
@@ -1792,7 +1793,7 @@
                   "loss_per_token": 4.858317490711211,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 113.18585467338562,
+                  "seconds": 109.11120915412903,
                   "step": 250,
                   "tokens_scored": 6094
                 },
@@ -1803,7 +1804,7 @@
                   "loss_per_token": 4.78731791046395,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 136.21651911735535,
+                  "seconds": 130.2670590877533,
                   "step": 300,
                   "tokens_scored": 6094
                 }
@@ -1837,7 +1838,7 @@
                 "loss_per_token": 4.785628303775423,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 139.82114386558533,
+                "seconds": 155.68591475486755,
                 "step": 300,
                 "tokens_scored": 6094
               },
@@ -1849,7 +1850,7 @@
                   "loss_per_token": 9.243741908250204,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.5530555248260498,
+                  "seconds": 1.4475438594818115,
                   "step": 0,
                   "tokens_scored": 6094
                 },
@@ -1860,7 +1861,7 @@
                   "loss_per_token": 5.612684945997039,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 28.90699601173401,
+                  "seconds": 33.50831866264343,
                   "step": 50,
                   "tokens_scored": 6094
                 },
@@ -1871,7 +1872,7 @@
                   "loss_per_token": 5.209239912639669,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 52.159823417663574,
+                  "seconds": 59.55599021911621,
                   "step": 100,
                   "tokens_scored": 6094
                 },
@@ -1882,7 +1883,7 @@
                   "loss_per_token": 5.034659536563382,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 75.11874175071716,
+                  "seconds": 86.07049989700317,
                   "step": 150,
                   "tokens_scored": 6094
                 },
@@ -1893,7 +1894,7 @@
                   "loss_per_token": 4.895834732106774,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 96.61335635185242,
+                  "seconds": 109.41535210609436,
                   "step": 200,
                   "tokens_scored": 6094
                 },
@@ -1904,7 +1905,7 @@
                   "loss_per_token": 4.832380504290406,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 117.94294929504395,
+                  "seconds": 132.71728229522705,
                   "step": 250,
                   "tokens_scored": 6094
                 },
@@ -1915,7 +1916,7 @@
                   "loss_per_token": 4.785628303775423,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 139.82114386558533,
+                  "seconds": 155.68591475486755,
                   "step": 300,
                   "tokens_scored": 6094
                 }
@@ -1930,7 +1931,7 @@
                 "loss_per_token": 4.784571606165803,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 132.88418078422546,
+                "seconds": 135.4232885837555,
                 "step": 300,
                 "tokens_scored": 6094
               },
@@ -1942,7 +1943,7 @@
                   "loss_per_token": 9.237878406611005,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.4965760707855225,
+                  "seconds": 1.5700292587280273,
                   "step": 0,
                   "tokens_scored": 6094
                 },
@@ -1953,7 +1954,7 @@
                   "loss_per_token": 5.634064261403759,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 22.90003991127014,
+                  "seconds": 23.830206632614136,
                   "step": 50,
                   "tokens_scored": 6094
                 },
@@ -1964,7 +1965,7 @@
                   "loss_per_token": 5.222405100420082,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 45.51668691635132,
+                  "seconds": 46.145906925201416,
                   "step": 100,
                   "tokens_scored": 6094
                 },
@@ -1975,7 +1976,7 @@
                   "loss_per_token": 4.996505556969725,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 68.03868532180786,
+                  "seconds": 68.55945086479187,
                   "step": 150,
                   "tokens_scored": 6094
                 },
@@ -1986,7 +1987,7 @@
                   "loss_per_token": 4.9030942500568315,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 89.48529934883118,
+                  "seconds": 90.69110894203186,
                   "step": 200,
                   "tokens_scored": 6094
                 },
@@ -1997,7 +1998,7 @@
                   "loss_per_token": 4.848866822324448,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 111.26108479499817,
+                  "seconds": 113.21925377845764,
                   "step": 250,
                   "tokens_scored": 6094
                 },
@@ -2008,7 +2009,7 @@
                   "loss_per_token": 4.784571606165803,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 132.88418078422546,
+                  "seconds": 135.4232885837555,
                   "step": 300,
                   "tokens_scored": 6094
                 }
@@ -2023,7 +2024,7 @@
                 "loss_per_token": 4.798487137267987,
                 "native_unit": "nats per token",
                 "scored_units_per_token": 1.0,
-                "seconds": 129.71085906028748,
+                "seconds": 139.4372889995575,
                 "step": 300,
                 "tokens_scored": 6094
               },
@@ -2035,7 +2036,7 @@
                   "loss_per_token": 9.238637232524882,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 1.6843781471252441,
+                  "seconds": 1.4624261856079102,
                   "step": 0,
                   "tokens_scored": 6094
                 },
@@ -2046,7 +2047,7 @@
                   "loss_per_token": 5.612740554907077,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 22.653751134872437,
+                  "seconds": 23.305690050125122,
                   "step": 50,
                   "tokens_scored": 6094
                 },
@@ -2057,7 +2058,7 @@
                   "loss_per_token": 5.16215744006687,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 44.304190158843994,
+                  "seconds": 45.87512445449829,
                   "step": 100,
                   "tokens_scored": 6094
                 },
@@ -2068,7 +2069,7 @@
                   "loss_per_token": 5.025386907952094,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 65.79014706611633,
+                  "seconds": 68.3278603553772,
                   "step": 150,
                   "tokens_scored": 6094
                 },
@@ -2079,7 +2080,7 @@
                   "loss_per_token": 4.8902798970667725,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 86.85068440437317,
+                  "seconds": 91.45165681838989,
                   "step": 200,
                   "tokens_scored": 6094
                 },
@@ -2090,7 +2091,7 @@
                   "loss_per_token": 4.864154069048159,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 108.40098309516907,
+                  "seconds": 116.01463460922241,
                   "step": 250,
                   "tokens_scored": 6094
                 },
@@ -2101,7 +2102,7 @@
                   "loss_per_token": 4.798487137267987,
                   "native_unit": "nats per token",
                   "scored_units_per_token": 1.0,
-                  "seconds": 129.71085906028748,
+                  "seconds": 139.4372889995575,
                   "step": 300,
                   "tokens_scored": 6094
                 }
@@ -2163,5 +2164,5 @@
     "size": 10000,
     "type": "BPE"
   },
-  "wall_seconds": 2922.827931165695
+  "wall_seconds": 4859.391494035721
 }

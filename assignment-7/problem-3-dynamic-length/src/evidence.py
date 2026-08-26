@@ -6,8 +6,11 @@ No figure in README.md is typed by hand. This script reads `artifacts/*.json` an
 changes an experiment finds the prose disagreeing with the evidence file immediately.
 """
 import json, os, sys
+import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(HERE, "..", "..", "common"))
+import provenance  # noqa: E402
 ART = os.path.join(HERE, "..", "artifacts")
 INDIC = ["MALAYALAM", "TAMIL", "KANNADA", "TELUGU", "ORIYA", "BENGALI", "DEVANAGARI",
          "GUJARATI", "GURMUKHI"]
@@ -21,6 +24,51 @@ def load(name):
 
 def pct(x, n=2):
     return "n/a" if x is None else f"{x * 100:.{n}f}%"
+
+
+def collect():
+    """Every quoted number, as data. Mirrors `evidence.md` so the two cannot disagree."""
+    w, f, c, b = load("window.json"), load("fixes.json"), load("cost.json"), load("bothends.json")
+    ls = w["e3_by_lane_and_script"]["rows"]
+    out = {
+        "corpus": w["corpus"],
+        "e1_occupancy_at_32": {lane: r["windows"]["32"]["mean_occupancy"]
+                               for lane, r in w["e1_occupancy"]["per_lane"].items()},
+        "e2_bytes_per_character": {s_: r["bytes_per_character"]
+                                   for s_, r in w["e2_characters_per_window"]["rows"].items()},
+        "e3_collisions_by_window": {
+            L: {"indic_groups": sum(ls["indic"][s_][L]["colliding_groups"]
+                                    for s_ in INDIC if s_ in ls["indic"]),
+                "english_prose_groups": sum(ls[l]["LATIN"][L]["colliding_groups"]
+                                            for l in PROSE_LANES if l in ls)}
+            for L in ("16", "32", "64")},
+        "e3_bitwise_check": w["e3_collision_check"],
+        "e4_equal_D": {s_: {"byte": v["8192"]["byte"]["types_in_collisions_rate"],
+                            "codepoint": v["8192"]["codepoint"]["types_in_collisions_rate"]}
+                       for s_, v in f["e4b_collisions_at_equal_D"]["rows"].items()},
+        "e4c_high_digit_entropy": {s_: r["high_digit_entropy_bits"]
+                                   for s_, r in f["e4c_block_entropy"]["rows"].items()},
+        "e6_cost": {"memory_ratio_at_32": c["memory"]["rows"]["32"]["ratio"],
+                    "arithmetic_ratio_at_32": c["compute"]["rows"]["32"]["arithmetic_ratio"],
+                    "scaling_correlation": c["scaling_with_length"]["correlation"]},
+        "e7_schemes": {n: {"groups": v["total_colliding_groups"],
+                           "reduction": v["reduction_vs_published"]}
+                       for n, v in b["schemes"].items()},
+        "choose_L": b.get("choose_L", {}).get("rows"),
+    }
+    try:
+        d = load("downstream.json")
+        out["e5_verdicts"] = {lane: {a: v["verdict"] for a, v in L["arms"].items()}
+                              for lane, L in d["lanes"].items()}
+        out["e5b"] = {lane: {a: v["exact_full_word_mean"] for a, v in L["arms"].items()}
+                      for lane, L in d.get("e5b_word_level", {}).items()}
+    except FileNotFoundError:
+        pass
+    try:
+        out["e7_codec_check"] = load("bothends_codec.json")["bitwise_collisions"]
+    except FileNotFoundError:
+        pass
+    return out
 
 
 def main():
@@ -196,6 +244,11 @@ def main():
     text = "\n".join(out) + "\n"
     with open(os.path.join(ART, "evidence.md"), "w", encoding="utf-8") as fh:
         fh.write(text)
+    # The machine readable form of the same thing. `evidence.md` is for a reader and
+    # `evidence.json` is for anything that wants to assert on a number without parsing prose.
+    with open(os.path.join(ART, "evidence.json"), "w", encoding="utf-8") as fh:
+        json.dump(provenance.stamp(collect(), __file__), fh, indent=2, sort_keys=True,
+                  ensure_ascii=False)
     return text
 
 

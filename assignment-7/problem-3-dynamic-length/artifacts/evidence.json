@@ -1,0 +1,248 @@
+{
+  "_provenance": {
+    "code": {
+      "common/codec.py": "2aeec5ae34594c15",
+      "common/corpus.py": "ea91e2d2e1cca8a8",
+      "common/data.py": "5e217b9cbe9d42e4",
+      "common/kron_model.py": "b001a515f246d4fb",
+      "common/vocabulary.py": "b3fd85daef192fe8",
+      "script": "8ee9b314a58ce63d",
+      "script_name": "evidence.py"
+    },
+    "note": "SHA-256 prefixes of the code that produced this artefact. If these disagree with the working tree, the artefact predates a code change and must be regenerated. Check with `python -m provenance` from `common/`."
+  },
+  "choose_L": {
+    "both ends + hash": {
+      "128": {
+        "D": 32768,
+        "colliding_groups": 0,
+        "projection_parameters": 3145728
+      },
+      "16": {
+        "D": 4096,
+        "colliding_groups": 152,
+        "projection_parameters": 393216
+      },
+      "32": {
+        "D": 8192,
+        "colliding_groups": 3,
+        "projection_parameters": 786432
+      },
+      "64": {
+        "D": 16384,
+        "colliding_groups": 0,
+        "projection_parameters": 1572864
+      }
+    },
+    "published prefix": {
+      "128": {
+        "D": 32768,
+        "colliding_groups": 0,
+        "projection_parameters": 3145728
+      },
+      "16": {
+        "D": 4096,
+        "colliding_groups": 12436,
+        "projection_parameters": 393216
+      },
+      "32": {
+        "D": 8192,
+        "colliding_groups": 2122,
+        "projection_parameters": 786432
+      },
+      "64": {
+        "D": 16384,
+        "colliding_groups": 10,
+        "projection_parameters": 1572864
+      }
+    }
+  },
+  "corpus": {
+    "characters": 17659426,
+    "distinct_token_types": 6812,
+    "distinct_word_types": 319479,
+    "documents_per_lane": {
+      "agentic": 922,
+      "code": 260,
+      "indic": 4275,
+      "long_ctx": 52,
+      "math": 246,
+      "reasoning": 2818,
+      "web": 164
+    },
+    "root": "../../assignment-6/frozen/corpus"
+  },
+  "e1_occupancy_at_32": {
+    "agentic": 0.06951775112668171,
+    "code": 0.051110066727345485,
+    "indic": 0.07094233956133669,
+    "long_ctx": 0.07902092910416951,
+    "math": 0.0725027693776242,
+    "reasoning": 0.07062532493974527,
+    "web": 0.08367967548002099
+  },
+  "e2_bytes_per_character": {
+    "ARABIC": 2.0,
+    "BENGALI": 3.0,
+    "COMMON": 1.018638160922118,
+    "DEVANAGARI": 3.0,
+    "GUJARATI": 3.0,
+    "GURMUKHI": 3.0,
+    "HAN": 3.0,
+    "KANNADA": 3.0,
+    "LATIN": 1.00017520057386,
+    "MALAYALAM": 3.0,
+    "ORIYA": 3.0,
+    "TAMIL": 3.0,
+    "TELUGU": 3.0
+  },
+  "e3_bitwise_check": {
+    "claim": "distinct words sharing a first-L-byte prefix receive the identical embedding",
+    "max_absolute_difference": 0.0,
+    "pairs_checked": 200,
+    "pairs_with_bitwise_identical_codec_vectors": 200,
+    "verdict": "confirmed"
+  },
+  "e3_collisions_by_window": {
+    "16": {
+      "english_prose_groups": 10,
+      "indic_groups": 11981
+    },
+    "32": {
+      "english_prose_groups": 0,
+      "indic_groups": 2062
+    },
+    "64": {
+      "english_prose_groups": 0,
+      "indic_groups": 6
+    }
+  },
+  "e4_equal_D": {
+    "ARABIC": {
+      "byte": 0.0,
+      "codepoint": 0.0
+    },
+    "BENGALI": {
+      "byte": 0.025348542458808618,
+      "codepoint": 0.00044732721986132855
+    },
+    "COMMON": {
+      "byte": 0.0,
+      "codepoint": 0.0018294622971683106
+    },
+    "DEVANAGARI": {
+      "byte": 0.021512642901391002,
+      "codepoint": 0.00028157909556794506
+    },
+    "GUJARATI": {
+      "byte": 0.0130924960601285,
+      "codepoint": 0.0007273608922293612
+    },
+    "GURMUKHI": {
+      "byte": 0.0007998400319936012,
+      "codepoint": 0.0
+    },
+    "KANNADA": {
+      "byte": 0.06306215260232441,
+      "codepoint": 0.0017180394138453764
+    },
+    "LATIN": {
+      "byte": 0.0017847794012660035,
+      "codepoint": 0.014825567559849602
+    },
+    "MALAYALAM": {
+      "byte": 0.17474923319240654,
+      "codepoint": 0.02196800132636989
+    },
+    "ORIYA": {
+      "byte": 0.026772908366533864,
+      "codepoint": 0.0009561752988047809
+    },
+    "TAMIL": {
+      "byte": 0.13062355658198616,
+      "codepoint": 0.00766743648960739
+    },
+    "TELUGU": {
+      "byte": 0.05255835523264801,
+      "codepoint": 0.001623125676302365
+    }
+  },
+  "e4c_high_digit_entropy": {
+    "ARABIC": -0.0,
+    "BENGALI": -0.0,
+    "COMMON": 0.0896521939023226,
+    "DEVANAGARI": -0.0,
+    "GUJARATI": -0.0,
+    "GURMUKHI": -0.0,
+    "HAN": 5.371029942431391,
+    "KANNADA": -0.0,
+    "LATIN": 0.0006047145719384201,
+    "MALAYALAM": -0.0,
+    "ORIYA": -0.0,
+    "TAMIL": -0.0,
+    "TELUGU": -0.0
+  },
+  "e5_verdicts": {
+    "indic": {
+      "byte": "not established, inside the seed noise floor",
+      "codepoint": "not established, inside the seed noise floor",
+      "script_relative": "not established, inside the seed noise floor"
+    },
+    "web": {
+      "byte": "not established, inside the seed noise floor",
+      "codepoint": "not established, inside the seed noise floor",
+      "script_relative": "not established, inside the seed noise floor"
+    }
+  },
+  "e5b": {
+    "indic": {
+      "byte": 0.0010248526774276198,
+      "script_relative": 0.006112514183229018
+    },
+    "web": {
+      "byte": 0.04794295117937466,
+      "script_relative": 0.049040043883708175
+    }
+  },
+  "e6_cost": {
+    "arithmetic_ratio_at_32": 932.4560789217729,
+    "memory_ratio_at_32": 345.4790823211876,
+    "scaling_correlation": 0.9861666172225436
+  },
+  "e7_codec_check": {
+    "bitwise_identical": 217,
+    "max_absolute_difference": 0.0,
+    "pairs_checked": 217,
+    "verdict": "confirmed"
+  },
+  "e7_schemes": {
+    "both_ends_32_bytes": {
+      "groups": 217,
+      "reduction": 9.778801843317972
+    },
+    "both_ends_32_bytes_aligned": {
+      "groups": 419,
+      "reduction": 5.064439140811456
+    },
+    "both_ends_plus_hash_32_bytes": {
+      "groups": 3,
+      "reduction": 707.3333333333334
+    },
+    "fixD_31_chars": {
+      "groups": 63,
+      "reduction": 33.682539682539684
+    },
+    "fixD_both_ends_31_chars": {
+      "groups": 39,
+      "reduction": 54.41025641025641
+    },
+    "overflow_hash_32_bytes": {
+      "groups": 48,
+      "reduction": 44.208333333333336
+    },
+    "prefix_32_bytes_published": {
+      "groups": 2122,
+      "reduction": 1.0
+    }
+  }
+}

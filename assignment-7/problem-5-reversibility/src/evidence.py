@@ -9,8 +9,11 @@ would be meaningless: a vocabulary head's loss is nats per **token**, a byte hea
 **byte position**, and a token spans several positions. Everything comparable is quoted per token.
 """
 import json, os
+import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(HERE, "..", "..", "common"))
+import provenance  # noqa: E402
 ART = os.path.join(HERE, "..", "artifacts")
 
 
@@ -21,6 +24,56 @@ def load(name):
 
 def pct(x, n=2):
     return "n/a" if x is None else f"{x * 100:.{n}f}%"
+
+
+def collect():
+    """Every quoted number, as data. Mirrors `evidence.md` so the two cannot disagree."""
+    k, t, r = load("codec.json"), load("train.json"), load("recheck.json")
+    out = {
+        "e1_roundtrip": {L: {"fitting": v["tokens_fitting"],
+                             "recovered": v["tokens_fitting_recovered"],
+                             "rate": v["tokens_fitting_rate"]}
+                         for L, v in k["e1_roundtrip"].items()},
+        "e2_margin": k["e2_noise"]["column_margin_after_znorm"],
+        "e2_sweep": {str(row["sigma"]): row["exact_token_accuracy_oracle_length"]
+                     for row in k["e2_noise"]["sweep"]},
+        "e3_sparsity_k": k["e3_projection"]["occupied_columns_mean"],
+        "e3_sweep": {str(row["d_model"]): row["minimum_norm_decode_accuracy"]
+                     for row in k["e3_projection"]["sweep"]},
+        "e4_heads": {h: {"loss_per_token": t["e4_three_heads"][h]["final_loss_per_token_mean"],
+                         "sd": t["e4_three_heads"][h]["final_loss_per_token_sd"],
+                         "exact": t["e4_three_heads"][h]["runs"][0]["final"]
+                                  ["exact_token_accuracy_oracle_length"],
+                         "params": t["e4_three_heads"][h]["params_measured"]["total"],
+                         "head_params_at_paper_scale":
+                             t["e4_three_heads"][h]["params_at_paper_scale"]["output_head"]}
+                     for h in ("vocab", "byte_untied", "byte_tied")},
+        "e4_noise_floor": t["e4_three_heads"]["_noise_floor_sd_across_seeds"],
+        "e5_copy_at_init": t["e5_gradient_from_zero"]["_copy_at_init"],
+        "e5_final": {o: t["e5_gradient_from_zero"][o]["byte_accuracy_final"]
+                     for o in ("ce", "mse")},
+        "e6_tying": {kk: t["e6_tying_cost"][kk] for kk in
+                     ("invalid_utf8_rate", "in_vocabulary_rate",
+                      "valid_utf8_out_of_vocabulary_rate", "exact_token_match_rate")},
+        "caveat": {lab: {"duplicates": r[lab]["separation"]["exact_duplicates"],
+                         "learned_inverse": r[lab]["learned_linear_inverse"]
+                                            ["held_out_decode_accuracy"]}
+                   for lab in ("random_init", "after_training")},
+        "verification": {"codec_equivalence": t["codec_equivalence_check"],
+                         "gradient_check": t["gradient_check"]},
+    }
+    try:
+        o = load("openvocab.json")
+        out["e7_bands"] = {lane: v["frequency_bands_mean"] for lane, v in o["lanes"].items()}
+    except FileNotFoundError:
+        pass
+    try:
+        c = load("constrained.json")
+        out["e8_constrained"] = {"unconstrained": c["unconstrained"],
+                                 "constrained": c["constrained"]}
+    except FileNotFoundError:
+        pass
+    return out
 
 
 def main():
@@ -195,6 +248,11 @@ def main():
     text = "\n".join(out) + "\n"
     with open(os.path.join(ART, "evidence.md"), "w", encoding="utf-8") as fh:
         fh.write(text)
+    # The machine readable form of the same thing. `evidence.md` is for a reader and
+    # `evidence.json` is for anything that wants to assert on a number without parsing prose.
+    with open(os.path.join(ART, "evidence.json"), "w", encoding="utf-8") as fh:
+        json.dump(provenance.stamp(collect(), __file__), fh, indent=2, sort_keys=True,
+                  ensure_ascii=False)
     return text
 
 

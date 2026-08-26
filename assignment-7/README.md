@@ -144,13 +144,36 @@ assignment-7/
   problem-3-dynamic-length/     PLAN.md, README.md, run_demo.py, src/, artifacts/, site/
 ```
 
+## What is submitted
+
+The form takes one URL. It should point at **this file**, `assignment-7/README.md`, which links
+everything else. For reference, the deliverables are:
+
+| file | what it is |
+|---|---|
+| `README.md` | this hub, and the link to submit |
+| `SUBMISSION.md` | which problems were taken, and every claim mapped to the artefact behind it |
+| `problem-5-reversibility/README.md` | the Problem 5 writeup, E1 to E8 in order |
+| `problem-3-dynamic-length/README.md` | the Problem 3 writeup, E1 to E7 in order |
+| `*/PLAN.md` | the plan agreed before any code, including the predictions the runs refuted |
+| `*/artifacts/evidence.md` and `evidence.json` | every quoted number, regenerated from the artefacts |
+| `*/artifacts/*.json` | the raw experiment output, each stamped with the code that produced it |
+| `*/site/` | the static dashboard for each problem |
+| `*/src/` | the experiments, one file per group |
+| `*/tests/test_invariants.py` | the properties the claims rest on |
+| `*/run_demo.py` | one command to regenerate everything |
+| `common/` | the codec, the corpus reader, the model, the provenance stamp |
+| `requirements.txt` | numpy and tokenizers. No torch, no GPU, no network. |
+
 ## Reproducing everything
 
 ```bash
 cd assignment-7
 python -m venv .venv && .venv/bin/pip install -r requirements.txt
-cd problem-3-dynamic-length && ../.venv/bin/python run_demo.py          # about a minute
-cd ../problem-5-reversibility && ../.venv/bin/python run_demo.py        # about half a minute
+cd problem-3-dynamic-length && ../.venv/bin/python tests/test_invariants.py
+../.venv/bin/python run_demo.py                                         # about a minute
+cd ../problem-5-reversibility && ../.venv/bin/python tests/test_invariants.py
+../.venv/bin/python run_demo.py                                         # about half a minute
 ```
 
 Add `--full` to either to include the training experiments, which take roughly an hour each on 16

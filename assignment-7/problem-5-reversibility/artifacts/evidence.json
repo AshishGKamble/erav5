@@ -1,0 +1,160 @@
+{
+  "_provenance": {
+    "code": {
+      "common/codec.py": "2aeec5ae34594c15",
+      "common/corpus.py": "ea91e2d2e1cca8a8",
+      "common/data.py": "5e217b9cbe9d42e4",
+      "common/kron_model.py": "b001a515f246d4fb",
+      "common/vocabulary.py": "b3fd85daef192fe8",
+      "script": "54f16348e162e389",
+      "script_name": "evidence.py"
+    },
+    "note": "SHA-256 prefixes of the code that produced this artefact. If these disagree with the working tree, the artefact predates a code change and must be regenerated. Check with `python -m provenance` from `common/`."
+  },
+  "caveat": {
+    "after_training": {
+      "duplicates": 0,
+      "learned_inverse": 0.5683333333333334
+    },
+    "random_init": {
+      "duplicates": 0,
+      "learned_inverse": 0.5916666666666667
+    }
+  },
+  "e1_roundtrip": {
+    "16": {
+      "fitting": 8384,
+      "rate": 1.0,
+      "recovered": 8384
+    },
+    "32": {
+      "fitting": 9510,
+      "rate": 1.0,
+      "recovered": 9510
+    },
+    "64": {
+      "fitting": 9726,
+      "rate": 1.0,
+      "recovered": 9726
+    }
+  },
+  "e2_margin": 37.831291618347166,
+  "e2_sweep": {
+    "0.0": 1.0,
+    "0.05": 1.0,
+    "0.1": 1.0,
+    "0.25": 1.0,
+    "0.5": 1.0,
+    "0.75": 1.0,
+    "1.0": 1.0,
+    "1.5": 1.0,
+    "12.0": 0.2488479262672811,
+    "2.0": 1.0,
+    "3.0": 0.9969278033794163,
+    "5.0": 0.8320532514080902,
+    "8.0": 0.5427547363031234
+  },
+  "e3_sparsity_k": 7.93,
+  "e3_sweep": {
+    "128": 0.5566666666666666,
+    "16": 0.016666666666666666,
+    "192": 0.6866666666666666,
+    "256": 0.7966666666666666,
+    "32": 0.11666666666666667,
+    "384": 0.94,
+    "48": 0.21,
+    "512": 0.98,
+    "64": 0.27666666666666667,
+    "768": 0.9933333333333333,
+    "8": 0.006666666666666667,
+    "96": 0.43666666666666665
+  },
+  "e4_heads": {
+    "byte_tied": {
+      "exact": 0.31726973684210524,
+      "head_params_at_paper_scale": 0,
+      "loss_per_token": 4.71644613899381,
+      "params": 1020864,
+      "sd": 0.15241080568968515
+    },
+    "byte_untied": {
+      "exact": 0.42680921052631576,
+      "head_params_at_paper_scale": 6291456,
+      "loss_per_token": 3.8621803267104853,
+      "params": 1807296,
+      "sd": 0.05445226176426558
+    },
+    "vocab": {
+      "exact": 0.4412828947368421,
+      "head_params_at_paper_scale": 100663296,
+      "loss_per_token": 2.6367430398778198,
+      "params": 1980864,
+      "sd": 0.008518032454170137
+    }
+  },
+  "e4_noise_floor": 0.15241080568968515,
+  "e5_copy_at_init": {
+    "byte_accuracy_vs_current_token": 0.8343206429460815,
+    "byte_accuracy_vs_next_token": 0.16681130438063616,
+    "chance": 0.00390625,
+    "positions": 26503
+  },
+  "e5_final": {
+    "ce": 0.5186839133559182,
+    "mse": 0.5166820654963556
+  },
+  "e6_tying": {
+    "exact_token_match_rate": 0.3816471917822042,
+    "in_vocabulary_rate": 0.8338277734051786,
+    "invalid_utf8_rate": 0.11979576597848682,
+    "valid_utf8_out_of_vocabulary_rate": 0.046376460616334686
+  },
+  "e7_bands": {
+    "indic": {
+      "in_head": 0.03169276659209545,
+      "in_mid": 0.00034094783498124785,
+      "in_tail": 0.0040650406504065045,
+      "outside_far": 0.00039761431411530816,
+      "outside_near": 0.0
+    },
+    "web": {
+      "in_head": 0.09093516924842227,
+      "in_mid": 0.0,
+      "in_tail": 0.0,
+      "outside_far": 0.0,
+      "outside_near": 0.0
+    }
+  },
+  "e8_constrained": {
+    "constrained": {
+      "empty_output_rate": 0.0,
+      "exact_match_rate": 0.4451482513001257,
+      "in_vocabulary_rate": 0.9177285386833609,
+      "invalid_utf8": 0,
+      "invalid_utf8_rate": 0.0,
+      "scored": 40573,
+      "valid_utf8_rate": 1.0
+    },
+    "unconstrained": {
+      "empty_output_rate": 0.0,
+      "exact_match_rate": 0.4124910654869002,
+      "in_vocabulary_rate": 0.8395238212604441,
+      "invalid_utf8": 4715,
+      "invalid_utf8_rate": 0.11621028762970448,
+      "scored": 40573,
+      "valid_utf8_rate": 0.8837897123702955
+    }
+  },
+  "verification": {
+    "codec_equivalence": {
+      "max_abs_vs_codec_encode_float32": 7.651109285689017e-06,
+      "max_abs_vs_float64_definition": 1.4210854715202004e-14,
+      "ok": true
+    },
+    "gradient_check": {
+      "W": 2.7958160847695756e-07,
+      "lnf_g": 1.9539061363941123e-10,
+      "wq0": 2.0660466157763463e-07
+    }
+  }
+}

@@ -1,14 +1,15 @@
 {
   "_provenance": {
-    "backfilled": true,
     "code": {
-      "common/codec.py": "7c7dd97e2e1b4917",
+      "common/codec.py": "2aeec5ae34594c15",
       "common/corpus.py": "ea91e2d2e1cca8a8",
       "common/data.py": "5e217b9cbe9d42e4",
       "common/kron_model.py": "b001a515f246d4fb",
-      "common/vocabulary.py": "b3fd85daef192fe8"
+      "common/vocabulary.py": "b3fd85daef192fe8",
+      "script": "b2c4758b27c84cc5",
+      "script_name": "exp_constrained.py"
     },
-    "reason": "Stamped after the full regeneration of 2026-08-26, which rebuilt every artefact from scratch with this exact common/ code. Fingerprints taken at write time from here on."
+    "note": "SHA-256 prefixes of the code that produced this artefact. If these disagree with the working tree, the artefact predates a code change and must be regenerated. Check with `python -m provenance` from `common/`."
   },
   "config": {
     "d_model": 96,
@@ -19,16 +20,16 @@
   },
   "constrained": {
     "empty_output_rate": 0.0,
-    "exact_match_rate": 0.44519754516550414,
-    "in_vocabulary_rate": 0.897863110935844,
+    "exact_match_rate": 0.4451482513001257,
+    "in_vocabulary_rate": 0.9177285386833609,
     "invalid_utf8": 0,
     "invalid_utf8_rate": 0.0,
     "scored": 40573,
     "valid_utf8_rate": 1.0
   },
   "improvement": {
-    "exact_match_change": 0.03270647967860396,
-    "in_vocabulary_change": 0.05833928967539992,
+    "exact_match_change": 0.03265718581322552,
+    "in_vocabulary_change": 0.07820471742291679,
     "invalid_utf8_removed": 0.11621028762970448
   },
   "predictions": 40573,

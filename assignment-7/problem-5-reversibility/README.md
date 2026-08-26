@@ -260,8 +260,8 @@ architectural change.** It is a decoding rule.
 |---|---|---|
 | invalid UTF-8 | 11.62% | **0.00%** |
 | empty output | 0.00% | **0.00%** |
-| in vocabulary | 83.95% | **89.79%** |
-| exact match to the target | 41.25% | **44.52%** |
+| in vocabulary | 83.95% | **91.77%** |
+| exact match to the target | 41.25% | **44.51%** |
 
 The defect is gone, and exact match **improves by 3.27 points** rather than being traded away. That
 is worth stating carefully: a constraint cannot make a model better at predicting, only better at
@@ -278,8 +278,21 @@ its first choice was structurally impossible.
 3. **A character must fit the remaining budget.** Without that check the decoder starts a three byte
    character with one position left, the trim then removes it, and a short token decodes to the
    **empty string**, which is trivially valid UTF-8 and flatters the validity rate while saying
-   nothing. Fixing it also raised exact match by 3.2 points, since the budget forces a character
-   that can actually be completed.
+   nothing. Fixing it raised exact match by 3.2 points, since the budget forces a character that
+   can actually be completed.
+4. **When the wanted character does not fit, stop rather than substitute.** This one was found by a
+   test rather than by inspection. A window that ends mid-character cannot be reproduced by a
+   decoder that only emits valid UTF-8, which is correct behaviour; what it must not do is fill the
+   gap. For a one-hot code every permitted byte scores identically, so a naive fallback returns
+   index 0 and pads the output with **NUL bytes**. Stopping instead drops exactly the split
+   character and leaves a clean prefix. Stopping is conditional on having emitted something
+   already, since at the first position it would just produce the empty string again.
+
+**This connects directly to Problem 3.** That writeup measured that the published window cuts a word
+mid-character essentially always for Indic, because 32 is not a multiple of 3. Constrained decoding
+therefore *cannot* reproduce the retained bytes of a cropped Indic token, and correctly returns the
+largest valid prefix instead. The two findings are the same fact seen from opposite ends: a byte
+window that does not respect character boundaries produces codes that are not decodable as text.
 
 What this does **not** do is fix E7. Being well formed is not the same as being right, and the open
 vocabulary question below is unaffected.
@@ -364,6 +377,7 @@ assignment and it is worth more than any single result in it.
 ```bash
 python -m venv .venv && .venv/bin/pip install -r ../requirements.txt
 cd problem-5-reversibility
+python tests/test_invariants.py   # the invariants, a few seconds
 python run_demo.py           # E1 to E3. About half a minute, no network, no model.
 python run_demo.py --full    # adds E4 to E7. Roughly an hour on 16 CPU cores.
 ```
@@ -386,6 +400,8 @@ head's dual path, worst relative error about **5e-7**.
 | `../common/provenance.py` | stamps each artefact with the SHA of the code that wrote it, and reports any that have gone stale |
 | `src/build_dashboard.py` | extracts the dashboard payload from the same artefacts |
 | `site/` | static dashboard. No framework, no build step, no network. Open `site/index.html` |
-| `artifacts/evidence.md` | the generated evidence file |
+| `artifacts/evidence.md` | the generated evidence file, for a reader |
+| `artifacts/evidence.json` | the same numbers as data, for anything that wants to assert on one |
+| `tests/test_invariants.py` | the properties the claims rest on, run with `python tests/test_invariants.py` |
 | `../common/kron_model.py` | the Kronecker input, three output heads, the factored codec, Adam, the gradient check |
 | `../common/codec.py` | the codec itself, zero learned parameters |

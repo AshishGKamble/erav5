@@ -158,8 +158,8 @@ Same trained head, same logits, 40,573 predictions. The only change is that byte
 | invalid UTF-8 | 11.62% | 0.00% |
 | valid UTF-8 | 88.38% | 100.00% |
 | empty output | 0.00% | 0.00% |
-| in vocabulary | 83.95% | 89.79% |
-| exact match to the target | 41.25% | 44.52% |
+| in vocabulary | 83.95% | 91.77% |
+| exact match to the target | 41.25% | 44.51% |
 
 Invalid UTF-8 removed: 11.62%. Exact match change: +3.27 points. No retraining, no architectural change.
 

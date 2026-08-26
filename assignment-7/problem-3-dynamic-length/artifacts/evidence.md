@@ -110,19 +110,19 @@ Fix D costs, measured: 3,214 cross-script alias groups if the script tag is drop
 
 | window | arithmetic reduction | wall-clock speedup |
 |---|---|---|
-| L=16 | 527x | 1.06x |
-| L=32 | 932x | 1.65x |
-| L=64 | 1812x | 3.27x |
-| L=128 | 3609x | 6.13x |
+| L=16 | 527x | 1.17x |
+| L=32 | 932x | 2.07x |
+| L=64 | 1812x | 3.75x |
+| L=128 | 3609x | 7.03x |
 
-Cost against token length: slope **432.1 ns per unit**, correlation **0.9852**. A flat line would refute the dynamic claim.
+Cost against token length: slope **424.7 ns per unit**, correlation **0.9862**. A flat line would refute the dynamic claim.
 
 | window | time for a short token, relative to L=32 | projection W parameters |
 |---|---|---|
-| L=16 | 1.021x | 393,216 |
+| L=16 | 1.002x | 393,216 |
 | L=32 | 1.000x | 786,432 |
-| L=64 | 1.024x | 1,572,864 |
-| L=128 | 1.039x | 3,145,728 |
+| L=64 | 0.997x | 1,572,864 |
+| L=128 | 1.035x | 3,145,728 |
 
 ## E7, reading the word from both ends
 

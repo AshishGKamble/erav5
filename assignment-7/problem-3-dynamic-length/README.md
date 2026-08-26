@@ -411,6 +411,7 @@ the encoding and do not depend on this experiment at all.
 ```bash
 python -m venv .venv && .venv/bin/pip install -r ../requirements.txt
 cd problem-3-dynamic-length
+python tests/test_invariants.py   # the invariants, a few seconds
 python run_demo.py           # E1 to E4, E6, E7. About a minute, no network.
 python run_demo.py --full    # adds E5 and E5b. Roughly an hour on 16 CPU cores.
 ```
@@ -432,6 +433,8 @@ disagreement between this README and the evidence file is a bug in this README.
 | `../common/provenance.py` | stamps each artefact with the SHA of the code that wrote it, and reports any that have gone stale |
 | `src/build_dashboard.py` | extracts the dashboard payload from the same artefacts |
 | `site/` | static dashboard. No framework, no build step, no network. Open `site/index.html` |
-| `artifacts/evidence.md` | the generated evidence file |
+| `artifacts/evidence.md` | the generated evidence file, for a reader |
+| `artifacts/evidence.json` | the same numbers as data, for anything that wants to assert on one |
+| `tests/test_invariants.py` | the properties the claims rest on, run with `python tests/test_invariants.py` |
 | `../common/codec.py` | the codec, the codepoint variant, and fix D's units |
 | `../common/corpus.py` | the frozen corpus reader and script detection |

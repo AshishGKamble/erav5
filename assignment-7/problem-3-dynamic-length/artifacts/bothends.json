@@ -1,7 +1,7 @@
 {
   "_provenance": {
     "code": {
-      "common/codec.py": "7c7dd97e2e1b4917",
+      "common/codec.py": "2aeec5ae34594c15",
       "common/corpus.py": "ea91e2d2e1cca8a8",
       "common/data.py": "5e217b9cbe9d42e4",
       "common/kron_model.py": "b001a515f246d4fb",

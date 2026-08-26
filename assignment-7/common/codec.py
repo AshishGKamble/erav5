@@ -264,6 +264,18 @@ def decode_constrained(logits, pos_dim):
             # trim then removes it, and a short token decodes to the empty string, which is
             # trivially valid UTF-8 and therefore flatters the validity rate while saying nothing.
             room = pos_dim - p
+            # If what the head actually wants here is a character that cannot fit in the room
+            # left, the token ends here. Substituting the best byte that does fit is worse than
+            # stopping: for a one-hot code every permitted byte scores identically, so the argmax
+            # returns index 0 and the output is padded with NUL bytes. A mid-character truncation
+            # should lose its final character cleanly, not gain a fake one.
+            want = int(np.argmax(lg[:, p]))
+            wlead = _utf8_lead(want)
+            if out and wlead is not None and wlead[0] >= room:
+                break
+            # `out` must be non-empty to stop. At the very first position there is nothing to keep,
+            # so stopping would emit the empty string, which is trivially valid UTF-8 and useless.
+            # There, fall back to the best character that does fit.
             cand = [b for b in leads if _utf8_lead(b)[0] < room]
             if not cand:
                 break
