@@ -61,29 +61,29 @@ Fifty percent recovery at d_model = 128, ninety-nine percent at 768. PLAN.md pre
 ## The caveat E3 left open: does training destroy this
 
 
-- **d_model=256**, minimum-norm decode 75.00% before training, 30.67% after. Condition number 1.43 to 40.41.
+- **d_model=256**, minimum-norm decode 75.00% before training, 30.67% after. Condition number 1.43 to 38.86.
 
-- **d_model=96**, minimum-norm decode 42.67% before training, 9.33% after. Condition number 1.23 to 35.24.
+- **d_model=96**, minimum-norm decode 42.67% before training, 9.67% after. Condition number 1.23 to 35.20.
 
 That looks like a refutation. It is not, because minimum norm is a **structure-blind** decoder, correct for the random W of E3 and wrong for a trained one. Splitting the question (`artifacts/recheck.json`, d_model=256):
 
 | | exact duplicates | relative separation (min) | learned inverse, held-out tokens |
 |---|---|---|---|
 | random init | 0 | 0.2594 | 59.17% |
-| after training | 0 | 0.0492 | 56.83% |
+| after training | 0 | 0.0486 | 56.83% |
 
 The decoder is fitted on 2,500 tokens and scored on 600 it never saw. Training breaks the decoder, not the encoding.
 
 
 ## E4, three output heads
 
-Indic lane, d_model=96, L=32, 300 steps, seeds [1, 2, 3]. Seed noise floor sd **0.1624** nats per token.
+Indic lane, d_model=96, L=32, 300 steps, seeds [1, 2, 3]. Seed noise floor sd **0.1524** nats per token.
 
 | head | loss per token | native loss | units/token | exact token | parameters |
 |---|---|---|---|---|---|
-| vocab | 2.6454 (sd 0.0141) | 2.6334 | 1.00 | 44.16% | 1,980,864 |
-| byte_untied | 3.8942 (sd 0.0604) | 1.1945 | 3.20 | 42.65% | 1,807,296 |
-| byte_tied | 4.7197 (sd 0.1624) | 1.4316 | 3.20 | 32.70% | 1,020,864 |
+| vocab | 2.6367 (sd 0.0085) | 2.6334 | 1.00 | 44.13% | 1,980,864 |
+| byte_untied | 3.8622 (sd 0.0545) | 1.1952 | 3.20 | 42.68% | 1,807,296 |
+| byte_tied | 4.7164 (sd 0.1524) | 1.4365 | 3.20 | 31.73% | 1,020,864 |
 
 At the paper's scale the parameter picture inverts, and this row is arithmetic, not measurement:
 
@@ -100,7 +100,7 @@ An untrained tied head reproduces the **current** token's bytes at 83.43% and th
 | objective | byte accuracy at step 0 | byte accuracy at end | loss per token, start to end |
 |---|---|---|---|
 | CE | 17.27% | 51.87% | 17.392 to 5.067 |
-| MSE | 17.27% | 51.64% | 17.392 to 13.985 |
+| MSE | 17.27% | 51.67% | 17.392 to 14.006 |
 
 PLAN.md predicted MSE would not move. It moves. The objection is wrong for both objectives, and the reason is the autoencoder above, not the loss function.
 
@@ -111,12 +111,12 @@ Over 49,551 predictions, decoded with the target's true length.
 
 | outcome | rate |
 |---|---|
-| invalid UTF-8 | 12.20% |
-| valid and in vocabulary | 83.33% |
-| valid but out of vocabulary | 4.47% |
-| exact match to the target token | 37.22% |
+| invalid UTF-8 | 11.98% |
+| valid and in vocabulary | 83.38% |
+| valid but out of vocabulary | 4.64% |
+| exact match to the target token | 38.16% |
 
-Out-of-vocabulary examples: ర఍, तत, ం఍, ర఍ఁ, तऍ, ర఍ర, ం఍ఁ, రఁ. These are degenerate, not plausible words.
+Out-of-vocabulary examples: ర఍, ం఍, तत, ర఍ఁ, तऍ, ర఍ర, రఁ, ం఍ఁ. These are degenerate, not plausible words.
 
 
 ## E7, can the head emit words it was never given an id for

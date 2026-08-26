@@ -28,7 +28,7 @@ writeups. This page is the hub, because the submission form accepts one link.
 | what was promised | the answer | where |
 |---|---|---|
 | "How do I make a reverse of this?" | **It already reverses.** Exact inversion, tolerates **60x** more error than the objection implies, and survives the 8192 to 768 projection because a code is only 8-sparse, which makes this compressed sensing. | E1, E2, E3 |
-| "We can get rid of the final head!" | **Yes, at zero parameters** (0 against 100.7M at the paper's dimensions). But it costs accuracy: at this scale the vocabulary head **wins** on loss, and that is reported rather than buried. Its one real defect, 12.20% invalid UTF-8, is **removed entirely** by constrained decoding. | E4, E8 |
+| "We can get rid of the final head!" | **Yes, at zero parameters** (0 against 100.7M at the paper's dimensions). But it costs accuracy: at this scale the vocabulary head **wins** on loss, and that is reported rather than buried. Its one real defect, about 12% invalid UTF-8, is **removed entirely** by constrained decoding. | E4, E8 |
 | "A vocab of 1M without any issues!" | **Split verdict.** The capability is architecturally true and needs no experiment. The competence is **not demonstrated and not testable** on this machine. | E6, E7 |
 
 ---
@@ -72,8 +72,8 @@ embedding, because Indic morphology is suffixal and the window reads prefixes.
 - **Problem 5 turned an objection into a number.** "The model predicts 0.31 not 0.30" is a relative
   error of about 0.03 against a measured decode margin of 37.83.
 - **Problem 5's one real defect turned out to be a decoding rule, not an architecture.** Constrained
-  decoding removes 12.20% invalid UTF-8 entirely and raises exact match by 3.27 points, with no
-  retraining.
+  decoding removes the invalid UTF-8 entirely, 11.62% to 0.00% on the same logits, and raises
+  exact match by 3.27 points, with no retraining.
 - **Both problems refuted their own pre-registered predictions** and kept the refutations in the
   writeups rather than quietly editing the plans.
 
@@ -94,6 +94,13 @@ naming because they are what made the measurements affordable.
 
 Each problem's README carries a table of the techniques it used and what each one is for, including
 the ones that exist only because a naive version of the same measurement gave a wrong answer first.
+
+**Artefacts record the code that produced them.** Every JSON file carries the SHA-256 of each module
+in `common/`, and `python common/provenance.py` reports any artefact whose code has since moved.
+This exists because of a real failure: a matmul was vectorised after two training artefacts had been
+written, the new path is mathematically identical and **not bit identical**, and nothing said so.
+It was caught by comparing file timestamps by hand, which is not a method. `run_demo.py` now runs
+the check at the end of every run.
 
 ## The methodological result, which applies to both
 

@@ -13,6 +13,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "common"))
 import codec, vocabulary  # noqa: E402
+import provenance  # noqa: E402
 
 SEED = 20260825
 
@@ -224,6 +225,7 @@ def main(tokenizer_path, out_path):
     }
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w") as fh:
+        provenance.stamp(result, __file__)
         json.dump(result, fh, indent=2, sort_keys=True)
     return result
 

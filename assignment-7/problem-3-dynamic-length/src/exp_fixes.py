@@ -24,7 +24,7 @@ from collections import Counter, defaultdict
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "common"))
-import codec, corpus, vocabulary  # noqa: E402
+import codec, corpus, provenance, vocabulary  # noqa: E402
 import exp_window as W  # noqa: E402
 
 # Configurations paired so that the two entries of each pair cost exactly the same D.
@@ -454,6 +454,7 @@ def main(corpus_root, tokenizer_path, out_path, limit=None):
     }
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w") as fh:
+        provenance.stamp(result, __file__)
         json.dump(result, fh, indent=2, sort_keys=True, ensure_ascii=False)
     return result
 

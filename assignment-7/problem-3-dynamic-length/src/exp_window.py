@@ -24,6 +24,7 @@ from collections import Counter, defaultdict
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "common"))
 import corpus, vocabulary  # noqa: E402
+import provenance  # noqa: E402
 
 WINDOWS = (16, 32, 64)
 MIN_TYPES_TO_REPORT = 200      # a script with fewer distinct types than this is too thin to quote
@@ -494,6 +495,7 @@ def main(corpus_root, tokenizer_path, out_path, limit=None):
     }
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w") as fh:
+        provenance.stamp(result, __file__)
         json.dump(result, fh, indent=2, sort_keys=True, ensure_ascii=False)
     return result
 

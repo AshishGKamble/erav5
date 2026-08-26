@@ -1,5 +1,16 @@
 {
   "D": 8192,
+  "_provenance": {
+    "backfilled": true,
+    "code": {
+      "common/codec.py": "7c7dd97e2e1b4917",
+      "common/corpus.py": "ea91e2d2e1cca8a8",
+      "common/data.py": "5e217b9cbe9d42e4",
+      "common/kron_model.py": "b001a515f246d4fb",
+      "common/vocabulary.py": "b3fd85daef192fe8"
+    },
+    "reason": "Stamped after the full regeneration of 2026-08-26, which rebuilt every artefact from scratch with this exact common/ code. Fingerprints taken at write time from here on."
+  },
   "after_training": {
     "learned_linear_inverse": {
       "fit_tokens": 2500,
@@ -8,11 +19,11 @@
     },
     "separation": {
       "exact_duplicates": 0,
-      "mean_norm": 131.14408730850093,
-      "nearest_neighbour_mean": 30.030164850515686,
-      "nearest_neighbour_min": 6.455225997223719,
-      "relative_separation_mean": 0.22898603716592483,
-      "relative_separation_min": 0.049222394464788675,
+      "mean_norm": 132.7021834409809,
+      "nearest_neighbour_mean": 30.236010974967517,
+      "nearest_neighbour_min": 6.4521965103650905,
+      "relative_separation_mean": 0.22784863210947046,
+      "relative_separation_min": 0.0486216303534651,
       "tokens": 600
     }
   },

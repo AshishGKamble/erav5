@@ -35,7 +35,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "..", "common"))
 sys.path.insert(0, os.path.join(HERE, "..", "..", "problem-3-dynamic-length", "src"))
 sys.path.insert(0, HERE)
-import codec, corpus, data, kron_model as K  # noqa: E402
+import codec, corpus, provenance, data, kron_model as K  # noqa: E402
 import exp_train as T  # noqa: E402
 import exp_window as WIN  # noqa: E402
 
@@ -230,6 +230,7 @@ def main(corpus_root, out_path, steps=800, d=192, lanes=("web", "indic"), seeds=
         result["lanes"][lane] = run_lane(corpus_root, lane, d=d, steps=steps, seeds=seeds)
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w") as fh:
+        provenance.stamp(result, __file__)
         json.dump(result, fh, indent=2, sort_keys=True, ensure_ascii=False)
     return result
 

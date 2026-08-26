@@ -1,4 +1,16 @@
 {
+  "_provenance": {
+    "code": {
+      "common/codec.py": "7c7dd97e2e1b4917",
+      "common/corpus.py": "ea91e2d2e1cca8a8",
+      "common/data.py": "5e217b9cbe9d42e4",
+      "common/kron_model.py": "b001a515f246d4fb",
+      "common/vocabulary.py": "b3fd85daef192fe8",
+      "script": "e7b71a1307bae956",
+      "script_name": "exp_window.py"
+    },
+    "note": "SHA-256 prefixes of the code that produced this artefact. If these disagree with the working tree, the artefact predates a code change and must be regenerated. Check with `python -m provenance` from `common/`."
+  },
   "corpus": {
     "characters": 17659426,
     "distinct_token_types": 6812,

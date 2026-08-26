@@ -1,4 +1,15 @@
 {
+  "_provenance": {
+    "backfilled": true,
+    "code": {
+      "common/codec.py": "7c7dd97e2e1b4917",
+      "common/corpus.py": "ea91e2d2e1cca8a8",
+      "common/data.py": "5e217b9cbe9d42e4",
+      "common/kron_model.py": "b001a515f246d4fb",
+      "common/vocabulary.py": "b3fd85daef192fe8"
+    },
+    "reason": "Stamped after the full regeneration of 2026-08-26, which rebuilt every artefact from scratch with this exact common/ code. Fingerprints taken at write time from here on."
+  },
   "lanes": {
     "indic": {
       "d_model": 192,

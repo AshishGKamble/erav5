@@ -25,6 +25,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "..", "common"))
 sys.path.insert(0, HERE)
 import codec, data, kron_model as K, vocabulary  # noqa: E402
+import provenance  # noqa: E402
 import exp_train as T  # noqa: E402
 
 SEED = 20260825
@@ -112,6 +113,7 @@ def main(corpus_root, tokenizer_path, out_path, steps=300, d=96, L=32, seed=1):
                       "repaired strings are also *correct* is the number that matters, and it is "
                       "reported next to the validity rate rather than instead of it.")
     with open(out_path, "w") as fh:
+        provenance.stamp(res, __file__)
         json.dump(res, fh, indent=2, sort_keys=True, ensure_ascii=False)
     return res
 

@@ -110,19 +110,19 @@ Fix D costs, measured: 3,214 cross-script alias groups if the script tag is drop
 
 | window | arithmetic reduction | wall-clock speedup |
 |---|---|---|
-| L=16 | 527x | 1.09x |
-| L=32 | 932x | 1.95x |
-| L=64 | 1812x | 3.50x |
-| L=128 | 3609x | 6.96x |
+| L=16 | 527x | 1.06x |
+| L=32 | 932x | 1.65x |
+| L=64 | 1812x | 3.27x |
+| L=128 | 3609x | 6.13x |
 
-Cost against token length: slope **431.1 ns per unit**, correlation **0.9875**. A flat line would refute the dynamic claim.
+Cost against token length: slope **432.1 ns per unit**, correlation **0.9852**. A flat line would refute the dynamic claim.
 
 | window | time for a short token, relative to L=32 | projection W parameters |
 |---|---|---|
-| L=16 | 1.019x | 393,216 |
+| L=16 | 1.021x | 393,216 |
 | L=32 | 1.000x | 786,432 |
-| L=64 | 1.019x | 1,572,864 |
-| L=128 | 1.062x | 3,145,728 |
+| L=64 | 1.024x | 1,572,864 |
+| L=128 | 1.039x | 3,145,728 |
 
 ## E7, reading the word from both ends
 
@@ -173,23 +173,23 @@ Aligning both cuts costs capacity: 32.00 units retained against 30.12 aligned.
 ## E5, downstream, and why the token-level version is null
 
 
-**indic** (noise floor sd 0.0247 nats/token)
+**indic** (noise floor sd 0.0416 nats/token)
 
 | arm | loss per token | delta vs byte | verdict |
 |---|---|---|---|
-| byte | 2.6454 | +0.0000 | not established, inside the seed noise floor |
-| codepoint | 2.6489 | +0.0034 | not established, inside the seed noise floor |
-| script_relative | 2.6393 | -0.0061 | not established, inside the seed noise floor |
+| byte | 2.6367 | +0.0000 | not established, inside the seed noise floor |
+| codepoint | 2.6512 | +0.0144 | not established, inside the seed noise floor |
+| script_relative | 2.6498 | +0.0130 | not established, inside the seed noise floor |
 
 Exposure: of 250,475 token occurrences, byte truncates 6 (0.0024%), codepoint 0, script-relative 0.
 
-**web** (noise floor sd 0.0083 nats/token)
+**web** (noise floor sd 0.0077 nats/token)
 
 | arm | loss per token | delta vs byte | verdict |
 |---|---|---|---|
-| byte | 4.7878 | +0.0000 | not established, inside the seed noise floor |
-| codepoint | 4.7943 | +0.0065 | not established, inside the seed noise floor |
-| script_relative | 4.7878 | +0.0001 | not established, inside the seed noise floor |
+| byte | 4.7894 | +0.0000 | not established, inside the seed noise floor |
+| codepoint | 4.7937 | +0.0043 | not established, inside the seed noise floor |
+| script_relative | 4.7896 | +0.0002 | not established, inside the seed noise floor |
 
 Exposure: of 1,124,430 token occurrences, byte truncates 0 (0.0000%), codepoint 0, script-relative 0.
 
@@ -197,11 +197,11 @@ Exposure: of 1,124,430 token occurrences, byte truncates 0 (0.0000%), codepoint 
 
 | lane | arm | word types representable | exact full-word | targets truncated |
 |---|---|---|---|---|
-| indic | byte | 88.96% | 0.099% | 4.01% |
-| indic | script_relative | 100.00% | 0.582% | 0.00% |
-| web | byte | 99.99% | 4.787% | 0.00% |
-| web | script_relative | 100.00% | 4.984% | 0.00% |
+| indic | byte | 88.96% | 0.102% | 4.01% |
+| indic | script_relative | 100.00% | 0.611% | 0.00% |
+| web | byte | 99.99% | 4.794% | 0.00% |
+| web | script_relative | 100.00% | 4.904% | 0.00% |
 
-- indic: script-relative minus byte = +0.0048, seed noise sd 0.0010, exceeds noise: True
+- indic: script-relative minus byte = +0.0051, seed noise sd 0.0013, exceeds noise: True
 
-- web: script-relative minus byte = +0.0020, seed noise sd 0.0076, exceeds noise: False
+- web: script-relative minus byte = +0.0011, seed noise sd 0.0078, exceeds noise: False

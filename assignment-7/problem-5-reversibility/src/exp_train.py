@@ -24,6 +24,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "common"))
 import codec, data, kron_model as K, vocabulary  # noqa: E402
+import provenance  # noqa: E402
 
 SEED = 20260825
 PAPER_DMODEL = 768
@@ -407,6 +408,7 @@ def main(corpus_root, tokenizer_path, out_path, lane="indic", steps=300, d=96, L
     result["wall_seconds"] = time.time() - t0
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w") as fh:
+        provenance.stamp(result, __file__)
         json.dump(result, fh, indent=2, sort_keys=True, ensure_ascii=False)
     return result
 

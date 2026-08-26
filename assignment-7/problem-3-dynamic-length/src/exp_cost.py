@@ -40,6 +40,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "..", "common"))
 sys.path.insert(0, HERE)
 import codec, kron_model as K, vocabulary  # noqa: E402
+import provenance  # noqa: E402
 
 WINDOWS = (16, 32, 64, 128)
 D_MODEL = 96
@@ -215,6 +216,7 @@ def main(tokenizer_path, out_path, n_ids=8192):
     }
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w") as fh:
+        provenance.stamp(result, __file__)
         json.dump(result, fh, indent=2, sort_keys=True)
     return result
 

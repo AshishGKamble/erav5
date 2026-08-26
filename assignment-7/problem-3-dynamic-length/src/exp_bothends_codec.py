@@ -22,7 +22,7 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "..", "common"))
 sys.path.insert(0, HERE)
-import codec, corpus  # noqa: E402
+import codec, corpus, provenance  # noqa: E402
 import exp_window as W  # noqa: E402
 
 L = 32
@@ -146,6 +146,7 @@ def main(corpus_root, out_path, sample=4000):
         "capacity_cost_of_aligning": capacity_cost(by_script),
     }
     with open(out_path, "w") as fh:
+        provenance.stamp(result, __file__)
         json.dump(result, fh, indent=2, sort_keys=True, ensure_ascii=False)
     return result
 

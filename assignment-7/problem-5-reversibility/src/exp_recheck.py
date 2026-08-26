@@ -26,6 +26,7 @@ import numpy as np
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "common"))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import codec, kron_model as K, vocabulary  # noqa: E402
+import provenance  # noqa: E402
 import exp_train as T  # noqa: E402
 
 SEED = 20260825
@@ -117,6 +118,7 @@ def main(corpus_root, tokenizer_path, out_path, d=256, L=32, steps=300, n_probe=
                     "was about a structure-blind decoder, not about the encoding."),
     }
     with open(out_path, "w") as fh:
+        provenance.stamp(out, __file__)
         json.dump(out, fh, indent=2, sort_keys=True)
     return out
 

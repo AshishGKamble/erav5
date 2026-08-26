@@ -23,7 +23,7 @@ out not to be testable on this machine and saying so is more useful than pretend
 | what was promised | the answer | evidence |
 |---|---|---|
 | **"How do I make a reverse of this?"** | **It already reverses**, in three independent senses. Exact inversion of every token that fits the window; tolerates **60x** more error than the objection implies; and survives `Linear(8192, 768)` because a code is only 7.93-sparse, which makes recovery compressed sensing rather than magic. | E1, E2, E3 |
-| **"We can get rid of the final head!"** | **Yes, at zero new parameters**, 0 against 100.7M at the paper's dimensions. But it costs accuracy: at this scale the **vocabulary head wins** on loss, 2.6454 against 4.7197 nats per token. The byte head's case is parameter scaling, which is arithmetic here and not measurement. Its one genuine defect, 12.20% invalid UTF-8, is **removed entirely** by constrained decoding at no cost. | E4, E8 |
+| **"We can get rid of the final head!"** | **Yes, at zero new parameters**, 0 against 100.7M at the paper's dimensions. But it costs accuracy: at this scale the **vocabulary head wins** on loss, 2.6367 against 4.7164 nats per token. The byte head's case is parameter scaling, which is arithmetic here and not measurement. Its one genuine defect, about 12% invalid UTF-8, is **removed entirely** by constrained decoding at no cost. | E4, E8 |
 | **"A vocab of 1M without any issues!"** | **Split verdict.** The **capability** is architecturally true and needs no experiment: a vocabulary softmax has no output row for an unknown word and scores exactly zero at any amount of training. The **competence** is not demonstrated, and two experiments that tried to demonstrate it both failed for reasons unrelated to the claim. | E6, E7 |
 
 The rest of this document is how those answers were arrived at, in the order the experiments ran.
@@ -177,11 +177,11 @@ converting would make either head look arbitrarily better. Everything below is n
 
 | head | loss per token | native loss | exact token | parameters |
 |---|---|---|---|---|
-| vocabulary | **2.6454** (sd 0.0141) | 2.6334 per token | **44.16%** | 1,980,864 |
-| byte, untied | 3.8942 (sd 0.0604) | 1.1945 per position | 42.65% | 1,807,296 |
-| byte, tied | 4.7197 (sd 0.1624) | 1.4316 per position | 32.70% | **1,020,864** |
+| vocabulary | **2.6367** (sd 0.0085) | 2.6334 per token | **44.13%** | 1,980,864 |
+| byte, untied | 3.8622 (sd 0.0545) | 1.1952 per position | 42.68% | 1,807,296 |
+| byte, tied | 4.7164 (sd 0.1524) | 1.4365 per position | 31.73% | **1,020,864** |
 
-Seed noise floor is 0.1624 nats per token. Both byte deltas exceed it.
+Seed noise floor is 0.1524 nats per token. Both byte deltas exceed it.
 
 **The vocabulary head wins at this scale, and that is the measured result.** It is stated first
 because the alternative is to hide it.
@@ -213,7 +213,7 @@ floor immediately and an MSE regression head would not.
 | objective | byte accuracy at step 0 | at the end | loss per token |
 |---|---|---|---|
 | cross entropy | 17.27% | **51.87%** | 17.392 to 5.067 |
-| MSE to the code | 17.27% | **51.64%** | 17.392 to 13.985 |
+| MSE to the code | 17.27% | **51.67%** | 17.392 to 14.006 |
 
 The diagnostic that explains it is more interesting than the prediction was. An **untrained tied
 head is already an autoencoder**: it reproduces the **current** token's bytes at **83.43%** accuracy
@@ -235,10 +235,10 @@ alone and not length inference.
 
 | outcome | rate |
 |---|---|
-| invalid UTF-8 | **12.20%** |
-| valid and in vocabulary | 83.33% |
-| valid but out of vocabulary | 4.47% |
-| exact match to the target token | 37.22% |
+| invalid UTF-8 | **11.98%** |
+| valid and in vocabulary | 83.38% |
+| valid but out of vocabulary | 4.64% |
+| exact match to the target token | 38.16% |
 
 **The invalid UTF-8 rate is a genuine defect**, and it is the direct cost of predicting positions
 independently. It also has a remedy, which E8 below implements and measures.
@@ -383,6 +383,7 @@ head's dual path, worst relative error about **5e-7**.
 | `src/exp_openvocab.py` | E7, the open vocabulary test and its rarity matched control |
 | `src/exp_constrained.py` | E8, constrained decoding against the unconstrained argmax |
 | `src/evidence.py` | regenerates every number in this README from the artefacts |
+| `../common/provenance.py` | stamps each artefact with the SHA of the code that wrote it, and reports any that have gone stale |
 | `src/build_dashboard.py` | extracts the dashboard payload from the same artefacts |
 | `site/` | static dashboard. No framework, no build step, no network. Open `site/index.html` |
 | `artifacts/evidence.md` | the generated evidence file |

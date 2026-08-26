@@ -377,9 +377,9 @@ dropped from the denominator.
 | lane | arm | word types representable | exact full word | delta | verdict |
 |---|---|---|---|---|---|
 | indic | byte | 88.96% | 0.10% | | |
-| indic | script relative | 100.00% | **0.58%** | +0.0048 (2sd = 0.0020) | outside noise |
+| indic | script relative | 100.00% | **0.61%** | +0.0051 (2sd = 0.0025) | outside noise |
 | web | byte | 99.99% | 4.79% | | |
-| web | script relative | 100.00% | 4.98% | +0.0020 (2sd = 0.0152) | inside noise, **no harm** |
+| web | script relative | 100.00% | 4.90% | +0.0011 (2sd = 0.0155) | inside noise, **no harm** |
 
 The web control is the one that matters, and it passes: helping Indic by hurting English would not
 be a fix, and this does not do that.
@@ -429,6 +429,7 @@ disagreement between this README and the evidence file is a bug in this README.
 | `src/exp_bothends.py` | E7, reading the word from both ends |
 | `src/exp_downstream.py` | E5 and E5b, the downstream tests and the exposure diagnostic |
 | `src/evidence.py` | regenerates every number in this README from the artefacts |
+| `../common/provenance.py` | stamps each artefact with the SHA of the code that wrote it, and reports any that have gone stale |
 | `src/build_dashboard.py` | extracts the dashboard payload from the same artefacts |
 | `site/` | static dashboard. No framework, no build step, no network. Open `site/index.html` |
 | `artifacts/evidence.md` | the generated evidence file |

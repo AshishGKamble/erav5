@@ -37,5 +37,9 @@ if __name__ == "__main__":
         run(label, script)
     run("evidence, every number regenerated from the artefacts", "evidence.py")
     run("dashboard data, extracted from the same artefacts", "build_dashboard.py")
+    print("\n=== provenance: do the artefacts match the code that is here now?",
+          flush=True)
+    subprocess.run([PY, os.path.join(HERE, "..", "common", "provenance.py")],
+                   cwd=os.path.join(HERE, "..", "common"))
     if not args.full:
         print("\nTraining experiments skipped. Run with --full to include E4 to E7.")
