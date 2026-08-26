@@ -6,10 +6,46 @@ The assignment offers five problems and says they are separate and should not be
 taken, and they are kept in separate folders with separate plans, experiments, artefacts and
 writeups. This page is the hub, because the submission form accepts one link.
 
+Two things govern everything below. **Every part of both briefs is answered**, including the parts
+that turned out to be less interesting than they sound, rather than the one part that made the best
+story. And **every number is checkable**: each was produced by a script, written to a committed
+artefact, and is regenerated into the prose rather than typed into it. Nothing here asks to be taken
+on trust.
+
 | | the problem | the writeup |
 |---|---|---|
 | **Problem 5** | Reversibility. Can the same embedding give back the same Kronecker code, and if so can the output head be deleted? | **[problem-5-reversibility/README.md](problem-5-reversibility/README.md)**, [dashboard](problem-5-reversibility/site/index.html) |
 | **Problem 3** | Dynamic length. The window spends 32 positions on every word, wastes space, and crops anything longer. | **[problem-3-dynamic-length/README.md](problem-3-dynamic-length/README.md)**, [dashboard](problem-3-dynamic-length/site/index.html) |
+
+---
+
+## Checking any claim in this submission
+
+This matters more than any single result, so it comes first.
+
+```bash
+cd problem-3-dynamic-length && python tests/test_invariants.py   # 12 invariants, seconds
+python run_demo.py                                              # rebuild the artefacts, ~1 min
+cd ../problem-5-reversibility && python tests/test_invariants.py # 14 invariants, seconds
+python run_demo.py                                              # ~30 seconds
+```
+
+- **The prose cannot drift from the evidence.** `run_demo.py` rewrites `artifacts/`, then
+  regenerates `artifacts/evidence.md` and `evidence.json` and the dashboard data from it. If a
+  README disagrees with the evidence file, the README is wrong.
+- **Artefacts record the code that produced them.** Every JSON carries the SHA-256 of each module in
+  `common/`, and `python common/provenance.py` reports any artefact whose code has since moved.
+  `run_demo.py` runs that check at the end of every run. This exists because of a real failure: a
+  matmul was vectorised after two training artefacts had been written, the new path is
+  mathematically identical and **not bit identical**, and nothing said so. It was found by comparing
+  file timestamps by hand, which is not a method.
+- **The load bearing claims need no model at all.** Problem 3's E1 to E4, E6 and E7 and Problem 5's
+  E1 to E3 are properties of the codec and the corpus. They run in about a minute, reproduce
+  exactly, and do not depend on anything that was trained.
+- **The central claim is verified against the codec, not argued from a definition.** Two words that
+  share their first 32 bytes are asserted to receive the same embedding; 200 of 200 sampled pairs
+  produce vectors whose maximum absolute difference is exactly 0.0.
+- **Nothing needs a network or a GPU.** numpy and tokenizers, and neither problem used a GPU.
 
 ---
 
@@ -59,13 +95,14 @@ The cropping is smaller and serious, and **it is not script neutral**: at L=32, 
 across 96,416. The collisions are grammatical, collapsing case-marked forms of the same word onto one
 embedding, because Indic morphology is suffixal and the window reads prefixes.
 
-## What each problem contributes beyond answering the question
+## What the measurements settled
 
-- **Problem 3 found a fix nobody proposed, and it is nearly free.** Every collision is a shared
-  prefix with a differing suffix, so half the window goes on the front of the word and half on the
-  back, and one position holds a checksum of whatever was discarded. Together that is **707 times**
-  fewer collisions at the same cost, with no new parameters, no script table and no assumptions
-  about Unicode.
+- **The best configuration found is a different choice of units, not a bigger window.** Every
+  collision is a shared prefix with a differing suffix, so half the window goes on the front of the
+  word and half on the back, and one position holds a checksum of whatever was discarded. That is
+  **707 times** fewer collisions at the same cost, with no new parameters, no script table and no
+  assumption about Unicode block layout. It also beats the published construction at twice the
+  dimensions, which is the useful part: the window did not need to grow.
 - **Problem 3 also measured that the high byte of an Indic codepoint carries 0.0000 bits**, which
   makes a second fix possible: send the script once per token, drop the high block, and get 32
   characters for every script at the same cost as 10.7.
@@ -94,13 +131,6 @@ naming because they are what made the measurements affordable.
 
 Each problem's README carries a table of the techniques it used and what each one is for, including
 the ones that exist only because a naive version of the same measurement gave a wrong answer first.
-
-**Artefacts record the code that produced them.** Every JSON file carries the SHA-256 of each module
-in `common/`, and `python common/provenance.py` reports any artefact whose code has since moved.
-This exists because of a real failure: a matmul was vectorised after two training artefacts had been
-written, the new path is mathematically identical and **not bit identical**, and nothing said so.
-It was caught by comparing file timestamps by hand, which is not a method. `run_demo.py` now runs
-the check at the end of every run.
 
 ## The methodological result, which applies to both
 

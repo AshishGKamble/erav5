@@ -3,8 +3,12 @@
 **ERA V5, Assignment 7, Problem 5. Ashish Kamble.**
 
 Every number here is produced by a script in `src/` and written to `artifacts/`. None is typed by
-hand. `artifacts/evidence.md` regenerates the whole set from the committed artefacts, and
-`run_demo.py` regenerates the artefacts with no network access.
+hand. `artifacts/evidence.md` and `evidence.json` regenerate the whole set from the committed
+artefacts, so if this README disagrees with them the README is wrong. `python
+tests/test_invariants.py` checks 14 properties the claims below rest on, and `python
+../common/provenance.py` reports any artefact whose code has moved since it was written. **E1 to E3
+need no model at all**: they are properties of the codec and the corpus, they run in about a minute
+and they reproduce exactly. `run_demo.py` regenerates the artefacts with no network access.
 
 ---
 

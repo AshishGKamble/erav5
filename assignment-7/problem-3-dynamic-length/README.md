@@ -3,8 +3,12 @@
 **ERA V5, Assignment 7, Problem 3. Ashish Kamble.**
 
 Every number here is produced by a script in `src/` and written to `artifacts/`. None is typed by
-hand. `artifacts/evidence.md` regenerates the whole set from the committed artefacts, and
-`run_demo.py` regenerates the artefacts from the frozen corpus with no network access.
+hand. `artifacts/evidence.md` and `evidence.json` regenerate the whole set from the committed
+artefacts, so if this README disagrees with them the README is wrong. `python
+tests/test_invariants.py` checks 12 properties the claims below rest on, and `python
+../common/provenance.py` reports any artefact whose code has moved since it was written. **E1 to E4, E6 and E7
+need no model at all**: they are properties of the codec and the corpus, they run in about a minute
+and they reproduce exactly. `run_demo.py` regenerates the artefacts from the frozen corpus with no network access.
 
 ---
 
@@ -65,8 +69,9 @@ At L=32, English prose has **zero** such collisions across 75,740 word types. Ni
 have **2,062** across 96,416. That is not a ratio. It is a categorical difference in whether the
 architecture works for your language.
 
-Three fixes are measured rather than advocated, and the cheapest one turns out to be the one nobody
-proposed: **read the word from both ends**.
+The fixes are measured rather than advocated, and the cheapest of them is not the one the plan
+expected: **read the word from both ends, and spend one position on a checksum of what was
+discarded**. That is 707 times fewer collisions at the same cost.
 
 ---
 
