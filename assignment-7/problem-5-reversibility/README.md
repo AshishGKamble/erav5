@@ -10,6 +10,8 @@ tests/test_invariants.py` checks 14 properties the claims below rest on, and `py
 need no model at all**: they are properties of the codec and the corpus, they run in about a minute
 and they reproduce exactly. `run_demo.py` regenerates the artefacts with no network access.
 
+**Live dashboard: https://euphonious-centaur-3a5265.netlify.app** (the same numbers, as charts). The Problem 3 dashboard is at https://thunderous-cactus-b47590.netlify.app.
+
 ---
 
 ## The question
@@ -403,7 +405,7 @@ head's dual path, worst relative error about **5e-7**.
 | `src/evidence.py` | regenerates every number in this README from the artefacts |
 | `../common/provenance.py` | stamps each artefact with the SHA of the code that wrote it, and reports any that have gone stale |
 | `src/build_dashboard.py` | extracts the dashboard payload from the same artefacts |
-| `site/` | static dashboard. No framework, no build step, no network. Open `site/index.html` |
+| `site/` | static dashboard, deployed at [https://euphonious-centaur-3a5265.netlify.app](https://euphonious-centaur-3a5265.netlify.app). No framework, no build step, no network |
 | `artifacts/evidence.md` | the generated evidence file, for a reader |
 | `artifacts/evidence.json` | the same numbers as data, for anything that wants to assert on one |
 | `tests/test_invariants.py` | the properties the claims rest on, run with `python tests/test_invariants.py` |

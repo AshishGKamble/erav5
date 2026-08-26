@@ -336,7 +336,11 @@
          " against " + fmtN(D.heads.vocab.head_params_at_scale) + " at the paper\u2019s " +
          "dimensions. But it costs accuracy: at this scale the <b>vocabulary head wins</b> on " +
          "loss, " + D.heads.vocab.loss.toFixed(4) + " against " + D.heads.byte_tied.loss.toFixed(4) +
-         " nats per token." : "Run the training experiments to populate this row.", "E4"],
+         " nats per token. Its one real defect, " +
+         (D.tying ? (D.tying.invalid_utf8_rate * 100).toFixed(2) + "% " : "") +
+         "invalid UTF-8, is <b>removed entirely</b> by constrained decoding, which also raises " +
+         "exact match rather than trading it away."
+         : "Run the training experiments to populate this row.", "E4, E8"],
       ["\u201cA vocab of 1M without any issues!\u201d",
        "<b>Split verdict.</b> The <b>capability</b> is architecturally true and needs no " +
        "experiment: a vocabulary softmax has no output row for an unknown word and scores exactly " +

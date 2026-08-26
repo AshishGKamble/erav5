@@ -14,8 +14,8 @@ on trust.
 
 | | the problem | the writeup |
 |---|---|---|
-| **Problem 5** | Reversibility. Can the same embedding give back the same Kronecker code, and if so can the output head be deleted? | **[problem-5-reversibility/README.md](problem-5-reversibility/README.md)**, [dashboard](problem-5-reversibility/site/index.html) |
-| **Problem 3** | Dynamic length. The window spends 32 positions on every word, wastes space, and crops anything longer. | **[problem-3-dynamic-length/README.md](problem-3-dynamic-length/README.md)**, [dashboard](problem-3-dynamic-length/site/index.html) |
+| **Problem 5** | Reversibility. Can the same embedding give back the same Kronecker code, and if so can the output head be deleted? | **[problem-5-reversibility/README.md](problem-5-reversibility/README.md)**, [live dashboard](https://euphonious-centaur-3a5265.netlify.app) |
+| **Problem 3** | Dynamic length. The window spends 32 positions on every word, wastes space, and crops anything longer. | **[problem-3-dynamic-length/README.md](problem-3-dynamic-length/README.md)**, [live dashboard](https://thunderous-cactus-b47590.netlify.app) |
 
 ---
 
@@ -188,7 +188,7 @@ everything else. For reference, the deliverables are:
 | `*/PLAN.md` | the plan agreed before any code, including the predictions the runs refuted |
 | `*/artifacts/evidence.md` and `evidence.json` | every quoted number, regenerated from the artefacts |
 | `*/artifacts/*.json` | the raw experiment output, each stamped with the code that produced it |
-| `*/site/` | the static dashboard for each problem |
+| `*/site/` | the static dashboard for each problem, deployed at [Problem 3](https://thunderous-cactus-b47590.netlify.app) and [Problem 5](https://euphonious-centaur-3a5265.netlify.app) |
 | `*/src/` | the experiments, one file per group |
 | `*/tests/test_invariants.py` | the properties the claims rest on |
 | `*/run_demo.py` | one command to regenerate everything |

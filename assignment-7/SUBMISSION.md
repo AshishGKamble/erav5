@@ -4,9 +4,16 @@
 
 ## Which problems
 
-**Problem 5 (reversibility) and Problem 3 (dynamic length).** The assignment says the problems are
-separate and should not be mixed, so they are in separate folders with their own plans, experiments,
-artefacts and writeups. [README.md](README.md) is the hub, since the form takes one link.
+**Problem 5 (reversibility) and Problem 3 (dynamic length).**
+
+The assignment says the problems are separate and should not be mixed, so they are in separate
+folders with their own plans, experiments, artefacts and writeups. [README.md](README.md) is the
+hub, since the form takes one link.
+
+Live dashboards, the same numbers as charts:
+
+- Problem 3, dynamic length: https://thunderous-cactus-b47590.netlify.app
+- Problem 5, reversibility: https://euphonious-centaur-3a5265.netlify.app
 
 ## Where each claim lives
 

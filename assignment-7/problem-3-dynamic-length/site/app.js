@@ -354,11 +354,13 @@
        "length, correlation <b>" + D.cost.scaling_fit.corr.toFixed(4) + "</b>. Per token " +
        "<i>dimensions</i> are impossible, because the projection needs a fixed input width.", "E6"],
       ["\u201c...doesn\u2019t force us to crop a word\u201d",
-       "<b>Read the word from both ends</b>: <b>" +
-       sch.both_ends_32_bytes.reduction.toFixed(1) + "x</b> fewer collisions for no new " +
-       "parameters. A script relative codec reaches " + sch.fixD_31_chars.reduction.toFixed(1) +
-       "x, and the two compose for <b>" + sch.fixD_both_ends_31_chars.reduction.toFixed(1) +
-       "x</b>.", "E7, E4"]
+       "<b>15 front bytes, 16 back bytes, and one checksum byte of the discarded middle</b>: <b>" +
+       sch.both_ends_plus_hash_32_bytes.reduction.toFixed(1) + "x</b> fewer collisions at the same " +
+       "D, with no new parameters, no script table and no Unicode assumption. Reading both ends " +
+       "alone gives " + sch.both_ends_32_bytes.reduction.toFixed(1) + "x and the checksum alone " +
+       sch.overflow_hash_32_bytes.reduction.toFixed(1) + "x; they fix different things and " +
+       "compose. The right window is still <b>L=32</b>, which beats the published construction at " +
+       "L=64 for half the dimensions.", "E7, E4"]
     ];
     document.getElementById("answersTable").innerHTML =
       "<tr><th>what was asked</th><th>the answer</th><th>where</th></tr>" +
